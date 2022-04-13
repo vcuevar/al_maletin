@@ -1,0 +1,175 @@
+-- Reporte de Ventas Reales segun Sr. Silva.
+-- Relacionar Facturacion de Anticipo, Notas de Credito Anticipos y Embarcado
+-- Elaborado: Ing. Vicente Cueva Ramirez.
+-- Actualizado: Miercoles 16 de Febrero del 2022; Origen.
+-- Actualizado: Miercoles 09 de Marzo del 2022; ReOrganizar porque me perdi y no me salio bien.
+
+-- Parametros: Fecha de Corte.
+DECLARE @FechaIS date
+DECLARE @FechaFS date
+
+--Set @FechaIS = CONVERT (DATE, '2021-01-01', 102) 
+Set @FechaIS = CONVERT (DATE, '2022-02-01', 102) 
+Set @FechaFS = CONVERT (DATE, '2022-03-15', 102) 
+
+/*
+-- Obtener información de las Facturas Anticipo.
+Select  Cast(FTR_FechaFactura as Date) AS FECHA
+        , CLI_CodigoCliente AS COD_CLIE
+        , CLI_RazonSocial AS CLIENTE
+        , OV_CodigoOV AS OV   
+        , FTR_OV_OrdenVentaId AS ID_OV     
+        , FTR_NumeroFactura AS FT_FACT        
+        ,Cast(SUM(FTRD_CantidadRequerida * FTRD_PrecioUnitario *FTRD_AFC_FactorConversion -                
+        FTRD_CantidadRequerida * FTRD_PrecioUnitario * FTRD_AFC_FactorConversion * ISNULL(FTRD_PorcentajeDescuento, 0.0)) as decimal(16,2)) AS IMP_FAC_MXP     
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = FTR_CMM_TipoRegistroId) AS TIPO_FACT
+        , (Select CMM_DefinidoPorUsuario1 from ControlesMaestrosMultiples Where CMM_ControlId = FTD_CMM_FormaPagoId) AS PAGO_CFDI
+        , (Select CMM_DefinidoPorUsuario1 from ControlesMaestrosMultiples Where CMM_ControlId = FTD_CMM_UsoCfdiId) AS USO_CFDI  
+From Facturas                
+Inner Join FacturasDetalle on FTRD_FTR_FacturaId = FTR_FacturaId  
+Inner Join FacturasDatos on FTD_FTR_FacturaId = FTR_FacturaId
+Inner Join OrdenesVenta on FTR_OV_OrdenVentaId = OV_OrdenVentaId
+Inner Join Clientes on FTD_CLI_ClienteId = CLI_ClienteId
+Where FTR_Eliminado = 0 
+and Cast(FTR_FechaFactura as Date) BETWEEN @FechaIS and @FechaFS 
+and (FTR_CMM_TipoRegistroId = '40467F7E-EA35-421A-95D1-74E57E702BF2' or FTR_CMM_TipoRegistroId = '22607E55-8B72-49C1-BB81-B58543654BAD')
+Group By FTR_FechaFactura, FTR_NumeroFactura, FTR_CMM_TipoRegistroId, OV_CodigoOV, FTR_OV_OrdenVentaId, 
+FTD_CMM_FormaPagoId, FTD_CMM_UsoCfdiId, CLI_CodigoCliente, CLI_RazonSocial --, B7.IMP_NC, FTR_OV_OrdenVentaId, B8.EMB_IMP_MXP, C7.IMPORTE
+Order by FTR_FechaFactura, FTR_NumeroFactura
+
+
+--Notas de Credito del Periodo seleccionado con tipo de relacion 07 CFDI por aplicacion de Anticipo
+
+Select  (Select OV_CodigoOV from OrdenesVenta Where OV_OrdenVentaId = FTR_OV_OrdenVentaId) AS OV
+        , FTR_OV_OrdenVentaId AS OV_ID
+        , NC_Codigo AS NC
+        , Cast(NC_FechaPoliza as date) AS FE_POLIZA
+        , NCD_Cantidad	AS CANT
+        , NCD_PrecioUnitario AS PRECIO
+        , (Select MON_Abreviacion From Monedas Where MON_MonedaId = NC_MON_MonedaId) AS MONEDA
+        , NC_MONP_Paridad AS TIP_CAMB
+        , (NCD_Cantidad * NCD_PrecioUnitario * NC_MONP_Paridad) AS IMPORTE
+        , (Select CMM_Valor From ControlesMaestrosMultiples Where CMM_ControlId = NC_CMM_TipoRelacionId) AS TIPO_RELAC
+        , (Select CMM_Valor From ControlesMaestrosMultiples Where CMM_ControlId = NC_CMM_FormaPagoId) AS FORM_PAGO
+        , FTR_NumeroFactura
+        , (Select MON_Abreviacion From Monedas Where MON_MonedaId = FTR_MON_MonedaId) AS MON_FAC
+        , FTR_MONP_Paridad AS TIP_CAFC
+From NotasCredito
+Inner Join NotasCreditoDetalle on NC_NotaCreditoId = NCD_NC_NotaCreditoId
+Inner join Facturas on NC_FTR_FacturaId = FTR_FacturaId and FTR_Eliminado = 0
+Where  NC_Eliminado = 0 
+and NC_CMM_TipoRelacionId = 'BC7535B5-7123-4F95-8019-BC87311BC6DD'
+and Cast(NC_FechaPoliza as Date) BETWEEN @FechaIS and @FechaFS 
+Order By NC_FechaPoliza, NC_Codigo
+
+
+Select  OV_CodigoOV AS OV   
+        , FTR_OV_OrdenVentaId AS ID_OV             
+        ,Cast(SUM(FTRD_CantidadRequerida * FTRD_PrecioUnitario *FTRD_AFC_FactorConversion -                
+        FTRD_CantidadRequerida * FTRD_PrecioUnitario * FTRD_AFC_FactorConversion * ISNULL(FTRD_PorcentajeDescuento, 0.0)) as decimal(16,2)) AS IMP_FAC_MXP     
+From Facturas                
+Inner Join FacturasDetalle on FTRD_FTR_FacturaId = FTR_FacturaId  
+Inner Join FacturasDatos on FTD_FTR_FacturaId = FTR_FacturaId
+Inner Join OrdenesVenta on FTR_OV_OrdenVentaId = OV_OrdenVentaId
+Inner Join Clientes on FTD_CLI_ClienteId = CLI_ClienteId
+Where FTR_Eliminado = 0 
+and Cast(FTR_FechaFactura as Date) BETWEEN @FechaIS and @FechaFS 
+and (FTR_CMM_TipoRegistroId = '40467F7E-EA35-421A-95D1-74E57E702BF2' or FTR_CMM_TipoRegistroId = '22607E55-8B72-49C1-BB81-B58543654BAD')
+Group By OV_CodigoOV, FTR_OV_OrdenVentaId
+Order by OV_CodigoOV
+
+
+
+
+Select  (Select OV_CodigoOV from OrdenesVenta Where OV_OrdenVentaId = FTR_OV_OrdenVentaId) AS OV
+        , FTR_OV_OrdenVentaId AS ID_OV
+        , SUM(NCD_Cantidad * NCD_PrecioUnitario * NC_MONP_Paridad) AS IMPORTE
+From NotasCredito
+Inner Join NotasCreditoDetalle on NC_NotaCreditoId = NCD_NC_NotaCreditoId
+Inner join Facturas on NC_FTR_FacturaId = FTR_FacturaId and FTR_Eliminado = 0
+Where  NC_Eliminado = 0 
+and NC_CMM_TipoRelacionId = 'BC7535B5-7123-4F95-8019-BC87311BC6DD'
+and Cast(NC_FechaPoliza as Date) BETWEEN @FechaIS and @FechaFS 
+Group By FTR_OV_OrdenVentaId
+
+*/
+
+
+-- Resumen de Facturas de Anticipo con Notas de Credito, Agrupadas primero por OV.
+Select  Cast(FTR_FechaFactura as Date) AS FECHA
+        , CLI_CodigoCliente AS COD_CLIE
+        , CLI_RazonSocial AS CLIENTE
+        , OV_CodigoOV AS OV   
+        , FTR_OV_OrdenVentaId AS ID_OV     
+        , FTR_NumeroFactura AS FT_FACT        
+        ,Cast(SUM(FTRD_CantidadRequerida * FTRD_PrecioUnitario *FTRD_AFC_FactorConversion -                
+        FTRD_CantidadRequerida * FTRD_PrecioUnitario * FTRD_AFC_FactorConversion * ISNULL(FTRD_PorcentajeDescuento, 0.0)) as decimal(16,2)) AS IMP_FAC_MXP     
+        , Cast(BA.IMPORTE as decimal(16,2)) AS NCRED
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = FTR_CMM_TipoRegistroId) AS TIPO_FACT
+        , (Select CMM_DefinidoPorUsuario1 from ControlesMaestrosMultiples Where CMM_ControlId = FTD_CMM_FormaPagoId) AS PAGO_CFDI
+        , (Select CMM_DefinidoPorUsuario1 from ControlesMaestrosMultiples Where CMM_ControlId = FTD_CMM_UsoCfdiId) AS USO_CFDI  
+From Facturas                
+Inner Join FacturasDetalle on FTRD_FTR_FacturaId = FTR_FacturaId  
+Inner Join FacturasDatos on FTD_FTR_FacturaId = FTR_FacturaId
+Inner Join OrdenesVenta on FTR_OV_OrdenVentaId = OV_OrdenVentaId
+Inner Join Clientes on FTD_CLI_ClienteId = CLI_ClienteId
+Inner Join (Select  B3.FTR_OV_OrdenVentaId AS ID_OV
+        , SUM(B2.NCD_Cantidad * B2.NCD_PrecioUnitario * B1.NC_MONP_Paridad) AS IMPORTE
+From NotasCredito B1
+Inner Join NotasCreditoDetalle B2 on B1.NC_NotaCreditoId = B2.NCD_NC_NotaCreditoId
+Inner join Facturas B3 on B1.NC_FTR_FacturaId = B3.FTR_FacturaId and B3.FTR_Eliminado = 0
+Where  B1.NC_Eliminado = 0 
+and B1.NC_CMM_TipoRelacionId = 'BC7535B5-7123-4F95-8019-BC87311BC6DD'
+and Cast(B1.NC_FechaPoliza as Date) BETWEEN @FechaIS and @FechaFS 
+Group By FTR_OV_OrdenVentaId ) BA on BA.ID_OV =  FTR_OV_OrdenVentaId
+Where FTR_Eliminado = 0 
+and Cast(FTR_FechaFactura as Date) BETWEEN @FechaIS and @FechaFS 
+and (FTR_CMM_TipoRegistroId = '40467F7E-EA35-421A-95D1-74E57E702BF2' or FTR_CMM_TipoRegistroId = '22607E55-8B72-49C1-BB81-B58543654BAD')
+Group By FTR_FechaFactura, FTR_NumeroFactura, FTR_CMM_TipoRegistroId, OV_CodigoOV, FTR_OV_OrdenVentaId, 
+FTD_CMM_FormaPagoId, FTD_CMM_UsoCfdiId, CLI_CodigoCliente, CLI_RazonSocial, BA.IMPORTE
+Order by FTR_FechaFactura, FTR_NumeroFactura
+
+
+-- Resumen de Facturas de Anticipo con Notas de Credito, Agrupadas por cliente.
+Select C1.COD_CLIE
+        , C1.CLIENTE
+        , Cast(SUM(C1.IMP_FAC_MXP) as decimal(16,2)) AS IMP_FACT
+        , Cast(SUM(C1.NCRED) as decimal(16,2)) AS IMP_NCRED
+        , Cast(SUM(C1.IMP_FAC_MXP) -SUM(C1.NCRED) as decimal(16,2)) AS FACT_ANT 
+From
+(Select  Cast(FTR_FechaFactura as Date) AS FECHA
+        , CLI_CodigoCliente AS COD_CLIE
+        , CLI_RazonSocial AS CLIENTE
+        , OV_CodigoOV AS OV   
+        , FTR_OV_OrdenVentaId AS ID_OV     
+        , FTR_NumeroFactura AS FT_FACT        
+        ,Cast(SUM(FTRD_CantidadRequerida * FTRD_PrecioUnitario *FTRD_AFC_FactorConversion -                
+        FTRD_CantidadRequerida * FTRD_PrecioUnitario * FTRD_AFC_FactorConversion * ISNULL(FTRD_PorcentajeDescuento, 0.0)) as decimal(16,2)) AS IMP_FAC_MXP     
+        , Cast(BA.IMPORTE as decimal(16,2)) AS NCRED
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = FTR_CMM_TipoRegistroId) AS TIPO_FACT
+        , (Select CMM_DefinidoPorUsuario1 from ControlesMaestrosMultiples Where CMM_ControlId = FTD_CMM_FormaPagoId) AS PAGO_CFDI
+        , (Select CMM_DefinidoPorUsuario1 from ControlesMaestrosMultiples Where CMM_ControlId = FTD_CMM_UsoCfdiId) AS USO_CFDI  
+From Facturas                
+Inner Join FacturasDetalle on FTRD_FTR_FacturaId = FTR_FacturaId  
+Inner Join FacturasDatos on FTD_FTR_FacturaId = FTR_FacturaId
+Inner Join OrdenesVenta on FTR_OV_OrdenVentaId = OV_OrdenVentaId
+Inner Join Clientes on FTD_CLI_ClienteId = CLI_ClienteId
+Inner Join (Select  B3.FTR_OV_OrdenVentaId AS ID_OV
+        , SUM(B2.NCD_Cantidad * B2.NCD_PrecioUnitario * B1.NC_MONP_Paridad) AS IMPORTE
+From NotasCredito B1
+Inner Join NotasCreditoDetalle B2 on B1.NC_NotaCreditoId = B2.NCD_NC_NotaCreditoId
+Inner join Facturas B3 on B1.NC_FTR_FacturaId = B3.FTR_FacturaId and B3.FTR_Eliminado = 0
+Where  B1.NC_Eliminado = 0 
+and B1.NC_CMM_TipoRelacionId = 'BC7535B5-7123-4F95-8019-BC87311BC6DD'
+and Cast(B1.NC_FechaPoliza as Date) BETWEEN @FechaIS and @FechaFS 
+Group By FTR_OV_OrdenVentaId ) BA on BA.ID_OV =  FTR_OV_OrdenVentaId
+Where FTR_Eliminado = 0 
+and Cast(FTR_FechaFactura as Date) BETWEEN @FechaIS and @FechaFS 
+and (FTR_CMM_TipoRegistroId = '40467F7E-EA35-421A-95D1-74E57E702BF2' or FTR_CMM_TipoRegistroId = '22607E55-8B72-49C1-BB81-B58543654BAD')
+Group By FTR_FechaFactura, FTR_NumeroFactura, FTR_CMM_TipoRegistroId, OV_CodigoOV, FTR_OV_OrdenVentaId, 
+FTD_CMM_FormaPagoId, FTD_CMM_UsoCfdiId, CLI_CodigoCliente, CLI_RazonSocial, BA.IMPORTE) C1
+Group By C1.COD_CLIE, C1.CLIENTE
+Order by C1.CLIENTE
+
+
+

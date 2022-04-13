@@ -1,0 +1,1 @@
+sqlcmd -i c:\Bases\CREATE_BACKUP.sql -S WIN-U0OMR306D55\SQLEXPRESS -U sa -P C4224a

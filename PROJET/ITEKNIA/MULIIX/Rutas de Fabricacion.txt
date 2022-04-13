@@ -1,0 +1,69 @@
+-- Consulta para sacar Estrucura Operacional
+-- Inicio: Lunes 30 de Julio del 2018.
+-- Actualizado: Jueves 02 de Agosto del 2018.
+
+-- Estructura Operacional  (21 Registros):
+
+select  DEP_Codigo, DEP_Nombre, CET_Codigo, CET_Nombre, CMM_Valor, 
+		EMP_CodigoEmpleado + ' ' + EMP_Nombre + ' ' + EMP_PrimerApellido AS RESPONSABLE
+from CentrosTrabajo
+inner join Departamentos on CET_DEP_DeptoId = DEP_DeptoId
+inner join ControlesMaestrosMultiples on CET_CMM_TipoCarga = CMM_ControlId
+inner join Empleados on DEP_EMP_EncargadoId = EMP_EmpleadoId
+where CET_Borrado = 0
+Order By CET_Codigo
+
+
+
+
+Select	ART_CodigoArticulo,	
+		ART_Nombre,
+		EST.FAE_Codigo,
+		EST.FAE_Descripcion,
+		EST.FAE_Comentarios,
+		CMM_Valor,
+		--CET_Codigo, 
+		--CET_Nombre, 
+		DEP_Codigo, 
+		DEP_Nombre,
+		PRE.FAE_Codigo,
+		PRE.FAE_Descripcion,
+		EMP_CodigoEmpleado + ' ' + EMP_Nombre + ' ' + EMP_PrimerApellido AS RESPONSABLE
+from Fabricacion
+inner join Articulos on FAB_ART_ArticuloId = ART_ArticuloId
+inner join FabricacionEstructura EST on EST.FAE_FAB_FabricacionId = FAB_FabricacionId
+inner join ControlesMaestrosMultiples on FAE_CMM_TipoOperacionId = CMM_ControlId
+inner join Departamentos on FAE_DEP_DeptoId = DEP_DeptoId
+inner join Empleados on DEP_EMP_EncargadoId = EMP_EmpleadoId
+Left join Fabricacion PRE on FAE_SecuencialAntecesorId = PRE.FAB_FabricacionId
+Where EST.FAE_Eliminado = 0 and ART_CodigoArticulo = '2506.9-10'
+Order by EST.FAE_Codigo
+
+
+Select * from Fabricacion
+inner join FabricacionEstructura on FAE_FAB_FabricacionId = FAB_FabricacionId
+Where FAE_Eliminado = 0 and FAB_ART_ArticuloId = '1404AE48-501C-44E2-B9FA-E29B83A7AD86'
+
+
+Select * from FabricacionEstructura
+Where FAE_FAB_FabricacionId = '8343E78B-06E1-454D-A69F-F81C01632545'
+
+select * from CentrosTrabajo
+inner join Departamentos on CET_DEP_DeptoId = DEP_DeptoId
+where CET_Borrado = 0
+Order By CET_Codigo
+
+
+
+
+Select * from Departamentos
+where DEP_Eliminado = 0 and DEP_Nivel = 1
+
+Select * from DepartamentosDatos
+
+
+Select * from ControlesMaestrosMultiples
+--where CMM_ControlId = '2D0DA641-8E75-4E7A-BC08-6AC624D41C7B'
+where CMM_Control = 'CMM_TipoDepartamento'
+
+select * from RutasOperacionDetalle
