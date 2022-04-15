@@ -21,11 +21,12 @@ LEFT JOIN OITT on OITT.Code = OITM.ItemCode
 INNER JOIN OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10 
 LEFT JOIN UFD1 T1 on T1.FldValue=OITM.U_Linea and T1.TableID='OITM' and T1.FieldID=7 
-WHERE OITM.U_TipoMat = 'RF' 
+WHERE OITM.U_TipoMat = 'PT' 
 	and OITM.U_IsModel = 'N'
 	and OITT.Name is null
 	and OITM.frozenFor = 'N'
 	and OITM.OnHand = 0
+	and OITM.U_ClaveUnidad <> 'ACT'
 ORDER BY OITM.ItemName
 
 -- ================================================================================================

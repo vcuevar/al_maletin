@@ -11,8 +11,7 @@ DECLARE @FechaFS date
 --Set @FechaIS = CONVERT (DATE, '2021-01-01', 102) 
 Set @FechaIS = CONVERT (DATE, '2022-01-01', 102) 
 Set @FechaFS = CONVERT (DATE, '2022-03-31', 102) 
-
-
+/*
 -- Obtener información de las Facturas Anticipo.
 Select  'FACTURA ANTICIPOS' AS DOC
         ,Cast(FTR_FechaFactura as Date) AS FECHA
@@ -64,7 +63,7 @@ and NC_CMM_TipoRelacionId = 'BC7535B5-7123-4F95-8019-BC87311BC6DD'
 and Cast(NC_FechaPoliza as Date) BETWEEN @FechaIS and @FechaFS 
 Order By OV, NC_FechaPoliza, NC_Codigo
 
-
+*/
 -- Resumen de Facturas de Anticipos.
 Select 'RESUMEN' AS DOC
         , CLI_CodigoCliente AS COD_CLIE
@@ -123,7 +122,7 @@ Having SUM(ANTICIPO.SAL_ANT) <> 0
 Order by CLI_RazonSocial
 
 
-
+/*
 
 -- Detalle por OV
 Select 'DETALL_OV' AS DOC
@@ -186,3 +185,4 @@ Select 'OV00747' as OV, 'AJUST' as DOC, 384213.06 as IMP_ANT, 0 as IMP_APL
 Group By ANTI.OV
 Order By OV
 
+*/
