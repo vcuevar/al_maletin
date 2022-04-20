@@ -139,10 +139,11 @@
 	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
 	and OITM.U_Ruta <> '200,206,209,212,218,221'
 	
-	--Update OITM set U_Ruta = '200,206,209,212,218,221'
-	--Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
-	--and OITM.U_Ruta <> '200,206,209,212,218,221'
-
+	/*
+	Update OITM set U_Ruta = '200,206,209,212,218,221'
+	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
+	and OITM.U_Ruta <> '200,206,209,212,218,221'
+	*/
 
 
 
