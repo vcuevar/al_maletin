@@ -8,7 +8,7 @@
 Declare @CodeOV as nvarchar(30)
 Declare @Id_OV as uniqueidentifier
 
-Set @CodeOV = 'OV00606'
+Set @CodeOV = 'OV00815'
 --Set @CodeOV = 'OV00457'
 --Set @CodeOV = 'OV00547'
 --Set @CodeOV = 'OV00548'
@@ -80,11 +80,8 @@ Inner Join CXCPagosDetalle on CXCP_CXCPagoId = CXCPD_CXCP_CXCPagoId
 inner Join NotasCredito on NC_NotaCreditoId = CXCPD_NC_NotaCreditoId
 inner join NotasCreditoDetalle on NCD_NC_NotaCreditoId = NC_NotaCreditoId
 inner join Facturas on NC_FTR_FacturaId = FTR_FacturaId and FTR_OV_OrdenVentaId = @Id_OV
-Where CXCP_Eliminado = 0
+Where CXCP_Eliminado = 0 and NC_Eliminado =  0
 Order by FECHA, IDENTIF
-
-
-
 
 /*  ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -125,42 +122,16 @@ inner join NotasCreditoDetalle on NCD_NC_NotaCreditoId = NC_NotaCreditoId
 inner join Facturas on NC_FTR_FacturaId = FTR_FacturaId --and FTR_OV_OrdenVentaId = @Id_OV
 Where CXCP_Eliminado = 0 and FTR_NumeroFactura = '00368' 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 or FTR_NumeroFactura = '00368' 
 
-
 CXCP_Eliminado = 0 and CXCPD_CXCP_CXCPagoId = 'F8C24C43-3D8A-4A87-9BF1-4CFE18520A43'
-
 
 Select * from Facturas Where FTR_FacturaId = '99EF7829-1D55-4DA2-B45E-83C543D15580'
 1580942.4700000000
 
-
-
-
-
 Select *
 From OrdenesVenta
 Where OV_OrdenVentaId = '4B5B2020-6B2B-470D-92BA-23C29D0C9B98'
-
-
-
-
-
 
 -- Esta consulta es para obtener las facturas que no tienen relacionado la Ordene de Venta.
 -- Para cargarla a la tabla. Muliix la saca del Detalle de la Factura y lo busca en detalle de OV (FTRD_Referencia).
@@ -186,7 +157,6 @@ Select * from OrdenesVenta Where OV_OrdenVentaId = 'A81E613E-2FF4-4612-9512-96EA
 update Facturas set FTR_OV_OrdenVentaId = 'C7DB1550-4C92-4FC1-BC2F-48DB3BB645A0' where FTR_FacturaId = '573EA1D6-6D44-4B75-BF95-00C79497E916'
 
 update Facturas set FTR_OV_OrdenVentaId = '2AF0417B-444E-4645-B588-63E887FBDD45' where FTR_FacturaId = 'B115D8A0-F757-425C-BF77-07678B11D3FC'
-
 
 Select * from Proyectos
 

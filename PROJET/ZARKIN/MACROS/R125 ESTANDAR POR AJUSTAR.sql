@@ -58,6 +58,7 @@ Set @TC_MXP = 1
 				FROM (SELECT ROW_NUMBER() OVER(PARTITION BY P.ItemCode ORDER BY P.DocEntry DESC, P.BaseLine) AS NumReng,
 				P.DocEntry, P.ItemCode, P.Price, P.ActDelDate, P.Currency FROM PDN1 P WHERE ItemCode = OITM.ItemCode) T1
 				WHERE T1.NumReng = 3) AS ULT_3
+			, Cast((Select top(1) PDN1.ShipDate from PDN1 WHERE PDN1.ItemCode = OITM.ItemCode ORDER BY PDN1.DocEntry DESC, PDN1.BaseLine) as date) AS FEC_ULT
 	from OITM
 	inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 7
 	WHERE Cast(ITM1.Price as decimal(16,4)) < 
@@ -80,6 +81,8 @@ Set @TC_MXP = 1
 	and OITM.FrozenFor = 'N'
 	order by OITM.ItemName
 
+
+	--SELECT TOP(10) * FROM PDN1
 
 /*
 -- Consulta

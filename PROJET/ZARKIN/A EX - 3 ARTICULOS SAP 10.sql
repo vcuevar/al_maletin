@@ -699,6 +699,26 @@ SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
 	WHERE OITM.U_TipoMat = 'PT' and OITM.U_IsModel = 'N' and OITM.U_Linea = '01' 
 	and MD.MODEL is null
 
+
+-- Articulo poner en U_CodAnt 'NOUSA' a todos los NULL
+SELECT '245 ART. ANT NULL' AS REPO_245
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, OITM.U_Linea AS LINEA
+FROM OITM 
+Where OITM.U_CodAnt is null
+ORDER BY OITM.ItemName
+
+/*
+Update OITM set OITM.U_CodAnt = 'NOUSA'
+FROM OITM 
+Where OITM.U_CodAnt is null
+*/
+
+
+
+
 /* ------------------------------------------------------------------------------------------------
 |                       FIN DE BLOQUE                                                             |
 -------------------------------------------------------------------------------------------------*/
@@ -806,7 +826,7 @@ SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
 	where OITM.SalPackMsr is null --and OITM.NumInBuy=1
 	ORDER BY OITM.ItemName
 				
--- VER-170829 ARTICULO CON LISTA DE MATERIALES Y NO TIENE MARCADAS PROPIEDADES.
+-- VER-170829 ARTICULO CON LISTA DE MATERIALES Y NO TIENE MARCADAS PROPIEDADES Y TIPO = SP.
 -- QUITAR ARTICULOS QUE SE FABRICAN PERO SE ESTAN COMPRANDO ACTUALMENTE.
 	Select '340 ? ART. CON LDM Y SIN PROPI.' AS REPORTE, A3.ItemCode, ITT1.Father ,A3.ItemName, A3.U_TipoMat, A3.QryGroup29, A3.QryGroup30,
 	A3.QryGroup31, A3.QryGroup32, A3.frozenFor
@@ -814,18 +834,7 @@ SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
 	left join ITT1 on A3.ItemCode = ITT1.Father    
 	where ITT1.Father is not null and A3.U_TipoMat <> 'PT' and A3.QryGroup29 = 'N'  
 	and A3.QryGroup30 = 'N' and A3.QryGroup31 = 'N' and A3.QryGroup32 = 'N'
-	and A3.frozenFor = 'N'
-	and A3.ItemCode <> '19472' and A3.ItemCode <> '19738' and A3.ItemCode <> '19093'
-	and A3.ItemCode <> '19094' and A3.ItemCode <> '19742' and A3.ItemCode <> '19743'
-	and A3.ItemCode <> '17896' and A3.ItemCode <> '18877' and A3.ItemCode <> '19750'
-	and A3.ItemCode <> '19495' and A3.ItemCode <> '19446' and A3.ItemCode <> '17701'
-	and A3.ItemCode <> '19646' and A3.ItemCode <> '19764' and A3.ItemCode <> '19772'
-	and A3.ItemCode <> '19770' and A3.ItemCode <> '19777' and A3.ItemCode <> '19778'
-	and A3.ItemCode <> '19765' and A3.ItemCode <> '18559' and A3.ItemCode <> '19749'
-	and A3.ItemCode <> '17814' and A3.ItemCode <> '19774' and A3.ItemCode <> '19786'
-	and A3.ItemCode <> '19771' and A3.ItemCode <> '19789' and A3.ItemCode <> '19768'
-	and A3.ItemCode <> '19769' and A3.ItemCode <> '19993' and A3.ItemCode <> '18894'
-	and A3.ItemCode <> '18892' and A3.ItemCode <> '18874'
+	and A3.frozenFor = 'N' and A3.U_TipoMat <> 'MP'
 	ORDER BY A3.ItemName	
 	
 	
@@ -953,8 +962,10 @@ SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
 				OITM.ItemName,
 				OITM.U_TipoMat,
 				OITM.U_VS, OITM.AvgPrice
+				, OITM.QryGroup2
+				, OITM.U_Estacion
 		from OITM
-		where QryGroup2 = 'Y'  and U_estacion <> 415
+		where QryGroup2 = 'Y'  and U_Estacion <> 415
 		order by OITM.ItemName
 
 
