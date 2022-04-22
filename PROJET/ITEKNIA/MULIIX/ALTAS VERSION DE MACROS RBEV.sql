@@ -16,9 +16,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'IT-VMA-2201-041'
-Set @Nomb = '041 Cuentas por Cobrar.'
-Set @Vers = 'VMA220128A'
+Set @Code = 'IT-VMA-2204-042'
+Set @Nomb = '042 FACTURA DE ANTICIPOS.'
+Set @Vers = 'VMA220420A'
 
 INSERT INTO [dbo].[RBEV]
            ([CodeRepo], [NombRepo], [NumeVers])

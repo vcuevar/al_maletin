@@ -32,7 +32,7 @@ BC_Cuenta_Id =  '601-100-000'
 -- Balanza de Comprobación Iteknia
 
 Select * from RPT_BalanzaComprobacion Where BC_Ejercicio = 2022 
-and BC_Cuenta_Id like '108-001-601%' -- and BC_Movimiento_01+BC_Movimiento_02+BC_Movimiento_03 <> 0
+and BC_Cuenta_Id like '%-000-000' -- and BC_Movimiento_01+BC_Movimiento_02+BC_Movimiento_03 <> 0
 Order by BC_Cuenta_Id
 
 --Delete RPT_BalanzaComprobacion Where BC_Ejercicio = 2022 

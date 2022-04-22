@@ -76,17 +76,16 @@ Order By OV, NC_FechaPoliza, NC_Codigo
 Select  'RES_EMB' AS DOC
 		, CLI_CodigoCliente AS COD_CLIE
         , CLI_RazonSocial AS CLIENTE
-		, SUM(EMBBD_Cantidad * OVD_PrecioUnitario - (EMBBD_Cantidad * OVD_PrecioUnitario * ISNULL(OVD_PorcentajeDescuento, 0.0)) +
+                
+	, SUM((EMBBD_Cantidad * OVD_PrecioUnitario - (EMBBD_Cantidad * OVD_PrecioUnitario * ISNULL(OVD_PorcentajeDescuento, 0.0)) +
        ((EMBBD_Cantidad * OVD_PrecioUnitario) - (EMBBD_Cantidad * OVD_PrecioUnitario * ISNULL(OVD_PorcentajeDescuento, 0.0))) *
-       ISNULL(OVD_CMIVA_Porcentaje, 0.0)) as IMP_EMB    
+       ISNULL(OVD_CMIVA_Porcentaje, 0.0))*OV_MONP_Paridad) as IMP_EMB    
 	   
 	   --  , Cast(EMBBD_FechaCreacion as date) AS FECHA
-		, OV_CodigoOV AS OV
+	--, OV_CodigoOV AS OV
 		 -- , ART_CodigoArticulo AS CODIGO
 		 -- , ART_Nombre AS DESCRIPCION
         --, EMBBD_Cantidad AS CANTIDAD
-
-
 from EmbarquesBultos
 Inner Join EmbarquesBultosDetalle on EMBBD_EMBB_EmbarqueBultoId = EMBB_EmbarqueBultoId
 Inner Join PreembarqueBultoDetalle on EMBBD_PREBD_PreembarqueBultoDetalleId = PREBD_PreembarqueBultoDetalleId
@@ -97,14 +96,37 @@ Inner Join OrdenesVenta  on OV_OrdenVentaId = OTRE_OV_OrdenVentaId
 Inner Join OrdenesVentaDetalle on OVD_OV_OrdenVentaId = OV_OrdenVentaId and OVD_ART_ArticuloId = ART_ArticuloId
 Inner Join Clientes on OV_CLI_ClienteId = CLI_ClienteId
 Where Cast(EMBBD_FechaCreacion as Date) BETWEEN @FechaIS and @FechaFS
- --and OV_CodigoOV = 'OV00697'
- Group By CLI_CodigoCliente, CLI_RazonSocial, OV_CodigoOV
- Order By CLI_RazonSocial, OV_CodigoOV
+and OV_CodigoOV > 'OV00873'
+ Group By CLI_CodigoCliente, CLI_RazonSocial--, OV_CodigoOV
+ Order By CLI_RazonSocial --, OV_CodigoOV
  
  -- Resumen de Facturas de Anticipos Fiscales (Agrupada por cliente, base a OV).
 -- Criterio Factura Tipo Parcial o De Anticipo.
 -- Unidad de medida igual a Actividad.
 
+
+
+
+
+
+
+
+esta es para cargarla a la macro del resumen de lo embarcado.
+Select 'RES_EMB' AS DOC, CLI_CodigoCliente AS COD_CLIE, CLI_RazonSocial AS CLIENTE, SUM((EMBBD_Cantidad * OVD_PrecioUnitario - (EMBBD_Cantidad * OVD_PrecioUnitario * ISNULL(OVD_PorcentajeDescuento, 0.0)) + ((EMBBD_Cantidad * OVD_PrecioUnitario) - (EMBBD_Cantidad * OVD_PrecioUnitario * ISNULL(OVD_PorcentajeDescuento, 0.0))) * ISNULL(OVD_CMIVA_Porcentaje, 0.0))*OV_MONP_Paridad) as IMP_EMB from EmbarquesBultos Inner Join EmbarquesBultosDetalle on EMBBD_EMBB_EmbarqueBultoId = EMBB_EmbarqueBultoId Inner Join PreembarqueBultoDetalle on EMBBD_PREBD_PreembarqueBultoDetalleId = PREBD_PreembarqueBultoDetalleId Inner join BultosDetalle on BULD_BultoDetalleId = PREBD_BULD_BultoDetalleId Inner join Articulos on BULD_ART_ArticuloId = ART_ArticuloId Inner Join OrdenesTrabajoReferencia on OTRE_OT_OrdenTrabajoId = BULD_OT_OrdenTrabajoId
+Inner Join OrdenesVenta  on OV_OrdenVentaId = OTRE_OV_OrdenVentaId Inner Join OrdenesVentaDetalle on OVD_OV_OrdenVentaId = OV_OrdenVentaId and OVD_ART_ArticuloId = ART_ArticuloId Inner Join Clientes on OV_CLI_ClienteId = CLI_ClienteId Where Cast(EMBBD_FechaCreacion as Date) BETWEEN @FechaIS and @FechaFS and OV_CodigoOV > 'OV00873' Group By CLI_CodigoCliente, CLI_RazonSocial Order By CLI_RazonSocial
+ 
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 Select 'RES_ANTICIPOS' AS DOC
         , CLI_CodigoCliente AS COD_CLIE
@@ -164,7 +186,7 @@ Having SUM(ANTICIPO.SAL_ANT) <> 0
 Order by CLI_RazonSocial
 
 
-
+*/
 
 
 
