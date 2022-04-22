@@ -61,7 +61,7 @@
 	and OITT.Code <> '18877' and OITT.Code <> '19765' and OITT.Code <> '19786' and OITT.Code <> '19789'
 	and OITT.Code <> '10436' and OITT.Code <> '19738' and OITT.Code <> '19016' and OITT.Code <> '19015'
 	and OITT.Code <> '18988' and OITT.Code <> '18990' and OITT.Code <> '19993' and OITT.Code <> '18894'
-	and OITT.Code <> '18559'
+	and OITT.Code <> '18559' and OITT.Code <> '18874'
 	ORDER BY A3.ItemName	
 
 -- LA LISTA DE PRECIOS PARA EL CALCULO ES LA DE 00 CALCULO DISEÑO.
