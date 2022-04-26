@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2022/04/20', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2022/04/20', 102)
+Set @FechaInac =  CONVERT (DATE, '2022/04/21', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -834,7 +834,7 @@ Where OITM.U_CodAnt is null
 	left join ITT1 on A3.ItemCode = ITT1.Father    
 	where ITT1.Father is not null and A3.U_TipoMat <> 'PT' and A3.QryGroup29 = 'N'  
 	and A3.QryGroup30 = 'N' and A3.QryGroup31 = 'N' and A3.QryGroup32 = 'N'
-	and A3.frozenFor = 'N' and A3.U_TipoMat <> 'MP'
+	and A3.frozenFor = 'N' and A3.U_TipoMat <> 'MP' and A3.U_TipoMat <> 'RF'
 	ORDER BY A3.ItemName	
 	
 	
