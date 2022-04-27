@@ -34,70 +34,16 @@ and COT_CodigoCotizacion <> '01397'
 Order by COT_CodigoCotizacion
 */
 
-Select * from Cotizaciones
-Where COT_FechaCerrada = @FechaIS 
-Order By COT_CodigoCotizacion
-
-/*
-COT_CodigoCotizacion = '01692'
-or COT_CodigoCotizacion = '01004'
-or COT_CodigoCotizacion = '01397'
-or COT_CodigoCotizacion = '01691'
-or COT_CodigoCotizacion = '01690'
-or COT_CodigoCotizacion = '01688'
-or COT_CodigoCotizacion = '01687'
-or COT_CodigoCotizacion = '01676'
-or COT_CodigoCotizacion = '01675'
-or COT_CodigoCotizacion = '01640'
-or COT_CodigoCotizacion = '01609'
-or COT_CodigoCotizacion = '01606'
-or COT_CodigoCotizacion = '01514'
-or COT_CodigoCotizacion = '01677'
-or COT_CodigoCotizacion = '01666'
-or COT_CodigoCotizacion = '01655'
-or COT_CodigoCotizacion = '01537'
-or COT_CodigoCotizacion = '01666'
-or COT_CodigoCotizacion = '01625'
-or COT_CodigoCotizacion = '01672'
-or COT_CodigoCotizacion = '01396'
-or COT_CodigoCotizacion = '01004'
-or COT_CodigoCotizacion = '01397'
-Order By COT_CodigoCotizacion
-*/
-
-/*
-Update Cotizaciones set COT_CMM_EstatusId = 'F5708F9D-B034-4BB9-A086-F370EE519E85', COT_FechaCerrada = GETDATE(),
-COT_EMP_ModificadoPorId = 'D117CCA7-7114-4B55-9EEB-9F8553BF6179'
-Where  COT_FechaCerrada is null  
-and COT_CodigoCotizacion <> '01692'
-and COT_CodigoCotizacion <> '01691'
-and COT_CodigoCotizacion <> '01690'
-and COT_CodigoCotizacion <> '01688'
-and COT_CodigoCotizacion <> '01687'
-and COT_CodigoCotizacion <> '01676'
-and COT_CodigoCotizacion <> '01675'
-and COT_CodigoCotizacion <> '01640'
-and COT_CodigoCotizacion <> '01609'
-and COT_CodigoCotizacion <> '01606'
-and COT_CodigoCotizacion <> '01514'
-and COT_CodigoCotizacion <> '01677'
-and COT_CodigoCotizacion <> '01666'
-and COT_CodigoCotizacion <> '01655'
-and COT_CodigoCotizacion <> '01537'
-and COT_CodigoCotizacion <> '01666'
-and COT_CodigoCotizacion <> '01625'
-and COT_CodigoCotizacion <> '01672'
-and COT_CodigoCotizacion <> '01396'
-and COT_CodigoCotizacion <> '01004'
-and COT_CodigoCotizacion <> '01397'
-*/
+Select TOP(50) * from Cotizaciones
+Where  COT_CodigoCotizacion like '%1514%'
+--COT_FechaCerrada = @FechaIS 
+Order By COT_CodigoCotizacion, COT_Revision
 
 
 Update Cotizaciones set COT_CMM_EstatusId = 'F5708F9D-B034-4BB9-A086-F370EE519E85', COT_FechaCerrada = GETDATE(),
 COT_EMP_ModificadoPorId = 'D117CCA7-7114-4B55-9EEB-9F8553BF6179'
 Where  COT_FechaCerrada is null  
-and COT_CodigoCotizacion <> '01692'
-an
+and COT_CotizacionId = 'C84D6F62-8B29-41D5-977D-5902A75B5BD9'
 
 
 
