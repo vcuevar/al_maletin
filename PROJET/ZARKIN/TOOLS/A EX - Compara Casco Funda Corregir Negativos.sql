@@ -5,7 +5,7 @@ algo pasa que no captura la cantidad recibida */
 	
 	update [@CP_OF] set U_Recibido=50 where Code=21481
 	
-	update [@CP_OF] set U_CT = 315, U_Orden = 315 where U_DocEntry = 32
+	update [@CP_OF] set U_CT = 17787, U_Orden = 17787 where Code = 2528
 	
 
 	update [@CP_OF] set U_Entregado = 6, U_Procesado = 6 where Code = 234032
@@ -13,16 +13,24 @@ algo pasa que no captura la cantidad recibida */
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 399822
 	update [@CP_OF] set U_Recibido= 1 where Code= 23199
 
-	
+	delete [@CP_OF] where Code = 149725
 	update [@CP_OF] set U_Recibido= 50 where Code= 399869
 
-	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 88338
-	update [@CP_OF] set U_DocEntry = 6315 where Code = 23199
-	delete [@CP_OF] where Code = 149725
+
+-- Para poner un registro que se perdio en OF
+-- Usamos estos codigo que no se han borrado.
+
+Select Top(20) CP.Code, CP.U_DocEntry, OP.ItemCode, A3.ItemName, OP.Status 
+from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry 
+inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
+ORDER BY CP.U_DocEntry
+
+update [@CP_OF] set U_CT = 100, U_Orden = 100, U_DocEntry = 17791 where Code = 2629
+	
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd =  10088
+	Set @NumOrd =  17791 --88, 89, 90, 91
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -45,24 +53,6 @@ algo pasa que no captura la cantidad recibida */
 	DELETE [@CP_LOGOF] WHERE Code = 120891
 
 	update [@CP_LOGOF] set U_Cantidad = 1 Where Code = 25922
-
--- Se borro esta produccion que se reporto y no procede su fabricacion.
--- Por si requieren que se regrese.
-Code	Name	U_idEmpleado	U_CT	U_Status	U_FechaHora	U_DocEntry	U_Cantidad	U_Reproceso	U_Liberado	U_Comentarios
-109228	109228	10	100	T	2021-12-11 03:14:00.000	10088	1	N	NULL	NULL
-176002	176002	15	151	T	2022-04-01 05:18:00.000	10088	1	N	NULL	NULL
-176244	176244	84	154	T	2022-04-01 06:57:00.000	10088	1	N	NULL	NULL
-177136	177136	84	157	T	2022-04-04 05:48:00.000	10088	1	N	NULL	NULL
-177137	177137	84	160	T	2022-04-04 05:48:00.000	10088	1	N	NULL	NULL
-177138	177138	84	172	T	2022-04-04 05:48:00.000	10088	1	N	NULL	NULL
-177789	177789	30	175	T	2022-04-05 06:04:11.000	10088	1	N	NULL	NULL
-
-
-
-
-
-
-
 ---------------------------------------------------------------------------------
 	-- Ordenes que se Cancelaron y no se Borro de Control de Piso.
 	-- Se pueden usar los codigos para asignar a otro que se haya borrado.
