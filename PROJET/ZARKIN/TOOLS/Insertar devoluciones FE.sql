@@ -5,7 +5,7 @@
 DECLARE @Devolu integer
 --DECLARE @Pedido integer
 
-Set @Devolu = 159
+Set @Devolu = 187
 --Set @Pedido = 3
 
 /*
