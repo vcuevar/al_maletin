@@ -1,7 +1,7 @@
 
 
-
-
+-- Para requerir el material se compara con el punto de reorden y las existencia de los almacenes de Materia 
+-- Prima y WIP que son de Almacen.
 
 Select	--AL.ALM_CodigoAlmacen as ALMACEN, 
         --LOC_CodigoLocalidad as LOCALIDAD, 
@@ -17,10 +17,10 @@ Select	--AL.ALM_CodigoAlmacen as ALMACEN,
         Convert(Decimal(28,4),ART_CantMinimaOrden) as MINIMO, 
         Convert(Decimal(28,4),ART_CantPuntoOrden) as P_REORDEN, 
         Convert(Decimal(28,4),ART_CantMaximaOrden) as MAXIMO
-        
+        , Convert(Decimal(28,2), ART_NoDiasAbastecimiento) AS DIA_ABS
         
        -- Convert(Decimal(28,4), ART_Precio) as COSTO 
-       -- ,  Articulos.*
+       ,  Articulos.*
 from LocalidadesArticulo 
 inner join Articulos on ART_ArticuloId = LOCA_ART_ArticuloId 
 inner join ControlesMaestrosUM UM on ART_CMUM_UMInventarioId = UM.CMUM_UnidadMedidaId 
@@ -30,13 +30,13 @@ left join ArticulosFamilias AF on ART_AFAM_FamiliaId = AF.AFAM_FamiliaId
 left join ArticulosCategorias AC on ART_ACAT_CategoriaId= AC.ACAT_CategoriaId 
 left join ArticulosTipos AT on ART_ATP_TipoId = AT.ATP_TipoId 
 
-Where LOC_Nombre = '1 ALMACEN MATERIAS PRIMAS' 
-and   LOCA_Cantidad <=  ART_CantPuntoOrden
-and ART_CantPuntoOrden > 0
-and AT.ATP_Descripcion = 'Materia prima'
-and ART_CMM_SubcategoriaId <> 'BBB10439-9178-456C-9530-3C7AD574E84C'
+Where --LOC_Nombre = '1 ALMACEN MATERIAS PRIMAS' 
+--and   LOCA_Cantidad <=  ART_CantPuntoOrden
+--ART_CantPuntoOrden > 0
+--and AT.ATP_Descripcion = 'Materia prima'
+--and ART_CMM_SubcategoriaId <> 'BBB10439-9178-456C-9530-3C7AD574E84C'
 
---and ART_CodigoArticulo = '00005'
+ ART_CodigoArticulo = '01457'
 Order By ART_Nombre 
 
 

@@ -3,24 +3,97 @@
 -- Actualizada: Jueves 27 de Mayo del 2021.
 
 -- Consultar 
-select * from FaltanteEmbarcar 
---where ID = 3304
+select * from FaltanteEmbarcar
+Where DocEntry = 187 and ID <> 1507
+
+90
+where ID = 9828
 Where ItemCode LIKE '3831-43-B0085%'
 3745-37-P0322	BAZZTA, -1R-, PIEL 0322 LATTE.
   
 --Articulo 3703-41-P0615, Cliente C0202, Pedido 3
-update FaltanteEmbarcar set Cantidad = 13, CantidadA = 13 Where ID = 1058        
+update FaltanteEmbarcar set Cantidad = 2, CantidadA = 2 Where ID = 1012        
 
 -- Cambiar parte de la Informacion.
 
 update FaltanteEmbarcar set 
-	ItemCode = '3819-39-P0310' 
-	, Dscription = 'KIRSH 1B, -1RBD-, PIEL 0310 BROWN.'
-	, Cantidad = 1
-	, CantidadA = 1
-Where ID = 3996
+	ItemCode = 'ZACATELAS' 
+	, Dscription = 'REGISTRO PARA CAMBIAR.'
+	, Cantidad = 60
+	, CantidadA = 60
+Where ID = 9828
  
- 
+  
+--Alta solicitada por Andrea 220429
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0380', Dscription = '914 (MO) -1R- PIEL 301 NEGRO', Cantidad = 2, CantidadA = 2 Where ID = 9828
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0379', Dscription = '914 (MO) -1RBD- PIEL 301 NEGRO', Cantidad = 2, CantidadA = 2 Where ID =	9829
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0378', Dscription = '914 (MO) -1RBI- PIEL 301 NEGRO', Cantidad = 2, CantidadA = 2 Where ID =	9830
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3704-01-P0402', Dscription = 'AZZKA, -1- PIEL 0402 GRIS.', Cantidad = 4, CantidadA = 4 Where ID = 9831
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0983', Dscription = 'BALTIMORE (PROTO) , -2- PIEL 0502 MARBLE.', Cantidad = 1, CantidadA = 1 Where ID =	9832
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0906', Dscription = 'BIANCA (PROTO) -3-, TELA INK OFF WHITE', Cantidad = 1, CantidadA = 1 Where ID =	9833
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0985', Dscription = 'BIANCA (PROTO) -T-, TELA INK OFF WHITE', Cantidad = 1, CantidadA = 1 Where ID =	9834
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0785', Dscription = 'CAZZETTI (PROTO) -MESA CUADRADA- PIEL 0607 DEEP WATER.', Cantidad = 1, CantidadA = 1 Where ID =	9835
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0684', Dscription = 'CAZZETTI (PROTO) -MESA LATERAL- PIEL 08 CAPUCHINO.', Cantidad = 2, CantidadA = 2 Where ID =	9836
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3749-53-P0312', Dscription = 'CAZZETTI, -MESA LATERAL CUADRADA-, PIEL 0312 NIEVE.', Cantidad = 1, CantidadA = 1 Where ID =	9837
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0567', Dscription = 'CORAZZOLA (PROTO), -T- PIEL 0402 GRIS', Cantidad = 1, CantidadA = 1 Where ID =	9838
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3717-03-P0814', Dscription = 'CORAZZOLA, -3-, PIEL 0814 CAPUCHINO.', Cantidad = 1, CantidadA = 1 Where ID =	9839
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0565', Dscription = 'ELVA (PROTO), -1-, PIEL 0402 GRIS', Cantidad = 1, CantidadA = 1 Where ID =	9840
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3819-39-P0310', Dscription = 'KIRSH 1B, -1RBD-, PIEL 0310 BROWN.', Cantidad = 1, CantidadA = 1 Where ID = 9841	
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3819-35-P0310', Dscription = 'KIRSH 1B, -1SB-, PIEL 0310 BROWN.', Cantidad = 1, CantidadA = 1 Where ID = 9842
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3819-23-P0310', Dscription = 'KIRSH 1B, -CHBI-, PIEL 0310 BROWN.', Cantidad = 1, CantidadA = 1 Where ID =	9843
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0793', Dscription = 'KUNO (PROTO), -SILLA-, PIEL 0303 BLANCO', Cantidad = 1, CantidadA = 1 Where ID =	9844
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3703-41-P0615', Dscription = 'KUNO, -SILLA-, PIEL 0615 MIEL.', Cantidad = 6, CantidadA = 6 Where ID =	9845
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0864', Dscription = 'LOTUS (PROTO) 2R ELECTRICO PIEL 0415 MOON.', Cantidad = 1, CantidadA = 1 Where ID =	9846
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3655-26-P0203', Dscription = 'MAZZOLA -BURO CRISTAL SATINADO- PIEL 0203 CHOCOLATE', Cantidad = 2, CantidadA = 2 Where ID =	9847
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0561', Dscription = 'OTTOMANO (PROTO), -PUFF-, PIEL 0314 MOHO', Cantidad = 1, CantidadA = 1 Where ID =	9848
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3758-29-P0403', Dscription = 'OTTOMANO, -PUFF-, PIEL 0403 BUCK OFF WHITE.', Cantidad = 1, CantidadA = 1 Where ID = 9849	
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3758-29-P0422', Dscription = 'OTTOMANO, -PUFF-, PIEL 0422 BUCK HUMO.', Cantidad = 1, CantidadA = 1 Where ID =	9850
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3665-01-P0301', Dscription = 'PEZZ, -1BD-, PIEL 0301 NEGRO.', Cantidad = 1, CantidadA = 1 Where ID = 9851
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3665-35-P0301', Dscription = 'PEZZ, -1SB-, PIEL 0301 NEGRO.', Cantidad = 1, CantidadA = 1 Where ID = 9852	
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3665-35-P0301', Dscription = 'PEZZ, -1SB-, PIEL 0301 NEGRO.', Cantidad = 1, CantidadA = 1 Where ID = 9853
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3665-24-P0301', Dscription = 'PEZZ, -CHBI-, PIEL 0301 NEGRO.', Cantidad = 1, CantidadA = 1 Where ID = 9854
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3711-01-P0455', Dscription = 'PIERO 2, -1-, PIEL 0455 UVA.', Cantidad = 1, CantidadA = 1 Where ID =	9855
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3591-01-P0307', Dscription = 'PIERO, -1-, PIEL 0307 CHANTILLY.', Cantidad = 1, CantidadA = 1 Where ID =	9856
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3591-01-P0319', Dscription = 'PIERO, -1-, PIEL 0319 NOGAL.', Cantidad = 7, CantidadA = 7 Where ID =	9857
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3591-02-P0307', Dscription = 'PIERO, -2-, PIEL 0307 CHANTILLY.', Cantidad = 1, CantidadA = 1 Where ID =	9858
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3591-03-P0307', Dscription = 'PIERO, -3-, PIEL 0307 CHANTILLY', Cantidad = 1, CantidadA = 1 Where ID =	9859
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3731-01-P0302', Dscription = 'PIRAMID, -1-, PIEL 0312 GRAYSH.', Cantidad = 1, CantidadA = 1 Where ID =	9860
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0635', Dscription = 'PIZZA B ELECTRICO (PROTO) -2R- PIEL 0414 CASTAÑO.', Cantidad = 1, CantidadA = 1 Where ID =	9861
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3679-17-P0201', Dscription = 'RAVIOLI, -1SB-, PIEL 0201 NEGRO', Cantidad = 2, CantidadA = 2 Where ID =	9862
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0907', Dscription = 'ROCHETTI (MO) -1R-, PIEL HUESO.', Cantidad = 1, CantidadA = 1 Where ID = 9863
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0699', Dscription = 'SKAR  (PROTO) -MESAS- (110-80-50) PIEL 0302 GRAYSH. (3 PZS)', Cantidad = 1, CantidadA = 1 Where ID = 9864
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0715', Dscription = 'SKAR (PROTO) -MESA OVALADA- PIEL 04 BUCK MARRON.', Cantidad = 1, CantidadA = 1 Where ID = 9865
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0563', Dscription = 'SKAR (PROTO), MESA REDONDA, DIAM .50 X .55 M. PIEL 0702 GRAFITO', Cantidad = 1, CantidadA = 1 Where ID = 9866
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0564', Dscription = 'SKAR (PROTO), MESA REDONDA, DIAM .80 X .40 M. PIEL 0702 GRAFITO', Cantidad = 1, CantidadA = 1 Where ID = 9867
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0562', Dscription = 'SKAR (PROTO), MESA REDONDA, DIAM 1.10 X .35 M. PIEL 0702 GRAFITO', Cantidad = 1, CantidadA = 1 Where ID = 9868	
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0706', Dscription = 'SKINY (PROTO) MESA REDONDA Y LATERAL PIEL 0802 GRAFITO.', Cantidad = 1, CantidadA = 1 Where ID = 9869
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3806-37-P0414', Dscription = 'TAFFANI, -1R-, PIEL 0514 CASTAÑO.', Cantidad = 1, CantidadA = 1 Where ID = 9870
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3738-09-P0306', Dscription = 'TAZZO, -PIE DE CAMA KS-, PIEL 0306 CANELA.', Cantidad = 2, CantidadA = 2 Where ID = 9871
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3684-11-P0318', Dscription = 'TERZO, -1- BASTIDOR DE MADERA, PIEL 0318 MORA.', Cantidad = 2, CantidadA = 2 Where ID = 9872	
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-15-P0203', Dscription = 'VEREY, -3BD-, PIEL 0203 BLANCO.', Cantidad = 1, CantidadA = 1 Where ID =	9873
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-15-P0303', Dscription = 'VEREY, -3BD-, PIEL 0303 BLANCO.', Cantidad = 1, CantidadA = 1 Where ID =	9874
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-15-P0310', Dscription = 'VEREY, -3BD-, PIEL 0310 BROWN.', Cantidad = 2, CantidadA = 2 Where ID =	9875
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-14-P0303', Dscription = 'VEREY, -3BI-, PIEL 0303 BLANCO.', Cantidad = 1, CantidadA = 1 Where ID =	9876
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-24-P0303', Dscription = 'VEREY, -ECHD-, PIEL 0303 BLANCO.', Cantidad = 1, CantidadA = 1 Where ID =	9877
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-23-P0203', Dscription = 'VEREY, -ECHI-, PIEL 0203 BLANCO.', Cantidad = 1, CantidadA = 1 Where ID =	9878
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-23-P0303', Dscription = 'VEREY, -ECHI-, PIEL 0303 BLANCO.', Cantidad = 1, CantidadA = 1 Where ID =	9879
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3624-23-P0310', Dscription = 'VEREY, -ECHI-, PIEL 0310 BROWN.', Cantidad = 2, CantidadA = 2 Where ID =	9880
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3681-01-P0523', Dscription = 'ZU -1- PIEL 0623 CHAMPAGNE', Cantidad = 1, CantidadA = 1 Where ID =	9881
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0897', Dscription = 'ZUBITTO (PROTO) -1SB-, TELA ZARK TERCIOPELO TINTO', Cantidad = 1, CantidadA = 1 Where ID = 9882
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0894', Dscription = 'ZUBITTO (PROTO) -3BI- TELA ZARK TERCIOPELO TINTO', Cantidad = 1, CantidadA = 1 Where ID =	9883
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0895', Dscription = 'ZUBITTO (PROTO) -CHBD-, TELA ZARK TERCIOPELO TINTO', Cantidad = 1, CantidadA = 1 Where ID =	9884
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = 'ZAR0896', Dscription = 'ZUBITTO (PROTO) -TAB REC-, TELA ZARK TERCIOPELO TINTO', Cantidad = 1, CantidadA = 1 Where ID =	9885
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3748-13-P0229', Dscription = 'ZUBITTO, -3BD-, PIEL 0229 CREMA.', Cantidad = 1, CantidadA = 1 Where ID =	9886
+update FaltanteEmbarcar set DocEntry = 187, ItemCode = '3748-23-P0229', Dscription = 'ZUBITTO, -ECHI-, PIEL 0229 CREMA.', Cantidad = 1, CantidadA = 1 Where ID = 9887
+
+select * from FaltanteEmbarcar
+Where DocEntry = 187 and ID <> 1507
+
+update FaltanteEmbarcar set fechapedido = CONVERT (DATE, GETDATE()),  
+		FECHAMOVIMIENTO = CONVERT (DATE, GETDATE()),
+		FECHAALMACEN = CONVERT (DATE, GETDATE())
+Where DocEntry = 187 and ID <> 1507
+
 update FaltanteEmbarcar set Dscription = 'BURANO, -T- CUILTEADO, PIEL 0523 CHAMPAGNE  / TELA ZARKS TERCIOPELO BEIGE.'
 Where ID = 1087
 
