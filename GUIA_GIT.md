@@ -9,11 +9,11 @@ En la maquina Linux
 git status
 git pull
 git add .
-git commit -m "Actualizacion LIN 220414"
+git commit -m "Actual LIN 220414"
 git push
 
 usuario: vcuevar
-password: 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
+token: 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
 
 git pull
 
@@ -23,7 +23,18 @@ En la maquina Windows
 git status
 git pull
 git add .
-git commit -m "Actualizacion WIN 220414"
+git commit -m "Actual WIN 220414"
+git push
+
+git pull
+
+
+En la maquina de Pranzo Windows
+
+git status
+git pull
+git add .
+git commit -m "Actual PRA 220414"
 git push
 
 git pull
