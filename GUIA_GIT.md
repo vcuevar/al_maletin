@@ -38,3 +38,24 @@ git commit -m "Actual PRA 220414"
 git push
 
 git pull
+
+
+--- Otros Comandos.
+
+git clone origin
+
+git fetch    es para actualiar de la red parte que hace pull
+git merge    es para fusionar ramas segunda parte que hace el pull
+
+git reset -- hard  (abandona cambios en local)
+
+Algunos editores se puede operar con
+
+	i (escribes mensaje) Ctrl + c luego wq
+otros
+i (escribes mensaje) Esc luego x!
+
+Tratar de configurar por omision editor en los Windows el NotePad
+
+git config core.editor notepad
+ 
