@@ -13,7 +13,7 @@ git commit -m "Actual LIN 220414"
 git push
 
 usuario: vcuevar
-token: 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
+token: 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
 
 git pull
 
