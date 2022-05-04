@@ -62,7 +62,8 @@ inner join ControlesMaestrosMultiples on FAE_CMM_TipoOperacionId = CMM_ControlId
 --inner join Departamentos on FAE_DEP_DeptoId = DEP_DeptoId
 --inner join Empleados on DEP_EMP_EncargadoId = EMP_EmpleadoId
 --Left join Fabricacion on FAE_SecuencialAntecesorId = FAB_FabricacionId
-Where FAB_Eliminado = 0 and FAE_Eliminado = 0 and ART_CodigoArticulo = '1109.2-57'
+Where FAB_Eliminado = 0 and FAE_Eliminado = 0 
+and ART_CodigoArticulo = '1109.2-57'
 Order by FAE_Codigo
 
 

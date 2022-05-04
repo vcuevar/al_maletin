@@ -11,7 +11,7 @@ Declare @FechaInac nvarchar(30)
 Declare @FechaIS nvarchar(30)
 
 -- Fecha Creacion Nuevos Articulos aaaa/mm/dd
-Set @FechaCrea = CONVERT (DATE, '2022/04/29', 102)
+Set @FechaCrea = CONVERT (DATE, '2022/05/02', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
 Set @FechaInac =  CONVERT (DATE, '2022/04/29', 102)
