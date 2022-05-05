@@ -1,0 +1,69 @@
+SELECT
+      FAE_EstructuraId
+    , ART_ArticuloId
+    , FAE_Codigo
+	, '(' + UPPER(FAE_Codigo) + ') - ' + UPPER(FAE_Descripcion) AS Descripcion
+	,TiempoEstandarSC
+	,TiempoEstandar
+	, CASE WHEN FAE_Nivel = 0 THEN SUM(TiempoEstandar)
+	   ELSE 0 END AS SUMTiemEst
+	, '' AS CENTROTRABAJO
+FROM Fabricacion
+INNER JOIN FabricacionEstructura ON FAB_FabricacionId = FAE_FAB_FabricacionId AND FAE_Eliminado = 0
+INNER JOIN Articulos ON FAB_ART_ArticuloId = ART_ArticuloId
+LEFT  JOIN (
+			SELECT
+				  FAE_PadreInmediatoId AS ID_PADRE
+				--, SUM(ROUND(ISNULL(FAD_Horas, 0.0) + CAST(ISNULL(FAD_Minutos, 0.0) AS DECIMAL(28,10)) / 60 + CAST(ISNULL(FAD_Segundos, 0.0) AS DECIMAL(28,10)) / 3600, 6)) AS TiempoEstandar
+				, CAST(SUM(FAD_Horas) AS VARCHAR) + ':' + CAST(SUM(FAD_Minutos) AS VARCHAR) + ':' + CAST(SUM(CAST(FAD_Segundos AS decimal(28,3))) AS VARCHAR) AS TiempoEstandarSC
+			    , SUM(ROUND(ISNULL(FAD_Horas, 0.0) + CAST(ISNULL(FAD_Minutos, 0.0) AS DECIMAL(28,10)) / 60 + CAST(ISNULL(FAD_Segundos, 0.0) AS DECIMAL(28,10)) / 3600, 6)) * $P{Cantidad_Trabajada} AS TiempoEstandar
+			FROM FabricacionEstructura
+			INNER JOIN FabricacionDetalle ON FAE_EstructuraId = FAD_FAE_EstructuraId AND FAD_Eliminado = 0
+			WHERE FAE_Eliminado = 0 AND FAE_Nivel > 0
+			GROUP BY FAE_PadreInmediatoId
+		   ) AS TIEMPOS ON FAE_EstructuraId = ID_PADRE
+WHERE FAB_Eliminado = 0 AND FAE_Nivel = 0
+--AND ART_ArticuloId = '928F2952-C7F1-4B15-9C25-D7A1F5BC0127' --Articulo
+AND ART_ArticuloId = $P{ARTICULO_ID} --Articulo
+GROUP BY
+FAE_EstructuraId,
+ART_ArticuloId,
+FAE_Codigo,
+FAE_Descripcion,
+TiempoEstandar,
+ID_PADRE,
+TiempoEstandarSC,
+FAE_Nivel
+--ORDER BY
+--FAE_Codigo
+
+UNION ALL
+SELECT
+    FAE_EstructuraId
+    , ART_ArticuloId
+    , FAE_Codigo
+	, '(' + UPPER(FAE_Codigo) + ') - ' + UPPER(FAE_Descripcion) AS Descripcion
+	, CAST(SUM(FAD_Horas) AS VARCHAR) + ':' + CAST(SUM(FAD_Minutos) AS VARCHAR) + ':' + CAST(SUM(CAST(FAD_Segundos AS decimal(28,3))) AS VARCHAR) AS TiempoEstandarSC
+	, SUM(ROUND(ISNULL(FAD_Horas, 0.0) + CAST(ISNULL(FAD_Minutos, 0.0) AS DECIMAL(28,10)) / 60 + CAST(ISNULL(FAD_Segundos, 0.0) AS DECIMAL(28,10)) / 3600, 6)) * $P{Cantidad_Trabajada} AS TiempoEstandar
+	, 0
+	, CET_Nombre
+FROM Fabricacion
+INNER JOIN FabricacionEstructura ON FAB_FabricacionId = FAE_FAB_FabricacionId AND FAE_Eliminado = 0
+INNER JOIN FabricacionDetalle ON FAE_EstructuraId = FAD_FAE_EstructuraId AND FAD_Eliminado = 0
+left Join CentrosTrabajo on CET_CentroTrabajoId=FAD_ReferenciaId
+INNER JOIN Articulos ON FAB_ART_ArticuloId = ART_ArticuloId
+WHERE FAB_Eliminado = 0 --AND FAE_Nivel = 0
+--AND ART_ArticuloId = '928F2952-C7F1-4B15-9C25-D7A1F5BC0127' --Articulo
+AND ART_ArticuloId = $P{ARTICULO_ID} --Articulo
+--AND FAE_PadreInmediatoId = 'DA901644-9A13-4B6A-8961-635375B8B26D'
+GROUP BY
+FAE_EstructuraId,
+ART_ArticuloId,
+FAE_Codigo,
+FAE_Descripcion,
+CET_Nombre,
+FAE_PadreInmediatoId,
+FAE_Nivel
+--TiempoEstandarSC
+ORDER BY
+FAE_Codigo
