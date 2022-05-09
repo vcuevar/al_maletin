@@ -61,10 +61,20 @@ Order By CET_Codigo
 
 
 
+ /*
+
+-- Consulta para Mostrar todas las Estaciones de Trabajo
+Select CET_Codigo AS COD_CET
+        , CET_Nombre AS CENTRO
+        , DEP_Codigo AS COD_DEP
+        , DEP_Nombre AS DEPARTAMENTO 
+From CentrosTrabajo
+Inner Join Departamentos on DEP_DeptoId = CET_DEP_DeptoId and DEP_Eliminado = 0 and DEP_Activo = 1
+Where CET_Activo = 1 and CET_Borrado = 0
+Order By CET_Codigo
 
 
 
-/*
 Select * from ControlesMaestrosMultiples Where CMM_ControlId = '3C843D99-87A6-442C-8B89-1E49322B265A'
 Select * from ControlesMaestrosMultiples Where CMM_Control = 'CMM_OT_Estatus'
 
@@ -86,6 +96,37 @@ Select *
 From RPT_Seguimiento_OT
 
 
+-- Cargar un Registro a RPT_Seguimiento_OT
+
+INSERT INTO [dbo].[RPT_Seguimiento_OT]
+                ([SOT_ID]
+                ,[SOT_OT]
+                ,[SOT_Empleado]
+                ,[SOT_Estacion]
+				,[SOT_Cantidad]
+				,[SOT_Recibido]
+				,[SOT_Entregado])
+VALUES
+        ('2'
+        , '41DE070A-56A3-44BE-AF04-1013F7CFD55E'
+        , '6F98CBE4-AFDE-46B2-9D2E-0C51AF5B11B1'
+        , '220'
+        , 10
+		, 4
+		, 0)
+GO
+
+Update RPT_Seguimiento_OT set SOT_Entregado = 4 Where SOT_ID = '1'
+
+
+SOT_ID	nvarchar(50)
+SOT_OT	uniqueidentifier
+SOT_Empleado	uniqueidentifier
+SOT_Estacion	nvarchar(50)
+SOT_Cantidad	int
+SOT_Recibido	int
+SOT_Entregado	int
+	
 
 
 -- Tabla de RPT_Seguimiento_OTF
@@ -101,8 +142,7 @@ From RPT_Seguimiento_OTF
 -- Tabla de RPT_Seguimiento_OTI
 -- Se lleva el Inicio de cuando la autorizan para Produccion.
 
-Select *
-From RPT_Seguimiento_OTI
+Select SOI_ID From RPT_Seguimiento_OTI Where SOI_OT = '41DE070A-56A3-44BE-AF04-1013F7CFD55E'
 
 */
 
