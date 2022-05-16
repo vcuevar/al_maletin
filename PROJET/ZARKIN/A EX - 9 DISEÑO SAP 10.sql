@@ -253,7 +253,7 @@
 	 and ITT1.Father <> '18761' and ITT1.Father <> '10436' and ITT1.Father <> '19416'
 	 and ITT1.Father <> '19415' and ITT1.Father <> '19430'  and ITT1.Father <> '18943'
 	 and ITT1.Father <> '18939'  and ITT1.Father <> '19053'  and ITT1.Father <> '19057'
-	 and ITT1.Father <> '19052'
+	 and ITT1.Father <> '19052' and ITT1.Father <> '20290' and ITT1.Father <> '20289'
 	Order by A3.ItemName	
 	
 	
