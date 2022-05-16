@@ -9,7 +9,7 @@ Set @FechaIS = CONVERT(DATE, (SELECT DATEADD(MM, -5, GETDATE())), 102)
 Set @FechaFS = CONVERT (DATE, GETDATE()) 
 --Set @ConXdia = 0
 Set @Cod_Mat = '00233'	-- MULTIPLAY CAOBILLA 03 MM 4 X 8 MERATI BENGAL (2.5)
---Set @Cod_Mat = '01457'	--LIJA BANDA 8" DE ANCHO X 2.55MTS LARGO  080°
+--Set @Cod_Mat = '01457'	--LIJA BANDA 8" DE ANCHO X 2.55MTS LARGO  080ï¿½
 --Set @Cod_Mat = '00005'	-- ADHESIVO "IRIS" K-810 S NO FLAMABLE
 --Set @Cod_Mat = '00997'	-- TORNILLO 5/16" X 1"  HEXAGONAL GALVANIZADO
 
@@ -44,7 +44,8 @@ Inner Join Localidades on LOC_LocalidadId = LOTL_LOC_LocalidadId
 Inner Join Articulos A1 on TRAM_ART_ArticuloId = A1.ART_ArticuloId
 Inner Join ControlesMaestrosMultiples on CMM_ControlId =  TRAM_CMM_TipoTransferenciaId
 Where  Cast(TRAM_FechaTraspaso as date) Between @FechaIS and @FechaFS 
-and (CMM_Valor ='Salida Producción/WIP' or CMM_Valor = 'Traspaso')
+and (CMM_ControlId = '689F221C-DB76-4824-8D5C-71955013B1A7' or CMM_ControlId = 'D7D22076-0400-4C59-B88E-1AA98C910B9F')
+--and (CMM_Valor ='Salida ProducciÃ³n/WIP' or CMM_Valor = 'Traspaso')
 and LOC_CodigoLocalidad = 'L101_GENERAL'
 and TRLOT_CantidadTraspaso < 0
 Group By  A1.ART_CodigoArticulo ) K on K.CCD_Codigo = ART_CodigoArticulo
@@ -67,13 +68,6 @@ inner join ControlesMaestrosUM on ART_CMUM_UMInventarioId = CMUM_UnidadMedidaId
 Where ART_CodigoArticulo = @Cod_Mat
 Order By ART_Nombre
 
-
-
-
-
-
-
-
  -- Detalle de los Consumos.
 Select Cast(TRAM_FechaTraspaso as date) AS FEC_TRASP
 	, ART_CodigoArticulo AS CODIGO
@@ -92,7 +86,7 @@ Inner Join Articulos on TRAM_ART_ArticuloId = ART_ArticuloId
 Inner Join ControlesMaestrosMultiples on CMM_ControlId =  TRAM_CMM_TipoTransferenciaId
 Where  Cast(TRAM_FechaTraspaso as date) Between @FechaIS and @FechaFS 
 and ART_CodigoArticulo = @Cod_Mat
-and (CMM_Valor ='Salida Producción/WIP' or CMM_Valor = 'Traspaso')
+and (CMM_ControlId = '689F221C-DB76-4824-8D5C-71955013B1A7' or CMM_ControlId = 'D7D22076-0400-4C59-B88E-1AA98C910B9F')
 and LOC_CodigoLocalidad = 'L101_GENERAL'
 and TRLOT_CantidadTraspaso < 0
 Order By TRAM_FechaTraspaso 
@@ -133,7 +127,7 @@ Inner Join Articulos on TRAM_ART_ArticuloId = ART_ArticuloId
 Inner Join ControlesMaestrosMultiples on CMM_ControlId =  TRAM_CMM_TipoTransferenciaId
 Where  Cast(TRAM_FechaTraspaso as date) Between @FechaIS and @FechaFS 
 and ART_CodigoArticulo = @Cod_Mat
-and (CMM_Valor ='Salida Producción/WIP' or CMM_Valor = 'Traspaso')
+and (CMM_Valor ='Salida Producciï¿½n/WIP' or CMM_Valor = 'Traspaso')
 and LOC_CodigoLocalidad = 'L101_GENERAL'
 and TRLOT_CantidadTraspaso < 0)
  
