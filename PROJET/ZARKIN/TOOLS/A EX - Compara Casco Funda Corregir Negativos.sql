@@ -13,7 +13,7 @@ algo pasa que no captura la cantidad recibida */
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 399822
 	update [@CP_OF] set U_Recibido= 1 where Code= 23199
 
-	delete [@CP_OF] where Code = 163977
+	delete [@CP_OF] where Code = 200641
 	
 
 -- Para asignar un nuevo codigo, primero ver que no exista
@@ -36,11 +36,11 @@ ORDER BY CP.U_DocEntry
 	update [@CP_OF] set U_CT = 418, U_Orden = 418, U_DocEntry = 11632 where Code = 2630
 	update [@CP_OF] set U_Entregado = 2, U_Procesado = 2 where Code = 138465
 	
-	update [@CP_OF] set U_Recibido= 2 where Code= 156159
+	update [@CP_OF] set U_Recibido= 9 where Code= 190229
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd =  17885 --17788 --88, 89, 90, 91
+	Set @NumOrd =  15850 --17788 --88, 89, 90, 91
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -52,14 +52,17 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 11674 --and U_CT = 415 -- and U_idEmpleado = 35
+	select * from [@CP_LOGOF] where U_DocEntry= 16626 and U_CT = 112 and U_idEmpleado = 128
 	order by U_CT, U_FechaHora
+
+	
 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 	update [@CP_LOGOF] set U_idEmpleado = 141 Where Code = 134102 
 
-	update [@CP_LOGOF] set U_idEmpleado = 38 where U_DocEntry= 8180 and U_CT = 118 and U_idEmpleado = 35
+	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 16626 and U_CT = 112 and U_idEmpleado = 128
+	
 	DELETE [@CP_LOGOF] WHERE Code = 120891
 
 	update [@CP_LOGOF] set U_Cantidad = 2 Where Code = 149739
