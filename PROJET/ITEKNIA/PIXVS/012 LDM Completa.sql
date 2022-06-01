@@ -8,9 +8,12 @@ DECLARE @IdedArt nvarchar(50)
 DECLARE @CodPro nvarchar(50)
 
 -- Asignar Valores a Variables
-Set @OTCode = 'OT1620'
+Set @OTCode = 'OT02449'
 
 Set @IdedArt = (Select AR_ID from RBV_OT Where OT_CD = @OTCode)
+
+Select * from OrdenesTrabajo Where OT_Codigo = 'OT02449' --@OTCode
+Inner join OrdenesTrabajo
 
 Select	EAR_ART_ComponenteId AS ID_Compo,	
 		ART_CodigoArticulo AS COD_MAT, 

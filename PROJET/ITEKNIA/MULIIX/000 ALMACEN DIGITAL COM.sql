@@ -58,3 +58,8 @@ select top (5) * from OrdenesCompraDetalle
 select top (5) * from OrdenesCompra
 inner JOIN OrdenesCompraDetalle on OCD_OC_OrdenCompraId = OC_OrdenCompraId
 Where OC_CodigoOC = 'OC02055'
+
+
+
+Select * from RPT_AlmacenDigitalIndice Where GRUPO_ID = 'OV00747' and DOC_ID = 'FAC00805'
+

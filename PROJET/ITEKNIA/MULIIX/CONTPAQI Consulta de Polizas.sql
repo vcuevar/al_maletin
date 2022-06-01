@@ -6,6 +6,13 @@
 -- Ejercicio + Periodo + TipoPol + Folio 
 -- Internamente maneja un Id que es unico.
 
+--Parametros Fecha Inicial y Fecha Final
+DECLARE @FechaIS date
+DECLARE @FechaFS date
+
+Set @FechaIS = CONVERT (DATE, '2022-04-01', 102)
+Set @FechaFS = CONVERT (DATE, '2022-04-13', 102) 
+
 -- Consulta:
 
 Select  Polizas.Ejercicio
@@ -26,11 +33,12 @@ from Polizas
 inner join MovimientosPoliza on Polizas.Id = MovimientosPoliza.IdPoliza
 inner join Cuentas on Cuentas.Id = MovimientosPoliza.IdCuenta
 inner Join TiposPolizas on TiposPolizas.Id = Polizas.TipoPol
-Where Polizas.Id = 5430
+Where Cast(Polizas.Fecha as Date) Between @FechaIS and @FechaFS
+--Where Polizas.Id = 5430
 Order By Polizas.Id, NumMovto
 
 
-
+/*
 Select *
 from Polizas
 inner join MovimientosPoliza on Polizas.Id = MovimientosPoliza.IdPoliza
@@ -44,15 +52,7 @@ Select * from TiposPolizas
 
 Select * from Cuentas 
 
-
-
-
-
 Select * from MovimientosPoliza where Referencia = 'F-4352'
-
-
-
-
 
 Select * from Polizas
 
@@ -70,3 +70,5 @@ Select * from MovimientosPoliza where Referencia = 'F-4352'
 
 
 Select * from TiposDocumentos
+
+*/

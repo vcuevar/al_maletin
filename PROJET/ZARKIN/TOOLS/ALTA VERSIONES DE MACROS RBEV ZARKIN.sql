@@ -16,9 +16,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'SA-VMA-2203-126'
-Set @Nomb = 'Requisicion Punto Reorden.'
-Set @Vers = 'VMA220314A'
+Set @Code = 'SA-VMA-2205-105'
+Set @Nomb = 'Compras Explosion de Materiales.'
+Set @Vers = 'VMA220530A'
 
 Insert Into [dbo].[SIZ_RBEV]
 			( [CodeRepo], [NombRepo], [NumeVers])
