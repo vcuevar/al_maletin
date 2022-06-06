@@ -40,6 +40,7 @@ and ( OT_CMM_Estatus = '3C843D99-87A6-442C-8B89-1E49322B265A'           -- Abier
       or OT_CMM_Estatus = 'A488B27B-15CD-47D8-A8F3-E9FB8AC70B9B'        -- Produccion
       or OT_CMM_Estatus = 'A488B27B-15CD-47D8-A8F3-E9FB8AC70B9B'))       -- Recibo Parcial
 
+
 -- Consulta para definir Estaciones del Articulo(Ruta)
 Select ART_CodigoArticulo AS CODIGO
         , ART_Nombre AS ARTICULO
