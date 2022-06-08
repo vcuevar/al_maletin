@@ -9,57 +9,129 @@ Declare @OT_Tope as nvarchar(30)
 Declare @MO_Hora as Decimal(16,3)
 
 Set @OT_Code = 'OT02449'
-Set @OT_Inic = 'OT02482'
+Set @OT_Inic = 'OT02440'
 Set @OT_Tope = 'OT02491'
 Set @MO_Hora = 72.60
 
-/*
+
 -- Consulta de OT
 Select OT_Codigo
-        , ART_CodigoArticulo
-	, ART_Nombre
+    , A0.ART_CodigoArticulo
+	, A0.ART_Nombre
 	, OTDA_Cantidad AS CANT
 	, ISNULL(OT_COT_MAT, 0) AS MAT
 	, ISNULL(OT_COT_MOB, 0) AS MOB
-	--, ISNULL(MOIN.IMPORTE, 0) AS MOIN_IMPORTE
-		
-		--, ISNULL(OT_COT_IND, 0) AS IND
-		--, ISNULL(OT_COT_VEN, 0) AS VEN
+	--, ISNULL(MOIN.IMPORTE, 0) AS MOIN_IMPORTE	
+	--, ISNULL(OT_COT_IND, 0) AS IND
+	--, ISNULL(OT_COT_VEN, 0) AS VEN
 	, (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = OT_CMM_Estatus) AS ESTATUS
 from OrdenesTrabajo
 Inner Join OrdenesTrabajoDetalleArticulos on OT_OrdenTrabajoId = OTDA_OT_OrdenTrabajoId
-Inner Join Articulos on ART_ArticuloId = OTDA_ART_ArticuloId
+Inner Join Articulos A0 on A0.ART_ArticuloId = OTDA_ART_ArticuloId
+
+Left Join (
+
+Select KIG.ID_ART, SUM(KIG.MP_INGE) AS MP_INGEN, SUM(KIG.MO_INGE) AS MO_INGEN 
+From (
+Select	A3.ART_ArticuloId AS ID_ART
+	, Convert(Decimal(16,3), SUM(EAR_CantidadEnsamble * ISNULL((LPC_PrecioCompra / AFC_FactorConversion), 0))) AS MP_INGE
+    , 0 AS MO_INGE
+from EstructurasArticulos 
+inner join Articulos A3 on EAR_ART_ComponenteId = A3.ART_ArticuloId 
+inner join ArticulosFactoresConversion on A3.ART_ArticuloId =AFC_ART_ArticuloId and ART_CMUM_UMConversionOCId = AFC_CMUM_UnidadMedidaId  
+left join ListaPreciosCompra on A3.ART_ArticuloId = LPC_ART_ArticuloId and LPC_ProvPreProgramado = 1
+Group By A3.ART_ArticuloId
+Union all
+SELECT A3.ART_ArticuloId AS ID_ART
+    , 0 AS MP_INGE
+    , CAST((SUM(FAD_Horas + FAD_Minutos / 60 + FAD_Segundos / 3600)) as decimal(16,3)) AS MO_INGE
+FROM Fabricacion
+INNER JOIN FabricacionEstructura ON FAB_FabricacionId = FAE_FAB_FabricacionId AND FAE_Eliminado = 0
+INNER JOIN FabricacionDetalle ON FAE_EstructuraId = FAD_FAE_EstructuraId AND FAD_Eliminado = 0
+left Join CentrosTrabajo on CET_CentroTrabajoId=FAD_ReferenciaId
+INNER JOIN Articulos A3 ON FAB_ART_ArticuloId = A3.ART_ArticuloId
+WHERE FAB_Eliminado = 0 
+Group By A3.ART_ArticuloId
+
+) KIG 
+Group By ID_ART
+
+
+on A0.ART_ArticuloId = KIG.ID_ART
+
+
+
+
+
+
+-- Consulta de Marteriales Cargados a la OT (REAL)
+Select  A3.
+        , 0 AS MP_ING
+        , 0 AS MO_ING
+        , Convert(Decimal(16,3), SUM((OTARA_Cantidad * (LPC_PrecioCompra / AFC_FactorConversion)))) AS MP_REAL
+        , 0 AS MO_REAL
+from OrdenesTrabajo
+inner join OrdenesTrabajoAsignacionRecursosArticulos on OT_OrdenTrabajoId = OTARA_OT_OrdenTrabajoId
+inner join Articulos A1 on A1.ART_ArticuloId = OTARA_ART_ArticuloId
+left join ListaPreciosCompra on A1.ART_ArticuloId = LPC_ART_ArticuloId and LPC_ProvPreProgramado = 1
+inner join ArticulosFactoresConversion on A1.ART_ArticuloId =AFC_ART_ArticuloId and A1.ART_CMUM_UMConversionOCId = AFC_CMUM_UnidadMedidaId  
+Where  OT_Codigo = @OT_Code
+Group By OT_Codigo
+Union All
+
+-- Consulta de Tiempos por OT (Real)
+Select  OT_Codigo as OT    
+        , 0 AS MP_ING
+        , 0 AS MO_ING
+        , 0 AS MP_REAL
+		, CAST((SUM(DATEPART(HOUR, [OTSOD_TiempoTotal])) +	(SUM(DATEPART(MI, [OTSOD_TiempoTotal])) / 60) +
+		(SUM(DATEPART(SECOND, [OTSOD_TiempoTotal])) / 3600)) * @MO_Hora as decimal(16,3)) AS MO_REAL from OrdenesTrabajo
+inner join OrdenesTrabajoSeguimiento on OT_OrdenTrabajoId = OTS_OT_OrdenTrabajoId
+inner join OrdenesTrabajoSeguimientoOperacion on OTS_OrdenesTrabajoSeguimientoId = OTSO_OTS_OrdenesTrabajoSeguimientoId
+inner join OrdenesTrabajoSeguimientoOperacionDetalle on OTSO_OrdenTrabajoSeguimientoOperacionId = OTSOD_OTSO_OrdenTrabajoSeguimientoOperacionId
+Where  OT_Codigo = @OT_Code
+Group By OT_Codigo
+) KOS
+Group By KOS.OT
+
+
+
+
+
+
+
+
+
+
+
 Where OT_Codigo BETWEEN @OT_Inic AND @OT_Tope 
 Order By OT_Codigo
 
 -- Subir Informacion a Muliix
 --Update OrdenesTrabajo Set OT_COT_MAT = 300, OT_COT_MOB = 25000, OT_COT_IND = 400, OT_COT_VEN = 55000 Where OT_Codigo = 'OT02449'
-
 */
 
 --Segundo intento desglosar todos para formaer la tabla de la informacion i usarla como inner join
-Select KOS.OT, SUM(KOS.MP_INGE), SUM(KOS.MO_INGE), SUM(KOS.MP_REAL), SUM(KOS.MO_REAL) 
+Select KOS.OT, SUM(KOS.MP_INGE) AS MP_INGEN, SUM(KOS.MO_INGE) AS MO_INGEN, SUM(KOS.MP_REAL) AS MP_REALE, SUM(KOS.MO_REAL) AS MO_REALE 
 From (
 
 -- Importe total del la LDM (Ingenieria)
 Select	@OT_Code AS OT
-        , Convert(Decimal(16,3), SUM(EAR_CantidadEnsamble * ISNULL((LPC_PrecioCompra / AFC_FactorConversion), 0))) AS MP_INGE
-        , 0 AS MO_INGE
-        , 0 AS MP_REAL
-        , 0 AS MO_REAL
+	, Convert(Decimal(16,3), SUM(EAR_CantidadEnsamble * ISNULL((LPC_PrecioCompra / AFC_FactorConversion), 0))) AS MP_INGE
+    , 0 AS MO_INGE
+    , 0 AS MP_REAL
+    , 0 AS MO_REAL
 from EstructurasArticulos 
 inner join Articulos on EAR_ART_ComponenteId = ART_ArticuloId 
 inner join ArticulosFactoresConversion on ART_ArticuloId =AFC_ART_ArticuloId and ART_CMUM_UMConversionOCId = AFC_CMUM_UnidadMedidaId  
 left join ListaPreciosCompra on ART_ArticuloId = LPC_ART_ArticuloId and LPC_ProvPreProgramado = 1
 Where EAR_ART_ArticuloPadreId = (Select OTDA_ART_ArticuloId from OrdenesTrabajo Inner join OrdenesTrabajoDetalleArticulos on OT_OrdenTrabajoId = OTDA_OT_OrdenTrabajoId Where OT_Codigo = @OT_Code)
-
 Union all
 
 -- Mano de Obra Ruta (Ingenieria)
 SELECT @OT_Code AS OT
-        , 0 AS MP_INGE
-        , SUM(ROUND(ISNULL(FAD_Horas, 0.0) + CAST(ISNULL(FAD_Minutos, 0.0) AS DECIMAL(28,10)) / 60 + CAST(ISNULL(FAD_Segundos, 0.0) AS DECIMAL(28,10)) / 3600, 3)) * @MO_Hora  AS MO_INGE
-        --, SUM(ROUND(ISNULL(FAD_Horas, 0.0) + CAST(ISNULL(FAD_Minutos, 0.0) AS DECIMAL(28,10)) / 60 + CAST(ISNULL(FAD_Segundos, 0.0) AS DECIMAL(28,10)) / 3600, 6)) * 1 AS  MO_INGE
+    , 0 AS MP_INGE
+    , CAST((SUM(FAD_Horas + FAD_Minutos / 60 + FAD_Segundos / 3600)) * @MO_Hora as decimal(16,3)) AS MO_INGE
 	, 0 AS MP_REAL
 	, 0 AS MO_REAL
 FROM Fabricacion
@@ -69,11 +141,9 @@ left Join CentrosTrabajo on CET_CentroTrabajoId=FAD_ReferenciaId
 INNER JOIN Articulos ON FAB_ART_ArticuloId = ART_ArticuloId
 WHERE FAB_Eliminado = 0 
 AND ART_ArticuloId = (Select OTDA_ART_ArticuloId from OrdenesTrabajo Inner join OrdenesTrabajoDetalleArticulos on OT_OrdenTrabajoId = OTDA_OT_OrdenTrabajoId Where OT_Codigo = @OT_Code)
-
 Union All
 
 -- Consulta de Marteriales Cargados a la OT (REAL)
-
 Select  OT_Codigo as OT
         , 0 AS MP_ING
         , 0 AS MO_ING
@@ -86,19 +156,15 @@ left join ListaPreciosCompra on A1.ART_ArticuloId = LPC_ART_ArticuloId and LPC_P
 inner join ArticulosFactoresConversion on A1.ART_ArticuloId =AFC_ART_ArticuloId and A1.ART_CMUM_UMConversionOCId = AFC_CMUM_UnidadMedidaId  
 Where  OT_Codigo = @OT_Code
 Group By OT_Codigo
-
 Union All
 
 -- Consulta de Tiempos por OT (Real)
-
 Select  OT_Codigo as OT    
         , 0 AS MP_ING
         , 0 AS MO_ING
         , 0 AS MP_REAL
-        , ((SUM((DATEPART(SECOND, [OTSOD_TiempoTotal])) + 
-                                 (60 * DATEPART(MINUTE, [OTSOD_TiempoTotal])) +
-                                 (3600 * DATEPART(HOUR, [OTSOD_TiempoTotal]))))/3600) * @MO_Hora  AS MO_REAL
-from OrdenesTrabajo
+		, CAST((SUM(DATEPART(HOUR, [OTSOD_TiempoTotal])) +	(SUM(DATEPART(MI, [OTSOD_TiempoTotal])) / 60) +
+		(SUM(DATEPART(SECOND, [OTSOD_TiempoTotal])) / 3600)) * @MO_Hora as decimal(16,3)) AS MO_REAL from OrdenesTrabajo
 inner join OrdenesTrabajoSeguimiento on OT_OrdenTrabajoId = OTS_OT_OrdenTrabajoId
 inner join OrdenesTrabajoSeguimientoOperacion on OTS_OrdenesTrabajoSeguimientoId = OTSO_OTS_OrdenesTrabajoSeguimientoId
 inner join OrdenesTrabajoSeguimientoOperacionDetalle on OTSO_OrdenTrabajoSeguimientoOperacionId = OTSOD_OTSO_OrdenTrabajoSeguimientoOperacionId
@@ -107,10 +173,24 @@ Group By OT_Codigo
 ) KOS
 Group By KOS.OT
 
-
-
-
 /*
+
+Select  OT_Codigo as OT    
+		, CAST((SUM(DATEPART(HOUR, [OTSOD_TiempoTotal])) +
+		(SUM(DATEPART(MI, [OTSOD_TiempoTotal])) / 60) +
+		(SUM(DATEPART(SECOND, [OTSOD_TiempoTotal])) / 3600)) * @MO_Hora as decimal(16,3)) AS MO_REAL 
+		--, [OTSOD_TiempoTotal] AS TOTAL
+		--, CAST([OTSOD_TiempoTotal] as time) AS NOSE
+from OrdenesTrabajo
+inner join OrdenesTrabajoSeguimiento on OT_OrdenTrabajoId = OTS_OT_OrdenTrabajoId
+inner join OrdenesTrabajoSeguimientoOperacion on OTS_OrdenesTrabajoSeguimientoId = OTSO_OTS_OrdenesTrabajoSeguimientoId
+inner join OrdenesTrabajoSeguimientoOperacionDetalle on OTSO_OrdenTrabajoSeguimientoOperacionId = OTSOD_OTSO_OrdenTrabajoSeguimientoOperacionId
+Where  OT_Codigo = @OT_Code
+Group By OT_Codigo
+
+
+
+
 -- Agrupado por Orden de Produccion.
 
 Select KOS.OT, SUM(KOS.MP_INGE), SUM(KOS.MO_INGE), SUM(KOS.MP_REAL), SUM(KOS.MO_REAL) 

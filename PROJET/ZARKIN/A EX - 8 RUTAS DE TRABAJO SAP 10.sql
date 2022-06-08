@@ -25,8 +25,10 @@
 	from OITM
 	Where OITM.QryGroup29='Y' and OITM.U_Ruta <> '400,403,406,409,415,418'
 	
-	--Update OITM set U_Ruta = '400,403,406,409,415,418'
-	--Where OITM.QryGroup29='Y' and OITM.U_Ruta <> '400,403,406,409,415,418'
+	/*
+	Update OITM set U_Ruta = '400,403,406,409,415,418'
+	Where OITM.QryGroup29='Y' and OITM.U_Ruta <> '400,403,406,409,415,418'
+	*/
 
 -- Articulos de Habilitados para Carpinteria.
 	--ARTICULOS:
