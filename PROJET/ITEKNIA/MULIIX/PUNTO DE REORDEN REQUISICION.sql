@@ -36,7 +36,13 @@ Where --LOC_Nombre = '1 ALMACEN MATERIAS PRIMAS'
 --and AT.ATP_Descripcion = 'Materia prima'
 --and ART_CMM_SubcategoriaId <> 'BBB10439-9178-456C-9530-3C7AD574E84C'
 
- ART_CodigoArticulo = '01457'
+ --ART_CodigoArticulo = '12741'
+ ART_CodigoArticulo = '00613'
+ 
+ 
+ --ART_CantMinimaOrden > 0
+ --ART_CantMaximaOrden > 1
+ 
 Order By ART_Nombre 
 
 
