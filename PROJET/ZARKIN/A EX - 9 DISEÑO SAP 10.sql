@@ -171,6 +171,7 @@
 		, A3.ItemCode AS CODIGO
 		, A3.ItemName AS DESCRIPCION
 		, A3.U_TipoMat AS TIPO
+		, A3.OnHand AS EXISTENCIA
 	from OITM A3
 	left join ITT1 on A3.ItemCode = ITT1.Father    
 	where A3.QryGroup29='Y' and ITT1.Father is null
@@ -185,6 +186,7 @@
 		, A3.ItemCode AS CODIGO
 		, A3.ItemName AS DESCRIPCION
 		, A3.U_TipoMat AS TIPO
+		, A3.OnHand AS EXISTENCIA
 	from OITM A3
 	left join ITT1 on A3.ItemCode = ITT1.Father    
 	where A3.QryGroup31='Y' and ITT1.Father is null
@@ -198,6 +200,7 @@
 		, A3.ItemCode AS CODIGO
 		, A3.ItemName AS DESCRIPCION
 		, A3.U_TipoMat AS TIPO
+		, A3.OnHand AS EXISTENCIA
 	from OITM A3
 	left join ITT1 on A3.ItemCode = ITT1.Father    
 	where A3.QryGroup32='Y' and ITT1.Father is null and A3.frozenFor = 'N'
@@ -210,6 +213,7 @@
 		, A3.ItemCode AS CODIGO
 		, A3.ItemName AS DESCRIPCION
 		, A3.U_TipoMat AS TIPO
+		, A3.OnHand AS EXISTENCIA
 	from OITM A3
 	left join ITT1 on A3.ItemCode = ITT1.Father    
 	where A3.U_TipoMat = 'PT' and ITT1.Father is null
@@ -244,17 +248,14 @@
 	from ITT1 
 	inner join OITM A3 on ITT1.Father=A3.ItemCode
 	inner join OITM A1 on ITT1.Code=A1.ItemCode
-	Where ITT1.Warehouse = 'AMP-ST' and A1.ItmsGrpCod <> '113' and A1.U_GrupoPlanea <> '6'
-	and ITT1.Father <> '17621'
-	and ITT1.Father <> '17620' and ITT1.Father <> '17691' and ITT1.Father <> '17701'
-	and ITT1.Father <> '17822' and ITT1.Father <> '17814'  and ITT1.Father <> '18292'
-	 and ITT1.Father <> '18288' and ITT1.Father <> '18262' and ITT1.Father <> '18627'
-	 and ITT1.Father <> '18626' and ITT1.Father <> '18696' and ITT1.Father <> '18559'
-	 and ITT1.Father <> '18761' and ITT1.Father <> '10436' and ITT1.Father <> '19416'
-	 and ITT1.Father <> '19415' and ITT1.Father <> '19430'  and ITT1.Father <> '18943'
-	 and ITT1.Father <> '18939'  and ITT1.Father <> '19053'  and ITT1.Father <> '19057'
-	 and ITT1.Father <> '19052' and ITT1.Father <> '20290' and ITT1.Father <> '20289'
-	 and ITT1.Father <> '19646' and ITT1.Father <> '20348'
+	Where ITT1.Warehouse = 'AMP-ST' and A1.ItmsGrpCod <> '113' and A1.U_GrupoPlanea <> '6' 
+	and ITT1.Father <> '17621' and ITT1.Father <> '19646' and ITT1.Father <> '20348' and ITT1.Father <> '20363' and ITT1.Father <> '20289'
+	and ITT1.Father <> '17620' and ITT1.Father <> '17691' and ITT1.Father <> '17701' and ITT1.Father <> '19052' and ITT1.Father <> '20290' 
+	and ITT1.Father <> '17822' and ITT1.Father <> '17814'  and ITT1.Father <> '18292' and ITT1.Father <> '18939'  and ITT1.Father <> '19053'  
+	and ITT1.Father <> '18288' and ITT1.Father <> '18262' and ITT1.Father <> '18627' and ITT1.Father <> '19057' and ITT1.Father <> '19057'
+	and ITT1.Father <> '18626' and ITT1.Father <> '18696' and ITT1.Father <> '18559' and ITT1.Father <> '18943' and ITT1.Father <> '19053'  
+	and ITT1.Father <> '18761' and ITT1.Father <> '10436' and ITT1.Father <> '19416' and ITT1.Father <> '18939'  and ITT1.Father <> '19430'  
+	and ITT1.Father <> '19415' and ITT1.Father <> '20357' and ITT1.Father <> '20358' 
 	Order by A3.ItemName	
 	
 	

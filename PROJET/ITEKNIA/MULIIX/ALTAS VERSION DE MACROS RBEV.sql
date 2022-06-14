@@ -16,9 +16,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'IT-VMA-2205-028'
-Set @Nomb = '028 COMPARATIVO COTIZACIONES.'
-Set @Vers = 'VMA220524A'
+Set @Code = 'IT-VMA-2206-043'
+Set @Nomb = '043 CONTROL MAXIMOS Y MINIMOS.'
+Set @Vers = 'VMA220610A'
 
 INSERT INTO [dbo].[RBEV]
            ([CodeRepo], [NombRepo], [NumeVers])

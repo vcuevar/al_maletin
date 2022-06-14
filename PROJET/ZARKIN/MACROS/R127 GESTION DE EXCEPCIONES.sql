@@ -124,6 +124,32 @@ Order By OITM.ItemName
 Select OITM.ItemCode AS CODIGO, OITM.ItemName AS DESCRIPCION, OITM.InvntryUom AS UDM, Cast(OITM.U_VS as decimal(16,3)) AS VS, ISNULL(Cast(((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) * (Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)), 0) AS VS_CAL, A1.ItemCode AS CODIGO_P, A1.ItemName AS DESCRIPCION_P, A1.InvntryUom AS UDM_P, Cast(A1.U_VS as decimal(16,3)) AS VS_P, ISNULL(Cast(((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) *
 (Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)),0) AS VS_P_CAL, Cast((Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)) AS VS_MODEL From OITM Left Join OITM A1 on OITM.U_CodAnt = A1.ItemCode Where OITM.QryGroup1 = 'Y' and OITM.frozenFor = 'N' and OITM.U_Linea = 01 and OITM.U_CodAnt <> 'NOUSA' Order By OITM.ItemName
 
+-- ================================================================================================
+-- |  EXCEPCIONES MODULO 10 PARA CALCULO DE VALOR SALA A LOS HULE ESPUMA NO JUEGOS (NOUSA)        |
+-- ================================================================================================
+/*
+' =========================================================================
+' | Procedimiento:                                                        |
+' |                                                                       |
+' | Se procede con:                                                       |
+' |      1.- Obtener el Listado de los Hules de NOUSAR y asignar el valor |
+' |        que le corresponde por el mueble.                              |
+' =========================================================================
+*/
+
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, Cast(OITM.U_VS as decimal(16,3)) AS VS
+	, Cast((Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)) AS VS_MODEL		
+From OITM
+Left Join OITM A1 on OITM.U_CodAnt = A1.ItemCode
+Where (OITM.QryGroup1 = 'Y' or OITM.QryGroup2 = 'Y') and OITM.frozenFor = 'N' and OITM.U_Linea = 01 and OITM.U_CodAnt = 'NOUSA'
+and Cast(OITM.U_VS as decimal(16,3)) <>
+Cast((Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)) 
+Order By OITM.ItemName
+
+
 
 
 -- ================================================================================================
