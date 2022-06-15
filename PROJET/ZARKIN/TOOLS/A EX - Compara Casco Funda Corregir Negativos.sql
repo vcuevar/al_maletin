@@ -33,14 +33,14 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_CT = 160, U_Orden = 160, U_DocEntry = 12064 where Code = 4583
+	update [@CP_OF] set U_CT = 100, U_Orden = 100, U_DocEntry = 20784 where Code = 4585
 	update [@CP_OF] set U_Entregado = 0, U_Procesado = 2 where Code = 138465
 	
-	update [@CP_OF] set U_Recibido= 1 where Code= 4583
+	update [@CP_OF] set U_Recibido= 1 where Code= 4585
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd =  12064 --17788 --88, 89, 90, 91
+	Set @NumOrd =  20784 
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
