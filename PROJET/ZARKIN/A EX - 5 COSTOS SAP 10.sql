@@ -373,13 +373,13 @@ Select '410 REVAL. MP s/e' AS REPORTE_410
 		, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
-Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
+Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand = 0
 Order By OITM.ItemName 
 
 
 -- Usar Revalorizacion de Inventarios. MP sin Existencia.
-Select '415 REVAL. MP c/e' AS REPORTE_410
+Select '415 REVAL. MP c/e' AS REPORTE_415
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom as UDM
@@ -391,25 +391,37 @@ Select '415 REVAL. MP c/e' AS REPORTE_410
 		, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
-Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
+Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand > 0
 Order By OITM.ItemName 
 
 
-
-/*
 -- Usar Revalorizacion de Inventarios. SB diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
-Select '420 REVAL. SB' AS REPORTE_420
+-- 20/JUN/22 RETOMO PERO SOLO CUANDO LA DIFERENCIA SEA EN AUMENTO Y SIN EXISTENCIA
+Select Top(50)'420 REVAL. SB' AS REPORTE_420
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
+		, OITM.InvntryUom as UDM
+		, OITM.OnHand AS EXISTENCIA 
+		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 		, OITM.DfltWH AS ALMACEN
-		, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO
-		, Cast(ITM1.Price as decimal(16,4)) AS PRECIO_10
-		, OITM.U_TipoMat AS TMAT	
+		, '501-200-000' AS C_AUMENTA	
+		, '501-200-000' AS C_DISMINUYE	
+		
+		--	, OITM.ItemCode AS CODE
+		--, OITM.ItemName AS NOMBRE
+		--, OITM.DfltWH AS ALMACEN
+		--, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO
+		--, Cast(ITM1.Price as decimal(16,4)) AS PRECIO_10
+		--, OITM.DfltWH AS ALMACEN
+		--, '501-200-000' AS C_AUMENTA	
+		--, '501-200-000' AS C_DISMINUYE	
+		--, OITM.U_TipoMat AS TMAT	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
-Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
+Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 and OITM.OnHand = 0
 and OITM.U_TipoMat <> 'MP' and OITM.U_TipoMat <> 'PT'
 Order By OITM.ItemName 
@@ -417,20 +429,30 @@ Order By OITM.ItemName
 
 -- Usar Revalorizacion de Inventarios. PT diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
-Select '425 REVAL. PT' AS REPORTE_425
+Select Top(50) '425 REVAL. PT' AS REPORTE_425
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
+		, OITM.InvntryUom as UDM
+		, OITM.OnHand AS EXISTENCIA 
+		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 		, OITM.DfltWH AS ALMACEN
-		, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO
-		, Cast(ITM1.Price as decimal(16,4)) AS PRECIO_10
-		, OITM.U_TipoMat AS TMAT	
+		, '501-200-000' AS C_AUMENTA	
+		, '501-200-000' AS C_DISMINUYE	
+		
+		--, OITM.ItemCode AS CODE
+		--, OITM.ItemName AS NOMBRE
+		--, OITM.DfltWH AS ALMACEN
+		--, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO
+		--, Cast(ITM1.Price as decimal(16,4)) AS PRECIO_10
+		--, OITM.U_TipoMat AS TMAT	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 
 and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0
 Order By OITM.ItemName 
-*/
+
 
 -- Inactivar codigos que queden en cero
 	Select	'430 INHABILITAR' AS REPORTE_430, 

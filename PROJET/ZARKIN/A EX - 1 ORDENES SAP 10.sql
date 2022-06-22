@@ -254,6 +254,10 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM A3 on OP.ItemCode = A3.ItemCode 
 	where OP.Status = 'P' 
 
+/*
+	delete [@CP_OF] where Code = 218687
+
+*/
 	
 /*ORDENES DE PRODUCCION GENERADAS NIVEL CABECERA. */
 /*  Orden Generada como tipo diferente a STANDAR, Cambiar a STANDAR  */
