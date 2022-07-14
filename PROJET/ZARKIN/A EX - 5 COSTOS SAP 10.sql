@@ -374,7 +374,7 @@ Select '410 REVAL. MP s/e' AS REPORTE_410
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
-and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand = 0
+and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
 
@@ -392,14 +392,14 @@ Select '415 REVAL. MP c/e' AS REPORTE_415
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
-and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand > 0
+and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand > 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
 
 -- Usar Revalorizacion de Inventarios. SB diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
 -- 20/JUN/22 RETOMO PERO SOLO CUANDO LA DIFERENCIA SEA EN AUMENTO Y SIN EXISTENCIA
-Select Top(50)'420 REVAL. SB' AS REPORTE_420
+Select Top(500)'420 REVAL. SB' AS REPORTE_420
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom as UDM
@@ -423,13 +423,13 @@ From OITM
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 and OITM.OnHand = 0
-and OITM.U_TipoMat <> 'MP' and OITM.U_TipoMat <> 'PT'
+and OITM.U_TipoMat <> 'MP' and OITM.U_TipoMat <> 'PT' and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
 
 -- Usar Revalorizacion de Inventarios. PT diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
-Select Top(50) '425 REVAL. PT' AS REPORTE_425
+Select Top(500) '425 REVAL. PT' AS REPORTE_425
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom as UDM
@@ -450,7 +450,7 @@ From OITM
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 
-and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0
+and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
 

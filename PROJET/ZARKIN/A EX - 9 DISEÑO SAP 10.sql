@@ -260,14 +260,14 @@
 	
 	
 	
-	
+	/*
 	-- VALIDAR ALMACEN DE BASE OITT CABECERA DE LDM PT. 
 	Select '795 ! DFL CAB. LMD CINTILLO.' AS REPORTE, OITT.Code, A3.ItemName, A3.U_TipoMat, OITT.ToWH
 	from OITT 
 	inner join OITM A3 on OITT.Code = A3.ItemCode 
 	where ItemCode = '3778-42-P0201' and OITT.TOWH <> 'APG-ST'
 	ORDER BY A3.ItemName
-
+	*/
 
 
 

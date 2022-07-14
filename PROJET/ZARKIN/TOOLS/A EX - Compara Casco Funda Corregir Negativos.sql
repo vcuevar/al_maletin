@@ -52,19 +52,26 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 16626 and U_CT = 112 and U_idEmpleado = 128
+	select * from [@CP_LOGOF] where U_DocEntry= 21383 and U_CT = 118 and U_idEmpleado = 35
 	order by U_CT, U_FechaHora
 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 	update [@CP_LOGOF] set U_idEmpleado = 141 Where Code = 134102 
 
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 16626 and U_CT = 112 and U_idEmpleado = 128
+	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21383 and U_CT = 118 and U_idEmpleado = 35
+	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21399 and U_CT = 118 and U_idEmpleado = 35
+	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21398 and U_CT = 118 and U_idEmpleado = 35
+	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21382 and U_CT = 118 and U_idEmpleado = 35
+	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21352 and U_CT = 118 and U_idEmpleado = 35
+	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21372 and U_CT = 118 and U_idEmpleado = 35
 	
 	DELETE [@CP_LOGOF] WHERE Code = 120891
 
 	update [@CP_LOGOF] set U_Cantidad = 2 Where Code = 149739
 
+
+	
 ---------------------------------------------------------------------------------
 	-- Ordenes que se Cancelaron y no se Borro de Control de Piso.
 	-- Se pueden usar los codigos para asignar a otro que se haya borrado.

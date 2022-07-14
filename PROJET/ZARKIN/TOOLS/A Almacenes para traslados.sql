@@ -24,29 +24,37 @@ Code	Name	Remarks	UserSign
 18	TAPICERIA	AREA DE TAPICERIA	1
 19	TERMINADO	AREA DE TERMINADO	1
 20	PERSONAL	RECURSOS HUMANOS	4
+21  ALMACEN DE PARTES
 */
 
 select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where --SIZ_AlmacenesTransferencias.Dept = '11' 
-SIZ_AlmacenesTransferencias.Code = 'APG-PA'
+where SIZ_AlmacenesTransferencias.Dept = '21' 
+--SIZ_AlmacenesTransferencias.Code = 'APG-PA'
 order by TrasladoDeptos, Label
 
-Select * from SIZ_AlmacenesTransferencias Where Label like '%APG-PA%' 
+Select * from SIZ_AlmacenesTransferencias 
+Where Dept = 21 --and Code = 'APT-TR'
+--Label like '%APT-TR%' 
+Order by Dept
 
---Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'OD' Where Code = 'APG-ST' and Dept = '10' 
+-- Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'OD' Where Code = 'APG-ST' and Dept = '7' 
+-- Update SIZ_AlmacenesTransferencias set SolicitudMateriales = 'D' Where Code = 'APG-ST' and Dept = '7' 
+-- Update SIZ_AlmacenesTransferencias set Label = 'APG-ST - WIP CORTE DE PIEL'  Where Dept = 7 and Code = 'APG-ST'
+-- Update SIZ_AlmacenesTransferencias set Label = 'PARA MUESTRARIO DE PIEL'  Where Dept = 7 and Code = 'APT-TR'
+
+--Update SIZ_AlmacenesTransferencias set TrasladoDeptos = ' ' Where Dept = 7 and Code = 'APT-TR'
 
 -- Delete SIZ_AlmacenesTransferencias Where Code = 'APG-PA' and Dept = '1'
 
 -- ****************** INSERTAR NUEVO ALMACEN  ***************************
 
 
-
 BEGIN      
 	INSERT INTO SIZ_AlmacenesTransferencias (Code, Dept, Label, SolicitudMateriales, TrasladoDeptos)
-    VALUES ('APT-PR','11','APT-PR - ALMACEN PRESIDENCIA.   ',' ','D')
+    VALUES ('APT-PA','21','APT-PA - WIP CARPINTERIA. ',' ','D')
       
 	--PRINT 'Ingresado: CODIGO ' + cast(@CODI as varchar(10))  + '  ' + cast(@NAME as varchar (50))
 END

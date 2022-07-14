@@ -11,10 +11,10 @@ Declare @FechaInac nvarchar(30)
 Declare @FechaIS nvarchar(30)
 
 -- Fecha Creacion Nuevos Articulos aaaa/mm/dd
-Set @FechaCrea = CONVERT (DATE, '2022/06/10', 102)
+Set @FechaCrea = CONVERT (DATE, '2022/06/26', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2022/06/20', 102)
+Set @FechaInac =  CONVERT (DATE, '2022/07/11', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -914,9 +914,9 @@ Where OITM.U_CodAnt is null
 	Where OITW.Locked = 'Y'
 
 -- Producto Terminado que tienen almacen Equivocado. 
-	select '790 ? CINTILLO ALM. EQUIVOCADO' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, OITM.ItmsGrpCod, OITM.U_estacion,
-	OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr from OITM 
-	where ItemCode = '3778-42-P0201' and OITM.DfltWH <> 'APG-ST' 
+	--select '790 ? CINTILLO ALM. EQUIVOCADO' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, OITM.ItmsGrpCod, OITM.U_estacion,
+	--OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr from OITM 
+	--where ItemCode = '3778-42-P0201' and OITM.DfltWH <> 'APG-ST' 
 
 -- Articulo Casco o complemento, sin marcar casilla de Articulo de Venta, al no activarlo no se puede capturar
 -- en pedido para generar la Orden de Produccion. 
