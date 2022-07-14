@@ -70,3 +70,4 @@ select * from OrdenesTrabajoSeguimientoGastosOperacion (Vacia)
 select * from OrdenesTrabajoSeguimientoOperacionEmpleados (Vacia)
 select * from OrdenesTrabajoSurtimientoCostosH (Vacia)
 select * from OrdenesTrabajoSurtimientoPartida (Vacia)
+

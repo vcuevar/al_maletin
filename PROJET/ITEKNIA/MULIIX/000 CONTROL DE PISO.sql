@@ -143,7 +143,7 @@ From RPT_Seguimiento_OTF
 -- Tabla de RPT_Seguimiento_OTI
 -- Se lleva el Inicio de cuando la autorizan para Produccion.
 
-Select SOI_ID From RPT_Seguimiento_OTI Where SOI_OT = '41DE070A-56A3-44BE-AF04-1013F7CFD55E'
+Select * From RPT_Seguimiento_OTI Where SOI_OT = '41DE070A-56A3-44BE-AF04-1013F7CFD55E'
 
 */
 
@@ -167,6 +167,31 @@ VALUES
         , 0
         , GETDATE())
 GO
-
-Select * from RPT_Seguimiento_OTI
 */
+
+Select * from RPT_Seguimiento_OTF
+
+-- Relacion de Informacion entre OT y OV
+Select OT_Codigo AS OT
+        , ART_CodigoArticulo AS PT
+        , ART_Nombre AS DESCRIPCION
+        , OTDA_Cantidad AS CANT_OT
+        , OV_CodigoOV AS OV
+        , PRY_CodigoEvento AS COD_PROY
+        , PRY_NombreProyecto AS NOM_PROY
+        , CLI_CodigoCliente AS COD_CLIE
+        , CLI_RazonSocial AS NOM_CLI
+from OrdenesTrabajo 
+inner join OrdenesTrabajoDetalleArticulos on OT_OrdenTrabajoId = OTDA_OT_OrdenTrabajoId
+inner join Articulos on ART_ArticuloId = OTDA_ART_ArticuloId
+inner join OrdenesTrabajoReferencia on OT_OrdenTrabajoId = OTRE_OT_OrdenTrabajoId
+inner join OrdenesVenta on OTRE_OV_OrdenVentaId = OV_OrdenVentaId
+inner join Proyectos on OV_PRO_ProyectoId = PRY_ProyectoId
+inner join Clientes on OV_CLI_ClienteId = CLI_ClienteId
+Where OT_Codigo = 'OT02430'
+--Where OT_OrdenTrabajoId = '41DE070A-56A3-44BE-AF04-1013F7CFD55E'
+
+
+
+
+select * from Clientes

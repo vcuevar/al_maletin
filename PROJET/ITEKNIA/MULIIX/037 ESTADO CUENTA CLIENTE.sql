@@ -24,8 +24,6 @@ Select TOP (10) * from EmbarquesDetalle
 Select TOP (10) * from EmbarquesDevoluciones
 Select TOP (10) * from EmbarquesDevolucionesDetalle
 
-
-
 Select TOP (10) * from EmbarquesBultos
 
 Select TOP (10) * from EmbarquesBultosDetalle
@@ -58,7 +56,11 @@ Where BUL_Eliminado = 0 and BULD_Eliminado = 0
 
 
 Select top (10) * from OrdenesVenta
-Where OV_CodigoOV = 'OV00697'           Paridad. 19.8537000000
+Where OV_CodigoOV = 'OV01004'          -- Paridad. 19.8537000000
+
+Update OrdenesVenta set OV_MONP_Paridad = 19.558 Where OV_CodigoOV = 'OV01004'
+
+
 
 Select top(10) * from CXCPagos 
 inner join CXCPagosDetalle on CXCP_CXCPagoId = CXCPD_CXCP_CXCPagoId

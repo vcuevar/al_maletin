@@ -18,7 +18,7 @@ Where OV_Eliminado = 1 and
 OV_CMM_EstadoOVId <> '2209C8BF-8259-4D8C-A0E9-389F52B33B46'
 
 -- Para corregir asignar este cambio.
-update OrdenesVenta set OV_CMM_EstadoOVId = '2209C8BF-8259-4D8C-A0E9-389F52B33B46' Where OV_Eliminado = 1 and  OV_CMM_EstadoOVId <> '2209C8BF-8259-4D8C-A0E9-389F52B33B46'
+--update OrdenesVenta set OV_CMM_EstadoOVId = '2209C8BF-8259-4D8C-A0E9-389F52B33B46' Where OV_Eliminado = 1 and  OV_CMM_EstadoOVId <> '2209C8BF-8259-4D8C-A0E9-389F52B33B46'
 
 
 -- select * from Proyectos
@@ -63,8 +63,14 @@ where OV_CodigoOV = 'OV00613'
 Order By OV_CodigoOV
 
 Select *        
-From OrdenesVenta where OV_CodigoOV = 'OV00613'
+From OrdenesVenta where OV_CodigoOV = 'OV01009'
 Order By OV_CodigoOV
+
+Select *        
+From OrdenesVenta where OV_MON_MonedaId = '1EA50C6D-AD92-4DE6-A562-F155D0D516D3' and OV_MONP_Paridad = 1
+and OV_CodigoOV > 'OV00887'
+Order By OV_CodigoOV
+
 
 Select  OV_CodigoOV
         , (Select CLI_CodigoCliente + '  '+ CLI_RazonSocial from Clientes Where CLI_ClienteId = OV_CLI_ClienteId) as CLIENTE

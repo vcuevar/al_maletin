@@ -5,10 +5,14 @@
 
 Declare @FechaIS nvarchar(30), @FechaFS nvarchar(30), @Cod_Mat nvarchar(10)
 
-Set @FechaIS = CONVERT(DATE, (SELECT DATEADD(MM, -5, GETDATE())), 102)
+--Set @FechaIS = CONVERT(DATE, (SELECT DATEADD(MM, -5, GETDATE())), 102)
+Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
+
 Set @FechaFS = CONVERT (DATE, GETDATE()) 
 
- Set @Cod_Mat = '12741'         --  ADHESIVO "IRIS" K-812 NO FLAMABLE
+Set @Cod_Mat = '12222'         --  ADHESIVO "IRIS" K-812 NO FLAMABLE
+
+--Select @FechaIS, @FechaFS 
 
 -- Con esta consulta se obtiene el material entregado por almacen de Materias Primas a WIP de hoy a 5
 -- Meses hacia atras. Todas las salidas del Almacen de Materias Primas Localidad L101_GENERAL.
@@ -23,6 +27,7 @@ Set @FechaFS = CONVERT (DATE, GETDATE())
 -- Para identificar los articulos que se manejan mediante Maximos y Minimos se toma que la cantidad capturada en Muliix 
 -- como Minimo sea mayor de 1 y ya que se actualice a que queden en cero las capturas sera entonces Minimo > 0
 
+/*
 -- Relacion de Articulos que se requieren por Maximos y Minimos
 Select ART_CodigoArticulo AS CODIGO
 	, ART_Nombre AS DESCRPCION
@@ -74,7 +79,62 @@ Having (SUM(OCFR_CantidadRequerida) - SUM(OCRC_CantidadRecibo)) > 0
 Where ART_CantMinimaOrden > 1 
 Order By ART_Nombre
 
+*/
+
+
+Select ART_CodigoArticulo AS CODIGO, ART_Nombre AS DESCRPCION, CMUM_Nombre AS UDM, Convert(Decimal(14,3), ISNULL(E.EXI_Inventario,0)) AS EXISTENCIA, Convert(Decimal(14,3), ISNULL(ART_CantMaximaOrden, 0)) as MAXIMO, Convert(Decimal(14,3), ISNULL((K.CCD_Consumo * 7) + (K.CCD_Consumo * ART_NoDiasAbastecimiento), 0)) AS PUN_REO, Convert(Decimal(14,3), ISNULL(ART_CantMinimaOrden, 0)) as MINIMO, Convert(Decimal(14,3), ISNULL(OC_OPN.CANT_PEND, 0)) AS OC_SURTIR, Convert(Decimal(14,3), ISNULL(ART_NoDiasAbastecimiento, 0)) AS LED_TIME, Convert(Decimal(14,3), ISNULL(K.CCD_Consumo, 0)) AS CONS_DIA, Convert(Decimal(14,3), ISNULL(K.CCD_Consumo * 7, 0)) AS STK_MIN, Convert(Decimal(14,3), ISNULL((K.CCD_Consumo *14) + (K.CCD_Consumo * ART_NoDiasAbastecimiento), 0)) AS STK_MAX 
+FROM Articulos 
+inner join ControlesMaestrosUM on ART_CMUM_UMInventarioId = CMUM_UnidadMedidaId 
+Left Join (Select A1.ART_CodigoArticulo AS CCD_Codigo, Convert(Decimal(14,3), ((SUM(TRAM_CantidadATraspasar)*-1)/152)) AS CCD_Consumo FROM TraspasosMovtos 
+Inner Join TraspasosLotes on TRAM_TraspasoMovtoId = TRLOT_TRAM_TraspasoMovtoId 
+Inner Join LotesLocalidades on LOTL_LoteLocalidadId = TRLOT_LOTL_LoteLocalidadId 
+Inner Join Localidades on LOC_LocalidadId = LOTL_LOC_LocalidadId 
+Inner Join Articulos A1 on TRAM_ART_ArticuloId = A1.ART_ArticuloId 
+Inner Join ControlesMaestrosMultiples on CMM_ControlId =  TRAM_CMM_TipoTransferenciaId 
+Where  Cast(TRAM_FechaTraspaso as date) > @FechaIS and CMM_Control = 'CMM_CDA_MovimientoEnInventario' and LOC_CodigoLocalidad = 'L101_GENERAL' and TRLOT_CantidadTraspaso < 0 Group By  A1.ART_CodigoArticulo ) K on K.CCD_Codigo = ART_CodigoArticulo 
+Left Join (Select   T1.ART_CodigoArticulo as EXI_Codigo, Convert(Decimal(28,4),SUM(T0.LOCA_Cantidad)) as EXI_Inventario 
+from LocalidadesArticulo T0 inner join Articulos T1 on T1.ART_ArticuloId = T0.LOCA_ART_ArticuloId Inner join Localidades T2 on T0.LOCA_LOC_LocalidadId = T2.LOC_LocalidadId Where (LOC_CodigoLocalidad = 'L101_GENERAL' or  LOC_CodigoLocalidad = 'L212_HULES' or  LOC_CodigoLocalidad = 'L214_HERRAMIENTAS' or  LOC_CodigoLocalidad = 'L222_LACA' or  LOC_CodigoLocalidad = 'L223_MADERAS') Group By T1.ART_CodigoArticulo) E on E.EXI_Codigo = ART_CodigoArticulo 
+Left join (Select OC_ABI.ID AS ID_ART, (SUM(OC_ABI.CANT_SOL) - SUM(OC_ABI.CANT_REC)) AS CANT_PEND From (Select ART_CodigoArticulo AS ID, SUM(OCFR_CantidadRequerida) AS CANT_SOL, SUM(OCRC_CantidadRecibo) as CANT_REC from OrdenesCompraRecibos inner join OrdenesCompra on OC_OrdenCompraId = OCRC_OC_OrdenCompraId inner join OrdenesCompraFechasRequeridas on OCFR_FechaRequeridaId = OCRC_OCFR_FechaRequeridaId 
+inner join OrdenesCompraDetalle on OCD_PartidaId = OCFR_OCD_PartidaId inner join Articulos on ART_ArticuloId = OCD_ART_ArticuloId 
+where OCFR_Borrado = 0 and OCD_Borrado = 0 and OC_Borrado = 0 
+Group By ART_CodigoArticulo 
+Having (SUM(OCFR_CantidadRequerida) - SUM(OCRC_CantidadRecibo)) > 0 ) OC_ABI Group By OC_ABI.ID) OC_OPN  on OC_OPN.ID_ART = ART_CodigoArticulo 
+Where ART_CantMinimaOrden > 0.001  and ART_Eliminado = 0 Order By ART_Nombre 
+
+
+
+-- Determinar Materiales que no tienen tiempo de Entrega
+Select	ART_CodigoArticulo as CODIGO
+        , ART_Nombre as NOMBRE
+        , Convert(Decimal(28,2), ART_NoDiasAbastecimiento) AS DIA_ABS   
+from Articulos
+Where ART_Activo = 1 and (ART_NoDiasAbastecimiento = 0 or ART_NoDiasAbastecimiento is null)
+
+
 /*
+-- Convertir todos los mínimos y maximos en cero que sea igual a = 1 el mínimo.
+
+Select	ART_CodigoArticulo as CODIGO
+        , ART_Nombre as NOMBRE
+        , Convert(Decimal(28,4),ART_CantMinimaOrden) as MINIMO
+        , Convert(Decimal(28,4),ART_CantPuntoOrden) as P_REORDEN 
+        , Convert(Decimal(28,4),ART_CantMaximaOrden) as MAXIMO
+from Articulos
+Where ART_CantMinimaOrden > 0.001
+
+Update Articulos Set ART_CantMinimaOrden = 0, ART_CantMaximaOrden = 0  Where ART_CantMinimaOrden = 1
+
+-- Marcar como Activos o Inactivos
+Select *
+FROM Articulos Where ART_CodigoArticulo = '1p'
+
+Select * From Articulos Where ART_ArticuloId = 'D864A373-0393-4069-8F74-9E72D9641D27'     
+
+Update Articulos Set ART_Activo = 0 Where ART_ArticuloId = '13FFC39F-657F-44F7-AB00-885E671E6E0A'     
+
+*/      
+/*
+
  -- Detalle de los Consumos.
 Select Cast(TRAM_FechaTraspaso as date) AS FEC_TRASP
 	, ART_CodigoArticulo AS CODIGO
@@ -138,9 +198,7 @@ inner join ControlesMaestrosUM UM on ART_CMUM_UMInventarioId = UM.CMUM_UnidadMed
 Where ART_CodigoArticulo = @Cod_Mat
 
 
-Select * from ControlesMaestrosMultiples where CMM_Control = 'CMM_CDA_MovimientoEnInventario'
-
-
+--Select * from ControlesMaestrosMultiples where CMM_Control = 'CMM_CDA_MovimientoEnInventario'
 	
 
 -- Asignar Consumo del Material por dia
@@ -205,6 +263,6 @@ where OCFR_Borrado = 0 and OCD_Borrado = 0 and OC_Borrado = 0
 Group By OC_OrdenCompraId, OC_CodigoOC, ART_CodigoArticulo, ART_Nombre, OCD_CMUM_UMCompras
 Having (SUM(OCFR_CantidadRequerida) - SUM(OCRC_CantidadRecibo)) > 0
 
-*/
 
+*/
 

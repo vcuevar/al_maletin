@@ -71,23 +71,22 @@ inner join Ciudades on CIU_CiudadId = EMP_CIU_CiudadId
 inner join Estados on EST_EstadoId = EMP_EST_EstadoId
 inner join Paises on PAI_PaisId = EMP_PAI_PaisId
 inner join ControlesMaestrosMultiples TSAN on TSAN.CMM_ControlId = EMP_CMM_TipoSanguineoId
-Where EMP_FechaEgreso is not null
+Where EMP_FechaEgreso is null and EMP_Activo = 0
 Order by DEPARTAMENTO, PUESTO, NOMBRE
 
 
-Select 	EMP_CodigoEmpleado AS CODIGO,
-		EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE,
-		ISNULL (DEP_Nombre, 'SIN DEPTO...') AS DEPARTAMENTO,
-		ISNULL (PUE_NombrePuesto, 'SIN PUESTO...') AS PUESTO,
-		Cast(EMP_FechaEgreso AS DATE) as FEC_BAJA,
-		EMP_Activo as ESTATUS,
-		ISNULL (EMP_Fotografia, 'SIN FOTO') as FOTO
-		, Empleados.*
+
+-- Excepciones de Empleados Inactivos sin fecha de baja
+Select 	EMP_CodigoEmpleado AS CODIGO
+        , EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE
+        , Cast(EMP_FechaEgreso AS DATE) as FEC_BAJA
+	, EMP_Activo as ESTATUS
+	, EMP_LIP_LineaProduccionId
 from Empleados
-left join Departamentos	on DEP_DeptoId = EMP_DEP_DeptoId
-left join Puestos	on PUE_PuestoId = EMP_PUE_PuestoId
-where EMP_Eliminado = 0 and EMP_CodigoEmpleado = '972'
-Order by DEPARTAMENTO, PUESTO, NOMBRE
+where EMP_Activo = 0  and EMP_FechaEgreso is null 
+--and EMP_CodigoEmpleado = '798'
+--and EMP_LIP_LineaProduccionId = '3FFD5508-8EA0-4577-A405-5B2BBE2A449A'
+Order by NOMBRE
 
 Select * from Usuarios
 Where USU_Nombre = '803'
