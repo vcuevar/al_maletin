@@ -42,7 +42,7 @@ Order by NOMBRE
 -- Base de Datos de Usuarios
 Select top (10) * from Empleados
 
-select top (10) * from Usuarios  Where USU_Nombre = '877'
+select top (10) * from Usuarios  Where USU_Nombre = '836'
 
 Select top (10) * from Permisos
 

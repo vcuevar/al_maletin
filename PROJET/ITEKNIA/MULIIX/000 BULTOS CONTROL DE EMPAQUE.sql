@@ -39,7 +39,7 @@ Select * from Bultos Where BUL_NumeroBulto = '3889' (BUL_BultoId = 'F48DC438-49E
 
 Select * from Bultos 
 inner join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
-Where BUL_NumeroBulto = '2913'
+Where BUL_NumeroBulto = '6644'
 
 Select * from ControlesMaestrosMultiples Where CMM_Control = 'CMM_PRO_EstatusBulto'
  
@@ -66,8 +66,8 @@ left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
 left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
 Left join OrdenesTrabajoReferencia on OTRE_OT_OrdenTrabajoId = BULD_OT_OrdenTrabajoId
 Where --BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0 and BUL_CMM_TipoBultoId = 'CDBBF4F2-3A62-475B-A0AB-B235496DFE7D'
-BULD_ART_ArticuloId = 'DDBB01BA-BB0C-4B0A-95EE-D20495597E4B'
---BUL_NumeroBulto = '3267'
+--BULD_ART_ArticuloId = 'DDBB01BA-BB0C-4B0A-95EE-D20495597E4B'
+BUL_NumeroBulto = '6644'
 
 Union All
 Select   Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
@@ -199,7 +199,7 @@ left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
 left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
 Left join OrdenesTrabajoReferencia on OTRE_OT_OrdenTrabajoId = BULD_OT_OrdenTrabajoId
 Where --BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0 and BUL_CMM_TipoBultoId = 'CDBBF4F2-3A62-475B-A0AB-B235496DFE7D'
-BUL_NumeroBulto = '4101'
+BUL_NumeroBulto = '6644'
 
 
 -- Seguimiento de Bultos del Articulos.
@@ -304,4 +304,49 @@ Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA
 Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4106'
 Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4107'
 Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4108'
+
+
+
+
+select * 
+from Bultos
+--left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
+Where --BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA'  and 
+BUL_NumeroBulto = '6644'
+
+
+
+-- 220824 Presentar informacion de almacen del Bulto.
+Select  (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BUL_PRINC
+        , IsNull(BUL_Complemento, '0000') AS BUL_COMPL
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (select OV_CodigoOV from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId) as OV
+        , (Select CLI_CodigoCliente + '  ' + CLI_RazonSocial from Clientes Where CLI_ClienteId =  (Select OV_CLI_ClienteId from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId)) AS CLIENTE        
+        , (select OV_ReferenciaOC from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId) as OC
+        , (Select (PRY_CodigoEvento + '  ' + PRY_NombreProyecto) from Proyectos Where PRY_ProyectoId = (Select OV_PRO_ProyectoId from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId)) as PROYECTO
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , BUL_CMM_EstatusBultoId
+from Bultos
+left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+Left join OrdenesTrabajoReferencia on OTRE_OT_OrdenTrabajoId = BULD_OT_OrdenTrabajoId
+Where --BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0 and BUL_CMM_TipoBultoId = 'CDBBF4F2-3A62-475B-A0AB-B235496DFE7D'
+BUL_NumeroBulto = '6644' or BUL_NumeroBulto = '6645' 
+
+Select ALM_CodigoAlmacen + '  ' + ALM_Nombre, * from Almacenes Where ALM_Eliminado = 0 Order By ALM_Nombre
+Select LOC_CodigoLocalidad + '  ' + LOC_Nombre, * from Localidades Where LOC_Eliminado = 0 Order By LOC_Nombre
+
+
+Almacen de Vallarta = DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8
+Localidad de Vallarta 8DCEC3E4-B9C1-4014-9643-5B777473576C
+
+
+select * from Bultos Where BUL_NumeroBulto = '6644'
+
+Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6644'
 
