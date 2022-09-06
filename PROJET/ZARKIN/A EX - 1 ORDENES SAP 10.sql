@@ -106,7 +106,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen material de AMP-ST 
 -- excepto las ordenes de Herrajes.
-	Select '040 OP CONSUME AMP-ST' AS REPORTE_040, OWOR.Status, WOR1.DocEntry, WOR1.ItemCode, OITM.ItemName
+	Select '040 OP CONSUME AMP-ST' AS REPORTE_040, OWOR.Status, WOR1.DocEntry, OWOR.ItemCode, WOR1.ItemCode, OITM.ItemName
 	, WOR1.wareHouse, OITM.U_GrupoPlanea 
 	from WOR1
 	inner join OWOR on WOR1.DocEntry = OWOR.DocEntry
@@ -114,8 +114,10 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OWOR.Status <> 'C' and OWOR.Status <> 'L' and OITM.ItmsGrpCod <> '113' 
 	and WOR1.wareHouse = 'AMP-ST' AND OWOR.ItemCode <> '17814' and 
 	OWOR.ItemCode <> '17620' and OWOR.ItemCode <> '17621' and OWOR.ItemCode <> '17701'
-	and OWOR.ItemCode <> '19415' and OWOR.ItemCode <> '19646'and OWOR.ItemCode <> '18939'
+	and OWOR.ItemCode <> '19415' and OWOR.ItemCode <> '19646' and OWOR.ItemCode <> '18939'
+	and OWOR.ItemCode <> '20414' and OWOR.ItemCode <> '20415' and OWOR.ItemCode <> '18943'
 	and OITM.U_GrupoPlanea <> '6'
+	Order by WOR1.DocEntry
 	
 -- Ordenes de Produccion con Material PIEL cargado almacen Diferente al de AMP-ST
 	Select '035 PIEL DIF. AMP-ST' AS REPORTE_35, OWOR.Status, WOR1.DocEntry, WOR1.ItemCode, OITM.ItemName, WOR1.wareHouse
@@ -191,14 +193,12 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM on OITM.ItemCode = WOR1.ItemCode 
 	where OWOR.Status='P' and WOR1.wareHouse = 'AMP-CC' and OITM.ItmsGrpCod <> '113'
 
-	
 /*	Ordenes Complementos Liberadas en Proceso con Almacen equivocado set owor.Warehouse= 'APT-ST' */
 		select '095 OP DIF ALM. NO APT-ST' AS REPORTE_095, owor.DocNum as Orden,owor.ItemCode, oitm.ItemName, owor.Warehouse
 		from owor 
 		inner join OITM on OITM.ItemCode = OWOR.ItemCode 
 		where owor.CmpltQty < owor.PlannedQty and owor.Warehouse <> 'APT-ST' and OITM.U_TipoMat='PT' 
 		and OWOR.Status = 'R'
-
 
 -- ORDENES QUE NO SE COMPLETO EL PROCESO Y NO QUEDARON REGISTRADAS
 	Select '100 SIN REGISTRO' as REPORTE_010, OWOR.DocEntry, OWOR.CmpltQty, [@CP_LOGOF].U_DocEntry, 
@@ -215,8 +215,6 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.Status = 'R'
 	Order by OWOR.DocEntry
 		
-
-	
 -- ORDENES QUE NO SE A CARGADO PIEL Y YA FUERON ENTREGADAS A PISO
 	Select '020 NO SE CARGO PIEL' AS REPORTE_020, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto,A3.ItemName, OWOR.Warehouse as ALM_PRO,
 		WOR1.ItemCode as Material, A1.itemname, WOR1.wareHouse as ALM_MAT, WOR1.PlannedQty, WOR1.IssuedQty,
@@ -255,7 +253,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OP.Status = 'P' 
 
 /*
-	delete [@CP_OF] where Code = 218687
+	delete [@CP_OF] where Code = 233929
 
 */
 	
@@ -268,8 +266,6 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 		inner join OITM on OITM.ItemCode = OWOR.ItemCode
 		where OWOR.Status='R' and OWOR.Type <> 'S'
 		
-
-
 	--ORDENESDE CASCO
 	-- Se quitaron las OP: 821, 1084, 1095, 4523 y 4900 20828
 	-- NOTA: PARA para finales de septiembre quitar y ver si ya fueron terminadas para que quede
@@ -283,8 +279,6 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.DocEntry <> 4523 and OWOR.DocEntry <> 4900
 	and OWOR.Status <>'C' and OWOR.Status <>'L'
 
-	
-
 	--ORDENES:
 	Select '105 RUTA OP HABILITADO' AS REPORTE_105
 		, OWOR.DocEntry, OWOR.ItemCode, OITM.ItemName, OWOR.U_Ruta
@@ -292,5 +286,34 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM on OWOR.ItemCode=OITM.ItemCode
 	Where OITM.QryGroup30='Y' and OWOR.U_Ruta <> '300,303,306,309,315' and OWOR.Status<>'C' and OWOR.Status<>'L'
 
+
+/*
+---------------------------------------------------------------------------------------------------------------------------------
+|        Validar que las Ordenes que tienen Datos en Complejo se haya cargado sino para que se actualice.                       |
+---------------------------------------------------------------------------------------------------------------------------------
+*/ -- Consulta todos las Ordenes diferentes.
+
+Select '110 ERROR EN COMPLEJO' AS REPORTE_110
+	, ORDR.DocEntry AS PEDIDO
+	, OWOR.ItemCode AS CODIGO
+	, OITM.ItemName AS MODELO
+	, SUM(OWOR.PlannedQty) AS CANTIDAD
+	, OWOR.U_cc AS COMPLEJO_OP
+	, ORDR.U_comp AS COMPLEJO_P
+from OWOR
+INNER JOIN OITM on OWOR.ItemCode = OITM.ItemCode
+INNER JOIN ORDR ON OWOR.OriginNum = ORDR.DocEntry
+Where OWOR.U_cc <> ORDR.U_comp and OWOR.Status<>'C' and OWOR.Status<>'L'
+Group By ORDR.DocEntry, OWOR.ItemCode, OITM.ItemName, OWOR.U_cc, ORDR.U_comp   
+Order By ORDR.DocEntry
+
+/* -- Para corregir hacerlo por Pedidos 
+Declare @Complejo as nvarchar(100)
+Declare @Pedido as integer
+Set @Pedido = 1005
+Set @Complejo = (Select ORDR.U_comp from ORDR Where ORDR.DocEntry = @Pedido)
+--Select @Complejo, * from OWOR Where OWOR.OriginNum = @Pedido and OWOR.Status<>'C' and OWOR.Status<>'L'
+Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
+*/
 
 --< EOF > EXCEPCIONES DE ORDENES DE FABRICACION.

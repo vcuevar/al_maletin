@@ -80,7 +80,7 @@ Select	'SUP. 309 CORTE CARTONES' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.first
 	inner join OWOR on DUDA.BaseRef= OWOR.DocEntry
 	inner join OITM A3 on OWOR.ItemCode=A3.ItemCode
 	inner join OIGN RB on DUDA.Recibo1=RB.DocEntry
-	where DUDA.Duplicado > 1 and DUDA.BaseRef<> 1563 and DUDA.BaseRef <> 6732 and DUDA.BaseRef <> 8847
+	where DUDA.Duplicado > 1 and DUDA.BaseRef<> 1563 and DUDA.BaseRef <> 6732 and DUDA.BaseRef <> 8847 and DUDA.BaseRef <> 24104
 	order by RB.DocDate,A3.ItemName
 
 

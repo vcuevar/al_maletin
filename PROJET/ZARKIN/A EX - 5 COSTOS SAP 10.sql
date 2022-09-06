@@ -373,7 +373,7 @@ Select '410 REVAL. MP s/e' AS REPORTE_410
 		, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
-Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
+Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
@@ -391,7 +391,7 @@ Select '415 REVAL. MP c/e' AS REPORTE_415
 		, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
-Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
+Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand > 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
@@ -453,7 +453,6 @@ and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0
 and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
-
 -- Inactivar codigos que queden en cero
 	Select	'430 INHABILITAR' AS REPORTE_430, 
 					OITM.ItemCode AS CODIGO,
@@ -476,8 +475,29 @@ Order By OITM.ItemName
 		from ITM1 L10
 		inner join OITM on L10.ItemCode = OITM.ItemCode and L10.PriceList=10
 		where OITM.ItemCode like '%ZIN%'
-		and OITM.OnHand = 0
+		and OITM.OnHand = 0 and OITM.OnOrder = 0 and OITM.IsCommited = 0
 		and frozenFor = 'N'
+
+
+-- Articulos Pendientes por Inactivar que aun tienen Existencia
+-- Al 12/Agosto/2022 Quedan 539 Articulos.
+/*
+	Select	'431 PENDIENTES POR INHABILITAR' AS REPO_431, 
+					OITM.ItemCode AS CODIGO,
+					OITM.ItemName AS DESCRIPCION,
+					OITM.U_TipoMat AS TM,
+					OITM.U_Linea AS LINE,
+					OITM.OnHand AS EXI_TOTAL,
+					L10.Price as L_10,
+					OITM.LastPurPrc AS U_COMP,
+					OITM.LastPurCur AS U_MON
+		from ITM1 L10
+		inner join OITM on L10.ItemCode = OITM.ItemCode and L10.PriceList=10
+		where OITM.ItemCode like '%ZIN%' and frozenFor = 'N'
+		and (OITM.OnHand + OITM.OnOrder + OITM.IsCommited > 0)
+		Order By OITM.ItemName
+*/
+
 
 -- Estas dos refacciones las cargaron a LDM, cambia MP y modifique directo Metodo a S
 	-- Tenian EvalSystem = 'A'

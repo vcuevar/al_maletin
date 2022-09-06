@@ -31,16 +31,23 @@ select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where SIZ_AlmacenesTransferencias.Dept = '21' 
---SIZ_AlmacenesTransferencias.Code = 'APG-PA'
+where SIZ_AlmacenesTransferencias.Dept = '2' 
+--SIZ_AlmacenesTransferencias.Code = 'APG-ST' and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
 
-Select * from SIZ_AlmacenesTransferencias 
-Where Dept = 21 --and Code = 'APT-TR'
---Label like '%APT-TR%' 
+Select Dept, Name, Label, SolicitudMateriales, TrasladoDeptos
+from SIZ_AlmacenesTransferencias 
+inner join OUDP on OUDP.Code = Dept
+Where --Dept = 2 --and Code = 'APT-TR'
+Label like '%APG-ST%' and TrasladoDeptos like '%D%'
 Order by Dept
 
--- Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'OD' Where Code = 'APG-ST' and Dept = '7' 
+
+
+
+-- Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'O' Where Code = 'APG-ST' and Dept = '2' 
+
+
 -- Update SIZ_AlmacenesTransferencias set SolicitudMateriales = 'D' Where Code = 'APG-ST' and Dept = '7' 
 -- Update SIZ_AlmacenesTransferencias set Label = 'APG-ST - WIP CORTE DE PIEL'  Where Dept = 7 and Code = 'APG-ST'
 -- Update SIZ_AlmacenesTransferencias set Label = 'PARA MUESTRARIO DE PIEL'  Where Dept = 7 and Code = 'APT-TR'
@@ -78,3 +85,22 @@ Delete SIZ_AlmacenesTransferencias where Dept = 9 and Code = 'AMP-CC'
 
 
 
+ -- Reporte de Personas que pueden mover de un almacen.
+ 
+ Select	U_EmpGiro AS NOMINA
+	, OHEM.firstName AS NOMBRE
+	, OHEM.lastName AS APELLIDO 
+	, OHEM.jobTitle AS FUNCION
+	, OHPS.name AS POSICION
+	, OHEM.dept AS AREA
+	, OUDP.Name AS NOM_AREA
+	, OUDP.Remarks AS DES_AREA
+	, OHST.name AS ESTATUS
+	, email AS E_MAIL
+ from OHEM
+  inner join OUDP on OUDP.Code = OHEM.dept
+  inner join OHPS on OHPS.posID = OHEM.position
+  inner join OHST on OHST.statusID = OHEM.status
+  Where OHEM.status = 1 and OHEM.dept = 18
+  Order by OUDP.Name, OHEM.jobTitle, OHEM.firstName, OHEM.lastName
+  

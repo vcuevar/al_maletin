@@ -61,7 +61,7 @@
 	and OITT.Code <> '18877' and OITT.Code <> '19765' and OITT.Code <> '19786' and OITT.Code <> '19789'
 	and OITT.Code <> '10436' and OITT.Code <> '19738' and OITT.Code <> '19016' and OITT.Code <> '19015'
 	and OITT.Code <> '18988' and OITT.Code <> '18990' and OITT.Code <> '19993' and OITT.Code <> '18894'
-	and OITT.Code <> '18559' and OITT.Code <> '18874'
+	and OITT.Code <> '18559' and OITT.Code <> '18874' and OITT.Code <> '20414' and OITT.Code <> '20415'
 	ORDER BY A3.ItemName	
 
 -- LA LISTA DE PRECIOS PARA EL CALCULO ES LA DE 00 CALCULO DISEÑO.
@@ -156,8 +156,6 @@
 	where A3.QryGroup30='Y' and OITT.TOWH <> 'APG-ST' and A3.frozenFor = 'N'
 	ORDER BY A3.ItemName
 
-	
-
 -- VC-160414 Validar que los HABILITADOS DE CASCOS (ESTRUCTURA) consuman del Almacen APT-PA y estan en Propiedad 30 */
 	Select '205 ! LDM HABIL. CONSUMA APG-ST' AS REPORTE, ITT1.Father, A3.ItemName, A3.U_TipoMat, ITT1.Code,A1.ItemName,ITT1.Warehouse
 	from ITT1 
@@ -178,7 +176,6 @@
 	and A3.OnHand > 0 and A3.frozenFor = 'N'
 	and A3.U_Linea = '01'
 	ORDER BY A3.ItemName	
-
 
 -- VALIDAR QUE TENGA LISTA DE MATERIALES LAS PATAS Y BASTIDORES PROP-31 
 -- Las que no tengan LDM en SAP 8 pasar a MP comprada.
@@ -255,7 +252,7 @@
 	and ITT1.Father <> '18288' and ITT1.Father <> '18262' and ITT1.Father <> '18627' and ITT1.Father <> '19057' and ITT1.Father <> '19057'
 	and ITT1.Father <> '18626' and ITT1.Father <> '18696' and ITT1.Father <> '18559' and ITT1.Father <> '18943' and ITT1.Father <> '19053'  
 	and ITT1.Father <> '18761' and ITT1.Father <> '10436' and ITT1.Father <> '19416' and ITT1.Father <> '18939'  and ITT1.Father <> '19430'  
-	and ITT1.Father <> '19415' and ITT1.Father <> '20357' and ITT1.Father <> '20358' 
+	and ITT1.Father <> '19415' and ITT1.Father <> '20357' and ITT1.Father <> '20358' and ITT1.Father <> '20414' and ITT1.Father <> '20415'
 	Order by A3.ItemName	
 	
 	
@@ -280,8 +277,6 @@
 	where A3.QryGroup32='Y' and A3.Itemname like '%CINTILL%' 
 	and (ITT1.Warehouse <> 'APG-ST' or  ITT1.Warehouse is null) and A1.ItmsGrpCod <> '113'
 	ORDER BY A3.ItemName
-
-
 
 	-- Configuración Grupo de Articulos MATERIAS PRIMAS W PT POR C  Lista de Materiales
 	SELECT distinct(T1.[ItemCode]),'165 ? CLASE ART. MP' AS REPORTE, T1.[ItemName], T2.[ItmsGrpNam], T1.[GLMethod]
@@ -377,20 +372,18 @@
 	WHERE  ITT1.Code is null and A3.InvntItem = 'Y'
 	ORDER BY OITT.Code DESC
 
--- Al terminar de Asignar hacer mismas consultas para el 11001
-/*
 -- ARTICULOS PT QUE NO CONTIENEN CODIGOS 11001 PARA ASIGNAR.
-	SELECT '906 PT SIN 11001' AS REPORTE_906
-			, OITT.Code AS CODE
+		SELECT '906 ESTR SIN 11000' AS REPORTE_906
+		, OITT.Code AS CODE
 		, A3.U_VS AS VS
 		, A3.ItemName AS MODELO
 		, ITT1.Code AS CODIGO
 	FROM OITT
-	INNER JOIN OITM A3 on OITT.Code = A3.ItemCode and A3.U_TipoMat = 'PT'
-	LEFT JOIN ITT1 on OITT.Code = ITT1.Father and (ITT1.Code= '11001' or ITT1.Code like '%-EST%')
+	INNER JOIN OITM A3 on OITT.Code = A3.ItemCode and A3.ItemCode like '%-EST%'
+	LEFT JOIN ITT1 on OITT.Code = ITT1.Father and ITT1.Code= '11001'
 	WHERE  ITT1.Code is null and A3.InvntItem = 'Y'
 	ORDER BY OITT.Code DESC
-*/
+
 
 -- ARTICULOS ESTRUCTURA QUE NO CONTIENEN CODIGOS 11000 PARA ASIGNAR.
 		SELECT '908 ESTR SIN 11000' AS REPORTE_908
@@ -405,7 +398,22 @@
 	ORDER BY OITT.Code DESC
 
 
+-- ================================================================================================
+-- |                    Lista de Materiales Detalles.                                             |
+-- |                 ALMACEN DE CONSUMO DE LOS COMPONENTES.                                       |
+-- ================================================================================================
+	
+-- ARTICULOS QUE NO TIENEN COMPLEMENTO, NOUSAR
+	SELECT '909 COMPLEMENTO NOUSA' AS REPORTE_909
+		, OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OITM.U_CodAnt as COMPLEMENTO
+	FROM OITM
+	WHERE OITM.U_CodAnt <> 'NOUSA' AND OITM.U_GrupoPlanea <> 6 
 
+	/*
+	UPDATE OITM SET U_CodAnt = 'NOUSA' WHERE OITM.U_CodAnt <> 'NOUSA' AND OITM.U_GrupoPlanea <> 6 
+	*/
 
 
 

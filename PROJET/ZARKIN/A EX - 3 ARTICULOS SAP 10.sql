@@ -11,10 +11,10 @@ Declare @FechaInac nvarchar(30)
 Declare @FechaIS nvarchar(30)
 
 -- Fecha Creacion Nuevos Articulos aaaa/mm/dd
-Set @FechaCrea = CONVERT (DATE, '2022/06/26', 102)
+Set @FechaCrea = CONVERT (DATE, '2022/09/04', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2022/07/11', 102)
+Set @FechaInac =  CONVERT (DATE, '2022/09/04', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -43,8 +43,6 @@ SELECT T0.[DocEntry], T0.[ItemCode], T1.[ItemName], T1.[InvntryUom]
 From OWOR T0
 Inner Join OITM T1 on T0.[ItemCode] = T1.[ItemCode]
 Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0.[Warehouse] <> 'APT-PA'
-
-
 
 -- ================================================================================================
 -- |               PESTAÑA DATOS DE INVENTARIOS.                                                  |
@@ -126,8 +124,6 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	from OITM
 	Where OITM.PurFactor1 <> 1
 
-	
-
 -- ================================================================================================
 -- |               VENTANA DATOS DE USUARIO.                                                      |
 -- ================================================================================================
@@ -196,8 +192,6 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	   	  
 	-- Corregir con Update
 	-- update OITM set  OITM.U_SubModelo = 'C' WHERE (OITM.QryGroup29 = 'Y' OR OITM.QryGroup30 = 'Y') and  OITM.U_SubModelo <> 'C'
-
-
 
 -- Articulo Fabricado con Comprador Asignado. Debe ser Planeacion.
 	Select '065 COMPRADOR->PLANEA' AS REPORTE_065
@@ -279,7 +273,6 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	FROM  [dbo].[OITM] T0  
 	WHERE T0.[U_TipoMat] = 'HB' and T0.[DfltWH] <> 'APG-ST' 
 	Order By T0.[ItemCode]
-
 
 -- Articulo Fijar Cuentas de Mayor Mediante Almacen (W).
 	Select '115 CTA. MAYOR ALMACEN' AS REPORTE_115
@@ -699,7 +692,6 @@ SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
 	WHERE OITM.U_TipoMat = 'PT' and OITM.U_IsModel = 'N' and OITM.U_Linea = '01' 
 	and MD.MODEL is null
 
-
 -- Articulo poner en U_CodAnt 'NOUSA' a todos los NULL
 SELECT '245 ART. ANT NULL' AS REPO_245
 	, OITM.ItemCode AS CODIGO
@@ -715,9 +707,6 @@ Update OITM set OITM.U_CodAnt = 'NOUSA'
 FROM OITM 
 Where OITM.U_CodAnt is null
 */
-
-
-
 
 /* ------------------------------------------------------------------------------------------------
 |                       FIN DE BLOQUE                                                             |
@@ -786,8 +775,7 @@ Where OITM.U_CodAnt is null
 	AND OITM.PurPackMsr <> 'DC2' AND OITM.PurPackMsr <> 'ROLLO' AND OITM.PurPackMsr <> 'CAJA'
 	AND OITM.PurPackMsr <> 'CUBETA' AND OITM.PurPackMsr <> 'FT2' AND OITM.PurPackMsr <> 'TAMBO'
 	ORDER BY OITM.ItemName
-	
-	
+		
 -- Articulos Sin unidad de Compra en Paquetes.
 	Select '320 ? SIN UM EN PAQUETE' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
 	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion, OITM.InvntryUom,
@@ -796,8 +784,7 @@ Where OITM.U_CodAnt is null
 	inner join OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod
 	where OITM.PurPackMsr is null --and OITM.NumInBuy=1
 	ORDER BY OITM.ItemName
-
-		
+	
 -- Articulos Sin unidad de Compra pero si con unidad de Empaque, Capturar Manualmente 
 	Select '325 ? SIN UM COMPRAS CON CONV' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
 	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion, OITM.InvntryUom,
@@ -806,8 +793,7 @@ Where OITM.U_CodAnt is null
 	inner join OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod
 	where OITM.BuyUnitMsr is null --and OITM.NumInBuy=1
 	ORDER BY OITM.ItemName
-		
-				
+						
 -- Articulos Sin unidad de Ventas. 
 	Select '330 ? SIN UM VENTAS' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
 	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion, OITM.InvntryUom,
@@ -837,28 +823,24 @@ Where OITM.U_CodAnt is null
 	and A3.frozenFor = 'N' and A3.U_TipoMat <> 'MP' and A3.U_TipoMat <> 'RF'
 	ORDER BY A3.ItemName	
 	
-	
 -- ARTICULO PROPIEDAD 32 NO MARCADOS COMO SP o RF.
 	Select '345 ? ART. PROP-32 NO SP' AS REPORTE, A3.ItemCode, A3.ItemName, A3.U_TipoMat, A3.QryGroup29, A3.QryGroup30,
 	A3.QryGroup31, A3.QryGroup32
 	from OITM A3
 	where A3.U_TipoMat <> 'SP' and A3.U_TipoMat <> 'RF' and A3.QryGroup32 = 'Y'
 	ORDER BY A3.ItemName				
-				
-				
+							
 -- ARTICULOS PRODUCTOS TERMINADOS
 -- Producto Terminado que no tiene almacen asignado APT-ST. 
 	select '400 ! PT, SIN ALMA.' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, OITM.ItmsGrpCod, OITM.U_estacion,
 	OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr from OITM 
 	where U_TipoMat = 'PT' and OITM.DfltWH is null
 	
-	
 -- Producto Terminado que tienen almacen Equivocado. 
 	select '405 ? PT ALM. EQUIVOCADO' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, OITM.ItmsGrpCod, OITM.U_estacion,
 	OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr from OITM 
 	where U_TipoMat = 'PT' and OITM.DfltWH <> 'APT-ST' 
 		
-	
 -- Articulos del Grupo Piel y no son Piel 
 	select '425 ? ART. 113 Y NO DICE PIEL' AS REPORTE, OITM.ItemCode,OITM.ItemName, OITM.ItmsGrpCod, OITB.ItmsGrpNam, OITM.U_TipoMat
 	from OITM
@@ -872,8 +854,7 @@ Where OITM.U_CodAnt is null
 	where U_TipoMat='PT' and U_GrupoPlanea<> 12 and U_GrupoPlanea <> 15 or
 	U_TipoMat='PT' and U_GrupoPlanea is null
 	order by OITM.ItemName
- 	
-				
+ 			
 -- Articulo VENTAS que la suma de valor sala sea la de sus componentes, Capture correcto diseño.
 -- Instalodo en Alarma en SAP.
 	Select '465 ! VS DIFERENTE' AS REPORTE, A2.ItemCode, A2.ItemName, A2.U_TipoMat, A2.U_VS, B0.ValSal ,A2.SellItem, A2.InvntItem, A2.PrchseItem
@@ -885,14 +866,12 @@ Where OITM.U_CodAnt is null
 	where A2.U_TipoMat='PT' and A2.SellItem='Y' and A2.InvntItem='N' and A2.PrchseItem='N' and A2.U_VS<>B0.ValSal
 	order by A2.ItemName 
 		
-	
 -- Articulo Con Grupo de Planeacion Nulo (Asignar segun el material).
 	select '500 ? SIN GPO. PLANEA' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.ItmsGrpCod, OITM.U_TipoMat, OITM.U_GrupoPlanea 
 	from OITM
 	where OITM.U_GrupoPlanea is null 
 	order by OITM.ItemName
  
-
 -- SUB-ENSAMBLES 210805 CREO QUE ESTO YA NO PROCEDE 
 -- Debe tener activada la Propiedad 32
 	--Select '505 ? PROP-32' AS REPORTE, OITM.U_TipoMat, OITM.ItemCode, OITM.ItemName,
@@ -901,8 +880,6 @@ Where OITM.U_CodAnt is null
 	--where OITM.U_TipoMat='SP' and OITM.QryGroup32 <> 'Y'
 	--and OITM.frozenFor = 'N'
 	---Order by OITM.ItemName
-
-
 	
 	Select '785 ! BLOQUEADOS' as REPORTE,
 			OITM.ItemCode as CODIGO,
@@ -934,7 +911,6 @@ Where OITM.U_CodAnt is null
 	from OITM 
 	where U_GrupoPlanea = 12 and InvntItem = 'Y' and PrchseItem='N'
 
-
 --EX-DISEÑO
 --	EX-DIS-001 Validar que los articulos modelos sean Tipo = PT 
 		Select	'001 ? MODELOS NO SON PT' AS REPORTE, 
@@ -944,7 +920,6 @@ Where OITM.U_CodAnt is null
 		where  OITM.U_IsModel = 'S' 
 		and OITM.U_TipoMat <> 'PT'
 		order by OITM.ItemName
-
 
 --	EX-DIS-010 Validar que los articulos modelos no haya borrado la Descripcion 
 		Select	'010 ? SIN DESCRIPCION' AS REPORTE, 
@@ -968,8 +943,6 @@ Where OITM.U_CodAnt is null
 		where QryGroup2 = 'Y'  and U_Estacion <> 415
 		order by OITM.ItemName
 
-
-
 --	EX-DIS-020 Validar que los articulos hule espuma (cojineria) consuma estacion 145
 	Select	'020 ! HE COJIN->EST 145' AS REPORTE, 
 				OITM.ItemCode, 
@@ -979,7 +952,6 @@ Where OITM.U_CodAnt is null
 		from OITM
 		where QryGroup1 = 'Y'  and U_estacion <> 145
 		order by OITM.ItemName
-
 	
 --	EX-DIS-025 Validar que los articulos HABILITADO, consuma estacion 403
 		Select	'025 ! HABIL->EST 403' AS REPORTE, 
@@ -990,8 +962,6 @@ Where OITM.U_CodAnt is null
 		from OITM
 		where QryGroup30 = 'Y'  and U_estacion <> 403
 		order by OITM.ItemName
-
-
 		
 --	EX-DIS-035 Sin Almacen por Default 
 		Select	'035 ? SIN ALMACEN DFT' AS REPORTE, 
@@ -1002,12 +972,6 @@ Where OITM.U_CodAnt is null
 		from OITM
 		where  OITM.DfltWH is null  
 		order by OITM.ItemName
-
-
-
-
-
-
 
 -- =================================================================================================================		
 -- | NOTA: Las siguientes excepciones se deja su correccion automatica, dado que se trata de datos de Usuarios.    |
@@ -1638,11 +1602,9 @@ Where OITM.U_CodAnt is null
 	where OITM.U_ClaveUnidad IS NULL
 	Order by OITM.ItemName
 	
-	
 -- Asignar cuenta contable de acuerdo a los grupos de Articulos.
 
 	/* Actualiza Cuentas contables para Poliza de Compras. */
-	
 	Update OITM set U_VerReporte = '500100001' Where OITM.ItmsGrpCod = 100 and (OITM.U_VerReporte is null or OITM.U_VerReporte <> '500100001')
 	Update OITM set U_VerReporte = '500100002' Where OITM.ItmsGrpCod = 114 and (OITM.U_VerReporte is null or OITM.U_VerReporte <> '500100002')
 	Update OITM set U_VerReporte = '500100003' Where OITM.ItmsGrpCod = 113 and (OITM.U_VerReporte is null or OITM.U_VerReporte <> '500100003')

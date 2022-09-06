@@ -12,26 +12,79 @@
 -- Fundas General
 --100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,154,157,160,172,175
 
---Casco General
---400,403,406,409,415,418
 
 -- Ruta Patas y Bastidores 
 ---400,403,406,415,418
 
-
--- Articulos de Cascos.
-	--ARTICULOS:
-	Select '005 ! RUTA LDM CASCO' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+/*=====================================================================================================================
+|              Articulos de Cascos.                                                                                   |
+=======================================================================================================================
+ARTICULOS: */
+	Select '005 RUTA LDM CASCO' AS REPO_005
+		, OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OITM.U_Ruta AS RUTA_LDM
 	from OITM
 	Where OITM.QryGroup29='Y' and OITM.U_Ruta <> '400,403,406,409,415,418'
-	
 	/*
 	Update OITM set U_Ruta = '400,403,406,409,415,418'
 	Where OITM.QryGroup29='Y' and OITM.U_Ruta <> '400,403,406,409,415,418'
 	*/
 
--- Articulos de Habilitados para Carpinteria.
-	--ARTICULOS:
+-- ORDENES DE PRODUCCION:
+	Select '006 RUTA OP CASCO' AS REPO_006
+		, OWOR.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OWOR.U_Ruta AS RUTA_OP
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.QryGroup29='Y' and OWOR.U_Ruta <> '400,403,406,409,415,418'
+	/*	
+	Update OWOR set U_Ruta = '400,403,406,409,415,418'
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.QryGroup29='Y' and OWOR.U_Ruta <> '400,403,406,409,415,418'
+	*/
+-- Ruta Patas y Bastidores 
+---400,403,406,415,418
+
+/*=====================================================================================================================
+|              Articulos de Patas y Bastidores de Madera.                                                             |
+=======================================================================================================================
+ARTICULOS: */
+	Select '007 RUTA LDM PATAS' AS REPO_007
+		, OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OITM.U_Ruta AS RUTA_LDM
+	from OITM
+	Where OITM.QryGroup31='Y' and OITM.U_Ruta <> '400,406,415,418' and OITM.U_GrupoPlanea = '14'
+	/*
+	Update OITM set U_Ruta = '400,406,415,418'
+	Where OITM.QryGroup31='Y' and OITM.U_Ruta <> '400,406,415,418' and OITM.U_GrupoPlanea = '14'
+	*/
+
+-- ORDENES DE PRODUCCION:
+	Select '008 RUTA OP PATAS' AS REPO_008
+		, OWOR.DocEntry AS OP
+		, OWOR.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OWOR.U_Ruta AS RUTA_OP
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.QryGroup31='Y' and OWOR.U_Ruta <> '400,406,415,418' and OITM.U_GrupoPlanea = '14'
+	and OWOR.Status<>'C' and OWOR.Status<>'L'
+	/*
+	Update OWOR set U_Ruta = '400,406,415,418'
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.QryGroup31='Y' and OWOR.U_Ruta <> '400,406,415,418' and OITM.U_GrupoPlanea = '14'
+	and OWOR.Status<>'C' and OWOR.Status<>'L'
+	*/
+
+/*=====================================================================================================================
+|              Articulos de Habilitados para Carpinteria.                                                             |
+=======================================================================================================================
+ARTICULOS: */
 	Select '010 RUTA LDM HABILITADO' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where OITM.QryGroup30='Y' and OITM.U_Ruta <> '300,303,306,309,315'
@@ -45,7 +98,6 @@
 	Where OITM.U_Ruta is null and (OITM.QryGroup29='Y' or OITM.QryGroup30='Y' or OITM.QryGroup31='Y'
 	or OITM.QryGroup32='Y')
 	Order By OITM.ItemName
-	
 	
 	--Update OITM set U_Ruta = '100,106,172,175'
 	--Where OITM.U_Ruta is null and (OITM.QryGroup29='Y' or OITM.QryGroup30='Y' or OITM.QryGroup31='Y'
@@ -74,10 +126,11 @@
 	-- Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%106%'
 	-- and OITM.ItemCode like '3831%'
 
--- ================================================================================================
--- |          Rutas con Estaciones No Autorizadas. 103, 142, 163, 166, 169, 312, 412	      |
--- ================================================================================================
--- Rutas con Estaciones No Autorizadas 103 Activar Orden	
+/*=================================================================================================
+|              Rutas con Estaciones No Autorizadas. 103, 142, 163, 166, 169, 312, 412	          |
+===================================================================================================
+Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
+
 	Select '035 CON 103' AS REPORTE_35, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%103%'
@@ -123,40 +176,48 @@
 	Order By OITM.ItemCode
 
 
--- ================================================================================================
--- |          Rutas de SUB-ENSAMBLES Hule Espuma. 200,206,209,212,218,221 	                          |
--- ================================================================================================
-
---	200 Ordenes en Planeacion		PLANEACION
---	206 Habilitado de Hule CNC		OPERARIO
---	209 Armado de Hule				OPERARIO
---	212 Pegado de Hule				OPERARIO
---	218 Empaque de Hule				OPERARIO
---	221 Entrega de Hule Almacen		ALMACENISTA
+/* ================================================================================================
+|          Rutas de SUB-ENSAMBLES Hule Espuma. 200,206,209,212,218,221 	                          |
+===================================================================================================
+	200 Ordenes en Planeacion		PLANEACION
+	206 Habilitado de Hule CNC		OPERARIO
+	209 Armado de Hule				OPERARIO
+	212 Pegado de Hule				OPERARIO
+	218 Empaque de Hule				OPERARIO
+	221 Entrega de Hule Almacen		ALMACENISTA
+*/
 
 -- Articulos Sub-Ensambles de Hule Espuma.
 	--ARTICULOS:
-	Select '050 ! RUTA LDM H.E.' AS REPO_050, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '050 RUTA LDM H.E.' AS REPO_050, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
 	and OITM.U_Ruta <> '200,206,209,212,218,221'
-	
+		
 	/*
-
 	Update OITM set U_Ruta = '200,206,209,212,218,221'
 	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
 	and OITM.U_Ruta <> '200,206,209,212,218,221'
+	*/
 
+	Select '051 RUTA OP H.E.' AS REPO_051
+		, OWOR.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OWOR.U_Ruta AS RUTA_OP
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
+	and OWOR.U_Ruta <> '200,206,209,212,218,221' and OWOR.Status<>'C' and OWOR.Status<>'L'
+	/*
+	Update OWOR set U_Ruta = '200,206,209,212,218,221'
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
+	and OWOR.U_Ruta <> '200,206,209,212,218,221' and OWOR.Status<>'C' and OWOR.Status<>'L'
 	*/
 
 
-
-
-
-
-
-	/*
-
+/*
 NO CORRER HASTA QUE SE DEFINA COMO SE MANEJAN LAS ESTACIONES DE TELA
 
 
@@ -321,7 +382,5 @@ NO CORRER HASTA QUE SE DEFINA COMO SE MANEJAN LAS ESTACIONES DE TELA
 	
 -- Fin Reporte de Excepciones Estaciones
 */
-
-
 --< EOF > EXCEPCIONES DE RUTAS DE FABRICACION.
 
