@@ -55,5 +55,30 @@
 	from OCRD
 	Where OCRD.CardType = 'S' and OCRD.ListNum IS NULL
 
-	
+-- Actualizar los Tiempo de Entrega.
+-- PT Tiempo de Entrega a 21 dias.
+
+Select '014 LEAD 21 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME
+From OITM 
+Where OITM.U_TipoMat='PT' and OITM.LeadTime <> 21 or OITM.U_TipoMat='PT' and LeadTime is null and OITM.frozenFor='Y'
+ 
+ -- Cascos Tiempo de Entrega a 7 días
+
+ Select '016 LEAD 7 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME 
+ From OITM 
+ Where OITM.QryGroup29='Y'  and OITM.LeadTime <> 7 or OITM.QryGroup29='Y' and LeadTime is null and OITM.frozenFor='Y'
+ 
+ -- Verificar que los Habilitado (Propiedad 30) tengan un Lead Time de 15 dias.
+
+Select '018 LEAD 15 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME 
+From OITM 
+Where OITM.QryGroup30='Y'  and OITM.LeadTime <> 15 or OITM.QryGroup30='Y' and LeadTime is null and OITM.frozenFor='Y'
+
+-- Verificar que los Complementos de Madera (Propiedad 31) tengan un Lead Time de 15 dias.
+
+Select '020 LEAD 15 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME 
+From OITM 
+Where OITM.QryGroup31='Y'  and OITM.LeadTime <> 15 or OITM.QryGroup31='Y' and LeadTime is null and OITM.frozenFor='Y'
+
+
 --< EOF > EXCEPCIONES DEL AREA DE COMPRAS.

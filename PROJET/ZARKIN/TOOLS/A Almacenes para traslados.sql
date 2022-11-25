@@ -31,8 +31,8 @@ select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where SIZ_AlmacenesTransferencias.Dept = '2' 
---SIZ_AlmacenesTransferencias.Code = 'APG-ST' and TrasladoDeptos like '%O%'
+where SIZ_AlmacenesTransferencias.Dept = '20' 
+--SIZ_AlmacenesTransferencias.Code = 'AMG-ST' --and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
 
 Select Dept, Name, Label, SolicitudMateriales, TrasladoDeptos

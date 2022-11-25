@@ -11,10 +11,10 @@ Declare @FechaInac nvarchar(30)
 Declare @FechaIS nvarchar(30)
 
 -- Fecha Creacion Nuevos Articulos aaaa/mm/dd
-Set @FechaCrea = CONVERT (DATE, '2022/09/04', 102)
+Set @FechaCrea = CONVERT (DATE, '2022/10/24', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2022/09/04', 102)
+Set @FechaInac =  CONVERT (DATE, '2022/10/24', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -115,7 +115,8 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 		, Cast(OITM.UpdateDate as date) AS FECH_CAMBIOI
 		,OITM.FrozenComm AS NOTAS
 	from OITM
-	WHERE Cast(OITM.UpdateDate as date) > Cast(@FechaInac as date) and OITM.frozenFor='Y'
+	WHERE Cast(OITM.frozenFrom as date) > Cast(@FechaInac as date) and OITM.frozenFor='Y'
+	--WHERE Cast(OITM.UpdateDate as date) > Cast(@FechaInac as date) and OITM.frozenFor='Y'
 	Order by Cast(OITM.UpdateDate as date) DESC
 
 -- Articulos con Factor en la pestaña compras.

@@ -216,14 +216,43 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 	and OWOR.U_Ruta <> '200,206,209,212,218,221' and OWOR.Status<>'C' and OWOR.Status<>'L'
 	*/
 
+-- Articulos CINTILLOS RUTA FIJA ES 100,106,109,112,115,118,121,124,127,130,133,136.
+	--ARTICULOS:
+	
+	Select '071 ! ART. RUTA CINTILLOS' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat <> 'MP'
+	AND OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136'
+
+	/*
+	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136'
+	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat <> 'MP'
+	AND OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136'
+	*/
+
+	--ORDENES
+	Select '075 ! OP RUTA CINTILLOS' AS REPORTE, OWOR.DocEntry, OWOR.ItemCode, OITM.ItemName, OWOR.U_Ruta
+	from OWOR
+	inner join OITM on OWOR.ItemCode=OITM.ItemCode
+	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat <> 'MP'
+	AND OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136'
+	AND OWOR.Status<>'C' AND OWOR.Status<>'L'
+
+	/*
+	Update OWOR set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136'
+	from OWOR
+	inner join OITM on OWOR.ItemCode=OITM.ItemCode
+	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat <> 'MP'
+	AND OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136'
+	AND OWOR.Status<>'C' AND OWOR.Status<>'L'
+	*/
+
 
 /*
 NO CORRER HASTA QUE SE DEFINA COMO SE MANEJAN LAS ESTACIONES DE TELA
 
 
-
 /* Excepciones para Nuevas Estaciones de Trabajo y Nuevos Almacenes */
-
 
 -- Articulos de Patas y Bastidores.
 	--ARTICULOS:
@@ -370,7 +399,6 @@ NO CORRER HASTA QUE SE DEFINA COMO SE MANEJAN LAS ESTACIONES DE TELA
 	OWOR.U_Ruta <> '100,151,160,172,175'
 	
 	--Update OWOR set U_Ruta='100,151,160,172,175' Where OWOR.ItemCode like '3721-%' and OWOR.Status<>'C' and OWOR.Status<>'L'
-
 
 -- MESAS BRAZZ
 	Select '193 RUTA OP BRAZZ' AS REPORTE, OWOR.DocEntry, OWOR.ItemCode, OWOR.U_Ruta

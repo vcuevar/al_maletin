@@ -1,5 +1,19 @@
 
 
+-- Definir variables sobre todo fechas
+
+Declare @FechaIS nvarchar(30)
+Declare @CodeArti as nvarchar(10)
+
+Set @FechaIS = CONVERT (DATE, '2019/01/01', 102)
+Set @CodeArti = '10002'
+
+SELECT SUBSTRING("SQL Tutorial", 5, 3) AS ExtractString;
+
+-- Formato Moneda
+ FORMAT(PDN1.Price,'C2','es-MX') AS PRECIOF  a dos decimales
+ FORMAT(PDN1.Price,'C4','es-MX') AS PRECIOF a 4 decimales
+ 
 /* Uso del like */
 Select * from [@TC_ATB] where U_AtbName like '%ZO US%'
 
@@ -10,13 +24,11 @@ CASE When CAST([@CP_LOGOF].U_FechaHora as  TIME) > CAST('10:00' as TIME) and CAS
 
 where  [@CP_LOGOF].U_FechaHora BETWEEN '2015/20/10 00:00' and '2015/20/10 23:59:59') BIHR  
 
-
 Select DISTINCT(ItemCode) from OITM
 
 
 USO DE TOP
 SELECT TOP (1) U_CT  FROM dbo.[@CP_OF] WHERE (U_DocEntry = OW.DocNum) ORDER BY U_CT DESC
-
 
 -- Insertar registros
 INSERT INTO Store_Information (Store_Name, Sales, Txn_Date)
@@ -29,7 +41,6 @@ Select DATEPART(ISO_Week, '2017/10/04') As Lunes, DATEPART(ISO_Week, '2017/11/04
 DATEPART(ISO_Week, '2017/12/04') As Miercoles, DATEPART(ISO_Week, '2017/13/04') As Jueves,
 DATEPART(ISO_Week, '2017/14/04') As Viernes, DATEPART(ISO_Week, '2017/15/04') As Sabado,
 DATEPART(ISO_Week, '2017/16/04') As Domingo, DATEPART(ISO_Week, '2017/17/04') As Lunes      
-
 
 
 /* Uso del Case when */

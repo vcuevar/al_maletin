@@ -8,7 +8,7 @@ Select * from SIZ_RBEV Order By NombRepo
 
 -- Modificar un Reporte a su Nueva Version
 
-Update SIZ_RBEV set NumeVers = 'VMA220218A' Where CodeRepo = 'SA-RBV-2103-110'
+Update SIZ_RBEV set NumeVers = 'VMA221010A' Where CodeRepo = 'SA-RBV-2210-128'
 
 -- Asignar un Nuevo Registro
 
@@ -16,9 +16,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'SA-VMA-2205-105'
-Set @Nomb = 'Compras Explosion de Materiales.'
-Set @Vers = 'VMA220530A'
+Set @Code = 'SA-RBV-2210-129'
+Set @Nomb = 'Compara STD y Compra de Articulo.'
+Set @Vers = 'VMA221020A'
 
 Insert Into [dbo].[SIZ_RBEV]
 			( [CodeRepo], [NombRepo], [NumeVers])

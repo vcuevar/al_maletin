@@ -13,7 +13,7 @@ algo pasa que no captura la cantidad recibida */
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 399822
 	update [@CP_OF] set U_Recibido= 1 where Code= 23199
 
-	delete [@CP_OF] where Code = 200641
+	delete [@CP_OF] where Code = 282199
 	
 
 -- Para asignar un nuevo codigo, primero ver que no exista
@@ -33,13 +33,13 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_CT = 100, U_Orden = 100, U_DocEntry = 20784 where Code = 4585
-	update [@CP_OF] set U_Entregado = 2, U_Procesado = 2 where Code = 245565
-	update [@CP_OF] set U_Recibido= 2 where Code= 245577
+	update [@CP_OF] set U_CT = 145, U_Orden = 145, U_DocEntry = 22739 where Code = 2637
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2637
+	update [@CP_OF] set U_Recibido= 1 where Code= 2637
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd =  24104  
+	Set @NumOrd =   19327  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -47,16 +47,15 @@ ORDER BY CP.U_DocEntry
 	from [@CP_LOGOF] HIS where HIS.U_DocEntry = @NumOrd 
 	Group by  HIS.U_CT  --HIS.U_idEmpleado 
 	order by HIS.U_CT
-
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 24104 -- and U_CT = 118 and U_idEmpleado = 35
+	select * from [@CP_LOGOF] where U_DocEntry= 19327 -- and U_CT = 118 and U_idEmpleado = 35
 	order by U_CT, U_FechaHora
 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
-	update [@CP_LOGOF] set U_idEmpleado = 117 Where Code = 264632 
+	update [@CP_LOGOF] set U_idEmpleado = 117 Where Code = 297363 
 
 	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21383 and U_CT = 118 and U_idEmpleado = 35
 	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21399 and U_CT = 118 and U_idEmpleado = 35
@@ -65,7 +64,7 @@ ORDER BY CP.U_DocEntry
 	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21352 and U_CT = 118 and U_idEmpleado = 35
 	update [@CP_LOGOF] set U_idEmpleado = 40 where U_DocEntry= 21372 and U_CT = 118 and U_idEmpleado = 35
 	
-	DELETE [@CP_LOGOF] WHERE Code = 250399
+	DELETE [@CP_LOGOF] WHERE Code = 283488
 
 	update [@CP_LOGOF] set U_Cantidad = 2 Where Code = 248016
 
