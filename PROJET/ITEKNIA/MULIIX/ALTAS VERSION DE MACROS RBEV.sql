@@ -8,7 +8,7 @@ Select * from RBEV Order By NombRepo
 
 -- Modificar un Reporte a su nueva Version.
 
-Update RBEV set NumeVers = 'VMA211222A' Where CodeRepo = 'IT-VMA-2111-040'
+Update RBEV set NumeVers = 'VMA221006A' Where CodeRepo = 'IT-VMA-2205-028'
 
 -- Asignar un nuevo registro.
 
@@ -16,9 +16,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'IT-VMA-2206-010'
-Set @Nomb = '010 LISTA DE MATERIALES COSTEADO.'
-Set @Vers = 'VMA220621A'
+Set @Code = 'IT-VMA-2209-023'
+Set @Nomb = '023 RECIBOS DE PRODUCCION.'
+Set @Vers = 'VMA220907A'
 
 INSERT INTO [dbo].[RBEV]
            ([CodeRepo], [NombRepo], [NumeVers])

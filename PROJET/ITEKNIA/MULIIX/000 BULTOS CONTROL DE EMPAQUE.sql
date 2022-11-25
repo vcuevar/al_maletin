@@ -254,42 +254,9 @@ PREBD_BULD_BultoDetalleId
 -- Se ajustaron de acuerdo al Correo que Envio Sharom 05 de Agosto del 2021
 --Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2887'
 
-Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId, * From Bultos Where BUL_NumeroBulto = '2943'
-Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId From Bultos Where BUL_NumeroBulto = '3873'
-Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId From Bultos Where BUL_NumeroBulto = '3874'
-Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId From Bultos Where BUL_NumeroBulto = '3489'
-
-Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId From Bultos Where BUL_NumeroBulto = '2690'
-Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId, * From Bultos Where BUL_NumeroBulto = '2691'
 Select BUL_NumeroBulto, BUL_CMM_EstatusBultoId, * From Bultos Where BUL_NumeroBulto = '2693'
 
-Update Bultos set BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' Where  BUL_NumeroBulto = '3873'
-Update Bultos set BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' Where  BUL_NumeroBulto = '3874'
-
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2908'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2909'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2912'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2913'
 Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2914'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2915'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2916'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2916'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2917'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '2918'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3281'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3622'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3623'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3624'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3625'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3627'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3628'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3629'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3630'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3631'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3632'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3633'
-Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where  BUL_NumeroBulto = '3634'
-
 
 -- 210927: Solictito Cancelación Jazzmin, por error de cantidad.
 -- Marque como Embarcado y puse eliminado como verdadero.
@@ -297,15 +264,6 @@ Update Bultos set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC
 -- los bultos 4101, 4102, 4103, 4104, 4105, 4106, 4107 y 4108.
 
 Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4101'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4102'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4103'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4104'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4105'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4106'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4107'
-Update Bultos set BUL_CMM_EstatusBultoId = 'A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA', BUL_Eliminado = 0 Where  BUL_NumeroBulto = '4108'
-
-
 
 
 select * 
@@ -340,11 +298,6 @@ BUL_NumeroBulto = '3617' -- or BUL_NumeroBulto = '6645'
 
 Select ALM_CodigoAlmacen + '  ' + ALM_Nombre, * from Almacenes Where ALM_Eliminado = 0 Order By ALM_Nombre
 Select LOC_CodigoLocalidad + '  ' + LOC_Nombre, * from Localidades Where LOC_Eliminado = 0 Order By LOC_Nombre
-
-
-
-
-
 
 -- 220831-A Reporte de Bultos contra Almacen de Articulos.
 -- Bultos Principales.
@@ -403,40 +356,10 @@ Where BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_El
 -- Update para cambiar de localidad un Bulto, Pasamos a Vallarta
 select * from Bultos Where BUL_NumeroBulto = '6644'
 
-Almacen de Vallarta = DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8
-Localidad de Vallarta 8DCEC3E4-B9C1-4014-9643-5B777473576C
+Almacen de Vallarta = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8'
+Localidad de Vallarta '8DCEC3E4-B9C1-4014-9643-5B777473576C'
 
 Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6868'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6630'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6631'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6644'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6645'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6873'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6646'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6647'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6828'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6829'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6875'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6648'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6649'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6826'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6827'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6650'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6651'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6824'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '6825'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7864'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7865'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7866'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7868'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7869'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7870'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7871'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7872'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7873'
-Update Bultos Set BUL_ALM_AlmacenId = 'DCC5A0E6-3FA4-4C23-B48E-A120D5B2F6B8', BUL_LOC_LocalidadId = '8DCEC3E4-B9C1-4014-9643-5B777473576C' Where BUL_NumeroBulto = '7874'
-
-
 
 
 -- Update para dejar como Embarcados los Bultos. Solo es cambiar el Estatus a Pre-Embarcado
@@ -449,6 +372,207 @@ inner join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
 Inner join PreembarqueBultoDetalle on PREBD_BULD_BultoDetalleId = BULD_BultoDetalleId
 Where BUL_NumeroBulto = '8230' or BUL_NumeroBulto = '3617' or BUL_NumeroBulto = '8233' 
 or BUL_NumeroBulto = '8248' or BUL_NumeroBulto = '8249' or BUL_NumeroBulto = '8335' or BUL_NumeroBulto = '8333' 
+
+-- Estatus de los Bultos
+-- A1DDDA80-4B1C-4F72-AA48-BF69C66B64BA	CMM_PRe_EstatusBulto	Abierto
+-- 2E47CE88-247A-43B3-89D8-71928C35B8EC	CMM_PRO_EstatusBulto	PreEmbarcado
+-- F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF	CMM_PRO_EstatusBulto	Recibo Completo
+-- EB967196-EF77-49A5-82B8-57DAC0ABD632	CMM_PRO_EstatusBulto	Recibo Parcial
+
+-- Auditar que los Bultos no esten cargados a un Pre-Embarque
+-- Los que estan cargados a un Pre-Embarque y traen estatus de Recibo Completo
+-- Cambiar Estatus a Pre-Embarque.
+
+Select BUL_NumeroBulto AS NUM_BULTO
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = BUL_CMM_TipoBultoId) AS TIPO_BULTO
+        , BUL_Eliminado AS ELIMINADO
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = BUL_CMM_EstatusBultoId) AS ESTATUS_BULTO
+        , BULD_PreEmbarcado AS EMBARCADO
+        , PREBD_Eliminado AS BORRADO
+        --, * 
+from Bultos 
+inner join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId 
+Inner join PreembarqueBultoDetalle on PREBD_BULD_BultoDetalleId = BULD_BultoDetalleId 
+Where BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BULD_PreEmbarcado = 1 AND PREBD_Eliminado = 0
+
+Update Bultos Set BUL_CMM_EstatusBultoId = '2E47CE88-247A-43B3-89D8-71928C35B8EC' Where BUL_NumeroBulto = '2712'
+
+Select * from Bultos inner join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId Inner join PreembarqueBultoDetalle on PREBD_BULD_BultoDetalleId = BULD_BultoDetalleId Where BUL_NumeroBulto = '6190'
+
+Select * from Bultos 
+Where  BUL_NumeroBulto = '8159' or BUL_NumeroBulto = '8157' 
+
+Select * from Bultos 
+Where BUL_BultoId = '84FD462A-62A7-40A7-B36C-7830FB0BAAD3'
+
+
+-- Buscar Bultos por un codigo de articulo
+Select  (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (select OV_CodigoOV from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId) as OV
+        , (Select CLI_CodigoCliente + '  ' + CLI_RazonSocial from Clientes Where CLI_ClienteId =  (Select OV_CLI_ClienteId from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId)) AS CLIENTE        
+        , (select OV_ReferenciaOC from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId) as OC
+        , (Select (PRY_CodigoEvento + '  ' + PRY_NombreProyecto) from Proyectos Where PRY_ProyectoId = (Select OV_PRO_ProyectoId from OrdenesVenta Where OV_OrdenVentaId = OTRE_OV_OrdenVentaId)) as PROYECTO
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+        , PREBD_Embarcado AS EMBARCADO
+from Bultos
+left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
+left join PreembarqueBultoDetalle on PREBD_BULD_BultoDetalleId = BULD_BultoDetalleId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+Left join OrdenesTrabajoReferencia on OTRE_OT_OrdenTrabajoId = BULD_OT_OrdenTrabajoId
+--Where ART_CodigoArticulo = '1731.1-09'
+--Where BUL_NumeroBulto = '8159' --or BUL_NumeroBulto = '9210'
+Where BUL_NumeroBulto = '8156' or BUL_NumeroBulto = '8159' or BUL_NumeroBulto = '8157' 
+Order By LOCALIDAD, DESCRIPCION
+
+
+--identificar estatus de bultos y sus tablas iteknia
+-- Envio Jorge el 220921 en el grupo.
+
+--PARA SABER QUE EL BULTO ESTA RECIBIDO bultos
+Select (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+from Bultos
+left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+WHERE BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0
+Order By BUL_NumeroBulto, ART_Nombre
+
+
+
+--PARA SABER QUE EL BULTO ESTA RECIBIDO estatus bultos complemento
+Select (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+from Bultos
+left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoPadreId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+Where BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0  and BUL_CMM_TipoBultoId = 'A00E0707-1CC9-4F59-8BA6-CD1DC4D82DD4'
+
+--PARA SABER QUE EL BULTO ESTA RECIBIDO Y SE CONSIDERE EXISTENTE EN ALMACEN NO TIENE QUE ESTAR PRE-EMBARCADO 
+Select (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+from Bultos
+left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoPadreId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+LEFT JOIN PreembarqueBultoDetalle ON BULD_BultoDetalleId = PREBD_BULD_BultoDetalleId AND PREBD_Eliminado = 0
+WHERE BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0 AND ISNULL(PREBD_Embarcado, 0) = 0
+
+--PARA SABER SI ESTA PREEMBARCADO
+Select (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+from Bultos
+left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoPadreId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+LEFT JOIN PreembarqueBultoDetalle ON BULD_BultoDetalleId = PREBD_BULD_BultoDetalleId AND PREBD_Eliminado = 0
+WHERE ISNULL(PREBD_Embarcado, 0) = 1
+
+--PARA SABER SI ESTA EMBARCADO
+ 
+Select (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+from PreembarqueBulto
+INNER JOIN PreembarqueBultoDetalle ON PREBD_PREB_PreembarqueBultoId = PREB_PreembarqueBultoId AND PREBD_Eliminado = 0
+INNER JOIN BultosDetalle ON BULD_BultoDetalleId = PREBD_BULD_BultoDetalleId
+INNER JOIN Bultos ON BUL_BultoId = BULD_BUL_BultoId
+left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
+WHERE ISNULL(PREBD_Embarcado, 0) = 1
+
+
+--para saber en que embarque se genero esta el reporte embaruqes bultos
+Select (Select ALM_CodigoAlmacen + '  ' + ALM_Nombre from Almacenes Where ALM_AlmacenId = BUL_ALM_AlmacenId) AS ALMACEN
+        , (Select LOC_CodigoLocalidad + '  ' + LOC_Nombre  from Localidades Where LOC_LocalidadId = BUL_LOC_LocalidadId) AS LOCALIDAD
+        , Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
+        , BUL_NumeroBulto as BULTO
+        , ART_CodigoArticulo AS CODE
+        , ART_Nombre AS DESCRIPCION
+        , (Select OT_Codigo from OrdenesTrabajo Where OT_OrdenTrabajoId =  BULD_OT_OrdenTrabajoId) as OT
+        , BULD_Cantidad as CANTIDAD
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_EstatusBultoId) AS ESTATUS
+        , (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId =  BUL_CMM_TipoBultoId) AS TIPO_BUL
+        , (Select SUM(TRAM_CantidadATraspasar) From TraspasosMovtos Where  TRAM_ART_ArticuloId = ART_ArticuloId) AS INVENT
+        , EmbarquesBultos.EMBB_CodigoEmbarqueBulto AS EMBARQUE
+FROM EmbarquesBultos
+INNER JOIN EmbarquesBultosDetalle ON  EMBB_EmbarqueBultoId = EMBBD_EMBB_EmbarqueBultoId AND EMBBD_Eliminado = 0
+INNER JOIN TraspasosMovtos ON EMBBD_EmbarqueBultoDetalleId = TRAM_ReferenciaMovtoId
+LEFT JOIN Articulos ON ART_ArticuloId = TRAM_ART_ArticuloId
+INNER JOIN PreembarqueBultoDetalle ON EMBBD_PREBD_PreembarqueBultoDetalleId = PREBD_PreembarqueBultoDetalleId
+INNER JOIN PreembarqueBulto ON PREBD_PREB_PreembarqueBultoId = PREB_PreembarqueBultoId AND PREBD_Eliminado = 0
+INNER JOIN BultosDetalle ON BULD_BultoDetalleId = PREBD_BULD_BultoDetalleId
+INNER JOIN Bultos ON BUL_BultoId = BULD_BUL_BultoId
+WHERE TRAM_CMM_TipoTransferenciaId = 'FB9DD40D-14AB-4AD4-AB2E-AD887C80FDE3'
+AND EMBB_Eliminado = 0
+AND EMBB_FechaCreacion between '20220901 00:00:00' and '20220921 23:59:59'
+order by EMBB_CodigoEmbarqueBulto, ART_CodigoArticulo
+
+
+--Cosnulta que envio Juan para validar el Bulto Embarcado
+
+SELECT BUL_NumeroBulto, PREB_CodigoPreembarqueBulto, PREB_FechaCreacion, PREBD_Embarcado, EMBB_CodigoEmbarqueBulto, EMBB_FechaCreacion, EMBBD_Cantidad
+FROM PreembarqueBulto
+INNER JOIN PreembarqueBultoDetalle ON PREB_PreembarqueBultoId = PREBD_PREB_PreembarqueBultoId AND PREBD_Eliminado = 0
+INNER JOIN Bultos ON PREBD_BUL_BultoId = BUL_BultoId
+LEFT  JOIN (
+			SELECT EMBB_CodigoEmbarqueBulto, EMBBD_PREBD_PreembarqueBultoDetalleId, EMBBD_Cantidad, EMBB_FechaCreacion
+			FROM EmbarquesBultos 
+			INNER JOIN EmbarquesBultosDetalle ON EMBB_EmbarqueBultoId = EMBBD_EMBB_EmbarqueBultoId AND EMBBD_Eliminado = 0
+			WHERE EMBB_Eliminado = 0
+			) AS EmbarquesBultos ON PREBD_PreembarqueBultoDetalleId = EMBBD_PREBD_PreembarqueBultoDetalleId
+WHERE PREB_Eliminado = 0
+      AND BUL_NumeroBulto = '8305'
+
 
 
 

@@ -1,15 +1,21 @@
 -- Consulta para generar 040 Back Order
 -- Actualizado al 29 de Septiembre del 2021; (Origen)
 -- Actualizado al 01 de Diciembre del 2021; (Se adecuo para Macro y nuevo acomodo de Columnas).
+-- Actualizado: Martes 25 de Octubre del 2022; (Ligar a la tabla de Procesos) 
 
-Select  OT_Codigo AS OT
-		--, OT_OrdenTrabajoId AS ID
+Select top(50) OT_Codigo AS OT
+        , OT_OrdenTrabajoId AS ID
         , ART_CodigoArticulo AS ARTICULO
         , ART_Nombre AS PRODUCTO
-		, Cast(ISNULL(SOT_Recibido-SOT_Entregado, OTDA_Cantidad) as decimal(16,2)) AS CANT
+        
+	--, Cast(ISNULL(SOT_Recibido-SOT_Entregado, OTDA_Cantidad) as decimal(16,2)) AS CANT
         --, Cast(OVD_CantidadRequerida as decimal(16,2)) AS CANT
-		--, Cast(OTDA_Cantidad as decimal(16,2)) AS CANT2
-		, SOT_Recibido-SOT_Entregado AS CANT_EST
+	, Cast(OTDA_Cantidad as decimal(16,2)) AS CANT_OT
+	--, SOT_Recibido-SOT_Entregado AS CANT_EST
+	--, SOT_Estacion
+	
+	
+	
         , CMUM_Nombre AS UNIDAD
         , ART_Comentarios AS DESCRIPCION
         , (Select AET_Valor from ArticulosEspecificaciones Where AET_ART_ArticuloId = ART_ArticuloId and AET_CMM_ArticuloEspecificaciones = 'CADE29BF-1459-4C9E-9A66-DA478E96D5E7') AS MEDIDA
@@ -21,8 +27,16 @@ Select  OT_Codigo AS OT
         --, Cast(OVR_FechaRequerida as date) AS FECHA_DE_ENTREGA
         , Cast(OT_FechaOT as date) AS FECHA_DE_ENTREGA
 
-		, Case When SOI_ID is null then 'PLANIFICADA' Else 'LIBERADA' end AS ESTATUS 
-		, Case When CET_Codigo is null then 'LIBERA2' Else CET_Codigo + '  ' + CET_Nombre + ' / ' + DEP_Nombre end AS ESTA2
+        , ISNULL( (Select Case When SOI_Id < 1 THEN 'PLANIFICADA' ELSE 'LIBERADA'END
+          from RPT_Seguimiento_OTI 
+          Where SOI_OT_OrdenTrabajoId = OTDA_OT_OrdenTrabajoId  
+          AND SOI_Eliminado = 0 ),'PLANIFICADA') AS ESTATUS1
+
+
+
+	--, Case When SOI_ID is null then 'PLANIFICADA' Else 'LIBERADA' end AS ESTATUS 
+	--, Case When CET_Codigo is null then 'LIBERA2' Else CET_Codigo + '  ' + CET_Nombre + ' / ' + DEP_Nombre end AS ESTA2
+		
 		
 		
         , Cast((OVD_PrecioUnitario / 5000) * OVD_CantidadRequerida as decimal(16,3)) AS PUNTOS                        
@@ -44,25 +58,40 @@ inner join OrdenesVentaReq on OVR_OVD_DetalleId = OVD_DetalleId
 inner join Proyectos on OV_PRO_ProyectoId  = PRY_ProyectoId
 inner Join Clientes on OV_CLI_ClienteId = CLI_ClienteId
 
-Left Join RPT_Seguimiento_OTI on OTDA_OT_OrdenTrabajoId = SOI_OT
-Left Join RPT_Seguimiento_OT on  SOI_OT = SOT_OT
-Left Join CentrosTrabajo on CET_Codigo = SOT_Estacion and CET_Activo = 1 and CET_Borrado = 0
-Left Join Departamentos on DEP_DeptoId = CET_DEP_DeptoId and DEP_Eliminado = 0 and DEP_Activo = 1
+--Left Join RPT_Seguimiento_OTI on OTDA_OT_OrdenTrabajoId = SOI_OT_OrdenTrabajoId
+--Left Join RPT_Seguimiento_OT on  OTDA_OT_OrdenTrabajoId = SOI_OT_OrdenTrabajoId
+
+--Left Join CentrosTrabajo on CET_Codigo = SOT_Estacion and CET_Activo = 1 and CET_Borrado = 0
+--Left Join Departamentos on DEP_DeptoId = CET_DEP_DeptoId and DEP_Eliminado = 0 and DEP_Activo = 1
 
 Where ( OT_CMM_Estatus = '3C843D99-87A6-442C-8B89-1E49322B265A' or
         OT_CMM_Estatus = 'A488B27B-15CD-47D8-A8F3-E9FB8AC70B9B' or
         OT_CMM_Estatus = '213ED3B9-12B3-41C9-8C6E-230DC86BBF90' ) and OT_Eliminado = 0
+        --and SOT_Recibido > 0
+	--and (SOT_Recibido - SOT_Entregado) <> 0 	
+	
         --and Cast(OV_FechaOV As Date) BETWEEN '" & FechaIS & "' and '" & FechaFS & "'
-        --and OT_Codigo = 'OT01837'
+        --and OT_Codigo = 'OT02422'
         --and OT_Codigo = 'OT01763'
         --and OV_CodigoOV = 'OV00976'
 Order By OVR_FechaRequerida, OT_Codigo
 
 
 
+/*
+
+Select SOT_Estacion AS ESTACION
+        --, CET_Nombre AS NOM_EST
+        , SOT_Recibido-SOT_Entregado AS CANT_EST
+from RPT_Seguimiento_OT 
+--Left Join CentrosTrabajo on CET_Codigo = SOT_Estacion and CET_Activo = 1 and CET_Borrado = 0
+Where SOT_OT_OrdenTrabajoId ='C54B5DF1-8955-4D03-A220-F1659F4F9164' 
+
+--Select * from CentrosTrabajo
+
 --Select * from OrdenesVenta
 --De un Articulo Presentar su Ruta de Trabajo (Centros de Trabajo)
-/*
+
 
 
 CMM_ControlId	                          CMM_Control	                    CMM_Valor

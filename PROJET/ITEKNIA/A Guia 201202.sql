@@ -191,3 +191,19 @@ GETDATE() 13:18:45.3470000
 GETUTCDATE() 20:18:45.3470000
 
 
+
+-- Para Dar formato de Moneda o comas a numeros.
+
+FORMAT(value, format, culture)
+
+SELECT FORMAT(123456789, '##-##-#####')
+
+Para moneda se utiliza
+
+Select FORMAT(25000,'C','En-Us')    Resultado: = $25,000.00
+Select FORMAT(25000,'C4','En-Us')   Resultado: = $25,000.0000
+
+
+
+
+

@@ -125,4 +125,17 @@ Go
 
 
 
+Select *
+from Localidades
+where LOC_Eliminado = 0 --and LOC_LocalidadGeneral = 0
+Order By LOC_Nombre
+
+Select * from Articulos Where ART_LOC_LocPredEntradasId = 'bcc35f23-6a19-41f8-b6e8-8b5d1ad89b80'
+
+Select * from Articulos Where ART_LOC_LocPredSalidasId = 'bcc35f23-6a19-41f8-b6e8-8b5d1ad89b80'
+
+Select * from Articulos Where ART_CodigoArticulo = '13331'
+d4ff91b0-97ca-47b3-b262-39f3b898a256
+
+-- Update Localidades set LOC_Eliminado = 1 Where LOC_LocalidadId =  'bcc35f23-6a19-41f8-b6e8-8b5d1ad89b80'
 

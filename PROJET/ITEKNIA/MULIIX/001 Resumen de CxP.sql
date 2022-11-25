@@ -7,7 +7,7 @@
 -- Actualizado: Jueves 27 de Junio del 2019; Segun documento o usa FechaRecibo o FechaRegistro.
 -- Actualizado: Miercoles 03 de Julio del 2019; Dejar Registro de Plantillas con fecha de LibroMayor.
 -- Actualizado: Miercoles 24 de Febrero del 2021; Mover a Muliix.
-
+
 --Parametros Fecha Inicial y Fecha Final
 Declare @FechaIS as nvarchar(30) 
 Declare @FechaFS as nvarchar(30)
@@ -72,9 +72,8 @@ and FP_CodigoFactura = '31603'
 --FP_Eliminado = 0 and FP_CMM_EstatusFacturaId <> '588A20C1-9CD6-446F-A958-E2373BEE68D8'
 --and FP_PRO_ProveedorId = '4D75CDDA-1D47-4E2E-8AFD-723B0C5F0639' -- P0051 Proveedor Carpintero
 
-
-
-
+Select * from Proveedores Where PRO_CodigoProveedor = 'PRO01851'  '1DC47D72-D477-4B53-A85F-FCD76F1B787D'
+Select * from Proveedores Where PRO_CodigoProveedor = 'P0510'     'ADA43477-9718-488D-B635-03FEAB9F273F'
 
 
 -- Informacion de los importes por factura.
@@ -93,10 +92,17 @@ Inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaP
 Where 
 --FP_Eliminado = 0 and FP_CMM_EstatusFacturaId <> '588A20C1-9CD6-446F-A958-E2373BEE68D8'
 --and 
-FP_PRO_ProveedorId = '4D75CDDA-1D47-4E2E-8AFD-723B0C5F0639' -- P0051 Proveedor Carpintero
-and FP_CodigoFactura = '31603'
+FP_PRO_ProveedorId = 'ADA43477-9718-488D-B635-03FEAB9F273F'
+--and FP_CodigoFactura = '31603'
 Group by FP_PRO_ProveedorId, FP_CodigoFactura, FP_FechaFactura, FP_MON_MonedaId, FP_TEP_TerminoPagoId, FP_FechaPago, FP_FacturaProveedorId
 Order by FP_CodigoFactura
+
+Select * from FacturasProveedores Where FP_CodigoFactura = 'IMP OCTUBRE' or FP_CodigoFactura = '15611'
+or FP_CodigoFactura = 'IMP 495590080 SEP'
+
+
+
+
 
 
 
