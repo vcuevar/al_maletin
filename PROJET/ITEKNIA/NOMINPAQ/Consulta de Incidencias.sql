@@ -20,7 +20,7 @@ Set @IdPeriodo = 0
 Set @NumDias = 1
 
 --Set @NumEmpl = '034' --GUILLERMO 
-Set @NumEmpl = '283' --GABRIEL
+Set @NumEmpl = '238' --GABRIEL
 --Set @NumEmpl = '994'  --YOLANDA
 Set @IdEmpleado = 0
 Set @FechaIS = CONVERT (DATE, '2022/09/26', 102)
@@ -58,12 +58,15 @@ Select  @Anual AS AÑO
         , Cast(SUM(Case When NOM10007.IdConcepto = 93 then NOM10007.ImporteTotal else 0 end) as Decimal(16,2)) AS D_ISR_$        
 from NOM10007
 Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
-Where idperiodo = @IdPeriodo
--- and NOM10007.idEmpleado = @IdEmpleado
+Where -- idperiodo = @IdPeriodo
+--and 
+NOM10007.idEmpleado = @IdEmpleado
 Group by NOM10001.CodigoEmpleado, NOM10001.Nombre, NOM10001.ApellidoPaterno, NOM10001.ApellidoMaterno
 , NOM10001.SueldoDiario, NOM10001.SueldoIntegrado 
  Order By NOMBRE
 
+
+/*
 -- Nomina Actual aun no timbrada.
 Select @Anual AS AÑO
         , @Semana + 1 AS PERIODO 
@@ -91,7 +94,7 @@ Select @Anual AS AÑO
 from NOM10008
 Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10008.IdEmpleado 
 Where idperiodo = @IdPeriodo+1
---and NOM10008.idEmpleado = @IdEmpleado
+and NOM10008.idEmpleado = @IdEmpleado
 Group by NOM10001.CodigoEmpleado, NOM10001.Nombre, NOM10001.ApellidoPaterno, NOM10001.ApellidoMaterno
 , NOM10001.SueldoDiario, NOM10001.SueldoIntegrado 
  Order By NOMBRE
@@ -101,11 +104,12 @@ Group by NOM10001.CodigoEmpleado, NOM10001.Nombre, NOM10001.ApellidoPaterno, NOM
 
 Select * from NOM10001 Where Nombre like '%CAROLI%'
 
+
+
 Select  Format(((EMP_SueldoBase/30.4)*7), 'C', 'En-Us') + '  MXP Semanal' AS BASE_SEM, 
         Format(EMP_SueldoBase, 'C', 'En-Us') + '  MXP Mensual' AS BASE_MES 
 from Empleados 
-
-Where EMP_CodigoEmpleado = '1012'
+Where EMP_CodigoEmpleado = '026'
 
 
 
@@ -139,11 +143,11 @@ Order by NOMBRE
 
 
 
- /*
-*/
+
+
 
 -- Preparar Kardex de Modificaciones de Salario.
-/*
+
 Select  --@Anual AS AÑO
         --, @Semana AS PERIODO 
         Distinct NOM10001.CodigoEmpleado AS CODIGO
@@ -238,3 +242,4 @@ Where idempleado = 536 and cidperiodo = 370
 where codigoempleado = '994'
 
 */
+

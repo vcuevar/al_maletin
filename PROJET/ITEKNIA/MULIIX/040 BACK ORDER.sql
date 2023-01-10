@@ -76,7 +76,11 @@ Where ( OT_CMM_Estatus = '3C843D99-87A6-442C-8B89-1E49322B265A' or
         --and OV_CodigoOV = 'OV00976'
 Order By OVR_FechaRequerida, OT_Codigo
 
+Select * from RPT_Seguimiento_OTI 
 
+Select * from RPT_Seguimiento_OT
+
+Select * from RPT_Seguimiento_OTF
 
 /*
 

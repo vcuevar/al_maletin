@@ -7,8 +7,8 @@
 DECLARE @FechaIS date
 DECLARE @FechaFS date
 
-Set @FechaIS = CONVERT (DATE, '2020-08-01', 102)
-Set @FechaFS = CONVERT (DATE, '2020-11-11', 102) 
+Set @FechaIS = CONVERT (DATE, '2022-11-30', 102)
+Set @FechaFS = CONVERT (DATE, '2022-11-30', 102) 
 
 Select	OC_CodigoOC as ORDEN,
 		OCRC_FechaRecibo AS F_RECIBO,

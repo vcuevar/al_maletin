@@ -14,7 +14,7 @@ Declare @FechaIS as varchar(30)
 Declare @NumDias as Integer
 
 Set @Anual = 2022
-Set @Semana = 41
+Set @Semana = 45
 Set @IdPeriodo = 0
 Set @NumDias = 1
 
@@ -71,6 +71,7 @@ Group by NOM10001.CodigoEmpleado, NOM10001.Nombre, NOM10001.ApellidoPaterno, NOM
  
  
  /*
+ 
  Select *
  from NOM10007
 Where idperiodo = @IdPeriodo
@@ -88,10 +89,13 @@ and NOM10007.idEmpleado = @IdEmpleado
  
  
  Select * from nom10026
- */
+
  
  Select fechaalta, fechareingreso, fechabaja, * from NOM10001 Where Cast(fechareingreso as date) <> Cast('1899-12-30 00:00:00' as date)
  codigoempleado = 211
  ID = 125
  FIng = fechaalta = 2015-06-23 00:00:00
         fechareingreso = 2017-10-11 00:00:00
+        
+        
+        */

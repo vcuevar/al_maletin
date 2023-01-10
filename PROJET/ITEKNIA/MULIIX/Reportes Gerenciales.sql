@@ -40,6 +40,10 @@ Order by BC_Cuenta_Id
 605-000-0015 ,605-000-016 Y 605-000-017 .
 
 
+SELECT * FROM RPT_BalanzaComprobacion
+where BC_Ejercicio = '2022' and BC_Cuenta_Id = '150-001-000'
+-- where BC_Ejercicio = '2022' and BC_Cuenta_Nombre = 'ANTICIPO CLIENTES EXTRAJNERO'
+205-027-000
 
 
 -- Balanza de Comprobación Azaret
@@ -103,8 +107,8 @@ Campo RGC_Sociedad
 
 -- Consulta de cuentas por Reporte
 
-select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 3 and (RGC_sociedad = 0 or RGC_sociedad = 1) 
---and RGC_BC_Cuenta_Id like '108-001-601%'
+select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 1 and (RGC_sociedad = 0 or RGC_sociedad = 1) 
+and RGC_BC_Cuenta_Id = '205-027-000'
 Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
 
 select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 3 and RGC_BC_Cuenta_Id = '500-200-003' and RGC_sociedad = 3 
@@ -120,13 +124,13 @@ update RPT_RG_ConfiguracionTabla set
         --, RGC_tipo_renglon = 'CUENTA'
         --, RGC_hoja = 6
         --, RGC_tabla_titulo = 'GASTOS GENERALES DE ADMINISTRACION'
-        --, RGC_tabla_linea = 2
+        --  RGC_tabla_linea = 12.5
         --, RGC_descripcion_cuenta = 'MANO DE OBRA' 
         --, RGC_fecha_alta = '2021-06-08'
-         RGC_multiplica = 1
+         RGC_multiplica = -1
         --, RGC_sociedad = 3
         --, RGC_BC_Cuenta_Id2 = '-1'
- where RGC_hoja = 3 and RGC_BC_Cuenta_Id = '108-001-601'and RGC_sociedad = 1 
+ where RGC_hoja = 1 and RGC_BC_Cuenta_Id = '205-027-000'and RGC_sociedad = 1 
         
 -- Para dar alta a una nueva cuenta
 

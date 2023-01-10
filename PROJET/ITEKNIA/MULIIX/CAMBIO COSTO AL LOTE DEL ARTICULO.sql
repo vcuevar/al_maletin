@@ -27,11 +27,16 @@ LEFT  JOIN ArticulosCategorias ON ART_ACAT_CategoriaId = ACAT_CategoriaId
 LEFT  JOIN ArticulosFactoresConversion ON ART_ArticuloId = AFC_ART_ArticuloId AND AFC_CMUM_UnidadMedidaId = '3A70E33B-B8D5-405D-B5AD-3A84A8A52875'
 INNER JOIN ControlesMaestrosUM ON ART_CMUM_UMInventarioId = CMUM_UnidadMedidaId
         
-Where ART_CodigoArticulo = '01574'-- and LOT_CodigoLote = '08513'
+Where ART_CodigoArticulo = '12829' and LOT_CodigoLote = '960128290308'
 
 
-Select * from Lotes where LOT_CodigoLote = '00145'
+Select * from Lotes where LOT_CodigoLote = '960128290308'
 Select * from Lotes where LOT_ART_ArticuloId = 'B8EC979E-A3C7-40DC-909A-11A0AE6FF2B5'
+
+
+
+221216: Solicitado por Mauricio
+update Lotes set LOT_CostoUnitario = 0.0075408 where LOT_CodigoLote = '960128290308'
 
 210707: Solicitado por Julio
 update Lotes set LOT_CostoUnitario = 0.0481222222 where LOT_CodigoLote = '00145'
@@ -128,6 +133,4 @@ update Lotes set LOT_CostoUnitario = 1.93 where LOT_CodigoLote = '4697'
 update Lotes set LOT_CostoUnitario = 38.294 where LOT_CodigoLote = '8831'
 update Lotes set LOT_CostoUnitario = 74.82 where LOT_CodigoLote = '8754'
 update Lotes set LOT_CostoUnitario = 104.35 where LOT_CodigoLote = '1735'
-
-
 

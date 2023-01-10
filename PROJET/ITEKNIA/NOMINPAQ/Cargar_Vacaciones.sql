@@ -15,7 +15,7 @@ Declare @IdEmpleado as Integer
 --Declare @NumDias as Integer
 
 Set @Anual = 2022
-Set @Semana = 42
+Set @Semana = 50
 Set @IdPeriodo = 0
 Set @IdEmpleado = 0
 Set @NumEmpl = '211' --GABRIEL
