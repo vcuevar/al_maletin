@@ -96,6 +96,7 @@ Select ART_CodigoArticulo AS CODIGO
 	, Convert(Decimal(14,3), ISNULL(K.CCD_Consumo, 0)) AS CONS_DIA
 	, Convert(Decimal(14,3), ISNULL(K.CCD_Consumo * 7, 0)) AS STK_MIN
 	, Convert(Decimal(14,3), ISNULL((K.CCD_Consumo *14) + (K.CCD_Consumo * ART_NoDiasAbastecimiento), 0)) AS STK_MAX 
+	, ART_Activo AS ACTIVO 
 FROM Articulos 
 inner join ControlesMaestrosUM on ART_CMUM_UMInventarioId = CMUM_UnidadMedidaId
 
@@ -143,6 +144,10 @@ Left join (
 	
 Where ART_CantMinimaOrden > 0.001  and ART_Eliminado = 0 Order By ART_Nombre 
 
+
+
+-- Select top(10) * from Articulos Where ART_CantMinimaOrden > 0.001  and ART_Eliminado = 0 and ART_Activo = 0
+-- Select top(10) * from Articulos Where ART_CodigoArticulo = '02648'
 
 -- Para Montar en la Macro
 /*

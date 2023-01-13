@@ -33,7 +33,7 @@ SELECT OT_Codigo AS OT,
        Cast((OVD_PrecioUnitario) AS decimal(16, 2)) AS PRECIO_U,
        Cast(OV_FechaOV AS date) AS FECH_OV,
        SOT_Estacion +' - ' + SCO.SCR_NombreOrigen AREA_CP,
-       sot_recibido - SOT_Entregado CANT_CP,
+       sot_recibido - SOT_Entregado CANT_CP
        --COALESCE( AreaDestino.cantidad_entregado, 0) AreaDestino_cantidad_entregado 
 FROM OrdenesTrabajo
       
