@@ -37,19 +37,19 @@ E	Linea para Traslado Externo		S-T
  Where  --SIZ_SolicitudesMP.Id_Solicitud = 2640
  --and SIZ_MaterialesTraslados.EstatusLinea <> 'S' 
  --and SIZ_SolicitudesMP.Status like 'Cancelada'
- SIZ_MaterialesTraslados.ItemCode = '18205'
+ SIZ_MaterialesTraslados.ItemCode = '43041'
   Order By SIZ_SolicitudesMP.Id_Solicitud
 
 
-  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 4791
+  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 43041
 
-  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 4791 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
+  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 43041 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
 
 
 -- Para cancelar una solicitud.
   Update SIZ_MaterialesTraslados set Cant_Pendiente = 0, EstatusLinea = 'C' Where SIZ_MaterialesTraslados.Id_Solicitud = 4791 --and EstatusLinea = 'S'
 
-  Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 4791
+  Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 43041
   
   
   Select * from SIZ_MaterialesTraslados  Where Id = 4791

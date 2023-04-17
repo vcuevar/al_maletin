@@ -32,10 +32,14 @@ select '002 SIN FECHA BAJA' AS REPORTE
 from Empleados
 --Inner Join Empleados on EMP_EmpleadoId = USU_EMP_EmpleadoId
 --Inner Join Permisos on PER_PermisoId = USU_PER_PermisoId
--- where EMP_CodigoEmpleado = '807' 
+--where EMP_CodigoEmpleado = '759' 
 Where EMP_Activo = 0 and EMP_FechaEgreso is null
 
 /*
+--230322 Se cargo fecha a estos dos registros que se generaron duplicados.
+Update Empleados Set EMP_FechaEgreso = Cast('2023-03-21' as date) Where EMP_EmpleadoId = '79EA582B-A861-4252-8908-44C971636B61'
+Update Empleados Set EMP_FechaEgreso = Cast('2023-01-30' as date) Where EMP_EmpleadoId = 'C2DE42C9-9863-4B93-9A03-3B45F4BF6F79'
+
 -- 221019 Se les cargo fecha de Egreso a todos estos empleados que no la tenian.
 Update Empleados Set EMP_FechaEgreso = Cast('2021-01-01' as date) Where EMP_EmpleadoId = '6e0cbb2c-cf69-4cf2-884d-6ba654ce8d9d'
 Update Empleados Set EMP_FechaEgreso = Cast('2022-05-10' as date) Where EMP_EmpleadoId = 'd118e0ab-33cb-45e3-9bf2-b8f1333e56c3'
@@ -73,6 +77,8 @@ Update Empleados Set EMP_FechaEgreso = Cast('2021-01-01' as date) Where EMP_Empl
 Update Empleados Set EMP_FechaEgreso = Cast('2021-01-01' as date) Where EMP_EmpleadoId = 'f00d2205-7848-4fb1-96a1-c80ee1e13844'
 Update Empleados Set EMP_FechaEgreso = Cast('2021-01-01' as date) Where EMP_EmpleadoId = 'f918a27e-1fc4-4e6b-865f-33f1d7aed685'
 
+Excepcion del 9 de Marzo del 2023. Solicite informacion a Jaq/Este.
+Update Empleados Set EMP_FechaEgreso = Cast('2021-01-01' as date) Where EMP_EmpleadoId = 'C2DE42C9-9863-4B93-9A03-3B45F4BF6F79'
 
 select * from empleados where EMP_CodigoEmpleado = '002'
 select * from empleados where EMP_EmpleadoId = '3A2D4A67-BB29-493B-BFB1-3A1A03310372' --Este es el 0001 y el 002 es el 75

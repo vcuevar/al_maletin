@@ -11,10 +11,10 @@ Declare @FechaInac nvarchar(30)
 Declare @FechaIS nvarchar(30)
 
 -- Fecha Creacion Nuevos Articulos aaaa/mm/dd
-Set @FechaCrea = CONVERT (DATE, '2022/10/24', 102)
+Set @FechaCrea = CONVERT (DATE, '2023/01/12', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2022/10/24', 102)
+Set @FechaInac =  CONVERT (DATE, '2023/01/12', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -199,7 +199,7 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_Comprador
 	From OITM
 	Where (OITM.QryGroup29 = 'Y' or OITM.QryGroup30 = 'Y' or OITM.QryGroup31 = 'Y' or OITM.QryGroup32 = 'Y')
-	and OITM.U_Comprador <> 'PL'  
+	and OITM.U_Comprador <> 'PL' and U_GrupoPlanea <> 6
 	Order By OITM.[ItemName]
 
 -- Articulo Con Activacion de Patas y Grupo diferente a Patas y Bastidores.
@@ -401,7 +401,7 @@ Where OITM.U_TipoMat <> 'SP' and QryGroup31 = 'Y'
 -- Articulos que tiene activado Propiedad de Complementos y no son Tipo SP
 Select '151 TIPO COMPLEMENTOS' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat
 From OITM
-Where OITM.U_TipoMat <> 'SP' AND OITM.U_TipoMat <> 'RF'and QryGroup32 = 'Y' 
+Where OITM.U_TipoMat <> 'SP' AND OITM.U_TipoMat <> 'RF'and QryGroup32 = 'Y' and U_GrupoPlanea <> 6
 
 -- Articulo Grupo de Planeacion si es SP - EMPA -> Grupo Planeacion = 3 (EMPAQUE).
 Select '155 GP_PLAN->EMPAQUE' AS REPORTE_155
@@ -828,7 +828,7 @@ Where OITM.U_CodAnt is null
 	Select '345 ? ART. PROP-32 NO SP' AS REPORTE, A3.ItemCode, A3.ItemName, A3.U_TipoMat, A3.QryGroup29, A3.QryGroup30,
 	A3.QryGroup31, A3.QryGroup32
 	from OITM A3
-	where A3.U_TipoMat <> 'SP' and A3.U_TipoMat <> 'RF' and A3.QryGroup32 = 'Y'
+	where A3.U_TipoMat <> 'SP' and A3.U_TipoMat <> 'RF' and A3.QryGroup32 = 'Y' and A3.U_GrupoPlanea <> 6
 	ORDER BY A3.ItemName				
 							
 -- ARTICULOS PRODUCTOS TERMINADOS
@@ -858,7 +858,9 @@ Where OITM.U_CodAnt is null
  			
 -- Articulo VENTAS que la suma de valor sala sea la de sus componentes, Capture correcto diseño.
 -- Instalodo en Alarma en SAP.
-	Select '465 ! VS DIFERENTE' AS REPORTE, A2.ItemCode, A2.ItemName, A2.U_TipoMat, A2.U_VS, B0.ValSal ,A2.SellItem, A2.InvntItem, A2.PrchseItem
+	Select '465 ! VS DIFERENTE' AS REPORTE, A2.ItemCode, A2.ItemName, A2.U_TipoMat
+		, Cast(A2.U_VS as decimal(16,3)) AS U_VS
+		, Cast(B0.ValSal as decimal(16,3)) AS ValSal, A2.SellItem, A2.InvntItem, A2.PrchseItem
 	from OITM A2
 	inner join (Select ITT1.Father, sum(A3.U_VS*ITT1.Quantity) As ValSal 
 	from ITT1
@@ -1631,5 +1633,10 @@ Where OITM.U_CodAnt is null
 -- =================================================================================================================		
 -- | Fin del Bloque con autocorrecciones.                                                                          |
 -- =================================================================================================================
+
+
+
+
+
 
 --< EOF > EXCEPCIONES PARA LOS ARTICULOS.

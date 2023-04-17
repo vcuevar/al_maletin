@@ -99,9 +99,11 @@ ARTICULOS: */
 	or OITM.QryGroup32='Y')
 	Order By OITM.ItemName
 	
-	--Update OITM set U_Ruta = '100,106,172,175'
-	--Where OITM.U_Ruta is null and (OITM.QryGroup29='Y' or OITM.QryGroup30='Y' or OITM.QryGroup31='Y'
-	--or OITM.QryGroup32='Y')
+	/*
+	Update OITM set U_Ruta = '100,106,172,175'
+	Where OITM.U_Ruta is null and (OITM.QryGroup29='Y' or OITM.QryGroup30='Y' or OITM.QryGroup31='Y'
+	or OITM.QryGroup32='Y')
+	*/
 
 -- Articulos de Producto Terminados Salas, sin RUTA.
 	Select '025 SIN RUTA MUEBLES' AS REPORTE_25, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
@@ -199,8 +201,9 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
 	and OITM.U_Ruta <> '200,206,209,212,218,221'
 	*/
-
+	
 	Select '051 RUTA OP H.E.' AS REPO_051
+		, OWOR.DocNum AS OP
 		, OWOR.ItemCode AS CODIGO
 		, OITM.ItemName AS DESCRIPCION
 		, OWOR.U_Ruta AS RUTA_OP

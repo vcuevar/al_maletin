@@ -83,29 +83,34 @@ Order By OITM.ItemName
 ' |           No estar Inactivo y debe ser de Linea y debe tener Cod_Ant. |
 ' |      2.- Listado de Cojinerias que no llevan Preparado.               |
 ' |      3.- Listado de Preparados que no llevan Cojineria.               |
-' |                             |
 ' =========================================================================
 */
-
 
 Select OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
-	--, Cast(OITM.SWeight1 as decimal(16,3)) AS PESO_ITM
-	--, Cast((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) as decimal(16,3)) AS PESO_LDM
 	, Cast(OITM.U_VS as decimal(16,3)) AS VS
-
-	, ISNULL(Cast(((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) *
+	, ISNULL(Cast(((
+	Select SUM(ITT1.Quantity) 
+	From ITT1 
+	Inner Join OITM AC on ITT1.Code = AC.ItemCode and AC.U_GrupoPlanea = 6 and AC.InvntryUom like '%K%' 
+	Where ITT1.Father = OITM.ItemCode) 
+	/ ((
+	
+	Select SUM(ITT1.Quantity) 
+	From ITT1 
+	Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Inner Join OITM A1 on ITT1.Code = A1.ItemCode and A1.U_GrupoPlanea = 6 and A1.InvntryUom like '%K%' Where ITT1.Father = A1.ItemCode))) *
 		(Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)), 0) AS VS_CAL
+
 
 	, A1.ItemCode AS CODIGO_P
 	, A1.ItemName AS DESCRIPCION_P
 	, A1.InvntryUom AS UDM_P
-	--, A1.SWeight1 AS PESO_P_ITM
-	--, Cast((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode) as decimal(16,3)) AS PESO_P_LDM
+
 	, Cast(A1.U_VS as decimal(16,3)) AS VS_P
 
-	, ISNULL(Cast(((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) *
+	, ISNULL(Cast(((
+	Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) *
 		(Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)),0) AS VS_P_CAL
 
 	, Cast((Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)) AS VS_MODEL
@@ -113,16 +118,11 @@ From OITM
 Left Join OITM A1 on OITM.U_CodAnt = A1.ItemCode
 Where OITM.QryGroup1 = 'Y' and OITM.frozenFor = 'N' and OITM.U_Linea = 01 and OITM.U_CodAnt <> 'NOUSA'
 
---and OITM.SWeight1 > 0
---and (Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) is not null
---and (Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) > 0
+and OITM.ItemCode = '20552'
 
 Order By OITM.ItemName
 
 
-
-Select OITM.ItemCode AS CODIGO, OITM.ItemName AS DESCRIPCION, OITM.InvntryUom AS UDM, Cast(OITM.U_VS as decimal(16,3)) AS VS, ISNULL(Cast(((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) * (Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)), 0) AS VS_CAL, A1.ItemCode AS CODIGO_P, A1.ItemName AS DESCRIPCION_P, A1.InvntryUom AS UDM_P, Cast(A1.U_VS as decimal(16,3)) AS VS_P, ISNULL(Cast(((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode) / ((Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = OITM.ItemCode) + (Select SUM(ITT1.Quantity) From ITT1 Where ITT1.Father = A1.ItemCode))) *
-(Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)),0) AS VS_P_CAL, Cast((Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)) AS VS_MODEL From OITM Left Join OITM A1 on OITM.U_CodAnt = A1.ItemCode Where OITM.QryGroup1 = 'Y' and OITM.frozenFor = 'N' and OITM.U_Linea = 01 and OITM.U_CodAnt <> 'NOUSA' Order By OITM.ItemName
 
 -- ================================================================================================
 -- |  EXCEPCIONES MODULO 10 PARA CALCULO DE VALOR SALA A LOS HULE ESPUMA NO JUEGOS (NOUSA)        |
@@ -149,7 +149,35 @@ and Cast(OITM.U_VS as decimal(16,3)) <>
 Cast((Select ALM.U_VS from OITM ALM Where ALM.ItemCode = (Select Top(1) ITT1.Father From ITT1 Where ITT1.Code = OITM.ItemCode)) as decimal(16,3)) 
 Order By OITM.ItemName
 
+-- ================================================================================================
+-- |  EXCEPCIONES MODULO 12 CALCULO DEL PESO DEL HULE PARA ASIGNAR AL CATALOGO MENOS 30%          |
+-- ================================================================================================
+/*
+' =========================================================================
+' | Procedimiento:                                                        |
+' |                                                                       |
+' | Se procede con:                                                       |
+' |      1.- Obtener el Listado de los articulos hule espuma, calcular su |
+' | contenido en kilos de hules y restar el 30% para asignar al peso del  |
+' | articulo padre.                                                       |
+' =========================================================================
+*/
 
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, ISNULL(Cast(IWeight1 as decimal(16,3)), 0) AS PESO
+	, ISNULL(Cast(TKGS.KG_LM*0.7 as decimal(16,3)), 0) AS PESO_LM
+	, 'POR ACTUALIZAR' AS ACCION
+	From OITM
+Inner Join (Select ITT1.Father AS PADRE, SUM(ITT1.Quantity) KG_LM 
+From ITT1 
+Inner Join OITM A1 on ITT1.Code = A1.ItemCode and A1.U_GrupoPlanea = 6 and A1.InvntryUom like '%K%'
+Group By ITT1.Father ) TKGS on TKGS.PADRE = OITM.ItemCode
+Where OITM.ItmsGrpCod = 109 and ItemCode= '17979'
+Order By OITM.ItemName
+
+Select * from OITM Where ItemCode= '17979'
 
 
 -- ================================================================================================

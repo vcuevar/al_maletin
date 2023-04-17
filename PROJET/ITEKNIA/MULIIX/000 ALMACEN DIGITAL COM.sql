@@ -27,10 +27,7 @@ Select  'COM'+ OC_CodigoOC + OC_CodigoOC AS LLAVE_ID
         , OC_FechaOC             
 From OrdenesCompra
 
-Where OC_Borrado = 0 and OC_CodigoOC = 'OC05391'
-
-
-
+Where OC_Borrado = 0 --and OC_CodigoOC = 'OC05391'
 
 -- Tabla de Facturas de Proveedor.
 SELECT  FP_CodigoFactura
@@ -47,7 +44,7 @@ WHERE FP_Eliminado = 0
 -- ---------------------------------------------------------------------------------------------------------------
 
 
-
+/*
 
 select top (5) * from FacturasProveedores Order BY FP_FechaFactura desc
 
@@ -63,3 +60,4 @@ Where OC_CodigoOC = 'OC02055'
 
 Select * from RPT_AlmacenDigitalIndice Where GRUPO_ID = 'OV00747' and DOC_ID = 'FAC00805'
 
+*/

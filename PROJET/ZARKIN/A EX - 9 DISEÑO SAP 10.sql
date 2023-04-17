@@ -415,6 +415,20 @@
 	UPDATE OITM SET U_CodAnt = 'NOUSA' WHERE OITM.U_CodAnt <> 'NOUSA' AND OITM.U_GrupoPlanea <> 6 
 	*/
 
+-- ================================================================================================
+-- |                    ARTICULOS COMO SP Y DEBEN SER MP.                                         |
+-- |                        CASO DE LOS HULES ESPUMAS.                                            |
+-- ================================================================================================
+	
+-- ARTICULOS QUE ESTAN COMO SP DE HULE ESPUMA.
+	SELECT '910 HULE COMO SP' AS REPORTE_910
+		, OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS NOMBRE
+		, OITM.InvntryUom AS UDM
+		, OITM.U_TipoMat AS TIPO
+	FROM OITM
+	WHERE OITM.U_TipoMat <> 'MP' AND OITM.U_GrupoPlanea = 6 
+
 
 
 

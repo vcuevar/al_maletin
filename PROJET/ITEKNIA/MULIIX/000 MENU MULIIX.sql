@@ -6,7 +6,7 @@ Select * from MenuPrincipalConfiguracion where MPC_NombreNodo like '%impri%'
 
 Select * from MenuPrincipalConfiguracion where MPC_NodoId = '0E9550F7-8764-42CD-B52D-0F2A8334D304'
 
-Update MenuPrincipalConfiguracion set MPC_NombreNodo = 'NA Imprimir Traspasos' where MPC_NodoId = '0E9550F7-8764-42CD-B52D-0F2A8334D304'
+--Update MenuPrincipalConfiguracion set MPC_NombreNodo = 'NA Imprimir Traspasos' where MPC_NodoId = '0E9550F7-8764-42CD-B52D-0F2A8334D304'
 
 -- Vacias  Select * from MenuPrincipalEtiquetas
 -- Vacias  Select * from MenuPrincipalPermisos

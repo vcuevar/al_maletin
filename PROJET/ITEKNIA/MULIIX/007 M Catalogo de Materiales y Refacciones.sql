@@ -30,21 +30,46 @@ left join ControlesMaestrosMultiples SBC on ART_CMM_SubcategoriaId = SBC.CMM_Con
 left join ControlesMaestrosMultiples CFI on ART_CMM_ClaveProductoId = CFI.CMM_ControlId 
 where ART_Activo = 1 and ART_Eliminado = 0
 AND ATP_Descripcion = 'P.T Fabricado' 
-and ART_CodigoArticulo = '0075.5-15'
+-- and ART_CodigoArticulo = '0075.5-15'
 order by ART_Nombre 
 
 
+Select ART_CMM_SubcategoriaId, * from Articulos
 
---Select * from ArticulosMarcas
+Select * from ControlesMaestrosUM 
+
+Select CMM_ControlId, CMM_Control, CMM_Valor from ControlesMaestrosMultiples -- Where CMM_ControlId = 'E8A9CE6B-6E87-4CEE-B054-EAD3A170365D'
+Where  CMM_Control = 'CMM_INV_PoliticaOrden'
+Where  CMM_Control = 'CMM_INV_ManejoInventario'
+Where  CMM_Control = 'CMM_INV_SubcategoriaArticulos' --CMM_ControlId = '60CBCB45-18E6-495F-A302-5E42858D25FD'
+
+Select * from ControlesMaestrosMultiples 
+--Where CMM_DefinidoPorUsuario1 = '52131501'
+Where CMM_DefinidoPorUsuario1 = '11162100'
+
+
+--Where CMM_Control = 'CMM_CCXC_CFDIClaveProducto'
+where CMM_Valor = 'Cortinas'
+
+
+Select AFAM_FamiliaId,	AFAM_Nombre,	AFAM_Descripcion from ArticulosFamilias
+
+Select ATP_TipoId, ATP_Descripcion, ATP_Etiqueta from ArticulosTipos
+
+
+Select ARTM_MarcaId, ARTM_Codigo, ARTM_Nombre from ArticulosMarcas
+
+Select ACAT_CategoriaId, ACAT_Nombre, ACAT_Descripcion from ArticulosCategorias
+
 
 -- Consulta para pasar un articulo a Inactivo.
 
-Select ART_CodigoArticulo, ART_Nombre, ART_Activo, ART_Eliminado
-From Articulos
-Where ART_CodigoArticulo = '09970'
+--Select ART_CodigoArticulo, ART_Nombre, ART_Activo, ART_Eliminado
+--From Articulos
+--Where ART_CodigoArticulo = '09970'
 
 
-Update Articulos Set ART_Activo = 0 Where ART_CodigoArticulo = '09970'
+--Update Articulos Set ART_Activo = 0 Where ART_CodigoArticulo = '09970'
 
 
 /*

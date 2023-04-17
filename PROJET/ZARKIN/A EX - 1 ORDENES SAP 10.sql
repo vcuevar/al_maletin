@@ -116,6 +116,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	OWOR.ItemCode <> '17620' and OWOR.ItemCode <> '17621' and OWOR.ItemCode <> '17701'
 	and OWOR.ItemCode <> '19415' and OWOR.ItemCode <> '19646' and OWOR.ItemCode <> '18939'
 	and OWOR.ItemCode <> '20414' and OWOR.ItemCode <> '20415' and OWOR.ItemCode <> '18943'
+	and OWOR.ItemCode <> '19416'
 	and OITM.U_GrupoPlanea <> '6'
 	Order by WOR1.DocEntry
 	
@@ -253,8 +254,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OP.Status = 'P' 
 
 /*
-	delete [@CP_OF] where Code = 233929
-
+	delete [@CP_OF] where Code = 313032
 */
 	
 /*ORDENES DE PRODUCCION GENERADAS NIVEL CABECERA. */
@@ -316,4 +316,37 @@ Set @Complejo = (Select ORDR.U_comp from ORDR Where ORDR.DocEntry = @Pedido)
 Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
 */
 
+-- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.
+	SELECT '115 MP MANUAL PLANIFICADAS' AS REPORTE_115
+		, OWOR.DocNum AS OP 
+		, OWOR.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.InvntryUom AS UDM
+		, WOR1.PlannedQty AS POR_CARGAR
+		, WOR1.IssuedQty AS CARGADO
+	FROM  OWOR
+	inner Join WOR1 on OWOR.DocEntry = WOR1.DocEntry
+	Inner Join OITM A1 on WOR1.ItemCode = A1.ItemCode 
+	WHERE OWOR.Status = 'P' 
+	and WOR1.IssueType = 'M' and A1.ItmsGrpCod <> '113' 
+ORDER BY OWOR.DocNum, A1.ItemName
+
+-- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.
+	SELECT '117 MP MANUAL LIBERADAS' AS REPORTE_117
+		, OWOR.DocNum AS OP 
+		, OWOR.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.InvntryUom AS UDM
+		, WOR1.PlannedQty AS POR_CARGAR
+		, WOR1.IssuedQty AS CARGADO
+	FROM  OWOR
+	inner Join WOR1 on OWOR.DocEntry = WOR1.DocEntry
+	Inner Join OITM A1 on WOR1.ItemCode = A1.ItemCode 
+	WHERE OWOR.Status = 'R' 
+	and OWOR.CmpltQty = 0
+	and WOR1.IssueType = 'M' and A1.ItmsGrpCod <> '113' 
+	and WOR1.IssuedQty = 0
+ORDER BY OWOR.DocNum, A1.ItemName
+
+	
 --< EOF > EXCEPCIONES DE ORDENES DE FABRICACION.

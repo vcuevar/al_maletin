@@ -37,7 +37,7 @@
 	from OITM 
 	Where U_TipoMat = 'MP' and U_Comprador <> 'C1'
 
-			
+	-- Update OITM Set U_Comprador = 'C1' Where U_TipoMat = 'MP' and U_Comprador <> 'C1'	
 
 	SELECT '025 ! COMP. KE REF' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Comprador
 	from OITM 
