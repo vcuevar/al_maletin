@@ -90,6 +90,10 @@ Order By OITM.ItemName
 
 -- Validar MENOR SOLO MP ENTRE 1 Y 7 SE CORRIGE MANUALMENTE L1
 -- NO TOMAR EN CUENTA PIEL Y COLORES VALIDAR Y CAMBIAR AL MAS ALTO DEL ESTANDAR.
+/*
+
+Integrada en Macro de Gestion de Costos.
+
 Select	'210 MP 1 < 7' AS DISEÑO_210
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
@@ -113,6 +117,7 @@ When L1.Currency = 'EUR' then L1.Price  * @TC_EUR
 When L1.Currency = 'MXP' then L1.Price  * @TC_MXP end) as decimal(16,2)) < Cast(LS.Price as decimal(16,2)) and OITM.EvalSystem = 'S' 
 and U_TipoMat = 'MP' AND LS.Price > 0 and OITM.frozenFor = 'N' and OITM.U_GrupoPlanea <> 9
 Order By OITM.ItemName 
+*/
 
 -- Validar DIFERENTE SOLO MP ENTRE 1 Y 7 SE CORRIGE MANUALMENTE L1
 -- Por el momento no lo uso hasta que me digan quen va a controlar.
@@ -392,7 +397,9 @@ Select '415 REVAL. MP c/e' AS REPORTE_415
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
-and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand > 0 and  OITM.frozenFor = 'N'
+and OITM.InvntItem = 'Y'  and  OITM.frozenFor = 'N'
+and OITM.U_TipoMat = 'MP' 
+and OITM.AvgPrice > 0 and OITM.OnHand > 0
 Order By OITM.ItemName 
 
 

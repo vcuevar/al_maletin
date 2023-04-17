@@ -163,7 +163,7 @@
 	inner join OITM A1 on A1.ItemCode=ITT1.Code
 	where A3.QryGroup30='Y' and ITT1.warehouse <> 'APG-ST' and A3.frozenFor = 'N' 
 	ORDER BY A3.ItemName
-
+	/* sE TIENE MACRO DE ENVIO A INACTIVO LOS DE SIN LDM
 -- VALIDAR QUE TENGA LISTA DE MATERIALES LOS CASCOS PROP-29 
 	Select '210 CASCO SIN LDM' AS REPORTE_210
 		, A3.ItemCode AS CODIGO
@@ -218,7 +218,7 @@
 	and A3.OnHand > 0
 	--and A3.OnOrder > 0
 	ORDER BY A3.ItemName
-
+	*/
 
 
 	-- VALIDAR ALMACEN DE BASE OITT CABECERA DE LDM PT. 

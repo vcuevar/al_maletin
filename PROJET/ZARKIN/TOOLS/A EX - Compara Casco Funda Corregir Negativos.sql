@@ -13,8 +13,14 @@ algo pasa que no captura la cantidad recibida */
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 399822
 	update [@CP_OF] set U_Recibido= 1 where Code= 23199
 
-	delete [@CP_OF] where Code = 308923
-	
+	delete [@CP_OF] where Code = 388701
+	delete [@CP_OF] where Code = 388704
+	delete [@CP_OF] where Code = 388705
+	delete [@CP_OF] where Code = 388700
+	delete [@CP_OF] where Code = 388702
+	delete [@CP_OF] where Code = 388703
+
+
 
 -- Para asignar un nuevo codigo, primero ver que no exista
 
@@ -33,33 +39,31 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_CT = 109, U_Orden = 109, U_DocEntry = 29018 where Code = 25012
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 25012
-	update [@CP_OF] set U_Recibido= 1 where Code= 25012
+	update [@CP_OF] set U_CT = 154, U_Orden = 154, U_DocEntry = 27984 where Code = 375221
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 386234
+	update [@CP_OF] set U_Recibido= 1 where Code= 23207
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd =   30741
+	Set @NumOrd =   32214
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
-	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD --, HIS.U_idEmpleado --, DATEPART(WK, HIS.U_FechaHora) as SEMANA
+	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD , HIS.U_idEmpleado --, DATEPART(WK, HIS.U_FechaHora) as SEMANA
 	from [@CP_LOGOF] HIS where HIS.U_DocEntry = @NumOrd 
-	Group by  HIS.U_CT  --HIS.U_idEmpleado 
+	Group by  HIS.U_CT , HIS.U_idEmpleado 
 	order by HIS.U_CT
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 27417 and U_CT = 112 and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 33614  --and U_CT = 157 -- and U_idEmpleado = 79
 	order by U_CT, U_FechaHora
-	 – 
- – 
- – 
-
+	 
+	Select * from  [@CP_LOGOF] where Code = 388700
 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
-	update [@CP_LOGOF] set U_idEmpleado = 37 Where Code = 321080 
+	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 381704
 
 	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27417 and U_CT = 112 and U_idEmpleado = 79
 	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27418 and U_CT = 112 and U_idEmpleado = 79
@@ -71,7 +75,25 @@ ORDER BY CP.U_DocEntry
 	
 
 
-	DELETE [@CP_LOGOF] WHERE Code = 313778
+	DELETE [@CP_LOGOF] WHERE Code = 388701
+	DELETE [@CP_LOGOF] WHERE Code = 388704
+	DELETE [@CP_LOGOF] WHERE Code = 388705
+
+
+	DELETE [@CP_LOGOF] WHERE Code = 381582
+	DELETE [@CP_LOGOF] WHERE Code = 381583
+	DELETE [@CP_LOGOF] WHERE Code = 381584
+	DELETE [@CP_LOGOF] WHERE Code = 381585
+	DELETE [@CP_LOGOF] WHERE Code = 381586
+	DELETE [@CP_LOGOF] WHERE Code = 381587
+	DELETE [@CP_LOGOF] WHERE Code = 381588
+	DELETE [@CP_LOGOF] WHERE Code = 381589
+
+
+
+
+
+
 
 	update [@CP_LOGOF] set U_Cantidad = 2 Where Code = 248016
 

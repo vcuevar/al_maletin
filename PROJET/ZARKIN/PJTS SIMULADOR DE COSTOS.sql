@@ -17,7 +17,7 @@ Set @TiCa_USD = (Select top(1) TC_usd from SIZ_TipoCambio Order by TC_date DESC)
 Set @TiCa_EUR = (Select top(1) TC_eur from SIZ_TipoCambio Order by TC_date DESC)
 
 -- Lista de Preios a Efectuar el RollOut solo procede para la 
-Set @NumeList = 7 -- = 7 Pruebas por Sistemas (COSTOS) (Usuario 777)
+Set @NumeList = 7  -- Pruebas por Sistemas (COSTOS) (Usuario 777)
 --Set @NumeList = 1 -- Calculo de Diseño   (Usuario 1)
 --Set @NumeList = 9 -- A_COMPRAS            (Usuario 2) 
 

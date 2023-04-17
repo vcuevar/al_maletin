@@ -307,13 +307,20 @@ Where OWOR.U_cc <> ORDR.U_comp and OWOR.Status<>'C' and OWOR.Status<>'L'
 Group By ORDR.DocEntry, OWOR.ItemCode, OITM.ItemName, OWOR.U_cc, ORDR.U_comp   
 Order By ORDR.DocEntry
 
-/* -- Para corregir hacerlo por Pedidos 
+ -- Para corregir hacerlo por Pedidos 
+ /*
 Declare @Complejo as nvarchar(100)
 Declare @Pedido as integer
-Set @Pedido = 1005
+Set @Pedido = 1226
 Set @Complejo = (Select ORDR.U_comp from ORDR Where ORDR.DocEntry = @Pedido)
---Select @Complejo, * from OWOR Where OWOR.OriginNum = @Pedido and OWOR.Status<>'C' and OWOR.Status<>'L'
+
 Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
+*/
+
+
+/*
+--Select @Complejo, * from OWOR Where OWOR.OriginNum = @Pedido and OWOR.Status<>'C' and OWOR.Status<>'L'
+
 */
 
 -- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.

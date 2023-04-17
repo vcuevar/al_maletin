@@ -11,10 +11,10 @@ Declare @FechaInac nvarchar(30)
 Declare @FechaIS nvarchar(30)
 
 -- Fecha Creacion Nuevos Articulos aaaa/mm/dd
-Set @FechaCrea = CONVERT (DATE, '2023/01/12', 102)
+Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2023/01/12', 102)
+Set @FechaInac =  CONVERT (DATE, '2023/04/10', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -86,7 +86,7 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Select '030 ? SIN LEAD TIME' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.LeadTime
 	from OITM
 	where LeadTime = 0  or LeadTime is null 
-	
+/*	
 -- Ver los Nuevos articulos ingresados, Ajustar PRECIO ESTANDAR.
 	Select '040 ART. NEW PREC-10' as REPORTE_040
 		, OITM.ItemCode
@@ -102,6 +102,7 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	INNER JOIN ITM1 LD on OITM.ItemCode = LD.ItemCode and LD.PriceList=7
 	where OITM.CreateDate > @FechaCrea and LS.Price <> LD.Price
 	Order by OITM.CreateDate DESC
+*/
 
 -- Reporte de Excepciones, ver que los materiales enviados, realmente deban ser inactivo, 
 -- no existir estructura que lo lleve y no tener existencia.
@@ -203,7 +204,7 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Order By OITM.[ItemName]
 
 -- Articulo Con Activacion de Patas y Grupo diferente a Patas y Bastidores.
-	Select '070 GRP. PLANEA->PATAS' AS REPORTE_070
+	Select '207 GRP. PLANEA->PATAS' AS REPORTE_207
 		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_Comprador
 	From OITM
 	Where OITM.QryGroup31 = 'Y' and OITM.U_GrupoPlanea <> '14'  
@@ -637,20 +638,19 @@ Order By OITM.ItemName
 	SELECT '240 !! REGRESAR A LINEA' AS REPO_240
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
-	, Cast(@FechaIS as date) AS FEC_BASE
 	, Cast(OITM.CreateDate as date) AS FEC_CREA
 	, Cast(OITM.LastPurDat as date) AS FEC_COMP
 	, LDM.Code AS CODE
 	, OITM.U_Linea AS LINEA
 	FROM OITM 
-	Left Join (Select Distinct ITT1.Code from ITT1) LDM  on LDM.Code = OITM.ItemCode
+	Left Join (Select Distinct LDM.Code from ITT1 LDM ) LDM on LDM.Code = OITM.ItemCode
 	WHERE LDM.Code IS NOT NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea <> '01'
 	and OITM.U_GrupoPlanea <> '9' and OITM.U_GrupoPlanea <> '11'  
 	ORDER BY OITM.ItemName
 
 	Update OITM set OITM.U_Linea = '01'
 	FROM OITM 
-	Left Join (Select Distinct ITT1.Code from ITT1) LDM  on LDM.Code = OITM.ItemCode
+	Left Join (Select Distinct LDM.Code from ITT1 LDM ) LDM on LDM.Code = OITM.ItemCode
 	WHERE LDM.Code IS NOT NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea <> '01'
 	and OITM.U_GrupoPlanea <> '9' and OITM.U_GrupoPlanea <> '11'  
 	

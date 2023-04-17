@@ -15,8 +15,8 @@
 DECLARE @EstIni varchar(10)
 DECLARE @EstFin varchar(10)
 
-Set @EstIni = '409'
-Set @EstFin = '418'
+Set @EstIni = '124'
+Set @EstFin = '175'
 
 Select	ROMPE.CODIGO
 		, ROMPE.MATERIAL
@@ -38,7 +38,7 @@ Select	ISNULL(RT.Name, '000 Orden Planificada') AS ESTACION
 		, A1.InvntryUom as UDM
 		, E3.WhsCode AS ALMACEN
 		, E3.OnHand as WIP_STOCK
-		, WOR1.PlannedQty AS PLANEADO
+		, WOR1.BaseQty * (CP.U_Recibido - CP.U_Entregado) AS PLANEADO
 		, WOR1.IssuedQty AS CONSUMIDO
 		, ITM1.Price AS PRECIO
 		, '501-200-000' AS CUENTA
@@ -49,7 +49,6 @@ Inner Join OITW E3 on A1.ItemCode=E3.ItemCode and E3.WhsCode='APG-ST'
 Inner Join ITM1 on A1.ItemCode=ITM1.ItemCode and ITM1.PriceList=10 
 Inner Join OWOR on  WOR1.DocEntry = OWOR.DocEntry
 Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode 
-
 Left Join [@CP_OF] CP  on CP.U_DocEntry = OWOR.DocEntry 
 Left join [@PL_RUTAS] RT on RT.Code = CP.U_CT 
 where CP.U_CT BETWEEN @EstIni and @EstFin and A1.InvntItem = 'Y' and OWOR.Status = 'R'
@@ -63,6 +62,9 @@ Order By ROMPE.MATERIAL
 
 -- Para Montar en Macro
 
+
+Select ROMPE.CODIGO, ROMPE.MATERIAL, ROMPE.UDM, ROMPE.ALMACEN, ROMPE.WIP_STOCK, ROMPE.WIP_STOCK - (SUM(ROMPE.PLANEADO) - SUM(ROMPE.CONSUMIDO)) AS NECESIDAD, ROMPE.PRECIO, (ROMPE.WIP_STOCK - (SUM(ROMPE.PLANEADO) - SUM(ROMPE.CONSUMIDO))) * ROMPE.PRECIO AS IMPORTE, ROMPE.CUENTA, ROMPE.COMPROMETIDO from (Select	ISNULL(RT.Name, '000 Orden Planificada') AS ESTACION, WOR1.DocEntry AS OP, OWOR.ItemCode AS CODE, A3.ItemName AS MODELO, WOR1.ItemCode AS CODIGO, A1.ItemName AS MATERIAL, A1.InvntryUom as UDM, E3.WhsCode AS ALMACEN, E3.OnHand as WIP_STOCK, WOR1.BaseQty * (CP.U_Recibido - CP.U_Entregado) AS PLANEADO, WOR1.IssuedQty AS CONSUMIDO, ITM1.Price AS PRECIO, '501-200-000' AS CUENTA, A1.IsCommited AS COMPROMETIDO From WOR1 Inner Join OITM A1 on WOR1.ItemCode=A1.ItemCode Inner Join OITW E3 on A1.ItemCode=E3.ItemCode and E3.WhsCode='APG-ST' 
+Inner Join ITM1 on A1.ItemCode=ITM1.ItemCode and ITM1.PriceList=10 Inner Join OWOR on  WOR1.DocEntry = OWOR.DocEntry Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode Left Join [@CP_OF] CP  on CP.U_DocEntry = OWOR.DocEntry Left join [@PL_RUTAS] RT on RT.Code = CP.U_CT where CP.U_CT BETWEEN '" & EstIni & "' and '" & EstFin & "' and A1.InvntItem = 'Y' and OWOR.Status = 'R' and WOR1.IssueType = 'B') ROMPE Group By ROMPE.CODIGO, ROMPE.MATERIAL, ROMPE.UDM, ROMPE.ALMACEN, ROMPE.WIP_STOCK, ROMPE.PRECIO, ROMPE.CUENTA, ROMPE.COMPROMETIDO Having (ROMPE.WIP_STOCK - (SUM(ROMPE.PLANEADO) - SUM(ROMPE.CONSUMIDO))) < 0 Order By ROMPE.MATERIAL
 
 
 

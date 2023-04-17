@@ -11,6 +11,7 @@
 -- Si es nulo y no da resultados es Urgente se capture el tipo de cambio para Mañana.
 
 --intentar jugar con un when que si trae valor presente null y si trae null presente valor 'SIN TC'
+/*
 	Select '005 HOY SIN TC' AS REPORTE_005, CAST(ORTT.RateDate as DATE) as Fecha, ORTT.Currency, ORTT.Rate, CAST(GETDATE() as DATE) as HOY
 	from ORTT
 	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,1,CAST(GETDATE() as DATE)) 
@@ -18,7 +19,48 @@
 -- Si es nulo y no da resultados es Recomendable que se capture el tipo de cambio para pasado Mañana.
 	Select '010 MAÑANA SIN TC' AS REPORTE_010, CAST(ORTT.RateDate as DATE) as Fecha, ORTT.Currency, ORTT.Rate, CAST(GETDATE() as DATE) as HOY
 	from ORTT
-	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,2,CAST(GETDATE() as DATE)) 
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,2,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD'
+
+	*/
+
+
+-- Si es nulo y no da resultados es Recomendable que se capture el tipo de cambio para pasado Mañana.
+
+Select Case When ( 
+	COALESCE((Select ORTT.Currency
+	from ORTT
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,1,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	'DIA HOY SIN TC' else
+''
+	end AS HOY_SIN_TC
+
+Select Case When ( 
+	COALESCE((Select ORTT.Currency
+	from ORTT
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,2,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	'DIA DOS SIN TC' else
+''
+	end AS MAÑANA_SIN_TC
+
+
+
+Select Case When ( 
+	COALESCE((Select ORTT.Currency
+	from ORTT
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,3,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	'DIA TRES SIN TC' else
+''
+	end AS DIA_3_TC
+
+	
+Select Case When ( 
+	COALESCE((Select ORTT.Currency
+	from ORTT
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,4,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	'DIA CUATRO SIN TC' else
+''
+	end AS DIA_4_TC
+
 
 
 --< EOF > EXCEPCIONES PARA EL AREA DE FINANZAS.

@@ -121,6 +121,16 @@ ARTICULOS: */
 	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%106%'
 	--and OITM.ItemCode like '3831%' -- 3831
 	Order By OITM.ItemCode
+
+
+
+-- Ruta sin 109	
+
+	Select '032 RUTA SIN 109' AS REPORTE_30, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%109%' and OITM.frozenFor = 'N'
+	--and OITM.ItemCode like '3831%' -- 3831
+	Order By OITM.ItemCode
 	
 	-- PT Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,154,157,160,172,175'
 	-- COJINES Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,172,175'

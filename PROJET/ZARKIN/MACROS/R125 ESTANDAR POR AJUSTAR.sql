@@ -149,3 +149,31 @@ left join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1
 Where U_TipoMat = 'MP' and OITM.frozenFor = 'N' and OITM.U_Linea = '01' Order By OITM.ItemName 
 
 */
+
+
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, Cast(L7.Price as decimal(16,4)) AS P_PRU
+	, L7.Currency AS M_PRU
+	, L7.PriceList AS L_PRE
+	, Cast(L10.Price as decimal(16,4)) AS P_STD
+	, L10.Currency AS M_STD
+	, 'POR ACTUALIZAR' AS ACCION 
+From OITM
+INNER JOIN ITM1 L7 on OITM.ItemCode = L7.ItemCode and L7.PriceList = 7 
+INNER JOIN ITM1 L10 on OITM.ItemCode = L10.ItemCode and L10.PriceList=10 
+Where L7.Price  <> L10.Price
+Order By OITM.ItemCode
+
+
+
+Select  OITM.ItemCode AS CODE, OITM.ItemName AS NOMBRE, OITM.InvntryUom AS UDM
+	, Cast(L7.Price as decimal(16,4)) AS PRECIO_7, L7.Currency AS MON
+	, 7 AS LIST_7, Cast(LS.Price as decimal(16,4)) AS PRECIO_L1
+	, LS.Currency AS MON_L1, 'POR ACTUALIZAR' AS ACCION 
+From OITM 
+INNER JOIN ITM1 L7 on OITM.ItemCode = L7.ItemCode and L7.PriceList = 7 
+INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 1 
+Where L7.Price = 0  and OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' --and OITM.U_TipoMat = 'MP' 
+Order By OITM.ItemName 

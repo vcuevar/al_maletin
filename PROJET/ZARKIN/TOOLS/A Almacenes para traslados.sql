@@ -31,25 +31,25 @@ select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where SIZ_AlmacenesTransferencias.Dept = '1' 
+where SIZ_AlmacenesTransferencias.Dept = '15' 
 --SIZ_AlmacenesTransferencias.Code = 'AMG-ST' --and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
 
 Select Dept, Name, Label, SolicitudMateriales, TrasladoDeptos
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-Where --Dept = 2 --and Code = 'APT-TR'
-Label like '%APG-ST%' and TrasladoDeptos like '%D%'
+Where Dept = 15 --and Code = 'APT-TR'
+--Label like '%APG-ST%' and TrasladoDeptos like '%D%'
 Order by Dept
 
 
 
 
--- Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'O' Where Code = 'APG-ST' and Dept = '2' 
+-- Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'OD' Where Code = 'APT-TR' and Dept = '15' 
 
 
 -- Update SIZ_AlmacenesTransferencias set SolicitudMateriales = 'D' Where Code = 'APG-ST' and Dept = '7' 
--- Update SIZ_AlmacenesTransferencias set Label = 'APG-ST - WIP CORTE DE PIEL'  Where Dept = 7 and Code = 'APG-ST'
+ --Update SIZ_AlmacenesTransferencias set Label = 'APG-ST - WIP VIRTUAL'  Where Dept = 15 and Code = 'APG-ST'
 -- Update SIZ_AlmacenesTransferencias set Label = 'PARA MUESTRARIO DE PIEL'  Where Dept = 7 and Code = 'APT-TR'
 
 --Update SIZ_AlmacenesTransferencias set TrasladoDeptos = ' ' Where Dept = 7 and Code = 'APT-TR'
@@ -58,10 +58,12 @@ Order by Dept
 
 -- ****************** INSERTAR NUEVO ALMACEN  ***************************
 
+APT-TR - APLICACION A CONSUMOS.	10	FINANZAS	APT-TR	D	O 	AREA DE FINANZAS Y FISCAL
+
 
 BEGIN      
 	INSERT INTO SIZ_AlmacenesTransferencias (Code, Dept, Label, SolicitudMateriales, TrasladoDeptos)
-    VALUES ('APT-PA','21','APT-PA - WIP CARPINTERIA. ',' ','D')
+    VALUES ('APP-ST','15','APP-ST - WIP PRINCIPAL',' ','D')
       
 	--PRINT 'Ingresado: CODIGO ' + cast(@CODI as varchar(10))  + '  ' + cast(@NAME as varchar (50))
 END

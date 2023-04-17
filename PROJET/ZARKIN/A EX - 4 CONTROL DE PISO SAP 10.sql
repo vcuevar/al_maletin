@@ -5,43 +5,48 @@
 -- Actualizado: Viernes 23 de Julio del 2021; SAP-10
 
 -- En todas las estaciones debe existir un usuario activo, con correo en caso de,
--- no contar con correo, poner el manuel.spindola y que su posicion sea SUPERVISOR
+-- y que su posicion sea SUPERVISOR
 -- ya que se requiere para que se les envie notificaciones de reprocesos y otros.
 -- Excepto la 100. y solo debe haber un supervisor.
 
---DEBE HABER 20 RENGLONES DE SUPERVISORES --
-/*
-Select	'SUP. 106 PREPARADO PIEL' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%106%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 109 ANAQUEL CORTE ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%109%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 112 CORTE DE PIEL ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%112%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 115 INSP. DE CORTE' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%115%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 118 PEGADO COSTURA' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%118%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 121 ANAQUEL COSTUR' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%121%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 124 COSTURA RECTA ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%124%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 127 ARMADO COSTURA' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%127%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 130 PESPUNTE O DOB' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%130%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 133 TERMINADO COST' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%133%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 136 INSPECCION COS' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%136%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 139 SERIES INCOMP ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%139%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 142 LLENADO COJIN ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%142%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 145 ACOJINADO     ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%145%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 148 FUNDAS TERMINA' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%148%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 151 KITING        ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%151%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 154 ENFUNDADO TAPI' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%154%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 157 TAPIZ         ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%157%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 160 ARMADO TAPIZ  ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%160%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 172 EMPAQUE       ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%172%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 175 INSP. FINAL   ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%175%' and OHEM.position = 4 and OHEM.status = 1 Union all
-
-Select	'SUP. 403 REC. HABILIT. ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%403%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 406 ARMADO        ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%406%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 415 PEGADO HULE   ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%415%' and OHEM.position = 4 and OHEM.status = 1 Union all
-
-Select	'SUP. 303 INICIAR ORDEN ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%303%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 306 HABILITADO    ' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%306%' and OHEM.position = 4 and OHEM.status = 1 Union all
-Select	'SUP. 309 CORTE CARTONES' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.firstName + '  ' + OHEM.lastName as NOMBRE, (Select OHPS.name from OHPS Where OHPS.posID = OHEM.position) as POSICION, OHEM.status from OHEM where OHEM.U_CP_CT like '%309%' and OHEM.position = 4 and OHEM.status = 1 
-*/
-	
+Select SUPER.REPORTE, SUPER.NOMBRE
+From (
+Select	'SUP. 100 OP PLANEACION.' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%100%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 106 PREPARADO PIEL' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%106%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 109 ANAQUEL CORTE ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%109%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 112 CORTE DE PIEL ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%112%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 115 INSP. DE CORTE' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%115%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 118 PEGADO COSTURA' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%118%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 121 ANAQUEL COSTUR' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%121%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 124 COSTURA RECTA ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%124%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 127 ARMADO COSTURA' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%127%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 130 PESPUNTE O DOB' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%130%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 133 TERMINADO COST' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%133%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 136 INSPECCION COS' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%136%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 139 SERIES INCOMP ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%139%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 145 ACOJINADO     ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%145%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 148 FUNDAS TERMINA' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%148%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 151 KITING        ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%151%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 154 ENFUNDADO TAPI' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%154%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 157 TAPIZ         ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%157%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 160 ARMADO TAPIZ  ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%160%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 172 EMPAQUE       ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%172%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 175 INSP. FINAL   ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%175%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 200 OP PLANEACION.' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%200%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 206 HAB. HULE CNC.' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%206%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 209 ARMADO DE HULE' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%209%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 212 PEGADO DE HULE' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%212%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 218 PEGADO DE HULE' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%218%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 221 ENTREGA HULE. ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%221%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 400 OP PLANEACION.' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%400%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 403 RECIBE HABIL. ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%403%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 406 ARMADO CASCO. ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%406%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 409 TAPADO CASCO. ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%409%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 415 PEGADO HULE.  ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%415%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
+Select	'SUP. 418 SUB-CASCO.    ' as REPORTE, Isnull((Select Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%418%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  
+) SUPER
+Where SUPER.NOMBRE Like '%NO_ASIGNADO%'   
+	   	 
 -- Alerta de Lineas Duplicadas en Control de Piso.
 	Select '005 LINEAS DUPLICADAS' AS REPORTE_005
 		, U_DocEntry AS OP
@@ -81,7 +86,8 @@ Select	'SUP. 309 CORTE CARTONES' as REPORTE, OHEM.U_EmpGiro as N_NOM, OHEM.first
 	inner join OITM A3 on OWOR.ItemCode=A3.ItemCode
 	inner join OIGN RB on DUDA.Recibo1=RB.DocEntry
 	where DUDA.Duplicado > 1 and DUDA.BaseRef<> 1563 and DUDA.BaseRef <> 6732 and DUDA.BaseRef <> 8847 and DUDA.BaseRef <> 24104
-	and DUDA.BaseRef <> 21210 and DUDA.BaseRef <> 25406
+	and DUDA.BaseRef <> 21210 and DUDA.BaseRef <> 25406 and DUDA.BaseRef <> 24887 and DUDA.BaseRef <> 28941
+	and DUDA.BaseRef <> 29503 and DUDA.BaseRef <> 27988 and DUDA.BaseRef <> 28034 and DUDA.BaseRef <> 32581
 	order by RB.DocDate,A3.ItemName
 
 
