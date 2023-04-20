@@ -8,13 +8,14 @@
 
 --Parametros Fecha Inicial y Fecha Final
 
---DECLARE @FechaIS date;
---DECLARE @FechaFS date;
+DECLARE @FechaIS date;
+DECLARE @FechaFS date
 
---Set @FechaIS = CONVERT (DATE, '2023-03-01', 102);
---Set @FechaFS = CONVERT (DATE, '2023-03-15', 102);
-DECLARE @FechaIS as date = CONVERT (DATE, '2023-03-01', 102);
-DECLARE @FechaFS as date = CONVERT (DATE, '2023-03-15', 102);
+Set @FechaIS = CONVERT (DATE, '2023-03-01', 102)
+Set @FechaFS = CONVERT (DATE, '2023-03-15', 102)
+
+--DECLARE @FechaIS as date = CONVERT (DATE, '2023-01-01', 102);
+--DECLARE @FechaFS as date = CONVERT (DATE, '2023-04-15', 102);
 
 -- Consulta:
 
