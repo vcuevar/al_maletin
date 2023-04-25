@@ -142,6 +142,9 @@ Order By OV_CodigoOV
 --identificar estatus de bultos y sus tablas iteknia
 -- Para hacer la validacion de las existencias contra los bultos
 --PARA SABER QUE EL BULTO ESTA RECIBIDO bultos
+-- Pendiente 230420 se termine de hacer movimientos de bultos para generar la relacion.
+
+
 
 Select *
 from Bultos
