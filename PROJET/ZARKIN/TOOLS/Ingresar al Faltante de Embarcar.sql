@@ -4,10 +4,10 @@
 
 -- Consultar 
 select * from FaltanteEmbarcar
-Where ID = 1023
+Where ID = 922
 
 --Regresar Cantidad Original al Registro dividido.
-update FaltanteEmbarcar set Cantidad = 24, CantidadA = 24 Where ID = 13832        
+update FaltanteEmbarcar set Cantidad = 7, CantidadA = 2 Where ID = 922        
 
 -- Cambiar parte de la Informacion.
 
@@ -18,6 +18,15 @@ update FaltanteEmbarcar set
 	, CantidadA = 60
 Where ID = 9828
  
+ 
+  --5 registros solicitados por Andrea el 27/ABRIL/2023
+update FaltanteEmbarcar set ItemCode = '3840-24-P0415', Dscription = 'ZULU, -DORMUAI-, PIEL 0515 MOON.', Cantidad = 4, CantidadA = 4 Where ID = 18722
+update FaltanteEmbarcar set ItemCode = '3840-21-P0471', Dscription = 'ZULU, -TMX-, PIEL 0471 VAPOR.', Cantidad =	5, CantidadA = 5 Where ID = 18723
+update FaltanteEmbarcar set ItemCode = '3840-21-P0306', Dscription = 'ZULU, -TMX-, PIEL 0306 CANELA.', Cantidad =	4, CantidadA = 4 Where ID = 18724	
+update FaltanteEmbarcar set ItemCode = '3840-01-P0301', Dscription = 'ZULU, -1-, PIEL 0301 NEGRO.', Cantidad =	2, CantidadA = 2 Where ID = 18725	
+update FaltanteEmbarcar set ItemCode = '3840-01-P0303', Dscription = 'ZULU, -1-, PIEL 0303 BLANCO.', Cantidad =	3, CantidadA = 3 Where ID = 18726	
+update FaltanteEmbarcar set ItemCode = '3840-44-P0303', Dscription = 'ZULU, -T-, PIEL 0303 BLANCO.', Cantidad =	3, CantidadA = 3 Where ID = 18727
+update FaltanteEmbarcar set ItemCode = '3840-44-P0301', Dscription = 'ZULU, -T-, PIEL 0301 NEGRO.', Cantidad =	2, CantidadA = 2 Where ID = 18758
 
  --24 registros solicitados por Andrea el 10/Octubre/2022
 update FaltanteEmbarcar set ItemCode = '3491-21-P0312', Dscription = 'BIANCA, -T-, PIEL 0312 NIEVE.', Cantidad = 1, CantidadA = 1 Where ID = 13832
