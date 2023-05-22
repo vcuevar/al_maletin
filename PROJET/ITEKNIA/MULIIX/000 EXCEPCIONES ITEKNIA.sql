@@ -149,7 +149,9 @@ Order By OV_CodigoOV
 Select *
 from Bultos
 left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoId
-WHERE BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0
+WHERE BUL_NumeroBulto  = '430'
+ 
+--BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0
 
 
 
