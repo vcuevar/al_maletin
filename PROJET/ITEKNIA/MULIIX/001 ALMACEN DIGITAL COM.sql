@@ -1,40 +1,8 @@
 -- Consultas relacionadas a Almacen Digital para modulo de Compras.
 -- Elaborado: Ing. Vicente Cueva Ramirez.
--- Actualizado: Miercoles 12 de Julio del 2023; Origen.
-
-
--- Consulta para los botones de los Filtros.
--- Boton Filtro por Proyecto.
-Select PRY_ProyectoId AS ID_PRY
-		, PRY_CodigoEvento  AS CODIGO 
-		, PRY_NombreProyecto  AS PROYECTO
-from Proyectos  
-Where PRY_CMM_EstatusId  = 'DF14DEDB-9879-49F7-AE2C-64A9A05A4152'
-Order By PRY_CodigoEvento
-
-Quitar Eliminados y poner estatus de los Cerrados o Abiertos.
-
-
--- Boton Filtro Requisiciones Convertidas
-Select  REQ_RequisicionId AS ID_REQ
-        , OC_CodigoOC AS GRUPO_ID
-		, REQ_CodigoRequisicion AS DOC_ID   
-From Requisiciones
-Inner Join RequisicionesDetalle on REQD_REQ_RequisicionId = REQ_RequisicionId 
-Inner Join OrdenesCompra on REQD_OC_OrdenCompraId = OC_OrdenCompraId  
-Where REQ_Eliminado = 0
-Order by REQ_CodigoRequisicion 
-
-
-
-
-
-
-
-
-
-
-
+-- Actualizado: Miercoles 07 de Junio del 2021; Origen.
+-- Actualizado: Miercoles 12 de Enero del 2021; Modificacion para Requisiciones.
+/*
 -- Cosnulta para cargar Requisiciones
 Select  'COM'+ OC_CodigoOC + REQ_CodigoRequisicion AS LLAVE_ID
         , OC_CodigoOC AS GRUPO_ID
@@ -80,7 +48,12 @@ WHERE FP_Eliminado = 0
 Select * from RPT_AlmacenDigitalIndice 
 
 --Universo de Proyectos Abiertos
- 
+Select PRY_ProyectoId AS ID_PRY
+		, PRY_CodigoEvento  AS CODIGO 
+		, PRY_NombreProyecto  AS PROYECTO
+from Proyectos  
+Where PRY_CMM_EstatusId  = 'DF14DEDB-9879-49F7-AE2C-64A9A05A4152' and PRY_NombreProyecto like '%CIRCU%'
+Order By PRY_CodigoEvento 
 
 -- Determinar los Proyecto Activos a Seleccionar.
 Select DISTINCT(PRY_ProyectoId) AS ID_PRY

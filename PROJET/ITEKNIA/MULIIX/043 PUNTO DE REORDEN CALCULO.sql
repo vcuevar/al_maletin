@@ -10,7 +10,7 @@ Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
 
 Set @FechaFS = CONVERT (DATE, GETDATE()) 
 
-Set @Cod_Mat = '00832'      --12222'         --  ADHESIVO "IRIS" K-812 NO FLAMABLE
+--Set @Cod_Mat = '00832'      --12222'         --  ADHESIVO "IRIS" K-812 NO FLAMABLE
 
 --Select @FechaIS, @FechaFS 
 
@@ -121,7 +121,7 @@ Left Join (
 	Inner join Localidades T2 on T0.LOCA_LOC_LocalidadId = T2.LOC_LocalidadId 
 	Where (LOC_CodigoLocalidad = 'L101_GENERAL' or  LOC_CodigoLocalidad = 'L212_HULES' 
 	or  LOC_CodigoLocalidad = 'L214_HERRAMIENTAS' or  LOC_CodigoLocalidad = 'L222_LACA' 
-	or  LOC_CodigoLocalidad = 'L223_MADERAS') 
+	or  LOC_CodigoLocalidad = 'L223_MADERAS' or  LOC_CodigoLocalidad = 'L215_LOCAL2')
 	Group By T1.ART_CodigoArticulo) E on E.EXI_Codigo = ART_CodigoArticulo
 
 Left join (

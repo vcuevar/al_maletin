@@ -7,7 +7,7 @@
 select RGC_tabla_linea, RGC_tabla_titulo, RGC_BC_Cuenta_Id, BC_Cuenta_Nombre, BC_Movimiento_01, (BC_Movimiento_01*RGC_multiplica) as DAT_OK
 from RPT_RG_ConfiguracionTabla 
 inner join RPT_BalanzaComprobacion on RGC_BC_Cuenta_Id = BC_Cuenta_Id
-where RGC_hoja = 3 and BC_Ejercicio = '2022'
+where RGC_hoja = 3 and BC_Ejercicio = '2023'
 Order by RGC_tabla_linea
 
 -- Reporte detallado del Estado de Costo AZARET
@@ -21,7 +21,7 @@ Order by RGC_tabla_linea
 
 Select (BC_Movimiento_01 + BC_Movimiento_02 + BC_Movimiento_03 + BC_Movimiento_04 + BC_Movimiento_05 + BC_Movimiento_06 + BC_Movimiento_07
 + BC_Movimiento_08 + BC_Movimiento_09 + BC_Movimiento_10 + BC_Movimiento_11+ BC_Movimiento_12) as TOTAL, *
- from RPT_BalanzaComprobacion Where BC_Ejercicio = 2022 and BC_Cuenta_Id like '%108-%' and
+ from RPT_BalanzaComprobacion Where BC_Ejercicio = 2023 and BC_Cuenta_Id like '%108-%' and
 (BC_Movimiento_01 + BC_Movimiento_02 + BC_Movimiento_03 + BC_Movimiento_04 + BC_Movimiento_05 + BC_Movimiento_06 + BC_Movimiento_07
 + BC_Movimiento_08 + BC_Movimiento_09 + BC_Movimiento_10 + BC_Movimiento_11) > 0 
 Order by BC_Cuenta_Id
@@ -31,7 +31,7 @@ BC_Cuenta_Id =  '601-100-000'
 
 -- Balanza de Comprobación Iteknia
 
-Select * from RPT_BalanzaComprobacion Where BC_Ejercicio = 2022 
+Select * from RPT_BalanzaComprobacion Where BC_Ejercicio = 2023 
 --and BC_Cuenta_Id like '%-000-000' -- and BC_Movimiento_01+BC_Movimiento_02+BC_Movimiento_03 <> 0
 Order by BC_Cuenta_Id
 

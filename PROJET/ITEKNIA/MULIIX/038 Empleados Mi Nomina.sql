@@ -10,7 +10,8 @@
 Select  EMP_CodigoEmpleado as NUM_NOMINA
         ,  EMP_PrimerApellido + '  ' + EMP_SegundoApellido + ';  ' +  EMP_Nombre as EMPLEADO
 from Empleados
-Where EMP_Activo = 1 and EMP_Comentarios not like '%NO NOMINA%' 
+Where EMP_Activo = 0 --and EMP_Comentarios not like '%NO NOMINA%'
+and EMP_CodigoEmpleado = '743' 
 Order by EMPLEADO
 
 
