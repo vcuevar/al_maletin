@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2023/04/10', 102)
+Set @FechaInac =  CONVERT (DATE, '2023/08/17', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -732,13 +732,17 @@ Where OITM.U_CodAnt is null
 	inner join UFD1 on OITM.U_GrupoPlanea=UFD1.FldValue and UFD1.TableID='UITM'
 	inner join OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod
 	where OITM.U_estacion is null and OITM.U_TipoMat = 'PT'
-	ORDER BY OITM.ItemName
+	ORDER BY OITM.ItemName	
+
+-- ================================================================================================
+-- |               VALIDACIONES DE UNIDADES DE MEDICION.                                           |
+-- ================================================================================================
 
 -- Articulos Sin unidad de Inventario. 
 	Select '255 ! PT KIT UM <> JGO' AS REPO_374, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, 
 	OITM.InvntItem, OITM.InvntryUom, OITM.PurPackMsr, OITM.BuyUnitMsr from OITM 
 	where OITM.InvntryUom <> 'JGO' and OITM.U_TipoMat = 'PT' and OITM.InvntItem = 'N'
-	and OITM.ItemCode <> '70000' and OITM.ItemCode <> '71000'
+	and OITM.ItemCode <> '70000' and OITM.ItemCode <> '71000' and OITM.ItemCode <> '71001'
 	ORDER BY OITM.ItemName		
 		
 -- Articulos Sin unidad definida Inventario cantidad compra = 1, Capturar Manualmente 
@@ -777,6 +781,14 @@ Where OITM.U_CodAnt is null
 	AND OITM.PurPackMsr <> 'CUBETA' AND OITM.PurPackMsr <> 'FT2' AND OITM.PurPackMsr <> 'TAMBO'
 	ORDER BY OITM.ItemName
 		
+		
+-- Articulo con Factor y misma Unidad de Compra.	
+	Select '317 ? CON FACTOR MISMA UM ' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.BuyUnitMsr,OITM.PurPackMsr, OITM.SalUnitMsr, OITM.SalPackMsr
+	, OITM.NumInBuy from OITM 
+	where OITM.NumInBuy > 1 AND OITM.PurPackMsr = BuyUnitMsr
+	ORDER BY OITM.ItemName
+
+
 -- Articulos Sin unidad de Compra en Paquetes.
 	Select '320 ? SIN UM EN PAQUETE' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
 	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion, OITM.InvntryUom,
@@ -812,7 +824,33 @@ Where OITM.U_CodAnt is null
 	inner join OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod
 	where OITM.SalPackMsr is null --and OITM.NumInBuy=1
 	ORDER BY OITM.ItemName
-				
+	
+-- Unidad Compras con factor uno debe ser misma que unidad de Inventario
+Select '336 ? UDC FACT 1 DIF. UDM' AS REPORTE_336
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom as UDM
+	, OITM.PurPackMsr AS UDC
+	, OITM.NumInBuy AS FACTOR
+	, OITM.BuyUnitMsr AS UDCM
+From OITM
+Where OITM.frozenFor = 'N' AND OITM.NumInBuy  = 1 and (OITM.PurPackMsr <> OITM.InvntryUom OR
+OITM.BuyUnitMsr <> OITM.InvntryUom)
+Order By DESCRIPCION
+
+-- Unidad Venta con factor uno debe ser misma que unidad de Inventario
+Select '338 ? UDV FACT 1 DIF. UDM' AS REPORTE_338
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom as UDM
+	, OITM.SalPackMsr AS UDC
+	, OITM.NumInSale AS FACTOR
+	, OITM.SalUnitMsr AS UDVM
+From OITM
+Where OITM.frozenFor = 'N' AND OITM.NumInSale  = 1 and (OITM.SalPackMsr <> OITM.InvntryUom OR
+OITM.SalUnitMsr <> OITM.InvntryUom) 
+Order By DESCRIPCION
+
 -- VER-170829 ARTICULO CON LISTA DE MATERIALES Y NO TIENE MARCADAS PROPIEDADES Y TIPO = SP.
 -- QUITAR ARTICULOS QUE SE FABRICAN PERO SE ESTAN COMPRANDO ACTUALMENTE.
 	Select '340 ? ART. CON LDM Y SIN PROPI.' AS REPORTE, A3.ItemCode, ITT1.Father ,A3.ItemName, A3.U_TipoMat, A3.QryGroup29, A3.QryGroup30,
@@ -1633,8 +1671,6 @@ Where OITM.U_CodAnt is null
 -- =================================================================================================================		
 -- | Fin del Bloque con autocorrecciones.                                                                          |
 -- =================================================================================================================
-
-
 
 
 

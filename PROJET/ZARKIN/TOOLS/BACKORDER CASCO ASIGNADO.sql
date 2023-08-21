@@ -10,6 +10,7 @@ Select	OWOR.DocEntry AS ORDEN
 		, A3.ItemCode AS MUEBLE
 		, A3.ItemName AS NOM_MUEBLE
 		, (OWOR.PlannedQty - OWOR.CmpltQty) AS CANTIDAD
+
 		, (OWOR.PlannedQty - OWOR.CmpltQty) * A3.U_VS AS VS_ORDEN
 		, ISNULL(RT.Name, UFD1.Descr)  AS ESTACION
 		, ISNULL(T_CAS.COD02, T_CA3.COD03) AS CASCO1

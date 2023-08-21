@@ -135,6 +135,20 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM on WOR1.ItemCode = OITM.ItemCode
 	where OWOR.Status <> 'C' and OWOR.Status <> 'L' and OITM.ItmsGrpCod <> '113' 
 	and WOR1.wareHouse = 'AMP-CC'
+
+-- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen material de AMP-CC
+	Select '050 CONSUME <> APG-ST' AS REPORTE_050, OWOR.Status, WOR1.DocEntry, OWOR.ItemCode, WOR1.ItemCode, OITM.ItemName, WOR1.wareHouse
+	from WOR1
+	inner join OWOR on WOR1.DocEntry = OWOR.DocEntry
+	inner join OITM on WOR1.ItemCode = OITM.ItemCode
+	where OWOR.Status <> 'C' and OWOR.Status <> 'L' and OITM.ItmsGrpCod <> '113' 
+	AND OWOR.ItemCode <> '17814' and 
+	OWOR.ItemCode <> '17620' and OWOR.ItemCode <> '17621' and OWOR.ItemCode <> '17701'
+	and OWOR.ItemCode <> '19415' and OWOR.ItemCode <> '19646' and OWOR.ItemCode <> '18939'
+	and OWOR.ItemCode <> '20414' and OWOR.ItemCode <> '20415' and OWOR.ItemCode <> '18943'
+	and OWOR.ItemCode <> '19416'
+	and WOR1.wareHouse <> 'APG-ST' and OITM.U_GrupoPlanea <> 6
+
 	
 	-- La 050 la cancele segun creo solo la 045 esta mas completa.
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen <> de APP-ST
@@ -309,12 +323,15 @@ Order By ORDR.DocEntry
 
  -- Para corregir hacerlo por Pedidos 
  /*
+
 Declare @Complejo as nvarchar(100)
 Declare @Pedido as integer
-Set @Pedido = 1226
+Set @Pedido = 1655
 Set @Complejo = (Select ORDR.U_comp from ORDR Where ORDR.DocEntry = @Pedido)
 
 Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
+
+
 */
 
 

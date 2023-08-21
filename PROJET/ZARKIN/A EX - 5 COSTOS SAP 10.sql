@@ -56,7 +56,23 @@ Where L7.Price = 0  and OITM.EvalSystem = 'S' and OITM.frozenFor = 'N'
 and OITM.U_TipoMat = 'MP' 
 Order By OITM.ItemName 
 
-	/*
+/*
+-- Articulos sin Precio Estandar
+Select '010 STD CERO' AS COSTO_010
+		, OITM.ItemCode AS CODE
+		, OITM.ItemName AS NOMBRE
+		, OITM.InvntryUom AS UDM
+		, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO_AV
+		, 'MXP' AS MON_AV
+		, LS.PriceList AS LISTA
+		, LS.Price AS PRECIO_LD
+		, LS.Currency AS MON_LD
+From OITM 
+INNER JOIN ITM1 LS on OITM.ItemCode =LS.ItemCode and LS.PriceList=10
+Where OITM.frozenFor = 'N' and OITM.AvgPrice = 0 and OITM.InvntItem = 'N'
+Order By NOMBRE
+
+	
 	 SELECT top 3 P.Price, P.DocDate, P.Currency, *
                   FROM PDN1 P 
                   WHERE ItemCode = '15807'
