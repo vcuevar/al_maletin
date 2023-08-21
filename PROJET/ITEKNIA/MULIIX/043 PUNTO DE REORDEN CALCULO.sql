@@ -142,7 +142,7 @@ Left join (
 	Where S1.OCD_Borrado = 0 and S2.OCFR_Borrado = 0 and S3.OC_Borrado = 0
 	Group By S1.OCD_ART_ArticuloId) OC_ABI on OC_ABI.ID_ART = ART_ArticuloId
 	
-Where ART_CantMinimaOrden > 0.001  and ART_Eliminado = 0 Order By ART_Nombre 
+Where ART_CantMinimaOrden > 0.001  and ART_Eliminado = 0 and ART_Activo = 1 Order By ART_Nombre 
 
 
 

@@ -1,24 +1,14 @@
 -- Consultas relacionadas a Almacen Digital para modulo de Compras.
 -- Elaborado: Ing. Vicente Cueva Ramirez.
 -- Actualizado: Miercoles 12 de Julio del 2023; Origen.
-
-
+-- Actualizado: Domingo 23 de Julio del 2023; Completar Filtros y Consulta General.
 -- Consulta para los botones de los Filtros.
--- Boton Filtro por Proyecto.
-Select PRY_ProyectoId AS ID_PRY
-		, PRY_CodigoEvento  AS CODIGO 
-		, PRY_NombreProyecto  AS PROYECTO
-from Proyectos  
-Where PRY_CMM_EstatusId  = 'DF14DEDB-9879-49F7-AE2C-64A9A05A4152'
-Order By PRY_CodigoEvento
-
-Quitar Eliminados y poner estatus de los Cerrados o Abiertos.
-
+/*
 
 -- Boton Filtro Requisiciones Convertidas
-Select  REQ_RequisicionId AS ID_REQ
-        , OC_CodigoOC AS GRUPO_ID
-		, REQ_CodigoRequisicion AS DOC_ID   
+-- Seleccionas Registro y se guarda
+Select  REQ_CodigoRequisicion AS REQUISION
+		, OC_CodigoOC AS CODIGO_OC   
 From Requisiciones
 Inner Join RequisicionesDetalle on REQD_REQ_RequisicionId = REQ_RequisicionId 
 Inner Join OrdenesCompra on REQD_OC_OrdenCompraId = OC_OrdenCompraId  
@@ -26,178 +16,169 @@ Where REQ_Eliminado = 0
 Order by REQ_CodigoRequisicion 
 
 
-
-
-
-
-
-
-
-
-
--- Cosnulta para cargar Requisiciones
-Select  'COM'+ OC_CodigoOC + REQ_CodigoRequisicion AS LLAVE_ID
-        , OC_CodigoOC AS GRUPO_ID
-	, REQ_CodigoRequisicion AS DOC_ID
-        , REQ_CodigoRequisicion +'.pdf' AS ARCHIVO_1
-	, REQ_ArchivoCotizacion1 AS ARCHIVO_2	
-	, REQ_ArchivoCotizacion2 AS ARCHIVO_3	
-	, REQ_ArchivoCotizacion3 AS ARCHIVO_4
-        , SUM(Cast(REQD_CantidadRequerida * REQD_PrecioUnitario as decimal(16,2)))AS IMPORTE      
-From Requisiciones
-Inner Join RequisicionesDetalle on REQD_REQ_RequisicionId = REQ_RequisicionId 
-Left Join OrdenesCompra on REQD_OC_OrdenCompraId = OC_OrdenCompraId 
-Where REQ_Eliminado = 0 --and REQ_CodigoRequisicion = 'REQ01695'
-Group By OC_CodigoOC, REQ_CodigoRequisicion, REQ_ArchivoCotizacion1, REQ_ArchivoCotizacion2, REQ_ArchivoCotizacion3
-
--- Consulta para cargar Ordenes de Compra.
-Select  'COM'+ OC_CodigoOC + OC_CodigoOC AS LLAVE_ID
-        , 'COM'+ OC_CodigoOC AS GRUPO_ID
-        , OC_CodigoOC AS DOC_ID
-        , OC_CodigoOC +'.pdf' AS ARCHIVO_1
-   
-        , OC_FechaOC             
+-- Boton Ordenes de Compras
+-- Se selecciona la OC y se guarda el Codigo de OC
+Select OC_CodigoOC AS ORDEN_COMPRA
+	, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
 From OrdenesCompra
+left join Proyectos on OC_EV_ProyectoId = PRY_ProyectoId
 
-Where OC_Borrado = 0 --and OC_CodigoOC = 'OC05391'
 
--- Tabla de Facturas de Proveedor.
-SELECT  FP_CodigoFactura
-        , FP_FechaFactura
-        , FP_ArchivoXml
-        , FP_ArchivoPdf
-        , OC_CodigoOC
-FROM FacturasProveedores
-INNER JOIN FacturasProveedoresDetalle on FPD_FP_FacturaProveedorId = FP_FacturaProveedorId
-LEFT JOIN OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
-LEFT JOIN OrdenesCompra on OCD_OC_OrdenCompraId = OC_OrdenCompraId
-WHERE FP_Eliminado = 0
+-- Boton Facturas de Proveedor.
+-- Se selecciona Factura y se guarda Codigo de OC	
+Select Distinct FP_CodigoFactura AS CODIGO_FACTURA
+		, OC_CodigoOC AS ORDEN_COMPRA
+From FacturasProveedores 
+inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
+left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
+left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId 
+Where OC_CodigoOC is not null
 
--- ---------------------------------------------------------------------------------------------------------------
--- Modificaciones 5 de Julio del 2023
-
--- Tabla de los Indices del Almacen Digital de Reportik.
-Select * from RPT_AlmacenDigitalIndice 
-
---Universo de Proyectos Abiertos
+-- Boton Pago de Facturas 
+-- Se selecciona Pago y se guarda la OC
+Select FP_CodigoFactura AS CODIGO_FACTURA
+		, OC_CodigoOC AS ORDEN_COMPRA
+From CXPPagos 
+inner join CXPPagosDetalle on CXPPD_CXPP_CXPPagoId = CXPP_CXPPagoId
+inner join FacturasProveedores on CXPPD_FP_FacturaProveedorId = FP_FacturaProveedorId
+inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
+left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
+left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId
+Where OC_CodigoOC is not null
  
-
--- Determinar los Proyecto Activos a Seleccionar.
-Select DISTINCT(PRY_ProyectoId) AS ID_PRY
+-- Boton Filtro por Proyecto.
+-- Se muestra Codigo y Proyecto y se guarda el ID seleccionado.
+Select PRY_ProyectoId AS ID_PRY
 		, PRY_CodigoEvento  AS CODIGO 
 		, PRY_NombreProyecto  AS PROYECTO
-from Proyectos 
-Inner Join OrdenesVenta on OV_PRO_ProyectoId = PRY_ProyectoId and OV_CMM_EstadoOVId = '3CE37D96-1E8A-49A7-96A1-2E837FA3DCF5' 
-Where PRY_CMM_EstatusId  = 'DF14DEDB-9879-49F7-AE2C-64A9A05A4152' 
---AND PRY_ProyectoId = '665FF1CC-3086-410B-B230-08F4E5585945'
-Order By PRY_CodigoEvento 
-
-DF14DEDB-9879-49F7-AE2C-64A9A05A4152	CMM_EstatusProyecto	Abierto
-4771CB7D-E9CD-4593-AA76-D049086742F9	CMM_EstatusProyecto	Cerrado
-
-
-Select * from OrdenesVenta Where OV_CMM_EstadoOVId = '3CE37D96-1E8A-49A7-96A1-2E837FA3DCF5'
-
-3CE37D96-1E8A-49A7-96A1-2E837FA3DCF5	CMM_VEN_EstadoOV	(092) Abierta
-2209C8BF-8259-4D8C-A0E9-389F52B33B46	CMM_VEN_EstadoOV	Cerrada Por Usuario
-D528E9EC-83CF-49BE-AEED-C3751A3B0F27	CMM_VEN_EstadoOV	Embarque Completo
-3C387542-8DFC-42CC-8C49-5B6D32092C0C	CMM_VEN_EstadoOV	Embarque Parcial
-90CAC435-DE6B-4148-BD20-16BCE3112936	CMM_VEN_EstadoOV	Facturado Completo
-C580C240-44D7-4CE7-9EED-339F2DA967F5	CMM_VEN_EstadoOV	Facturado Parcial
-
-Select * from ControlesMaestrosMultiples Where CMM_Control = 'CMM_EstatusProyecto'
-Select * from ControlesMaestrosMultiples Where CMM_ControlId = 'DF14DEDB-9879-49F7-AE2C-64A9A05A4152'
+from Proyectos  
+Where PRY_CMM_EstatusId  = 'DF14DEDB-9879-49F7-AE2C-64A9A05A4152'
+and PRY_Activo = 1 and PRY_Borrado = 0
+Order By PRY_CodigoEvento
 */
--- ---------------------------------------------------------------------------------------------------------------
--- Actualizado: Martes 11 de Julio del 2023; Para Nuevo almacen Digital en Muliix.
--- 230706: Consultas para Almacen Digital de Compras.
--- Estoy usando el Proyecto 1677.7  MOBILIARIO TORRE KOTS II UNIDAD 2BR SUITE LOFT (3320CA17-1483-4EE8-A4DD-490241F2D594)
--- y el 2092.1  MOBILIARIO CIRCULACIONES VERTICALES DE EAST  CABOS
 
--- Consulta para cargar requisiciones.
-Select  PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
-    	, ISNULL(OC_CodigoOC, 'OC_S/C') AS GRUPO_ID
-		, REQ_CodigoRequisicion AS DOC_ID
-    	, REQ_CodigoRequisicion +'.pdf' AS ARCHIVO_1
-		, ISNULL(REQ_ArchivoCotizacion1, 'S/D') AS ARCHIVO_2	
-		, ISNULL(REQ_ArchivoCotizacion2, 'S/D') AS ARCHIVO_3	
-		, ISNULL(REQ_ArchivoCotizacion3, 'S/D') AS ARCHIVO_4    
+
+
+-- Tabla para la vista.
+-- Consulta General.
+Select  ADC.ID_PROY
+		, ADC.PROYECTO
+    	, ADC.GRUPO_ID
+		, DOC_ID
+    	, ARCHIVO_1
+		, ARCHIVO_2	
+		, ARCHIVO_3	
+		, ARCHIVO_4    
+From (
+
+-- 1) Consulta para cargar requisiciones.
+Select PRY_ProyectoId as ID_PROY  
+	, PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
+    , ISNULL(OC_CodigoOC, 'OC_S/C') AS GRUPO_ID
+	, REQ_CodigoRequisicion AS DOC_ID
+    , REQ_CodigoRequisicion +'.pdf' AS ARCHIVO_1
+	, ISNULL(REQ_ArchivoCotizacion1, 'S/D') AS ARCHIVO_2	
+	, ISNULL(REQ_ArchivoCotizacion2, 'S/D') AS ARCHIVO_3	
+	, ISNULL(REQ_ArchivoCotizacion3, 'S/D') AS ARCHIVO_4    
 From Requisiciones
 Left Join RequisicionesDetalle on REQD_REQ_RequisicionId = REQ_RequisicionId 
 Left Join OrdenesCompra on REQD_OC_OrdenCompraId = OC_OrdenCompraId 
 Left join Proyectos on REQD_PRY_ProyectoId = PRY_ProyectoId
 Where REQ_Eliminado = 0 
-and (REQD_PRY_ProyectoId = '665FF1CC-3086-410B-B230-08F4E5585945')
-Group By OC_CodigoOC, PRY_CodigoEvento, REQ_CodigoRequisicion, PRY_NombreProyecto, REQ_ArchivoCotizacion1, REQ_ArchivoCotizacion2, REQ_ArchivoCotizacion3
+Group By PRY_ProyectoId, OC_CodigoOC, PRY_CodigoEvento, REQ_CodigoRequisicion, PRY_NombreProyecto, REQ_ArchivoCotizacion1, REQ_ArchivoCotizacion2, REQ_ArchivoCotizacion3
 
--- Consulta para cargar Ordenes de Compra.
+-- 2) Consulta para cargar Ordenes de Compra.
 Union all
-Select  PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
-        , OC_CodigoOC AS GRUPO_ID
-        , OC_CodigoOC AS DOC_ID
-        , OC_CodigoOC +'.pdf' AS ARCHIVO_1
-        , 'S/D' AS ARCHIVO_2
-        , 'S/D' AS ARCHIVO_3
-        , 'S/D' AS ARCHIVO_4          
+Select PRY_ProyectoId as ID_PROY
+	, PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
+    , OC_CodigoOC AS GRUPO_ID
+    , OC_CodigoOC AS DOC_ID
+    , OC_CodigoOC +'.pdf' AS ARCHIVO_1
+    , 'S/D' AS ARCHIVO_2
+    , 'S/D' AS ARCHIVO_3
+    , 'S/D' AS ARCHIVO_4          
 From OrdenesCompra
 Left join Proyectos on OC_EV_ProyectoId = PRY_ProyectoId
 Where OC_Borrado = 0
-and (OC_EV_ProyectoId = '665FF1CC-3086-410B-B230-08F4E5585945')
 
-/*
--- Consulta para las OC Recibidas
-Union ALL 
 
-Select	PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
-, OC_CodigoOC AS GRUPO_ID
-        , OC_CodigoOC AS DOC_ID
-OC_CodigoOC as OC,
-		OCRC_FechaRecibo as FECH_RECIBO,
-		PRO_CodigoProveedor as COD_PROV,
-		PRO_Nombre as RAZON_SOC,
-		PRY_CodigoEvento as COD_PRY,
-		PRY_NombreProyecto as NOM_PRY,
-		
-		ISNULL((Select ART_CodigoArticulo from Articulos Where ART_ArticuloId = OCD_ART_ArticuloId),'Miscelaneo') as COD_ART,
-		ISNULL((Select ART_Nombre from Articulos Where ART_ArticuloId = OCD_ART_ArticuloId),OCD_DescripcionArticulo) as ARTICULO,
-		
-		OCRC_CantidadRecibo as CANT_REC,
-		OCD_CMUM_UMCompras as UMC,
-		ISNULL(OCD_AFC_FactorConversion, 1) as FACT_CONV,
-		
-		(Select MON_Abreviacion from Monedas where MON_MonedaId = OC_MON_MonedaId) as MONEDA,
-		OCRC_TipoCambio as TIP_CA,
-		OCFR_PrecioUnitario as PRECIO,
-		OCD_CMIVA_PorcentajeIVA as IVA,
-		OCFR_PorcentajeDescuento as DESCU,
-		ISNULL(OCD_CMUM_UMInventario,OCD_CMUM_UMCompras)  as UMI
+-- 3) Consulta para los Recibos de Ordenes de Compra (Entradas al almacen).
+Union All
+Select	PRY_ProyectoId as ID_PROY
+	, PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
+    , OC_CodigoOC AS GRUPO_ID
+    , OC_CodigoOC AS DOC_ID
+    , 'Entrada OC' AS ARCHIVO_1
+    , 'S/D' AS ARCHIVO_2
+    , 'S/D' AS ARCHIVO_3
+    , 'S/D' AS ARCHIVO_4
 from OrdenesCompraRecibos
 inner join OrdenesCompra on OC_OrdenCompraId = OCRC_OC_OrdenCompraId
 inner join Proveedores on PRO_ProveedorId = OC_PRO_ProveedorId
 inner join Proyectos on PRY_ProyectoId = OC_EV_ProyectoId
 inner join OrdenesCompraFechasRequeridas on OCFR_FechaRequeridaId = OCRC_OCFR_FechaRequeridaId
 inner join OrdenesCompraDetalle on OCD_PartidaId = OCFR_OCD_PartidaId
-where Cast(OCRC_FechaRecibo As Date) BETWEEN @FechaIS and @FechaFS 
+ 
+-- 4) Facturas de Proveedor
+Union All
+Select Distinct PRY_ProyectoId as ID_PROY
+	, PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
+    , OC_CodigoOC AS GRUPO_ID
+    , FP_CodigoFactura AS DOC_ID
+    , 'Fact. a Proveedor' AS ARCHIVO_1
+    ,  FP_ArchivoPdf AS ARCHIVO_2
+    , FP_ArchivoXml AS ARCHIVO_3
+    , 'S/D' AS ARCHIVO_4 
+From FacturasProveedores 
+inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
+left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
+left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId 
+Left join Proyectos on OC_EV_ProyectoId = PRY_ProyectoId
+Where OC_CodigoOC is not null
 
-*/
+-- 5) Pagos a Proveedores 
+Union all
+Select Distinct PRY_ProyectoId as ID_PROY
+	, PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
+    , OC_CodigoOC AS GRUPO_ID
+    , FP_CodigoFactura AS DOC_ID
+    , 'Pago a Proveedor' AS ARCHIVO_1
+    ,  CXPP_ArchivoPdf AS ARCHIVO_2
+    , CXPP_ArchivoXml AS ARCHIVO_3
+    , 'S/D' AS ARCHIVO_4 
+From CXPPagos 
+inner join CXPPagosDetalle on CXPPD_CXPP_CXPPagoId = CXPP_CXPPagoId
+inner join FacturasProveedores on CXPPD_FP_FacturaProveedorId = FP_FacturaProveedorId
+inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
+left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
+left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId
+Left join Proyectos on OC_EV_ProyectoId = PRY_ProyectoId
+Where OC_CodigoOC is not null
 
-
-
-
+-- 6) Notas de Debito
 /*
-
-select top (5) * from FacturasProveedores Order BY FP_FechaFactura desc
-
-select top (5) * from FacturasProveedoresDetalle Order BY FP_FechaFactura desc
-
-select top (5) * from OrdenesCompraDetalle 
-
-select top (5) * from OrdenesCompra
-inner JOIN OrdenesCompraDetalle on OCD_OC_OrdenCompraId = OC_OrdenCompraId
-Where OC_CodigoOC = 'OC02055'
-
-
-
-Select * from RPT_AlmacenDigitalIndice Where GRUPO_ID = 'OV00747' and DOC_ID = 'FAC00805'
-
+Select PRY_ProyectoId as ID_PROY
+	, PRY_CodigoEvento + '  ' + PRY_NombreProyecto AS PROYECTO
+    , OC_CodigoOC AS GRUPO_ID
+    , ND_CodigoNotaDebito  AS DOC_ID
+    
+from NotasDebito
+Inner join NotasDebitoDetalle on ND_NotaDebitoID = NDD_ND_NotaDebitoID
+inner join FacturasProveedores on NDD_FP_FacturaProveedorId = FP_FacturaProveedorId 
+inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
+left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
+left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId 
+Left join Proyectos on OC_EV_ProyectoId = PRY_ProyectoId
+Where ND_Eliminado = 0
 */
+
+
+
+) ADC
+
+-- En caso de que se utilice el filtro de Proyecto.
+-- Where ADC.ID_PROY = '665FF1CC-3086-410B-B230-08F4E5585945'
+
+--Para el caso de que sea cualquier otro parametro el filtro es por el Codigo de la OC
+Where ADC.GRUPO_ID = 'OC08617'
+

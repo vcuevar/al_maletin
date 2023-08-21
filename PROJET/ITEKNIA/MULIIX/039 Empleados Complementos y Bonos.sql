@@ -56,7 +56,7 @@ Order by EMP_CodigoEmpleado
 select * from AlmacenDigitalCHIndice 
 
 
-' UPDATE Empleados SET EMP_CodigoEmpleado = '004' WHERE EMP_EmpleadoId = 'D3D607F5-DC0C-4A0A-840C-755EB17D2B6D'
+UPDATE Empleados SET EMP_CodigoEmpleado = '004' WHERE EMP_EmpleadoId = 'D3D607F5-DC0C-4A0A-840C-755EB17D2B6D'
 
 UPDATE Empleados SET EMP_CodigoEmpleado = '009' WHERE EMP_EmpleadoId = '18B102D7-6E59-435D-917D-A4ACB046B8F1'
 
@@ -72,5 +72,22 @@ UPDATE Empleados SET EMP_CodigoEmpleado = '025' WHERE EMP_EmpleadoId = '611E469E
 
 UPDATE Empleados SET EMP_CodigoEmpleado = '735' WHERE EMP_EmpleadoId = '072BB403-2576-4F38-926F-A9C0C5E1B185'
 UPDATE Empleados SET EMP_CodigoEmpleado = '736' WHERE EMP_EmpleadoId = '7101E652-CE68-4088-B46B-D4CF7A7A6F76'
+
+
+
+
+-- Generar Reporte de Hijos con respectivas edades.
+
+Select  EMP_CodigoEmpleado AS NUM_NOMINA
+        , EMP_Nombre + '  ' + EMP_PrimerApellido + '  ' + EMP_SegundoApellido AS EMPLEADO
+        , FAM_NombreFamiliar AS FAMILIAR
+        , CMM_Valor AS PARIENTE
+        , Cast(FAM_FechaNacimiento as date) AS F_NACIM  
+        , DATEDIFF(YEAR, FAM_FechaNacimiento, GETDATE()) AS EDAD
+from Empleados
+inner join RPT_EmpleadoFamiliares on FAM_EMP_EmpleadoId = EMP_EmpleadoId and FAM_Eliminado = 0
+inner join ControlesMaestrosMultiples on CMM_ControlId = FAM_CMM_ParentescoId
+Where EMP_Activo = 1 and EMP_Eliminado = 0 
+Order by EMPLEADO 
 
 

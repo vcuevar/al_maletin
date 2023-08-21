@@ -86,11 +86,16 @@ select * from usuarios where USU_EMP_EmpleadoId = '8EDFC690-978A-4112-B61C-1999C
 select * from usuarios where USU_Nombre = '002'
 update Usuarios set USU_EMP_EmpleadoId = '8EDFC690-978A-4112-B61C-1999CD0C71F5' where USU_Nombre = '002'
 
+select * from empleados where EMP_CodigoEmpleado = '1006'
+Update Empleados Set EMP_FechaEgreso = Cast('2021-01-01' as date) Where EMP_EmpleadoId = 'AF1CC802-F0EE-4D32-8971-D6B5AA5D906F'
+
+
 */
 
 -- Determinar Materiales que no tienen tiempo de Entrega y se concideran para M&M
 
-Select	ART_CodigoArticulo as CODIGO
+Select	'SIN TIEMPO DE ABAST' AS REPORTE_030
+		, ART_CodigoArticulo as CODIGO
         , ART_Nombre as NOMBRE
         , Convert(Decimal(28,2), ART_NoDiasAbastecimiento) AS DIA_ABS  
         , Convert(Decimal(28,2), ART_CantMinimaOrden) AS MINIMO
@@ -120,7 +125,11 @@ Select * from OrdenesCompraDetalle where OCD_AFC_FactorConversion = 0
 
 
 -- Validar que todos los Eliminados tengan estatus de Cerradas por usuario.
-select * from OrdenesVenta 
+select 'ELIMINADO -> CERRADA POR USUA'
+		, OV_CodigoOV  AS OV_OrdenVentaId 
+		, OV_FechaOV  AS FECHA_OV
+		, OV_Comentarios AS NOTAS
+from OrdenesVenta 
 Where OV_Eliminado = 1 and 
 OV_CMM_EstadoOVId <> '2209C8BF-8259-4D8C-A0E9-389F52B33B46'
 
