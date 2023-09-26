@@ -21,8 +21,11 @@
 	from ORTT
 	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,2,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD'
 
-	*/
+	
+	-- Validar que en sistema se tenga el tipo de cambio 
 
+	Select * from SIZ_TipoCambio Order By TC_date desc
+*/
 
 -- Si es nulo y no da resultados es Recomendable que se capture el tipo de cambio para pasado Mañana.
 

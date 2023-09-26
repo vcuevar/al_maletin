@@ -234,8 +234,9 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 	
 	Select '071 ! ART. RUTA CINTILLOS' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
-	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat <> 'MP'
+	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat = 'RF'
 	AND OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136'
+						
 
 	/*
 	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136'

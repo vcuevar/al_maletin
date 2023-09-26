@@ -97,7 +97,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	FROM  OWOR 
 	INNER JOIN OITM on OWOR.ItemCode = OITM.ItemCode and OITM.QryGroup32 = 'Y' and OITM.U_TipoMat = 'RF'
 	WHERE OWOR.Warehouse <> 'APT-ST' and OWOR.CmpltQty < OWOR.PlannedQty
-	and OWOR.Status <> 'C' and OWOR.Status <> 'L'
+	and OWOR.Status <> 'C' and OWOR.Status <> 'L' and  OITM.ItemName Not Like '%CINTI%'
 	ORDER BY OITM.ItemName
 
 -- ================================================================================================
@@ -117,7 +117,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.ItemCode <> '19415' and OWOR.ItemCode <> '19646' and OWOR.ItemCode <> '18939'
 	and OWOR.ItemCode <> '20414' and OWOR.ItemCode <> '20415' and OWOR.ItemCode <> '18943'
 	and OWOR.ItemCode <> '19416'
-	and OITM.U_GrupoPlanea <> '6'
+	and OITM.U_GrupoPlanea <> '6' and OITM.U_GrupoPlanea <> 11
 	Order by WOR1.DocEntry
 	
 -- Ordenes de Produccion con Material PIEL cargado almacen Diferente al de AMP-ST
@@ -147,7 +147,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.ItemCode <> '19415' and OWOR.ItemCode <> '19646' and OWOR.ItemCode <> '18939'
 	and OWOR.ItemCode <> '20414' and OWOR.ItemCode <> '20415' and OWOR.ItemCode <> '18943'
 	and OWOR.ItemCode <> '19416'
-	and WOR1.wareHouse <> 'APG-ST' and OITM.U_GrupoPlanea <> 6
+	and WOR1.wareHouse <> 'APG-ST' and OITM.U_GrupoPlanea <> 6  and OITM.U_GrupoPlanea <> 11
 
 	
 	-- La 050 la cancele segun creo solo la 045 esta mas completa.
@@ -352,7 +352,7 @@ Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
 	inner Join WOR1 on OWOR.DocEntry = WOR1.DocEntry
 	Inner Join OITM A1 on WOR1.ItemCode = A1.ItemCode 
 	WHERE OWOR.Status = 'P' 
-	and WOR1.IssueType = 'M' and A1.ItmsGrpCod <> '113' 
+	and WOR1.IssueType = 'M' and A1.ItmsGrpCod <> '113' and A1.U_GrupoPlanea <> 11
 ORDER BY OWOR.DocNum, A1.ItemName
 
 -- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.
@@ -369,7 +369,7 @@ ORDER BY OWOR.DocNum, A1.ItemName
 	WHERE OWOR.Status = 'R' 
 	and OWOR.CmpltQty = 0
 	and WOR1.IssueType = 'M' and A1.ItmsGrpCod <> '113' 
-	and WOR1.IssuedQty = 0
+	and WOR1.IssuedQty = 0 and A1.U_GrupoPlanea <> 11
 ORDER BY OWOR.DocNum, A1.ItemName
 
 	

@@ -64,6 +64,34 @@
 	and OITT.Code <> '18559' and OITT.Code <> '18874' and OITT.Code <> '20414' and OITT.Code <> '20415'
 	ORDER BY A3.ItemName	
 
+
+--El articulo contiene CINTI debe ser Refaccion
+	SELECT '022 CINTLLO RF' AS REPORTE_022
+		, OITT.Code AS CODIGO
+		, A3.ItemName AS DESCRIPCION
+		, A3.InvntryUom AS UDM
+		, A3.U_TipoMat AS TIPO
+		, OITT.ToWH AS DFL_LDM
+		, A3.DfltWH AS DFL_ART
+	FROM OITT 
+	inner join OITM A3 on OITT.Code = A3.ItemCode
+	WHERE  A3.ItemName LIKE '%CINTI%' and A3.U_TipoMat <> 'RF' 
+	ORDER BY A3.ItemName	
+	   
+--El almacen de las refacciones que contiene palabra CINTI deben caer al almacen APG-ST
+	SELECT '023 CINTLLO APG-ST ENTREGA' AS REPORTE_023
+		, OITT.Code AS CODIGO
+		, A3.ItemName AS DESCRIPCION
+		, A3.InvntryUom AS UDM
+		, A3.U_TipoMat AS TIPO
+		, OITT.ToWH AS DFL_LDM
+		, A3.DfltWH AS DFL_ART
+	FROM OITT 
+	inner join OITM A3 on OITT.Code = A3.ItemCode
+	WHERE A3.U_TipoMat = 'RF' and A3.ItemName LIKE '%CINTI%' and A3.DfltWH <> 'APG-ST'
+	ORDER BY A3.ItemName	
+
+
 -- LA LISTA DE PRECIOS PARA EL CALCULO ES LA DE 00 CALCULO DISEÑO.
 	SELECT '025 LP_00 CAL-DIS.' AS REPORTE_025
 		, OITT.Code AS CODIGO
@@ -163,19 +191,9 @@
 	inner join OITM A1 on A1.ItemCode=ITT1.Code
 	where A3.QryGroup30='Y' and ITT1.warehouse <> 'APG-ST' and A3.frozenFor = 'N' 
 	ORDER BY A3.ItemName
+
+
 	/* sE TIENE MACRO DE ENVIO A INACTIVO LOS DE SIN LDM
--- VALIDAR QUE TENGA LISTA DE MATERIALES LOS CASCOS PROP-29 
-	Select '210 CASCO SIN LDM' AS REPORTE_210
-		, A3.ItemCode AS CODIGO
-		, A3.ItemName AS DESCRIPCION
-		, A3.U_TipoMat AS TIPO
-		, A3.OnHand AS EXISTENCIA
-	from OITM A3
-	left join ITT1 on A3.ItemCode = ITT1.Father    
-	where A3.QryGroup29='Y' and ITT1.Father is null
-	and A3.OnHand > 0 and A3.frozenFor = 'N'
-	and A3.U_Linea = '01'
-	ORDER BY A3.ItemName	
 
 -- VALIDAR QUE TENGA LISTA DE MATERIALES LAS PATAS Y BASTIDORES PROP-31 
 -- Las que no tengan LDM en SAP 8 pasar a MP comprada.
@@ -245,7 +263,7 @@
 	from ITT1 
 	inner join OITM A3 on ITT1.Father=A3.ItemCode
 	inner join OITM A1 on ITT1.Code=A1.ItemCode
-	Where ITT1.Warehouse = 'AMP-ST' and A1.ItmsGrpCod <> '113' and A1.U_GrupoPlanea <> '6' 
+	Where ITT1.Warehouse = 'AMP-ST' and A1.ItmsGrpCod <> '113' and A1.ItmsGrpCod <> '114' and A1.U_GrupoPlanea <> '6' 
 	and ITT1.Father <> '17621' and ITT1.Father <> '19646' and ITT1.Father <> '20348' and ITT1.Father <> '20363' and ITT1.Father <> '20289'
 	and ITT1.Father <> '17620' and ITT1.Father <> '17691' and ITT1.Father <> '17701' and ITT1.Father <> '19052' and ITT1.Father <> '20290' 
 	and ITT1.Father <> '17822' and ITT1.Father <> '17814'  and ITT1.Father <> '18292' and ITT1.Father <> '18939'  and ITT1.Father <> '19053'  
@@ -275,7 +293,7 @@
 	inner join OITM A3 on ITT1.Father = A3.ItemCode
 	inner join OITM A1 on ITT1.Code=A1.ItemCode  
 	where A3.QryGroup32='Y' and A3.Itemname like '%CINTILL%' 
-	and (ITT1.Warehouse <> 'APG-ST' or  ITT1.Warehouse is null) and A1.ItmsGrpCod <> '113'
+	and (ITT1.Warehouse <> 'APG-ST' or  ITT1.Warehouse is null) and A1.ItmsGrpCod <> '113' and A1.ItmsGrpCod <> '114'
 	ORDER BY A3.ItemName
 
 	-- Configuración Grupo de Articulos MATERIAS PRIMAS W PT POR C  Lista de Materiales

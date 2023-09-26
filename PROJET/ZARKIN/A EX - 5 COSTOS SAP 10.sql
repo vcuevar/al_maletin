@@ -135,31 +135,25 @@ and U_TipoMat = 'MP' AND LS.Price > 0 and OITM.frozenFor = 'N' and OITM.U_GrupoP
 Order By OITM.ItemName 
 */
 
--- Validar DIFERENTE SOLO MP ENTRE 1 Y 7 SE CORRIGE MANUALMENTE L1
--- Por el momento no lo uso hasta que me digan quen va a controlar.
-/*Select	'213 MP 1 <> 7' AS DISEÑO_210
+-- Validar DIFERENTE SOLO MP ENTRE 10 Y 7 SE CORRIGE MANUALMENTE LP 7
+Select	'213 LP 10 <> 7' AS LPRECIOS_213
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom AS UDM
-		, L1.Price AS PRE_1
-		, L1.Currency AS MON_1
-		, 1 AS LIST_1
-		, Cast((Case When L1.Currency = 'USD' then LS.Price  / @TC_USD  
-			When L1.Currency = 'CAN' then LS.Price  / @TC_CAN
-			When L1.Currency = 'EUR' then LS.Price  / @TC_EUR
-			When L1.Currency = 'MXP' then LS.Price  / @TC_MXP end) as decimal(16,2)) AS PRE_NW
-		, L1.Currency AS MON_1_NW
+		, L1.Price AS PRE_7
+		, L1.Currency AS MON_7
+		, L1.PriceList AS LIST_7
+		, LS.Price AS PRE_10
+		, LS.Currency AS MON_10
+		, LS.PriceList AS LIST_10
 		, 'POR ACTUALIZAR' AS ACCION
 From OITM 
-INNER JOIN ITM1 L1 on OITM.ItemCode = L1.ItemCode and L1.PriceList = 1
-INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 7 
-Where Cast((Case When L1.Currency = 'USD' then L1.Price  * @TC_USD  
-When L1.Currency = 'CAN' then L1.Price  * @TC_CAN
-When L1.Currency = 'EUR' then L1.Price  * @TC_EUR
-When L1.Currency = 'MXP' then L1.Price  * @TC_MXP end) as decimal(16,2)) <> Cast(LS.Price as decimal(16,2)) and OITM.EvalSystem = 'S' 
-and U_TipoMat = 'MP' AND LS.Price > 0 and OITM.frozenFor = 'N' 
+INNER JOIN ITM1 L1 on OITM.ItemCode = L1.ItemCode and L1.PriceList = 7
+INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 10 
+Where OITM.EvalSystem = 'S' and U_TipoMat = 'MP' and OITM.frozenFor = 'N' AND OITM.U_GrupoPlanea <> '6' 
+AND LS.Price <> L1.Price
 Order By OITM.ItemName 
-*/
+
 -- Validar que no tenga ceros en listas de Precios 01 DISEÑO.
 Select	'215 CERO 00 DISEÑO' AS DISEÑO_215
 		, OITM.ItemCode AS CODE

@@ -38,13 +38,13 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_CT = 418, U_Orden = 418, U_DocEntry = 37086 where Code = 2643
+	update [@CP_OF] set U_CT = 154, U_Orden = 154 where Code = 466142
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 435480
 	update [@CP_OF] set U_Recibido= 3 where Code= 2643
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd =   36301
+	Set @NumOrd =   36028
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -55,18 +55,18 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 36995 -- and U_CT = 112 and U_idEmpleado = 79
-	order by U_CT, U_FechaHora
+	select * from [@CP_LOGOF] where U_DocEntry= 39667 -- and U_CT = 112 and U_idEmpleado = 79
+	order by  U_FechaHora, U_CT
 	 
 	Select * from  [@CP_LOGOF] where Code = 388700
 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 444279
-	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 444280
-	update [@CP_LOGOF] set U_idEmpleado = 44 Where Code = 444281
-	update [@CP_LOGOF] set U_idEmpleado = 268 Where Code = 444282
+	update [@CP_LOGOF] set U_idEmpleado = 71 Where Code = 478349
+	update [@CP_LOGOF] set U_idEmpleado = 223 Where Code = 478350
+	update [@CP_LOGOF] set U_idEmpleado = 224 Where Code = 478351
+	update [@CP_LOGOF] set U_idEmpleado = 74 Where Code = 478352
 
 	update [@CP_LOGOF] set U_idEmpleado = 83 Where Code = 433026
 	update [@CP_LOGOF] set U_idEmpleado = 91 Where Code = 433027
@@ -81,13 +81,25 @@ ORDER BY CP.U_DocEntry
 	
 
 
-	DELETE [@CP_LOGOF] WHERE Code = 428646
-	DELETE [@CP_LOGOF] WHERE Code = 422322
-	DELETE [@CP_LOGOF] WHERE Code = 377604
+DELETE [@CP_LOGOF] WHERE Code = 474692
+DELETE [@CP_LOGOF] WHERE Code = 474693
+DELETE [@CP_LOGOF] WHERE Code = 474694
+DELETE [@CP_LOGOF] WHERE Code = 474695
+DELETE [@CP_LOGOF] WHERE Code = 474696
+DELETE [@CP_LOGOF] WHERE Code = 474697
+DELETE [@CP_LOGOF] WHERE Code = 474698
+DELETE [@CP_LOGOF] WHERE Code = 474699
+DELETE [@CP_LOGOF] WHERE Code = 474700
+DELETE [@CP_LOGOF] WHERE Code = 474701
+DELETE [@CP_LOGOF] WHERE Code = 474702
+DELETE [@CP_LOGOF] WHERE Code = 474703
 
-
-	DELETE [@CP_LOGOF] WHERE Code = 381582
-	DELETE [@CP_LOGOF] WHERE Code = 381583
+	DELETE [@CP_LOGOF] WHERE Code = 474678
+	DELETE [@CP_LOGOF] WHERE Code = 474679
+	DELETE [@CP_LOGOF] WHERE Code = 474680
+	DELETE [@CP_LOGOF] WHERE Code = 474681
+	DELETE [@CP_LOGOF] WHERE Code = 474682
+	DELETE [@CP_LOGOF] WHERE Code = 474683
 	DELETE [@CP_LOGOF] WHERE Code = 381584
 	DELETE [@CP_LOGOF] WHERE Code = 381585
 	DELETE [@CP_LOGOF] WHERE Code = 381586

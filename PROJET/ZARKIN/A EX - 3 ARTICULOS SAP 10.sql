@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2023/08/17', 102)
+Set @FechaInac =  CONVERT (DATE, '2023/09/21', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -349,6 +349,7 @@ SELECT '190 ALM-DFT SB. ' AS REPORTE_190
 		, T0.U_GrupoPlanea AS GRUPO
 FROM  [dbo].[OITM] T0  
 WHERE T0.[DfltWH] <> 'APT-ST' and T0.[QryGroup32] = 'Y' and T0.U_GrupoPlanea = '13'
+and T0.[ItemName] not like '%CINTI%'
 Order By T0.[ItemName]
 
 -- Obtener Determinacion del Almacen por defauld para SP (32) VARIOS => APG-ST Grupo Diferentes
@@ -489,7 +490,7 @@ Order By OITM.ItemName
 	where OITM.QryGroup31='Y' and OITM.ItemName not like '%BASTIDOR%' and OITM.ItemName not like '%PATA%'
 	and OITM.ItemName not like '%BASTON%' and OITM.ItemName not like '%CAJA%' and OITM.ItemName not like '%CUBIERTA%'
 	and OITM.ItemName not like '%BOTON%' and OITM.ItemName not like '%MESA%' and OITM.ItemName not like '%VISTA%'
-	and OITM.ItemName not like '%CASCO%' and OITM.ItemName not like '%BASE%'
+	and OITM.ItemName not like '%CASCO%' and OITM.ItemName not like '%BASE%' and OITM.ItemName not like '%ZOCLO%' 
 	ORDER BY OITM.ItemName		
 		
 -- VER-160414 VALIDAR ALMACEN DE COMPLEMENTOS SEA APT-PA 
@@ -548,7 +549,7 @@ Order By OITM.ItemName
 	select '220 ? ERR, METODO EN MANUAL' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, OITM.IssueMthd, OITM.ItmsGrpCod,
 	OITM.U_estacion, OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr
 	from OITM 
-	where IssueMthd='M' and ItmsGrpCod<> 113 and OITM.ItemCode  <> '13382'
+	where IssueMthd='M' and ItmsGrpCod <> 113 and OITM.ItemCode  <> '13382' and OITM.U_GrupoPlanea <> '11' 
 		
 -- Catalogo de Piel debe tener Lotes*/
 	select '225 ? PIEL SIN LOTES' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.OnHand, OITM.DfltWH, OITM.IssueMthd, OITM.ItmsGrpCod,
@@ -1671,8 +1672,85 @@ Order By DESCRIPCION
 -- =================================================================================================================		
 -- | Fin del Bloque con autocorrecciones.                                                                          |
 -- =================================================================================================================
+	
+-- 230920 Validar que los articulos MP TELAS y TELAS Y VINILES Tengan Emision Manual. 
+	Select '785 TELAS ART. MANUAL' AS REPORTE_785
+		, A1.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.U_TipoMat AS TIPO
+		, A1.ItmsGrpCod AS GRUPO
+		, A1.U_GrupoPlanea AS PLANEA
+		, A1.IssueMthd AS EMISION
+	From OITM A1   
+	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
+	and A1.IssueMthd <> 'M' and A1.U_Linea = '01'
+	ORDER BY A1.ItemName
 
 
+-- 230920 Validar que las LDM los componentes MP TELAS y TELAS Y VINILES Tengan Emision Manual.
+Select '800 TELAS LDM MANUAL' AS REPORTE_800
+		, ITT1.Father AS PT
+		, A1.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.U_TipoMat AS TIPO
+		, A1.ItmsGrpCod AS GRUPO
+		, A1.U_GrupoPlanea AS PLANEA
+		, ITT1.IssueMthd AS EMISION
+	From OITM A1  
+	inner Join ITT1 on A1.ItemCode = ITT1.Code
+	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
+	and ITT1.IssueMthd <> 'M' -- and  A1.ItemCode = '20704'
+	ORDER BY A1.ItemName
 
+-- 230920 Validar que las OP los componentes MP TELAS y TELAS Y VINILES Tengan Emision Manual.
+Select '805 TELAS OP MANUAL' AS REPORTE_805
+		, OWOR.DocNum AS OP
+		, OWOR.ItemCode AS PT
+		, A1.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.U_TipoMat AS TIPO
+		, A1.ItmsGrpCod AS GRUPO
+		, A1.U_GrupoPlanea AS PLANEA
+		, WOR1.IssueType AS EMISION
+	From OITM A1  
+	inner Join WOR1 on A1.ItemCode = WOR1.ItemCode
+	inner Join OWOR on WOR1.DocEntry = OWOR.DocEntry
+	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
+	and OWOR.CmpltQty < OWOR.PlannedQty and OWOR.Status <> 'C' and OWOR.Status <> 'L'
+	and WOR1.IssueType <> 'M' -- and  A1.ItemCode = '20704'
+	ORDER BY A1.ItemName, OWOR.DocNum
+
+-- 230920 Validar que las LDM los componentes MP TELAS y TELAS Y VINILES Tengan Almacen de AMP-ST.
+Select '800 TELAS LDM MANUAL' AS REPORTE_800
+		, ITT1.Father AS PT
+		, A1.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.U_TipoMat AS TIPO
+		, A1.ItmsGrpCod AS GRUPO
+		, A1.U_GrupoPlanea AS PLANEA
+		, ITT1.Warehouse AS ALMACEN
+	From OITM A1  
+	inner Join ITT1 on A1.ItemCode = ITT1.Code
+	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
+	and ITT1.Warehouse <> 'AMP-ST'  -- and  A1.ItemCode = '20704'
+	ORDER BY A1.ItemName
+
+-- 230920 Validar que las OP los componentes MP TELAS y TELAS Y VINILES Tengan Almacen de AMP-ST.
+Select '805 TELAS OP MANUAL' AS REPORTE_805
+		, OWOR.DocNum AS OP
+		, OWOR.ItemCode AS PT
+		, A1.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, A1.U_TipoMat AS TIPO
+		, A1.ItmsGrpCod AS GRUPO
+		, A1.U_GrupoPlanea AS PLANEA
+		, WOR1.wareHouse AS ALMACEN
+	From OITM A1  
+	inner Join WOR1 on A1.ItemCode = WOR1.ItemCode
+	inner Join OWOR on WOR1.DocEntry = OWOR.DocEntry
+	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
+	and OWOR.CmpltQty < OWOR.PlannedQty and OWOR.Status <> 'C' and OWOR.Status <> 'L'
+	and WOR1.wareHouse <> 'AMP-ST' -- and  A1.ItemCode = '20704'
+	ORDER BY A1.ItemName, OWOR.DocNum
 
 --< EOF > EXCEPCIONES PARA LOS ARTICULOS.
