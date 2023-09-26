@@ -125,6 +125,7 @@ Select * from OrdenesCompraDetalle where OCD_AFC_FactorConversion = 0
 
 
 -- Validar que todos los Eliminados tengan estatus de Cerradas por usuario.
+-- Posiblemente agregar Empaque completo.
 select 'ELIMINADO -> CERRADA POR USUA'
 		, OV_CodigoOV  AS OV_OrdenVentaId 
 		, OV_FechaOV  AS FECHA_OV

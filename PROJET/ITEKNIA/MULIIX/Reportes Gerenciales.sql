@@ -14,7 +14,7 @@ Order by RGC_tabla_linea
 select RGC_tabla_linea, RGC_tabla_titulo, RGC_BC_Cuenta_Id, BC_Cuenta_Nombre, BC_Movimiento_04, (BC_Movimiento_04*RGC_multiplica) as DAT_OK
 from RPT_RG_ConfiguracionTabla 
 inner join RPT_BalanzaComprobacionAzaret on RGC_BC_Cuenta_Id = BC_Cuenta_Id
-where RGC_hoja = 3 and BC_Ejercicio = '2021'
+where RGC_hoja = 3 and BC_Ejercicio = '2023'
 Order by RGC_tabla_linea
 
 
@@ -46,12 +46,6 @@ where BC_Ejercicio = '2022' and BC_Cuenta_Id = '150-001-000'
 205-027-000
 
 
--- Balanza de Comprobación Azaret
-
-Select * from RPT_BalanzaComprobacionAzaret Where BC_Ejercicio = 2021 and BC_Cuenta_Id like '500-200-006%' --and BC_Cuenta_Id =  '604-000-017'-- and BC_Movimiento_01 <> 0
-
- 
-
 Select * from RPT_BalanzaComprobacion Where BC_Ejercicio = 2021 --and BC_Cuenta_Id = '104-100-000' 
 Order By BC_Cuenta_id
 
@@ -78,6 +72,23 @@ BC_Cuenta_Id = '601-327-000'
 
 --update RPT_BalanzaComprobacion set BC_Saldo_Inicial=0, BC_Saldo_Final=0, BC_Movimiento_01=0, BC_Movimiento_04=0 where BC_Cuenta_Id = '108-003-716'
 
+
+
+
+-- Balanza de Comprobación Azaret
+
+Select * from RPT_BalanzaComprobacionAzaret Where BC_Ejercicio = 2023 and BC_Cuenta_Id like '101-%' --and BC_Cuenta_Id =  '604-000-017'-- and BC_Movimiento_01 <> 0
+
+-- Update RPT_BalanzaComprobacionAzaret Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
+
+
+Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2023 and BC_Cuenta_Id like '211-%'
+
+
+--Update RPT_BalanzaComprobacionAzaret Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
+
+
+
 -- Ajustes datos adicionales que se capturan Manualmente.
 Select * from RPT_RG_Ajustes
 
@@ -98,6 +109,11 @@ Para tener los datos que corresponden al reporte.
 
 15.- BASURA
 
+select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 -- and RGC_sociedad = 3 
+Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
+
+
+
 33.- Formulas de Reporte de Costos.
 
 Campo RGC_Sociedad
@@ -107,30 +123,32 @@ Campo RGC_Sociedad
 
 -- Consulta de cuentas por Reporte
 
-select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 1 and (RGC_sociedad = 0 or RGC_sociedad = 1) 
-and RGC_BC_Cuenta_Id = '205-027-000'
+select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 2 --and RGC_sociedad = 3 --RGC_sociedad = 3 --(RGC_sociedad = 0 or RGC_sociedad = 1) 
+and RGC_BC_Cuenta_Id = '400-100-000'
 Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
 
-select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 3 and RGC_BC_Cuenta_Id = '500-200-003' and RGC_sociedad = 3 
+select * from RPT_RG_ConfiguracionTabla 
+where RGC_hoja = 1 and RGC_BC_Cuenta_Id = '218-000-000' and RGC_sociedad = 3 
 
-update RPT_RG_ConfiguracionTabla set RGC_multiplica = 1 where RGC_hoja = 3 and RGC_BC_Cuenta_Id = '500-200-006' and RGC_sociedad = 3 
+update RPT_RG_ConfiguracionTabla set RGC_sociedad = 1 where RGC_hoja = 2 and RGC_BC_Cuenta_Id = '451-000-000' and RGC_sociedad = 2 
 
 500-200-003 y 500-200-006
 
 -- Cambiar algun campo a la configuracion, del reporte y de la cuenta.
 
 update RPT_RG_ConfiguracionTabla set 
-        --RGC_BC_Cuenta_Id = '601-001-000'
-        --, RGC_tipo_renglon = 'CUENTA'
-        --, RGC_hoja = 6
-        --, RGC_tabla_titulo = 'GASTOS GENERALES DE ADMINISTRACION'
-        --  RGC_tabla_linea = 12.5
-        --, RGC_descripcion_cuenta = 'MANO DE OBRA' 
-        --, RGC_fecha_alta = '2021-06-08'
-         RGC_multiplica = -1
-        --, RGC_sociedad = 3
-        --, RGC_BC_Cuenta_Id2 = '-1'
- where RGC_hoja = 1 and RGC_BC_Cuenta_Id = '205-027-000'and RGC_sociedad = 1 
+        RGC_BC_Cuenta_Id = '400-100-000'
+        , RGC_tipo_renglon = 'CUENTA'
+        , RGC_hoja = 2
+        , RGC_tabla_titulo = 'VENTAS'
+        , RGC_tabla_linea = 4
+        , RGC_descripcion_cuenta = 'VENTAS GENERALES' 
+        , RGC_fecha_alta = '2023-09-25'
+        , RGC_multiplica = 1
+        , RGC_sociedad = 3
+        , RGC_BC_Cuenta_Id2 = '-1'
+        , RGC_hojaDescripcion  = '02 ESTADO DE RESULTADOS'
+ where RGC_hoja = 15 and RGC_BC_Cuenta_Id = '601-315-002'and RGC_sociedad = 1 
         
 -- Para dar alta a una nueva cuenta
 
@@ -144,11 +162,21 @@ Octubre 07,2021
 INSERT INTO [dbo].[RPT_RG_ConfiguracionTabla]
         ([RGC_BC_Cuenta_Id], [RGC_tipo_renglon], [RGC_hoja], [RGC_tabla_titulo], [RGC_tabla_linea],[RGC_descripcion_cuenta], [RGC_fecha_alta], [RGC_mostrar], [RGC_multiplica], [RGC_sociedad], [RGC_BC_Cuenta_Id2])
 VALUES 
-  ( '104-100-000' ,'CUENTA' , 1,'ACTIVO CIRCULANTE', 4.3,'CLIENTES EXTRANJEROS', '2022-03-02', 0, 1, 1, '-1')
+  ( '300-800-000' ,'CUENTA' , 1,'RESULTADOS', 30,'RESULTADO DEL EJERCICIO 2021', '2023-09-21', 0, 1, 3, '-1')
 
 GO
 
- -- Datos
+INSERT INTO [dbo].[RPT_RG_ConfiguracionTabla]
+        ([RGC_BC_Cuenta_Id], [RGC_tipo_renglon], [RGC_hoja], [RGC_tabla_titulo], [RGC_tabla_linea],[RGC_descripcion_cuenta], [RGC_fecha_alta], [RGC_mostrar], [RGC_multiplica], [RGC_sociedad], [RGC_BC_Cuenta_Id2])
+VALUES 
+  ( '300-900-000' ,'CUENTA' , 1,'RESULTADOS', 31,'RESULTADO DEL EJERCICIO 2022', '2023-09-21', 0, 1, 3, '-1')
+
+GO
+
+
+
+
+-- Datos
 Select * from RPT_RG_Documentos
 
 -- Tabla temporal donde se cargan las informaciones del Calculo.

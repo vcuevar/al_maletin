@@ -40,7 +40,8 @@ Order by NOMBRE
 
 
 -- Base de Datos de Usuarios
-Select top (10) * from Empleados
+Select * from Empleados -- Where EMP_CodigoEmpleado = '0836'
+Where EMP_CMM_TipoEmpleadoId <> 'E646B375-C7AD-494E-8F6B-8BDF540DBEEB' Diferente Tipo Virtual
 
 select top (10) * from Usuarios  Where USU_Nombre = '788'
 
