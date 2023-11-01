@@ -35,15 +35,22 @@ Where PRO_Activo = 1 and PRO_Eliminado = 0
 Order by PRO_Nombre 
 
 
-Select * from Proveedores where PRO_CodigoProveedor = 'P0023'
+Select * from Proveedores where PRO_ProveedorId = 'A0501355-148C-4FD5-B37D-7E03AA95F367'
 
 UPDATE Proveedores set PRO_Activo = 0 where PRO_CodigoProveedor = 'P0023'
 
 
-/*
-Select PRO_CodigoProveedor from Proveedores where PRO_ProveedorId = '2EF1BE8C-D63B-4319-AA29-2D05A474368A'
 
+Select PRO_CodigoProveedor,PRO_Nombre  from Proveedores where PRO_ProveedorId = '903E01A1-4325-4C8F-8E01-98D1564CA822'
+/*
 update Proveedores set PRO_CodigoProveedor = 'P0018' where PRO_ProveedorId = '2F27E87B-BE6D-4FE6-AC11-3EAA117C2219'
 
 */
+
+
+Select * from ProveedoresBancos 
+--Where PBAN_Clabe = '012320001997862523' or PBAN_Cuenta = '012320001997862523' 
+--PBAN_Cuenta = '60522960095' or PBAN_Clabe = '60522960095'
+Where PBAN_Clabe = '012320001763166893'
+				
 

@@ -62,18 +62,12 @@ BC_Movimiento_02 <> 0 BC_Saldo_Inicial
 BC_Cuenta_Id = '601-327-000'
 
 --update RPT_BalanzaComprobacion set BC_Movimiento_01 = 582110.94 Where BC_Ejercicio = 2020 and BC_Cuenta_Id = '108-001-300'
-
---update RPT_BalanzaComprobacion set BC_Movimiento_04 = 0 Where BC_Ejercicio = 2020 and BC_Movimiento_04 is null
---update RPT_BalanzaComprobacion set BC_Movimiento_05 = 0 Where BC_Ejercicio = 2020 and BC_Movimiento_05 is null
---update RPT_BalanzaComprobacion set BC_Movimiento_06 = 0 Where BC_Ejercicio = 2020 and BC_Movimiento_06 is null
---update RPT_BalanzaComprobacion set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2020 and BC_Movimiento_07 is null
---update RPT_BalanzaComprobacion set BC_Movimiento_08 = 0 Where BC_Ejercicio = 2020 and BC_Movimiento_08 is null
---update RPT_BalanzaComprobacion set BC_Movimiento_09 = 0 Where BC_Ejercicio = 2020 and BC_Movimiento_09 is null
-
 --update RPT_BalanzaComprobacion set BC_Saldo_Inicial=0, BC_Saldo_Final=0, BC_Movimiento_01=0, BC_Movimiento_04=0 where BC_Cuenta_Id = '108-003-716'
 
-
-
+-- Balanza de Comprobacion Comercializadora
+	Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2023
+	
+-- Update RPT_BalanzaComprobacionComercializadora Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
 
 -- Balanza de Comprobación Azaret
 
@@ -86,8 +80,6 @@ Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2023 
 
 
 --Update RPT_BalanzaComprobacionAzaret Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
-
-
 
 -- Ajustes datos adicionales que se capturan Manualmente.
 Select * from RPT_RG_Ajustes
@@ -109,9 +101,8 @@ Para tener los datos que corresponden al reporte.
 
 15.- BASURA
 
-select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 -- and RGC_sociedad = 3 
+select RGC_BC_Cuenta_Id, RGC_hoja, RGC_sociedad from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 -- and RGC_sociedad = 3 
 Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
-
 
 
 33.- Formulas de Reporte de Costos.
@@ -123,32 +114,37 @@ Campo RGC_Sociedad
 
 -- Consulta de cuentas por Reporte
 
-select * from RPT_RG_ConfiguracionTabla where RGC_hoja = 2 --and RGC_sociedad = 3 --RGC_sociedad = 3 --(RGC_sociedad = 0 or RGC_sociedad = 1) 
-and RGC_BC_Cuenta_Id = '400-100-000'
-Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
-
 select * from RPT_RG_ConfiguracionTabla 
-where RGC_hoja = 1 and RGC_BC_Cuenta_Id = '218-000-000' and RGC_sociedad = 3 
+--where RGC_hoja = 2 and RGC_sociedad = 2
+where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2
+Order by RGC_tabla_linea
 
-update RPT_RG_ConfiguracionTabla set RGC_sociedad = 1 where RGC_hoja = 2 and RGC_BC_Cuenta_Id = '451-000-000' and RGC_sociedad = 2 
+-- Ajustar Orden de una Cuenta en el Reporte
+update RPT_RG_ConfiguracionTabla 
+set RGC_tabla_linea = 11
+where RGC_hoja = 2 and RGC_sociedad = 3 and RGC_BC_Cuenta_Id = '602-000-000'
 
-500-200-003 y 500-200-006
+-- Enviar a Basura una Cuenta
+update RPT_RG_ConfiguracionTabla
+Set RGC_hoja = 15
+where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2
+
 
 -- Cambiar algun campo a la configuracion, del reporte y de la cuenta.
 
 update RPT_RG_ConfiguracionTabla set 
-        RGC_BC_Cuenta_Id = '400-100-000'
-        , RGC_tipo_renglon = 'CUENTA'
-        , RGC_hoja = 2
-        , RGC_tabla_titulo = 'VENTAS'
-        , RGC_tabla_linea = 4
-        , RGC_descripcion_cuenta = 'VENTAS GENERALES' 
-        , RGC_fecha_alta = '2023-09-25'
-        , RGC_multiplica = 1
+        --RGC_BC_Cuenta_Id = '602-000-000'
+        --, RGC_tipo_renglon = 'CUENTA'
+        , RGC_hoja = 15
+        --, RGC_tabla_titulo = 'GASTOS DE OPERACION'
+        --, RGC_tabla_linea = 17
+        --, RGC_descripcion_cuenta = 'GASTOS DE VENTAS' 
+        , RGC_fecha_alta = '2023-10-04'
+        --, RGC_multiplica = 1
         , RGC_sociedad = 3
         , RGC_BC_Cuenta_Id2 = '-1'
         , RGC_hojaDescripcion  = '02 ESTADO DE RESULTADOS'
- where RGC_hoja = 15 and RGC_BC_Cuenta_Id = '601-315-002'and RGC_sociedad = 1 
+ where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2 
         
 -- Para dar alta a una nueva cuenta
 
