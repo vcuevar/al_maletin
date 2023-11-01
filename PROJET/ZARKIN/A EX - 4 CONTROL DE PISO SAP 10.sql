@@ -88,7 +88,8 @@ Where SUPER.NOMBRE Like '%NO_ASIGNADO%'
 	where DUDA.Duplicado > 1 and DUDA.BaseRef<> 1563 and DUDA.BaseRef <> 6732 and DUDA.BaseRef <> 8847 and DUDA.BaseRef <> 24104
 	and DUDA.BaseRef <> 21210 and DUDA.BaseRef <> 25406 and DUDA.BaseRef <> 24887 and DUDA.BaseRef <> 28941
 	and DUDA.BaseRef <> 29503 and DUDA.BaseRef <> 27988 and DUDA.BaseRef <> 28034 and DUDA.BaseRef <> 32581
-	and DUDA.BaseRef <> 31594 and DUDA.BaseRef <> 31827 and DUDA.BaseRef <> 33475
+	and DUDA.BaseRef <> 31594 and DUDA.BaseRef <> 31827 and DUDA.BaseRef <> 33475 and DUDA.BaseRef <> 36663
+	and DUDA.BaseRef <> 38149 and DUDA.BaseRef <> 37966
 	order by RB.DocDate,A3.ItemName
 
 

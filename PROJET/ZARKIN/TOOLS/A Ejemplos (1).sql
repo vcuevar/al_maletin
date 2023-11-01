@@ -1,5 +1,9 @@
 
 
+
+
+Uso de cláusulas HAVING y WHERE en la misma consulta
+
 -- Definir variables sobre todo fechas
 
 Declare @FechaIS nvarchar(30)

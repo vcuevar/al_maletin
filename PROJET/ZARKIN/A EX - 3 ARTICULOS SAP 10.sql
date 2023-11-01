@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2023/09/21', 102)
+Set @FechaInac =  CONVERT (DATE, '2023/10/27', 102)
 
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
@@ -1688,7 +1688,7 @@ Order By DESCRIPCION
 
 
 -- 230920 Validar que las LDM los componentes MP TELAS y TELAS Y VINILES Tengan Emision Manual.
-Select '800 TELAS LDM MANUAL' AS REPORTE_800
+Select '801 TELAS LDM MANUAL' AS REPORTE_801
 		, ITT1.Father AS PT
 		, A1.ItemCode AS CODIGO
 		, A1.ItemName AS DESCRIPCION
@@ -1703,7 +1703,7 @@ Select '800 TELAS LDM MANUAL' AS REPORTE_800
 	ORDER BY A1.ItemName
 
 -- 230920 Validar que las OP los componentes MP TELAS y TELAS Y VINILES Tengan Emision Manual.
-Select '805 TELAS OP MANUAL' AS REPORTE_805
+Select '804 TELAS OP MANUAL' AS REPORTE_804
 		, OWOR.DocNum AS OP
 		, OWOR.ItemCode AS PT
 		, A1.ItemCode AS CODIGO
@@ -1717,11 +1717,11 @@ Select '805 TELAS OP MANUAL' AS REPORTE_805
 	inner Join OWOR on WOR1.DocEntry = OWOR.DocEntry
 	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
 	and OWOR.CmpltQty < OWOR.PlannedQty and OWOR.Status <> 'C' and OWOR.Status <> 'L'
-	and WOR1.IssueType <> 'M' -- and  A1.ItemCode = '20704'
+	and WOR1.IssueType <> 'M' and  OWOR.U_Starus <> '06' --and A1.ItemCode = '19604' --[%] 
 	ORDER BY A1.ItemName, OWOR.DocNum
 
 -- 230920 Validar que las LDM los componentes MP TELAS y TELAS Y VINILES Tengan Almacen de AMP-ST.
-Select '800 TELAS LDM MANUAL' AS REPORTE_800
+Select '807 TELAS LDM MANUAL' AS REPORTE_807
 		, ITT1.Father AS PT
 		, A1.ItemCode AS CODIGO
 		, A1.ItemName AS DESCRIPCION
@@ -1736,7 +1736,7 @@ Select '800 TELAS LDM MANUAL' AS REPORTE_800
 	ORDER BY A1.ItemName
 
 -- 230920 Validar que las OP los componentes MP TELAS y TELAS Y VINILES Tengan Almacen de AMP-ST.
-Select '805 TELAS OP MANUAL' AS REPORTE_805
+Select '810 TELAS OP MANUAL' AS REPORTE_810
 		, OWOR.DocNum AS OP
 		, OWOR.ItemCode AS PT
 		, A1.ItemCode AS CODIGO
@@ -1750,7 +1750,7 @@ Select '805 TELAS OP MANUAL' AS REPORTE_805
 	inner Join OWOR on WOR1.DocEntry = OWOR.DocEntry
 	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
 	and OWOR.CmpltQty < OWOR.PlannedQty and OWOR.Status <> 'C' and OWOR.Status <> 'L'
-	and WOR1.wareHouse <> 'AMP-ST' -- and  A1.ItemCode = '20704'
+	and WOR1.wareHouse <> 'AMP-ST' --and  A1.ItemCode = '19604'
 	ORDER BY A1.ItemName, OWOR.DocNum
 
 --< EOF > EXCEPCIONES PARA LOS ARTICULOS.

@@ -268,7 +268,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OP.Status = 'P' 
 
 /*
-	delete [@CP_OF] where Code = 313032
+	delete [@CP_OF] where Code = 493699
 */
 	
 /*ORDENES DE PRODUCCION GENERADAS NIVEL CABECERA. */
@@ -372,5 +372,50 @@ ORDER BY OWOR.DocNum, A1.ItemName
 	and WOR1.IssuedQty = 0 and A1.U_GrupoPlanea <> 11
 ORDER BY OWOR.DocNum, A1.ItemName
 
-	
+
+/*
+---------------------------------------------------------------------------------------------------------------------------------
+|        ORDENES DE SUBENSAMBLES NO FABRICABLES.                                                                                |
+---------------------------------------------------------------------------------------------------------------------------------
+*/ 
+-- Ordenes de Subensamble ESTRUCTURA.
+
+Select '121 OP ESTRUCTURA' AS REPORTE_121
+	, OWOR.DocNum AS OP
+	, OWOR.ItemCode AS CODIGO
+	, A3.ItemName AS DESCRIPCION
+	, A3.InvntryUom AS UDM
+	, 'CANCELAR O CERRAR' AS ACCION
+from OWOR
+inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
+Where OWOR.ItemCode like '%ESTRU%' and (OWOR.Status = 'R' or OWOR.Status = 'P') 
+
+-- Ordenes de Subensamble EMPAQUE.
+
+Select '124 OP EMPAQUE' AS REPORTE_124
+	, OWOR.DocNum AS OP
+	, OWOR.ItemCode AS CODIGO
+	, A3.ItemName AS DESCRIPCION
+	, A3.InvntryUom AS UDM
+	, 'CANCELAR O CERRAR' AS ACCION
+from OWOR
+inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
+Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P') 
+
+-- Ordenes de Subensamble ACABADOS.
+
+Select '127 OP ACABADO' AS REPORTE_127
+	, OWOR.DocNum AS OP
+	, OWOR.ItemCode AS CODIGO
+	, A3.ItemName AS DESCRIPCION
+	, A3.InvntryUom AS UDM
+	, 'CANCELAR O CERRAR' AS ACCION
+from OWOR
+inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
+Where (OWOR.Status = 'R' or OWOR.Status = 'P') and A3.QryGroup32 = 'Y' and A3.ItemName like '%ACABA%'
+
+
+
+
+
 --< EOF > EXCEPCIONES DE ORDENES DE FABRICACION.

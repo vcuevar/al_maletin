@@ -65,6 +65,7 @@ Select BO.OP
 	, BO.VS 
 	, BO.Funda
 	, BO.U_Starus AS U_Status 
+
 from RDR1 
 left join Vw_BackOrderExcel BO on BO.Pedido = RDR1.DocEntry and BO.CODIGO = RDR1.ItemCode
 Where DocEntry = '1747' 
