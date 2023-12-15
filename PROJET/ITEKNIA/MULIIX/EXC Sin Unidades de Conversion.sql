@@ -7,7 +7,7 @@ Declare @IdCode uniqueidentifier
 Declare @IdUdM uniqueidentifier
 Declare @User uniqueidentifier
 
-Set @Code = '04673'
+Set @Code = '01971'
 
 Set @IdUdM = '70723AED-7F6A-4D9F-BD31-A74584B19A6A' -- Unidad Piezas
 Set @User =  'D117CCA7-7114-4B55-9EEB-9F8553BF6179' -- Empleado Vicente 777
@@ -40,3 +40,10 @@ Insert Into [dbo].[ArticulosFactoresConversion]
             GetDate(),
             @User)
 Go                 
+
+--Select * from Articulos where ART_CodigoArticulo = '01971'
+
+
+--select * from ArticulosFactoresConversion
+--where AFC_ART_ArticuloId =  'F530EBCD-83F0-4E41-B3E8-9C099899DF84'
+

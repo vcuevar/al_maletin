@@ -20,7 +20,7 @@
 Select OT_Codigo, CMM_Valor
 from OrdenesTrabajo
 inner join ControlesMaestrosMultiples on CMM_ControlId	= OT_CMM_Estatus
-Where OT_Codigo like 'OT01012'
+Where OT_Codigo like 'OT03637'
 Order by OT_Codigo
 
 
@@ -32,4 +32,15 @@ update OrdenesTrabajo set OT_CMM_Estatus = 'F860806C-B1EC-4047-AA95-EDAD406DE10E
 update OrdenesTrabajo set OT_CMM_Estatus = 'A488B27B-15CD-47D8-A8F3-E9FB8AC70B9B' Where OT_Codigo = 'OT00017' -- En Produccion
 
 46B96B9F-3A45-4CF9-9775-175C845B6198
+
+--Se cambio estatus a cerradas por Usuario ya que tenian Recibo Parcial
+-- Lunes 04 de Diciembre del 2023
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT03640' -- Cerrada por Usuario
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT03381' -- Cerrada por Usuario
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT03163' -- Cerrada por Usuario
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT03164' -- Cerrada por Usuario
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT03003' -- Cerrada por Usuario
+
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT03637' -- Cerrada por Usuario
+
 

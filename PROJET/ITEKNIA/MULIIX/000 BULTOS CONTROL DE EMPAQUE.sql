@@ -16,7 +16,7 @@
 -- EB967196-EF77-49A5-82B8-57DAC0ABD632	CMM_PRO_EstatusBulto	Recibo Parcial
 
 
-Select * from Bultos Where BUL_NumeroBulto = '3617'
+Select * from Bultos Where BUL_NumeroBulto = 'A-1484'
 Select Distinct BUL_CMM_EstatusBultoId from Bultos
 
 Select * from Bultos Where BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF'
@@ -67,7 +67,7 @@ left join Articulos on BULD_ART_ArticuloId = ART_ArticuloId
 Left join OrdenesTrabajoReferencia on OTRE_OT_OrdenTrabajoId = BULD_OT_OrdenTrabajoId
 Where --BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0 and BUL_CMM_TipoBultoId = 'CDBBF4F2-3A62-475B-A0AB-B235496DFE7D'
 --BULD_ART_ArticuloId = 'DDBB01BA-BB0C-4B0A-95EE-D20495597E4B'
-BUL_NumeroBulto = '3617'
+BUL_NumeroBulto = 'A-1484'
 
 Union All
 Select   Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD

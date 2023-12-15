@@ -7,7 +7,8 @@
 
 -- MACRO 036-B, Sacar Materiales por Orden de Trabajo.
 
-Select  OT_Codigo as OT, 
+Select  OT_Codigo as OT
+	, AFC_FactorConversion as CONVER,
         A3.ART_CodigoArticulo as CODE,
         A3.ART_Nombre as DESCRIPCION,       
         OTDA_Cantidad as CANT,
@@ -36,7 +37,7 @@ inner join ArticulosCategorias on ACAT_CategoriaId = A1.ART_ACAT_CategoriaId
 left join ListaPreciosCompra on A1.ART_ArticuloId = LPC_ART_ArticuloId and LPC_ProvPreProgramado = 1
 inner join ArticulosFactoresConversion on A1.ART_ArticuloId =AFC_ART_ArticuloId and A1.ART_CMUM_UMConversionOCId = AFC_CMUM_UnidadMedidaId  
 inner join ControlesMaestrosMultiples on CMM_ControlId = OT_CMM_Estatus
-Where  OT_Codigo = 'OT00895'
+Where  OT_Codigo = 'OT03690'
 Order By A1.ART_Nombre, Cast(OTARA_FechaAsignacion As Date)
 
 -- MACRO 036-A Cabecera del Reporte, Numero de OT por Estatus de Abiertas y Proceso.
@@ -54,7 +55,7 @@ Select  OTRES.OT
         , OTRES.CODE
         , OTRES.DESCRIPCION
         , OTRES.CANT
-        , SUM(OTRES.IMPORTE) as IMPORTE
+        , ISNULL(SUM(OTRES.IMPORTE), 0) as IMPORTE
         , OTRES.ESTATUS
 From (
 Select  OT_Codigo as OT, 

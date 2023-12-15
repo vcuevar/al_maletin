@@ -89,7 +89,7 @@ where EMP_Activo = 0  and EMP_FechaEgreso is null
 Order by NOMBRE
 
 Select * from Usuarios
-Where USU_Nombre = '803'
+Where USU_Nombre = '270'
 
 
 

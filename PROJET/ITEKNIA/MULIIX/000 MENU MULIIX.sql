@@ -9,9 +9,14 @@ Declare @Nodo_Padre uniqueidentifier
 -- Set @Nodo_Padre = '0A1BEDD1-0AF2-427D-9119-F9342D22CF31'   	-- 1	VENTAS
 -- Set @Nodo_Padre = 'ED9E6A70-1756-4279-A1B4-8F881B5D2671'     -- 1    VENTAS / 3   ORDENES DE VENTA
 -- Set @Nodo_Padre = '041870EB-9C9B-4EAF-8AF5-5B844288E184' 	-- 1    VENTAS / 7   REPORTES
+
+-- Set @Nodo_Padre = '0C3DD1FB-BC97-4413-877C-3173DAA001FF'		-- 2 INVENTARIOS
+-- Set @Nodo_Padre = '553A8C8F-244F-4926-A572-152B4D0254CB'		-- 2 INVANTARIOS / 1 ALMACENES
+ Set @Nodo_Padre = '8EFE9371-70DE-471B-8297-DE4503360582'		-- 2 INVENTARIOS / 2 PRODUCTOS
+
 -- Set @Nodo_Padre = '4D1B8753-3A4C-4D2D-A11D-57116CBFA44A'        -- 3    FINANZAS
 -- Set @Nodo_Padre = '1AF47AEF-D1FB-438A-91AE-6E99DDF91371'        -- 3    FINANZAS / 11 REPORTES 
- Set @Nodo_Padre = 'BB5521C9-E44C-46B9-A8A6-951CCAF166B9'          --3 FINANZAS / TESORERIA
+-- Set @Nodo_Padre = 'BB5521C9-E44C-46B9-A8A6-951CCAF166B9'          --3 FINANZAS / TESORERIA
 
 -- 1.- Conocer los nodos principales del Menú.
 --  Si conocemos el Id (MPC_NodoId) podemos conocer los subnodos, para conocer los nodos principales
@@ -135,5 +140,12 @@ Tiene 2,011
 -- UPDATE MenuPrincipalConfiguracion SET MPC_Activo = 0 WHERE MPC_NodoId = '22DD0F42-726E-4169-B45F-58D204902BBB'
 
 -- Reporte de Flujo de Efectivo de Muliix se cambia por el de Programa de Pagos de Beto.
-UPDATE MenuPrincipalConfiguracion SET MPC_Activo = 0 WHERE MPC_NodoId = '9A41060A-A991-4E6E-AA0B-DBAFC310ADDA'
+-- UPDATE MenuPrincipalConfiguracion SET MPC_Activo = 0 WHERE MPC_NodoId = '9A41060A-A991-4E6E-AA0B-DBAFC310ADDA'
+
+-- 231108: INVENTARIOS / PRODUCTO / RECIBO Se quita esta opcion no funciona.
+-- UPDATE MenuPrincipalConfiguracion SET MPC_Activo = 0 WHERE MPC_NodoId = 'FA6AA50D-6AEE-4845-83E1-2CC76BB11100'
+-- 231108: INVENTARIOS / PRODUCTO / Productos Politicas Ordenes, al parecer no funciona.
+-- UPDATE MenuPrincipalConfiguracion SET MPC_Activo = 0 WHERE MPC_NodoId = 'ADD0320A-F93D-4649-AD02-C8E218DF78F3'
+
+
 

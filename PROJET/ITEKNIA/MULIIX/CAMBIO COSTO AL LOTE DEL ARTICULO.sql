@@ -30,7 +30,7 @@ INNER JOIN ControlesMaestrosUM ON ART_CMUM_UMInventarioId = CMUM_UnidadMedidaId
 Where ART_CodigoArticulo = '12829' and LOT_CodigoLote = '960128290308'
 
 
-Select * from Lotes where LOT_CodigoLote = '960128290308'
+Select * from Lotes where LOT_CodigoLote = '01971'
 Select * from Lotes where LOT_ART_ArticuloId = 'B8EC979E-A3C7-40DC-909A-11A0AE6FF2B5'
 
 
@@ -134,3 +134,12 @@ update Lotes set LOT_CostoUnitario = 38.294 where LOT_CodigoLote = '8831'
 update Lotes set LOT_CostoUnitario = 74.82 where LOT_CodigoLote = '8754'
 update Lotes set LOT_CostoUnitario = 104.35 where LOT_CodigoLote = '1735'
 
+
+-- Asignar Precio a articulos que reporto Monica Rivera 231129
+update Lotes set LOT_CostoUnitario = 105.00 where LOT_CodigoLote = '11433'
+update Lotes set LOT_CostoUnitario = 93.10 where LOT_CodigoLote = '01971'
+
+
+
+-- Para Validar existencia del Lote a Modificar
+Select * from Lotes where LOT_CodigoLote = '01971'

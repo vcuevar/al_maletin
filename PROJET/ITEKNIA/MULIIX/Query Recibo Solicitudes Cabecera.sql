@@ -68,7 +68,7 @@ SELECT * FROM
 		INNER JOIN TraspasosSolicitudesDetalleManufactura ON TSDM_TSM_TraspasoSolicitudId = TSM_TraspasoSolicitudId
 		INNER JOIN Almacenes ON TSM_ALM_AlmacenOrigenId = ALM_AlmacenId
 		Inner Join Articulos on ART_ArticuloId = TSDM_ART_ArticuloId
-		Where TSM_CodigoSolicitud  = 'SM06247'
+		Where TSM_CodigoSolicitud  = 'SM06211'
 		
 		
 		Select * from Articulos
