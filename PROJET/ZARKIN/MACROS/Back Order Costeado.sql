@@ -24,7 +24,7 @@ Select BO.OP
 	, BO.Funda
 	, BO.U_Starus AS U_Status
 from Vw_BackOrderExcel BO 
-Where BO.Pedido = '696' 
+Where BO.Pedido = '1761' 
 Order By BO.Descripcion, BO.OP  
 
 

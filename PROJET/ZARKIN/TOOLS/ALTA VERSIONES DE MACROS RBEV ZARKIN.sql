@@ -16,9 +16,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'GZ-VMA-2307-135'
-Set @Nomb = 'Planeación del Gurú.'
-Set @Vers = 'VMA230727A'
+Set @Code = 'GZ-VMA-2311-136'
+Set @Nomb = 'Guru de las Reclasificaciones.'
+Set @Vers = 'VMA231103A'
 
 Insert Into [dbo].[SIZ_RBEV]
 			( [CodeRepo], [NombRepo], [NumeVers])

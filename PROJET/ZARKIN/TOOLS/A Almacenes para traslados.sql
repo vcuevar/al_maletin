@@ -31,7 +31,7 @@ select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where SIZ_AlmacenesTransferencias.Dept = '15' 
+where SIZ_AlmacenesTransferencias.Dept = '10' 
 --SIZ_AlmacenesTransferencias.Code = 'AMG-ST' --and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
 
@@ -58,12 +58,9 @@ Order by Dept
 
 -- ****************** INSERTAR NUEVO ALMACEN  ***************************
 
-APT-TR - APLICACION A CONSUMOS.	10	FINANZAS	APT-TR	D	O 	AREA DE FINANZAS Y FISCAL
-
-
 BEGIN      
 	INSERT INTO SIZ_AlmacenesTransferencias (Code, Dept, Label, SolicitudMateriales, TrasladoDeptos)
-    VALUES ('APP-ST','15','APP-ST - WIP PRINCIPAL',' ','D')
+    VALUES ('ATG-FX','15','ATG-FX - PT RESGUARDO GDL.',' ','O')
       
 	--PRINT 'Ingresado: CODIGO ' + cast(@CODI as varchar(10))  + '  ' + cast(@NAME as varchar (50))
 END

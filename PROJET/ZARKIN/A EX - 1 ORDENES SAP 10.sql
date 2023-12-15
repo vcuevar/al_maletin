@@ -106,7 +106,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen material de AMP-ST 
 -- excepto las ordenes de Herrajes.
-	Select '040 OP CONSUME AMP-ST' AS REPORTE_040, OWOR.Status, WOR1.DocEntry, OWOR.ItemCode, WOR1.ItemCode, OITM.ItemName
+	Select '035 OP CONSUME AMP-ST' AS REPORTE_035, OWOR.Status, WOR1.DocEntry, OWOR.ItemCode, WOR1.ItemCode, OITM.ItemName
 	, WOR1.wareHouse, OITM.U_GrupoPlanea 
 	from WOR1
 	inner join OWOR on WOR1.DocEntry = OWOR.DocEntry
@@ -121,7 +121,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	Order by WOR1.DocEntry
 	
 -- Ordenes de Produccion con Material PIEL cargado almacen Diferente al de AMP-ST
-	Select '035 PIEL DIF. AMP-ST' AS REPORTE_35, OWOR.Status, WOR1.DocEntry, WOR1.ItemCode, OITM.ItemName, WOR1.wareHouse
+	Select '040 PIEL DIF. AMP-ST' AS REPORTE_40, OWOR.Status, WOR1.DocEntry, WOR1.ItemCode, OITM.ItemName, WOR1.wareHouse
 	from WOR1
 	inner join OWOR on WOR1.DocEntry = OWOR.DocEntry
 	inner join OITM on WOR1.ItemCode = OITM.ItemCode
@@ -181,7 +181,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 --ORDENES DE PRODUCCION GENERADAS NIVEL LISTA DE MATERIALES.
 -- Lista de Materiales de Ordenes con Almacen 01 o no definido el Almacen No Piel
 -- PLANIFICADAS set Warehouse='APP-ST' 
-	Select '075 OP P. ALMACEN 01' AS REPORTE_075
+	Select '060 OP P. ALMACEN 01' AS REPORTE_060
 		, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto, OWOR.Warehouse as ALM_PRO,
 		WOR1.ItemCode as Material, WOR1.wareHouse as ALM_MAT 
 	from OWOR
@@ -190,7 +190,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OWOR.Status='P' and WOR1.wareHouse = '01' and OITM.ItmsGrpCod <> '113'
 
 -- Lista de Materiales con Almacen 01 LIBERADAS set Warehouse = 'APP-ST'
-	Select '080 OP P. ALMACEN 01' AS REPORTE_080
+	Select '065 OP P. ALMACEN 01' AS REPORTE_065
 		, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto, OWOR.Warehouse as ALM_PRO,
 		WOR1.ItemCode as Material, WOR1.wareHouse as ALM_MAT 
 	from OWOR
@@ -200,7 +200,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 
 -- Lista de Materiales de Ordenes con Almacen AMP-CC o no definido el Almacen
 -- PLANIFICADAS set Warehouse='APP-ST' 
-	Select '085 OP P. ALMACEN AMP-CC' AS REPORTE_085
+	Select '070 OP P. ALMACEN AMP-CC' AS REPORTE_070
 		, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto, OWOR.Warehouse as ALM_PRO,
 		WOR1.ItemCode as Material, WOR1.wareHouse as ALM_MAT 
 	from OWOR
@@ -209,14 +209,14 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OWOR.Status='P' and WOR1.wareHouse = 'AMP-CC' and OITM.ItmsGrpCod <> '113'
 
 /*	Ordenes Complementos Liberadas en Proceso con Almacen equivocado set owor.Warehouse= 'APT-ST' */
-		select '095 OP DIF ALM. NO APT-ST' AS REPORTE_095, owor.DocNum as Orden,owor.ItemCode, oitm.ItemName, owor.Warehouse
+		select '075 OP DIF ALM. NO APT-ST' AS REPORTE_075, owor.DocNum as Orden,owor.ItemCode, oitm.ItemName, owor.Warehouse
 		from owor 
 		inner join OITM on OITM.ItemCode = OWOR.ItemCode 
 		where owor.CmpltQty < owor.PlannedQty and owor.Warehouse <> 'APT-ST' and OITM.U_TipoMat='PT' 
 		and OWOR.Status = 'R'
 
 -- ORDENES QUE NO SE COMPLETO EL PROCESO Y NO QUEDARON REGISTRADAS
-	Select '100 SIN REGISTRO' as REPORTE_010, OWOR.DocEntry, OWOR.CmpltQty, [@CP_LOGOF].U_DocEntry, 
+	Select '080 SIN REGISTRO' as REPORTE_080, OWOR.DocEntry, OWOR.CmpltQty, [@CP_LOGOF].U_DocEntry, 
 		OITM.ItemName, OITM.U_VS, OWOR.Type, OWOR.Status
 	from OWOR
 	inner join OITM on OWOR.ItemCode=OITM.ItemCode
@@ -231,7 +231,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	Order by OWOR.DocEntry
 		
 -- ORDENES QUE NO SE A CARGADO PIEL Y YA FUERON ENTREGADAS A PISO
-	Select '020 NO SE CARGO PIEL' AS REPORTE_020, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto,A3.ItemName, OWOR.Warehouse as ALM_PRO,
+	Select '085 NO SE CARGO PIEL' AS REPORTE_085, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto,A3.ItemName, OWOR.Warehouse as ALM_PRO,
 		WOR1.ItemCode as Material, A1.itemname, WOR1.wareHouse as ALM_MAT, WOR1.PlannedQty, WOR1.IssuedQty,
 		OWOR.U_Entrega_Piel
 	from WOR1
@@ -241,8 +241,19 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OWOR.Status<>'C' and OWOR.Status<>'L' and  A1.ItmsGrpCod = '113'
 	and OWOR.U_Entrega_Piel is not null and WOR1.IssuedQty = 0
 		  
+-- VER-231124: ORDENES QUE NO SE A CARGADO TELA Y YA FUERON ENTREGADAS A PISO
+	Select '090 NO SE CARGO TELA' AS REPORTE_090, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto,A3.ItemName, OWOR.Warehouse as ALM_PRO,
+		WOR1.ItemCode as Material, A1.itemname, WOR1.wareHouse as ALM_MAT, WOR1.PlannedQty, WOR1.IssuedQty,
+		OWOR.U_Entrega_Piel
+	from WOR1
+	inner join OWOR on OWOR.DocEntry=WOR1.DocEntry
+	inner join OITM A1 on A1.ItemCode = WOR1.ItemCode 
+	inner join OITM A3 on A3.ItemCode = OWOR.ItemCode
+	where OWOR.Status<>'C' and OWOR.Status<>'L' and  A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = 11
+	and OWOR.U_Entrega_Piel is not null and WOR1.IssuedQty = 0
+		  
 -- VER-150615 ORDENES QUE SE CARGO PIEL Y ESTAN EN ESTATUS DE NO PROCESO
-	Select '025 CON PIEL STATUS NO PROCESO' AS REPORTE_02S, OWOR.DocEntry as NumOrde, OWOR.Status, A1.ItemName, OWOR.U_Grupo, OWOR.U_Starus,OWOR.U_Entrega_Piel,
+	Select '095 CON PIEL STATUS NO PROCESO' AS REPORTE_09S, OWOR.DocEntry as NumOrde, OWOR.Status, A1.ItemName, OWOR.U_Grupo, OWOR.U_Starus,OWOR.U_Entrega_Piel,
 		OWOR.ItemCode as Produto, OWOR.Warehouse as ALM_PRO,
 		WOR1.ItemCode as Material, oitm.ItemName,WOR1.wareHouse as ALM_MAT, WOR1.BaseQty, WOR1.IssuedQty
 	from OWOR
@@ -253,27 +264,45 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	order by U_Grupo, NumOrde
 
 -- ORDENES EN PROCESO Y CON STATUS DIFERENTE A 06 PROCESO.
-	Select '030 OP EN WIP DIF A 06 PROCESO' AS REPORTE_030, OP, NO_SERIE, Pedido, CODIGO, Descripcion, Cantidad,VSInd, VS, Funda, U_Starus 
+	Select '100 OP EN WIP DIF A 06 PROCESO' AS REPORTE_100, OP, NO_SERIE, Pedido, CODIGO, Descripcion, Cantidad,VSInd, VS, Funda, U_Starus 
 		from Vw_BackOrderExcel 
 	where CodFunda between 109 and 175 
 	and U_Starus <> '06'
 	
 -- Ordenes que se movieron a Planificadas y no se Borro de Control de Piso.
 -- Se borra historial para nuevamente ser capturadas.
-	Select '070 BASURA EN PISO' AS REPORTE_070
+	Select '105 BASURA EN PISO' AS REPORTE_105
 		, CP.Code, CP.U_DocEntry, OP.ItemCode, A3.ItemName, OP.Status 
 	from [@CP_OF] CP 
 	inner join OWOR OP on CP.U_DocEntry= OP.DocEntry 
 	inner join OITM A3 on OP.ItemCode = A3.ItemCode 
 	where OP.Status = 'P' 
 
-/*
-	delete [@CP_OF] where Code = 493699
-*/
+	/*
+	delete [@CP_OF] where Code = 514540
+delete [@CP_OF] where Code =514539
+delete [@CP_OF] where Code =510631
+delete [@CP_OF] where Code =510633
+delete [@CP_OF] where Code =510632
+delete [@CP_OF] where Code =510634
+delete [@CP_OF] where Code =514538
+delete [@CP_OF] where Code =510630
+delete [@CP_OF] where Code =514541
+delete [@CP_OF] where Code =510629
+
+	delete [@CP_OF] where Code = 497807
+	delete [@CP_OF] where Code = 497799
+	delete [@CP_OF] where Code = 497797
+	delete [@CP_OF] where Code = 497809
+	delete [@CP_OF] where Code = 497795
+	delete [@CP_OF] where Code = 497800
+	delete [@CP_OF] where Code = 497804
+	delete [@CP_OF] where Code = 497801
+	*/
 	
 /*ORDENES DE PRODUCCION GENERADAS NIVEL CABECERA. */
 /*  Orden Generada como tipo diferente a STANDAR, Cambiar a STANDAR  */
-		select '090 OP DIF STANDAR' AS REPORTE_090
+		select '110 OP DIF STANDAR' AS REPORTE_110
 			, OWOR.DocEntry as NumOrde, OWOR.Status, OWOR.ItemCode as Produto,
 		OITM.ItemName, OWOR.Warehouse as ALM_PRO, OWOR.Type
 		from OWOR
@@ -284,7 +313,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	-- Se quitaron las OP: 821, 1084, 1095, 4523 y 4900 20828
 	-- NOTA: PARA para finales de septiembre quitar y ver si ya fueron terminadas para que quede
 	-- la consulta sin trucos.
-	Select '100 RUTA OP CASCO' AS REPORTE_100
+	Select '115 RUTA OP CASCO' AS REPORTE_115
 		, OWOR.DocEntry, OWOR.ItemCode, OITM.ItemName, OWOR.U_Ruta
 	from OWOR
 	inner join OITM on OWOR.ItemCode=OITM.ItemCode
@@ -294,7 +323,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.Status <>'C' and OWOR.Status <>'L'
 
 	--ORDENES:
-	Select '105 RUTA OP HABILITADO' AS REPORTE_105
+	Select '120 RUTA OP HABILITADO' AS REPORTE_120
 		, OWOR.DocEntry, OWOR.ItemCode, OITM.ItemName, OWOR.U_Ruta
 	from OWOR
 	inner join OITM on OWOR.ItemCode=OITM.ItemCode
@@ -307,7 +336,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 ---------------------------------------------------------------------------------------------------------------------------------
 */ -- Consulta todos las Ordenes diferentes.
 
-Select '110 ERROR EN COMPLEJO' AS REPORTE_110
+Select '125 ERROR EN COMPLEJO' AS REPORTE_125
 	, ORDR.DocEntry AS PEDIDO
 	, OWOR.ItemCode AS CODIGO
 	, OITM.ItemName AS MODELO
@@ -341,7 +370,7 @@ Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
 */
 
 -- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.
-	SELECT '115 MP MANUAL PLANIFICADAS' AS REPORTE_115
+	SELECT '130 MP MANUAL PLANIFICADAS' AS REPORTE_130
 		, OWOR.DocNum AS OP 
 		, OWOR.ItemCode AS CODIGO
 		, A1.ItemName AS DESCRIPCION
@@ -356,7 +385,7 @@ Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
 ORDER BY OWOR.DocNum, A1.ItemName
 
 -- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.
-	SELECT '117 MP MANUAL LIBERADAS' AS REPORTE_117
+	SELECT '135 MP MANUAL LIBERADAS' AS REPORTE_135
 		, OWOR.DocNum AS OP 
 		, OWOR.ItemCode AS CODIGO
 		, A1.ItemName AS DESCRIPCION
@@ -380,7 +409,7 @@ ORDER BY OWOR.DocNum, A1.ItemName
 */ 
 -- Ordenes de Subensamble ESTRUCTURA.
 
-Select '121 OP ESTRUCTURA' AS REPORTE_121
+Select '140 OP ESTRUCTURA' AS REPORTE_140
 	, OWOR.DocNum AS OP
 	, OWOR.ItemCode AS CODIGO
 	, A3.ItemName AS DESCRIPCION
@@ -392,7 +421,7 @@ Where OWOR.ItemCode like '%ESTRU%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 
 -- Ordenes de Subensamble EMPAQUE.
 
-Select '124 OP EMPAQUE' AS REPORTE_124
+Select '145 OP EMPAQUE' AS REPORTE_145
 	, OWOR.DocNum AS OP
 	, OWOR.ItemCode AS CODIGO
 	, A3.ItemName AS DESCRIPCION
@@ -404,7 +433,7 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 
 -- Ordenes de Subensamble ACABADOS.
 
-Select '127 OP ACABADO' AS REPORTE_127
+Select '150 OP ACABADO' AS REPORTE_150
 	, OWOR.DocNum AS OP
 	, OWOR.ItemCode AS CODIGO
 	, A3.ItemName AS DESCRIPCION

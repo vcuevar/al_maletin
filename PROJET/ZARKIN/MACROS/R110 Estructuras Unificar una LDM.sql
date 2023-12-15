@@ -9,7 +9,7 @@ ITM1.Price AS L_10,  (CONVERT(int, '1') * ITM1.Price) AS IMPORTE, ITM1.Currency 
 from OITM 
 inner join [@PL_RUTAS] RUTE on RUTE.Code = U_estacion 
 inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList=10
-where  OITM.ItemCode = '3642-02-P0301' 
+where  OITM.ItemCode = '3936-38-V0340'
 Order by MATERIAL
 
 -- Consulta que obtiene de un codigo los sub ensambles.
@@ -20,7 +20,7 @@ from ITT1
 inner join OITM on OITM.ItemCode = ITT1.Code 
 inner join [@PL_RUTAS] RUTE on RUTE.Code = OITM.U_estacion 
 inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList=10
-where  ITT1.Father = '3642-02-P0301' and (OITM.QryGroup29 = 'Y' or OITM.QryGroup30 = 'Y' or OITM.QryGroup31 = 'Y' or OITM.QryGroup32 = 'Y')
+where  ITT1.Father = '393638-ESTRUCTURA' and (OITM.QryGroup29 = 'Y' or OITM.QryGroup30 = 'Y' or OITM.QryGroup31 = 'Y' or OITM.QryGroup32 = 'Y')
 Order by MATERIAL
 
 -- Consulta que obtiene solo los materiales de un codigo, Se va Tomando los codigos del Indice.

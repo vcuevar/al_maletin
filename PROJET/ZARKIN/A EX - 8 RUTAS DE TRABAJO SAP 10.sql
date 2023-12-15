@@ -126,12 +126,31 @@ ARTICULOS: */
 
 -- Ruta sin 109	
 
-	Select '032 RUTA SIN 109' AS REPORTE_30, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '032 RUTA SIN 109' AS REPORTE_032, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%109%' and OITM.frozenFor = 'N'
 	--and OITM.ItemCode like '3831%' -- 3831
 	Order By OITM.ItemCode
 	
+	Select '033 RUTA SIN 109' AS REPO_033
+		, OWOR.DocEntry AS OP
+		, OWOR.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OWOR.U_Ruta AS RUTA_OP
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Where OITM.U_TipoMat = 'PT' and OITM.U_Ruta <> OWOR.U_Ruta  
+	and OWOR.Status<>'C' and OWOR.Status<>'L'
+
+	--Update OWOR set OWOR.U_Ruta = OITM.U_Ruta
+	--From OWOR
+	--Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	--Where OITM.U_TipoMat = 'PT' and OITM.U_Ruta <> OWOR.U_Ruta  
+	--and OWOR.Status<>'C' and OWOR.Status<>'L'
+
+	--Where OITM.U_TipoMat='PT' and OITM.U_Ruta is null
+
+
 	-- PT Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,154,157,160,172,175'
 	-- COJINES Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,172,175'
 	-- MADERAS Update OITM set U_Ruta = '100,106,151,154,157,160,172,175'

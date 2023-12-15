@@ -16,8 +16,8 @@ algo pasa que no captura la cantidad recibida */
 	delete [@CP_OF] where Code = 388704
 	delete [@CP_OF] where Code = 388705
 	delete [@CP_OF] where Code = 388700
-	delete [@CP_OF] where Code = 388702
-	delete [@CP_OF] where Code = 435481
+	delete [@CP_OF] where Code = 506616
+	delete [@CP_OF] where Code = 506649
 
 
 
@@ -29,23 +29,28 @@ Select * from [@CP_OF] CP  Where Name = 163134
 
 	update [@CP_OF] set Code = 163134, Name = 163134 where Code = 2630 
 
+-- 17/Noviembre/2023
+update [@CP_OF] set U_DocEntry = 77  where Code=491315
+-- Pongo esto como OP 77 por si necesito regresarlos al Docentry = 39917
+
 
 -- Para poner un registro que se perdio en OF
 -- Usamos estos codigo que no se han borrado.
-
 Select Top(20) CP.Code, CP.U_DocEntry, OP.ItemCode, A3.ItemName, OP.Status 
 from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry 
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_DocEntry = 41143 where Code=2646
-	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 2646
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2646
-	update [@CP_OF] set U_Recibido= 1 where Code= 2646
+	update [@CP_OF] set U_DocEntry = 43204  where Code=2134
+	update [@CP_OF] set U_CT = 112, U_Orden = 112 where Code = 2134
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2134
+	update [@CP_OF] set U_Recibido= 42 where Code= 2134
+
+	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 41143 
+	Set @NumOrd = 43204
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -56,7 +61,7 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 39770    -- and U_CT = 112 and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 39692    -- and U_CT = 112 and U_idEmpleado = 79
 	order by  U_FechaHora, U_CT
 	 
 	Select * from  [@CP_LOGOF] where Code = 388700
@@ -64,9 +69,10 @@ ORDER BY CP.U_DocEntry
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 71 Where Code = 494542
-	update [@CP_LOGOF] set U_idEmpleado = 223 Where Code = 494543
-	update [@CP_LOGOF] set U_idEmpleado = 224 Where Code = 494544
+	update [@CP_LOGOF] set U_idEmpleado = 71 Where Code = 519090
+	update [@CP_LOGOF] set U_idEmpleado = 223 Where Code = 519091
+
+	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 507416
 
 
 	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 502896

@@ -29,6 +29,7 @@ Select	OITW.WhsCode AS CODEALMA
 		, OITM.U_VS * OITW.OnHand AS TVS
 		, UFD1.Descr as LINEA
 		, T1.Descr AS GRUPPLAN
+		, (OITM.U_Minimo/5) AS KxDia
 from OITM 
 inner join OITW on OITM.ItemCode=OITW.ItemCode 
 inner join OWHS on OWHS.WhsCode=OITW.WhsCode 

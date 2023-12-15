@@ -136,6 +136,8 @@ Order By OITM.ItemName
 */
 
 -- Validar DIFERENTE SOLO MP ENTRE 10 Y 7 SE CORRIGE MANUALMENTE LP 7
+-- 231123 Se lleva control en Excel Costos.
+/*
 Select	'213 LP 10 <> 7' AS LPRECIOS_213
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
@@ -153,7 +155,7 @@ INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 10
 Where OITM.EvalSystem = 'S' and U_TipoMat = 'MP' and OITM.frozenFor = 'N' AND OITM.U_GrupoPlanea <> '6' 
 AND LS.Price <> L1.Price
 Order By OITM.ItemName 
-
+*/
 -- Validar que no tenga ceros en listas de Precios 01 DISEÑO.
 Select	'215 CERO 00 DISEÑO' AS DISEÑO_215
 		, OITM.ItemCode AS CODE
