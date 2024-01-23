@@ -2,17 +2,12 @@
 -- OBJETIVO: Mantener al dia El costo Estandar y auditar las Listas de Precios.
 -- Desarrollo: Ing. Vicente Cueva Ramírez.
 -- Actualizado: Lunes 26 de Agosto del 2021; SAP-10, Quitar autocorrecion.
+-- Actualizado: Martes 16 de Enero del 2024; Depurar.
 
--- Proceso para Tipo de Cambio Anual.
--- Cuando se carga un nuevo articulos.
--- Actualizaciona Periodico de los precios o Esperar al Fin de Año?
--- Sugiero que sea cambios constantes ya que por año, les da miedo autorizar ajustes??
+/* ================================================================================================
+|    EXCEPCIONES TIPO DE CAMBIO ASIGNADOS.                                                        |
+================================================================================================= */
 
--- Excepciones para Costos.
--- Dado que Finanzas no toma control sobre lista 10, Octubre del 2019, 
---a demas A_COMPRAS se desvirtuo y ya no se actualizo MP. hare mi parte.
-
--- Para las monedas extranjeras se utilizaron los siguientes tipo de cambio:				
 -- Select * from SIZ_TipoCambio
 Declare @TC_USD as Integer
 Declare @TC_CAN as Integer
@@ -24,21 +19,26 @@ Set @TC_CAN = (Select top(1) TC_can from SIZ_TipoCambio Order by TC_date DESC)
 Set @TC_EUR = (Select top(1) TC_eur from SIZ_TipoCambio Order by TC_date DESC)
 Set @TC_MXP = 1
 
--- Actualizado 09 de Diciembre del 2021
+-- Actualizado 09 de Diciembre del 2021; Origen
+-- Actualizado Martes 16 de Enero del 2024; Actualizar. 
 /* Listas de Precio de SAP 
-1	00 DISEÑO.				(Administra DISEÑO) Pero Sistemas carga cambios de incremento segun lista 7.
+1	00 DISEÑO.				(Administra DISEÑO).
 2	A - VENTAS GENERAL.		(2.5 del 10 ESTANDAR).
-9	A - COMPRAS				(Administra COMPRAS).
-7   Lista Precios 7         (Administra SISTEMAS (COSTO)) Se va actualizando al dia con Ultima compra 
-10	10						(Administra FINANZAS (Segun Defina Mario) Por el momento lo realizo VS Reclasificacion)
-
+9	A - COMPRAS				(Administra COMPRAS). a la fecha nadie toma control.
+7   PRUEBAS SISTEAS         (Administra SISTEMAS (COSTO)) Se va actualizando al mes con Ultima compra 
+10	10						(Administra FINANZAS)
 */
+
+/* ================================================================================================
+|    EXCEPCIONES LISTA PRECIOS (VALIDAR SI SE QUITAN YA QUE SE TIENE MACRO.                        |
+================================================================================================= */
 
 -- ------------------------------------------------------------------------------------------------------------------------
 --        S-000   LISTA DE PRECIOS 7, COSTOS, A CARGO PROVISIONAL DE SISTEMAS.
 -- ------------------------------------------------------------------------------------------------------------------------
 -- Validar que no tenga ceros en listas de Precios 7 Pruebas Sistemas. Asignar mismo que se tiene
 -- en Diseño o determinar, Solo MP y no esten Invalidos.
+/*
 Select	'005 CERO 7 SISTEMAS' AS COSTOS_005
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
@@ -56,7 +56,8 @@ Where L7.Price = 0  and OITM.EvalSystem = 'S' and OITM.frozenFor = 'N'
 and OITM.U_TipoMat = 'MP' 
 Order By OITM.ItemName 
 
-/*
+
+
 -- Articulos sin Precio Estandar
 Select '010 STD CERO' AS COSTO_010
 		, OITM.ItemCode AS CODE
@@ -94,7 +95,7 @@ Order By NOMBRE
 --        S-200   LISTA DE PRECIOS 1, DISEÑO, A CARGO DE DISEÑO.
 -- ------------------------------------------------------------------------------------------------------------------------
 
-
+/*
 --	EX-DIS-005 Validar que los articulos modelos cuenten con Estandar de 0.0001 
 		Select	'205 ? SIN ESTANDAR MODELO' AS REPORTE, 
 				OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat,
@@ -106,7 +107,6 @@ Order By NOMBRE
 
 -- Validar MENOR SOLO MP ENTRE 1 Y 7 SE CORRIGE MANUALMENTE L1
 -- NO TOMAR EN CUENTA PIEL Y COLORES VALIDAR Y CAMBIAR AL MAS ALTO DEL ESTANDAR.
-/*
 
 Integrada en Macro de Gestion de Costos.
 
@@ -156,6 +156,7 @@ Where OITM.EvalSystem = 'S' and U_TipoMat = 'MP' and OITM.frozenFor = 'N' AND OI
 AND LS.Price <> L1.Price
 Order By OITM.ItemName 
 */
+/*
 -- Validar que no tenga ceros en listas de Precios 01 DISEÑO.
 Select	'215 CERO 00 DISEÑO' AS DISEÑO_215
 		, OITM.ItemCode AS CODE
@@ -168,11 +169,11 @@ INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=1 
 Where LS.Price = 0  and OITM.EvalSystem = 'S' and ITM1.Price > 0
 Order By OITM.ItemName 
-
+*/
 -- ------------------------------------------------------------------------------------------------------------------------
 --        S-300   LISTA DE PRECIOS 10, ESTANDAR, A CARGO DE FINANZAS.
 -- ------------------------------------------------------------------------------------------------------------------------
-
+/*
 -- Validar que no tenga ceros en listas de Precios 10 ESTANDAR, SIN EXISTENCIA.
 Select	'305 CERO 10 ESTANDAR' AS FINANZAS_305
 		, OITM.ItemCode AS CODE
@@ -189,7 +190,7 @@ INNER JOIN ITM1 L7 on OITM.ItemCode = L7.ItemCode and L7.PriceList = 7
 INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 10 
 Where LS.Price = 0  and OITM.EvalSystem = 'S' and OITM.frozenFor = 'N'
 Order By OITM.ItemName 
-
+*/
 /*
 -- No usar cambios al Estandar ya que dira David como se hara Marzo 22
 -- Validar DIFERENCIAS SOLO MP, ENTRE 7 Y 10 SE CORRIGE MACRO SIN EXISTENCIAS
@@ -357,55 +358,54 @@ Order By OITM.ItemName
 	) desc, OITM.ItemName
 
 	*/
--- --------------------------------------------------------------------
--- REVALORIZACIONES
--- --------------------------------------------------------------------
+
+/* ================================================================================================
+|    EXCEPCIONES COSTOS PARA REVALORIZAR.                                                          |
+================================================================================================= */
+
 -- Asignar COSTO ESTANDAR, Realizar Revalorizar Articulos Cero ESTANDAR.
-Select '405 REVAL. ST = 0' AS REPORTE_405
-		, OITM.ItemCode AS CODE
-		, OITM.ItemName AS NOMBRE
-		, OITM.InvntryUom as UDM
-		, OITM.OnHand AS EXISTENCIA 
-		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
-		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
-		, OITM.DfltWH AS ALMACEN
-		, '501-200-000' AS C_AUMENTA	
-		, '501-200-000' AS C_DISMINUYE	
+Select OITM.ItemCode AS REP_051
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom as UDM
+	, OITM.OnHand AS EXISTENCIA 
+	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
+	, OITM.DfltWH AS ALMACEN
+	, '501-200-000' AS C_AUMENTA	
+	, '501-200-000' AS C_DISMINUYE	
 From OITM 
-INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
+Inner JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where OITM.AvgPrice = 0 and OITM.EvalSystem = 'S' and ITM1.Price <> 0 
 and OITM.InvntItem = 'Y' and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
 -- Usar Revalorizacion de Inventarios. MP sin Existencia.
-Select '410 REVAL. MP s/e' AS REPORTE_410
-		, OITM.ItemCode AS CODE
-		, OITM.ItemName AS NOMBRE
-		, OITM.InvntryUom as UDM
-		, OITM.OnHand AS EXISTENCIA 
-		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
-		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
-		, OITM.DfltWH AS ALMACEN
-		, '501-200-000' AS C_AUMENTA	
-		, '501-200-000' AS C_DISMINUYE	
+Select OITM.ItemCode AS REP_053
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom as UDM
+	, OITM.OnHand AS EXISTENCIA 
+	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
+	, OITM.DfltWH AS ALMACEN
+	, '501-200-000' AS C_AUMENTA	
+	, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
-
 -- Usar Revalorizacion de Inventarios. MP sin Existencia.
 Select '415 REVAL. MP c/e' AS REPORTE_415
-		, OITM.ItemCode AS CODE
-		, OITM.ItemName AS NOMBRE
-		, OITM.InvntryUom as UDM
-		, OITM.OnHand AS EXISTENCIA 
-		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
-		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
-		, OITM.DfltWH AS ALMACEN
-		, '501-200-000' AS C_AUMENTA	
-		, '501-200-000' AS C_DISMINUYE	
+	, OITM.ItemCode AS RE_055
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom as UDM
+	, OITM.OnHand AS EXISTENCIA 
+	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
+	, OITM.DfltWH AS ALMACEN
+	, '501-200-000' AS C_AUMENTA	
+	, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
@@ -414,30 +414,18 @@ and OITM.U_TipoMat = 'MP'
 and OITM.AvgPrice > 0 and OITM.OnHand > 0
 Order By OITM.ItemName 
 
-
 -- Usar Revalorizacion de Inventarios. SB diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
 -- 20/JUN/22 RETOMO PERO SOLO CUANDO LA DIFERENCIA SEA EN AUMENTO Y SIN EXISTENCIA
-Select Top(500)'420 REVAL. SB' AS REPORTE_420
-		, OITM.ItemCode AS CODE
-		, OITM.ItemName AS NOMBRE
-		, OITM.InvntryUom as UDM
-		, OITM.OnHand AS EXISTENCIA 
-		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
-		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
-		, OITM.DfltWH AS ALMACEN
-		, '501-200-000' AS C_AUMENTA	
-		, '501-200-000' AS C_DISMINUYE	
-		
-		--	, OITM.ItemCode AS CODE
-		--, OITM.ItemName AS NOMBRE
-		--, OITM.DfltWH AS ALMACEN
-		--, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO
-		--, Cast(ITM1.Price as decimal(16,4)) AS PRECIO_10
-		--, OITM.DfltWH AS ALMACEN
-		--, '501-200-000' AS C_AUMENTA	
-		--, '501-200-000' AS C_DISMINUYE	
-		--, OITM.U_TipoMat AS TMAT	
+Select OITM.ItemCode AS REP_057
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom as UDM
+	, OITM.OnHand AS EXISTENCIA 
+	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
+	, OITM.DfltWH AS ALMACEN
+	, '501-200-000' AS C_AUMENTA	
+	, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
@@ -445,58 +433,23 @@ and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 and OITM.OnHand = 0
 and OITM.U_TipoMat <> 'MP' and OITM.U_TipoMat <> 'PT' and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
-
 -- Usar Revalorizacion de Inventarios. PT diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
-Select Top(500) '425 REVAL. PT' AS REPORTE_425
-		, OITM.ItemCode AS CODE
-		, OITM.ItemName AS NOMBRE
-		, OITM.InvntryUom as UDM
-		, OITM.OnHand AS EXISTENCIA 
-		, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
-		, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
-		, OITM.DfltWH AS ALMACEN
-		, '501-200-000' AS C_AUMENTA	
-		, '501-200-000' AS C_DISMINUYE	
-		
-		--, OITM.ItemCode AS CODE
-		--, OITM.ItemName AS NOMBRE
-		--, OITM.DfltWH AS ALMACEN
-		--, Cast(OITM.AvgPrice as decimal(16,4)) AS PRECIO
-		--, Cast(ITM1.Price as decimal(16,4)) AS PRECIO_10
-		--, OITM.U_TipoMat AS TMAT	
+Select OITM.ItemCode AS REP_059
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom as UDM
+	, OITM.OnHand AS EXISTENCIA 
+	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
+	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
+	, OITM.DfltWH AS ALMACEN
+	, '501-200-000' AS C_AUMENTA	
+	, '501-200-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 
 and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
-
--- Inactivar codigos que queden en cero
-	Select	'430 INHABILITAR' AS REPORTE_430, 
-					OITM.ItemCode AS CODIGO,
-					OITM.ItemName AS DESCRIPCION,
-					OITM.U_TipoMat AS TM,
-					OITM.U_Linea AS LINE,
-					OITM.OnHand AS EXI_TOTAL,
-						Case 
-					When OITM.LastPurCur = 'USD' then OITM.LastPurPrc * 20  
-					When OITM.LastPurCur = 'CAN' then OITM.LastPurPrc * 16
-					When OITM.LastPurCur = 'EUR' then OITM.LastPurPrc * 24
-					When OITM.LastPurCur = 'MXP' then OITM.LastPurPrc * 1 
-					end AS Prec,
-					OITM.AvgPrice AS ESTANDAR,
-					L10.Price as L_10,
-					OITM.LastPurPrc AS U_COMP,
-					OITM.LastPurCur AS U_MON,
-					OITM.OnHand*OITM.AvgPrice AS IMPORTE,
-					OITM.FrozenFor AS INACTIVO 
-		from ITM1 L10
-		inner join OITM on L10.ItemCode = OITM.ItemCode and L10.PriceList=10
-		where OITM.ItemCode like '%ZIN%'
-		and OITM.OnHand = 0 and OITM.OnOrder = 0 and OITM.IsCommited = 0
-		and frozenFor = 'N'
-
 
 -- Articulos Pendientes por Inactivar que aun tienen Existencia
 -- Al 12/Agosto/2022 Quedan 539 Articulos.

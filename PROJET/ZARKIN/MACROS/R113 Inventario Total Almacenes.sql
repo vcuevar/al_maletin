@@ -2,7 +2,7 @@
 -- Elaborado: Vicente Cueva Raírez.
 -- Actualizado: Miercoles 07 de Abril del 2021.
 
-
+/*
 --Consulta Para Resumen total del Importe.
 
 Select SUM(OITM.OnHand * ITM1.Price) as Inventario 
@@ -69,4 +69,92 @@ inner join OITM A1 on OW.ItemCode = A1.ItemCode
 inner join ITM1 L10 on A1.ItemCode= L10.ItemCode and L10.PriceList= 10 
 where BO.U_Starus = '06' and A1.ItmsGrpCod <> 113   and OW.IssuedQty > 0) RVB 
 
+*/
+
+-- Calcula Valor Sala de Inventario Inicial de las Ordenes de Casco.
+Select KDX.CODIGO AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, SUM(KDX.ENTRADA) AS ENTRADA 
+	, SUM(KDX.SALIDA) AS SALIDA
+	, SUM((KDX.ENTRADA + KDX.SALIDA) * -1) AS EX_INI
+	, SUM((KDX.ENTRADA + KDX.SALIDA) * KDX.VS * -1) AS EX_INI
+From (
+Select OINM.ItemCode AS CODIGO
+	, (OINM.OutQty -OINM.InQty) AS ENTRADA
+	, 0 AS SALIDA
+	, OINM.AppObjAbs
+	, A3.U_VS AS VS
+From OINM 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat = 'CA'
+Where Cast (OINM.CreateDate as DATE) < Cast(getdate() as DATE)
+and OINM.AppObjAbs <> -1 
+Union All	
+Select OINM.ItemCode AS CODIGO
+	, 0 AS ENTRADA
+	, (OINM.InQty - OINM.OutQty) AS SALIDA
+	, OINM.AppObjAbs
+	, A3.U_VS AS VS
+From OINM  
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat = 'CA'
+Where Cast(OWOR.CloseDate as DATE) < Cast(getdate() as DATE)
+and OINM.AppObjAbs <> -1 
+) KDX
+Inner Join OITM on KDX.CODIGO = OITM.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10 
+Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price, KDX.VS
+Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 
+Order By ARTICULO
+
+
+
+
+
+
+-- Calcula materiales cargados a las OP para CA la fecha de Corte.
+Select KDX.CODIGO AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, SUM(KDX.ENTRADA) AS ENTRADA 
+	, SUM(KDX.SALIDA) AS SALIDA
+	, SUM(KDX.ENTRADA + KDX.SALIDA) AS EX_INI
+	, SUM((KDX.ENTRADA + KDX.SALIDA) * KDX.VS * -1) AS EX_INI
+	
+	--, KDX.AppObjAbs AS OC
+From (
+Select OINM.ItemCode AS CODIGO
+	, (OINM.OutQty -OINM.InQty) AS ENTRADA
+	, 0 AS SALIDA
+	, OINM.AppObjAbs
+	, A3.U_VS AS VS
+From OINM 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat = 'CA'
+Where Cast (OINM.CreateDate as DATE) < Cast(getdate() as DATE)
+and OINM.AppObjAbs <> -1 
+Union All	
+Select OINM.ItemCode AS CODIGO
+	, 0 AS ENTRADA
+	, (OINM.InQty - OINM.OutQty) AS SALIDA
+	, OINM.AppObjAbs
+	, A3.U_VS AS VS
+From OINM  
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat = 'CA'
+Where Cast(OWOR.CloseDate as DATE) < Cast(getdate() as DATE)
+and OINM.AppObjAbs <> -1 
+) KDX
+Inner Join OITM on KDX.CODIGO = OITM.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10 
+Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price, KDX.VS
+Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 
+Order By ARTICULO
 

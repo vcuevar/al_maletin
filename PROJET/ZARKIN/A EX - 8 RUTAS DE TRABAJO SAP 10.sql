@@ -114,33 +114,56 @@ ARTICULOS: */
 	--Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,154,157,160,172,175'
 	--Where OITM.U_TipoMat='PT' and OITM.U_Ruta is null
 
--- Ruta sin 106	
+-- La Ruta minima para un PT es 100,106,109,148,172,175 Son estaciones Obligatorias. 
+-- Ruta sin 100 Planeacion	
+	Select '031 RUTA SIN 100' AS REPORTE_30, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%100%'
+	Order By OITM.ItemCode
 
-	Select '030 RUTA SIN 106' AS REPORTE_30, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+-- Ruta sin 106	Almacen de Materias Primas.
+	Select '033 RUTA SIN 106' AS REPORTE_30, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%106%'
-	--and OITM.ItemCode like '3831%' -- 3831
-	Order By OITM.ItemCode
-
-
-
--- Ruta sin 109	
-
-	Select '032 RUTA SIN 109' AS REPORTE_032, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
-	from OITM
-	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%109%' and OITM.frozenFor = 'N'
-	--and OITM.ItemCode like '3831%' -- 3831
 	Order By OITM.ItemCode
 	
-	Select '033 RUTA SIN 109' AS REPO_033
+-- Ruta sin 109	Inicio del Produccion, Anaquel de Piel.
+	Select '035 RUTA SIN 109' AS REPORTE_032, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%109%' and OITM.frozenFor = 'N'
+	Order By OITM.ItemCode
+	
+-- Ruta sin 148	Almacen de Partes o Terminado.
+	Select '037 RUTA SIN 148' AS REPORTE_032, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%148%' and OITM.frozenFor = 'N'
+	Order By OITM.ItemCode
+
+-- Ruta sin 172	Proceso de Empaque.
+	Select '039 RUTA SIN 172' AS REPORTE_032, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%172%' and OITM.frozenFor = 'N'
+	Order By OITM.ItemCode
+
+-- Ruta sin 175	Generacion del Recibo de Produccion.
+	Select '041 RUTA SIN 175' AS REPORTE_032, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%175%' and OITM.frozenFor = 'N'
+	Order By OITM.ItemCode
+
+-- Orden de Produccion con Diferente Ruta al Articulo.
+	Select '043 RUTA <> ARTICULO' AS REPO_033
 		, OWOR.DocEntry AS OP
+		, OWOR.Status AS ESTATUS
 		, OWOR.ItemCode AS CODIGO
 		, OITM.ItemName AS DESCRIPCION
-		, OWOR.U_Ruta AS RUTA_OP
+		, OITM.U_Ruta AS RUTA_OP
 	From OWOR
 	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
 	Where OITM.U_TipoMat = 'PT' and OITM.U_Ruta <> OWOR.U_Ruta  
 	and OWOR.Status<>'C' and OWOR.Status<>'L'
+	Order By ESTATUS, OP
+
 
 	--Update OWOR set OWOR.U_Ruta = OITM.U_Ruta
 	--From OWOR
@@ -162,31 +185,31 @@ ARTICULOS: */
 ===================================================================================================
 Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 
-	Select '035 CON 103' AS REPORTE_35, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '045 CON 103' AS REPORTE_35, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%103%'
 	Order By OITM.ItemCode
 
 -- Rutas con Estaciones No Autorizadas 142 Activar Orden	
-	Select '037 CON 142' AS REPORTE_37, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '047 CON 142' AS REPORTE_37, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%142%'
 	Order By OITM.ItemCode
 
 	-- Rutas con Estaciones No Autorizadas 163 Activar Orden	
-	Select '039 CON 163' AS REPORTE_39, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '049 CON 163' AS REPORTE_39, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%163%'
 	Order By OITM.ItemCode
 
 	-- Rutas con Estaciones No Autorizadas 166 Activar Orden	
-	Select '041 CON 166' AS REPORTE_41, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '051 CON 166' AS REPORTE_41, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%166%'
 	Order By OITM.ItemCode
 
 	-- Rutas con Estaciones No Autorizadas 169 Activar Orden	
-	Select '043 CON 169' AS REPORTE_43, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '053 CON 169' AS REPORTE_43, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%169%'
 	Order By OITM.ItemCode
@@ -195,13 +218,13 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 	--Where  OITM.U_Ruta LIKE '%169%'
 
 	-- Rutas con Estaciones No Autorizadas 312 Activar Orden	
-	Select '045 CON 312' AS REPORTE_45, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '055 CON 312' AS REPORTE_45, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%312%'
 	Order By OITM.ItemCode
 
 	-- Rutas con Estaciones No Autorizadas 412 Activar Orden	
-	Select '047 CON 412' AS REPORTE_47, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '057 CON 412' AS REPORTE_47, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%412%'
 	Order By OITM.ItemCode
@@ -220,7 +243,7 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 
 -- Articulos Sub-Ensambles de Hule Espuma.
 	--ARTICULOS:
-	Select '050 RUTA LDM H.E.' AS REPO_050, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '061 RUTA LDM H.E.' AS REPO_050, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where OITM.QryGroup32='Y'  and OITM.U_GrupoPlanea = '6'
 	and OITM.U_Ruta <> '200,206,209,212,218,221'
@@ -231,7 +254,7 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 	and OITM.U_Ruta <> '200,206,209,212,218,221'
 	*/
 	
-	Select '051 RUTA OP H.E.' AS REPO_051
+	Select '063 RUTA OP H.E.' AS REPO_051
 		, OWOR.DocNum AS OP
 		, OWOR.ItemCode AS CODIGO
 		, OITM.ItemName AS DESCRIPCION

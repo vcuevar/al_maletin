@@ -10,16 +10,32 @@
 |     PARAMETROS GENERALES.                                                                     |
 ============================================================================================== */
 
+/*
+Indice de Tipo de Operaciones en Libro de Almacen (OINM)
+13  Facturas clientes
+14  Notas de crédito clientes
+15  Entregas
+16  Devoluciones
+18  Fact.proveedores
+20  Pedido de entrada de mercancías
+21  Devolución de mercancías
+59  Entrada de mercancías / Recibo de produccion
+60  Emisión para producción / Salidas de Mercancia
+67  Traslados -
+162  Revalorización de inventario
+*/
+
 Declare @FechaIS as Date
 Declare @FechaFS as Date
 Declare @xCodProd AS VarChar(20)
 
-Set @FechaIS = CONVERT (DATE, '2023-12-04', 102)
-Set @FechaFS = CONVERT (DATE, '2023-12-31', 102)
+Set @FechaIS = CONVERT (DATE, '2024-01-01', 102)
+Set @FechaFS = CONVERT (DATE, '2024-01-14', 102)
 
 --Set @xCodProd =  '3707-07-P0596'
 --Set @xCodProd =  '3936-38-V0340'
 --Set @xCodProd =  '393638-ESTRUCTURA'
+Set @xCodProd =  '17164' 
 
 /* ==============================================================================================
 |  Reporte de Produccion Agrupado por Modelos. Hoja 2 de Excel                                  |
@@ -102,26 +118,25 @@ Order by MATERIAL
 */
 
 /* ==============================================================================================
-|     MATERIAL ENTREGADO A WIP POR PARTE DEL ALMACEN. Hoja 5 de Excel                           |
+|     MATERIAL MOVIMIENTO EN WIP POR PARTE DEL ALMACEN.      Hoja 5 de Excel                    |
 ============================================================================================== */
-
---Para Sacar lo entregado de los almacenes de Stock a Producción
--- Se cambia para usar Libro de Almacen. OINM
 /*
- Select OINM.ItemCode AS CODIGO
+-- Para Sacar lo entregado de los almacenes de Stock a Producción
+-- Se utiliza traslados 67 y ajustes entrada 59 sobre APG-ST.
+Select OINM.ItemCode AS CODIGO
 	, OITM.ItemName AS MATERIAL
 	, OITM.InvntryUom AS UDM
 	, ITM1.Price as PRECIO
-	, SUM(OINM.OutQty) as CANTIDAD
+	, SUM(OINM.InQty) AS ENTRADA
+	, SUM(OINM.OutQty) AS SALIDAS
 From OINM  
 Inner join OITM on OINM.ItemCode = OITM.ItemCode 
 Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
 Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
-and OINM.Warehouse = 'AMP-ST' 
-and OINM.Ref2 = 'APG-ST'
-and OINM.OutQty > 0
-and OINM.TransType = 67 -- Codigo para Traslados
+and OINM.Warehouse = 'APG-ST' 
 and OITM.U_TipoMat <> 'PT'
+and (OINM.TransType = 67 or OINM.TransType = 59) 
+and OINM.CardCode <> '_SYS00000000350'
 Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
 Order by MATERIAL
 */
@@ -141,89 +156,112 @@ Order By ARTICULO
 */
 
 /* ==============================================================================================
-|     MATERIAL DEVUELTO POR PRODUCCION A ALMACEN O ENVIA A OTROS ALMACENES.  Hoja 07 de Excel.  |
+| Materiales Cargados a Ordenes de Produccion, sin Casco, solo PT y RF--> Hoja 07 de Excel.      |
 ============================================================================================== */
 /*
--- Se maneja con el Libro de Almacen.
- Select OINM.ItemCode AS CODIGO
-	, OITM.ItemName AS MATERIAL
-	, OITM.InvntryUom AS UDM
-	, ITM1.Price as PRECIO
-	, SUM(OINM.OutQty) as CANTIDAD
-From OINM  
-Inner join OITM on OINM.ItemCode = OITM.ItemCode 
-Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
-Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
-and OINM.Warehouse = 'APG-ST' 
-and OINM.OutQty > 0
-and OINM.TransType = 67 -- Codigo para Traslados
-and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
-and OITM.U_TipoMat <> 'PT'
-Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
-Order by MATERIAL
-
-*/
-
-/* ==============================================================================================
-|     CALCULA LA EXISTENCIA INICIAL  Hoja 11 de Excel.                                      |
-============================================================================================== */
-/*
-Select OITM.ItemCode AS CODIGO
+-- Calcula materiales cargados a las OP para PT y RF la fecha de Corte.
+Select KDX.CODIGO AS CODIGO
 	, OITM.ItemName AS ARTICULO
 	, OITM.InvntryUom AS UDM
-	, ISNULL(INIC.SalInic, 0) AS EX_INI
-	, ITM1.Price AS PRECIO
-	, OITM.U_TipoMat AS TIPO
-from OITM 
-inner join ITM1 on OITM.ItemCode= ITM1.ItemCode and ITM1.PriceList= 10 
-left join (Select INICIO.ItemCode, (SUM(INICIO.InQty)-SUM(INICIO.OutQty)) as SalInic 
-From (Select OINM.ItemCode, OINM.InQty, OINM.OutQty from OINM 
-where OINM.CreateDate < @FechaIS and OINM.Warehouse = 'APG-ST' ) INICIO 
-Group by INICIO.ItemCode) INIC on INIC.ItemCode = OITM.ItemCode 
-Where  ISNULL(INIC.SalInic, 0) <> 0
-Order by ARTICULO  
+	, ITM1.Price as PRECIO
+	, SUM(KDX.ENTRADA) AS ENTRADA 
+	, SUM(KDX.SALIDA) AS SALIDA
+	, SUM(KDX.ENTRADA + KDX.SALIDA) AS EX_INI
+From (
+Select OINM.ItemCode AS CODIGO
+	, (OINM.OutQty -OINM.InQty) AS ENTRADA
+	, 0 AS SALIDA
+	, OINM.AppObjAbs
+From OINM 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and (A3.U_TipoMat = 'PT' or A3.U_TipoMat = 'RF')
+Where Cast (OINM.CreateDate as DATE) < @FechaIS 
+and OINM.AppObjAbs <> -1 
+Union All	
+Select OINM.ItemCode AS CODIGO
+	, 0 AS ENTRADA
+	, (OINM.InQty - OINM.OutQty) AS SALIDA
+	, OINM.AppObjAbs
+From OINM  
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and (A3.U_TipoMat = 'PT' or A3.U_TipoMat = 'RF') 
+Where Cast(OWOR.CloseDate as DATE) < @FechaIS 
+and OINM.AppObjAbs <> -1 
+) KDX
+Inner Join OITM on KDX.CODIGO = OITM.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10 
+Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 
+Order By ARTICULO
 */
+
+
 /* ==============================================================================================
-|     MATERIAL CARGADO DIRECTAMENTE DEL ALMACEN A LA OP.  Hoja 12 de Excel.                                      |
+| INVENTARIO INICIAL MENOR QUE A LA FECHA DE INICIO. ALMACEN APG-ST --> Hoja 11 de Excel.       |
+============================================================================================== */
+
+-- Calcula Existencia del Inventario Inicial a la Menor que a la Fecha de Inicio.
+/*
+ Select OINM.ItemCode AS CODIGO
+		, OITM.ItemName AS ARTICULO
+		, OITM.InvntryUom AS UDM
+		, ITM1.Price AS PRECIO
+		, SUM(OINM.InQty - OINM.OutQty) AS  EX_INI
+		, OITM.U_TipoMat AS TIPO
+From OINM  
+Inner Join OITM on OINM.ItemCode = OITM.ItemCode
+inner join ITM1 on OITM.ItemCode= ITM1.ItemCode and ITM1.PriceList= 10 
+Where Cast (OINM.CreateDate as DATE) < @FechaIS and OINM.Warehouse = 'APG-ST'  
+--Where Cast (OINM.CreateDate as DATE) < '" & FechaIS & "' and OINM.Warehouse = 'APG-ST'  
+Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price, OITM.U_TipoMat
+Having SUM(OINM.InQty - OINM.OutQty) <> 0
+Order by ARTICULO
+*/
+
+/* ==============================================================================================
+|     Materiales consumidos por OP a Primer Nivel.  Hoja 12 de Excel.                           |
 ============================================================================================== */
 /*
--- Se maneja con el Libro de Almacen.
- Select OINM.ItemCode AS CODIGO
-	, OITM.ItemName AS MATERIAL
-	, OITM.InvntryUom AS UDM
-	, ITM1.Price as PRECIO
-	, SUM((OINM.InQty-OINM.OutQty) * -1) as CANTIDAD
+-- Consumo de Ordenes de Produccion mediante Libro de almacen Tipo = 60 Recibos de Produccion.
+Select OINM.ItemCode AS CODIGO
+	, A1.ItemName AS ARTICULO
+	, A1.InvntryUom AS UDM
+	, ITM1.Price AS PRECIO
+	, SUM(OINM.InQty) AS ENTRADA
+	, SUM(OINM.OutQty) AS SALIDA
 From OINM  
-Inner join OITM on OINM.ItemCode = OITM.ItemCode 
-Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
-Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
-and OINM.Warehouse = 'AMP-ST' 
-and OINM.TransType = 60 -- Emisiones de Produccion
-and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
-and OITM.U_TipoMat <> 'PT'
-Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
-Order by MATERIAL
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = A1.ItemCode and ITM1.PriceList = 10 
+Where Cast (OINM.CreateDate as DATE) BETWEEN @FechaIS and @FechaFS and OINM.Warehouse = 'APG-ST'  
+and OINM.TransType = 60
+and OINM.CardCode = '_SYS00000000023' --Producto Terminado
+Group By OINM.ItemCode, A1.ItemName, A1.InvntryUom, ITM1.Price 
+Order By ARTICULO
 */
 
 /* ==============================================================================================
 |     MATERIAL AJUSTADOS POR RECLASIFICACION.  Hoja 13 de Excel.                                |
 ============================================================================================== */
-
+/*
  Select OINM.ItemCode AS CODIGO
 	, OITM.ItemName AS MATERIAL
 	, OITM.InvntryUom AS UDM
 	, ITM1.Price as PRECIO
-	, SUM(OINM.InQty) AS ENTRADA
-	, SUM(OINM.OutQty) AS SALIDA
+	, (OINM.InQty) AS ENTRADA
+	, (OINM.OutQty) AS SALIDA
+	, OINM.*
 From OINM 
 Inner join OITM on OINM.ItemCode = OITM.ItemCode 
 Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
 Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
-and OINM.Warehouse = 'APG-ST' and OINM.CardCode = '_SYS00000000350'
-and (OINM.TransType = 59 or OINM.TransType = 60)
-Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+and OINM.Warehouse = 'APG-ST' 
+--and OINM.CardCode = '_SYS00000000350'
+--and (OINM.TransType = 59 or OINM.TransType = 60)
+and OINM.TransType = 59
+and OINM.ItemCode = @xCodProd
+--Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
 Order By MATERIAL
-
+*/
 
 
 
@@ -234,7 +272,6 @@ Order By MATERIAL
 ============================================================================================== */
 
 /*
-Set @xCodProd =  '10059' 
 
 -- KARDEX detallado, Se maneja con el Libro de Almacen.
  Select Cast(OINM.DocDate as date) AS FECHA
@@ -267,7 +304,7 @@ Set @xCodProd =  '10059'
 	, ITM1.Price as PRECIO
 	, OINM.InQty AS ENTRADA
 	, OINM.OutQty AS SALIDA
-	
+	, OINM.Warehouse AS ALMA_BAS
 	, OINM.JrnlMemo AS MOVI
 	, OINM.BASE_REF AS REFERENCIA
 	, ISNULL(OINM.Ref2, OINM.AppObjAbs) AS ALMA_OP
@@ -343,12 +380,254 @@ Order by MES, MOVIMIENTO
 */
 
 
+/* ==============================================================================================
+| Materiales Cargados a Ordenes de Produccion, para Casco --> Hoja 15 de Excel.                 |
+============================================================================================== */
+/*
+-- Calcula materiales cargados a las OP para CA la fecha de Corte.
+Select KDX.CODIGO AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, (KDX.ENTRADA) AS ENTRADA 
+	, (KDX.SALIDA) AS SALIDA
+	, (KDX.ENTRADA + KDX.SALIDA) AS EX_INI
+	, KDX.AppObjAbs AS OC
+From (
+Select OINM.ItemCode AS CODIGO
+	, (OINM.OutQty -OINM.InQty) AS ENTRADA
+	, 0 AS SALIDA
+	, OINM.AppObjAbs
+From OINM 
+--Inner Join WOR1 on OINM.AppObjAbs = WOR1.DocEntry 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' --and (A3.U_TipoMat = 'CA' or A3.U_TipoMat = 'SP') 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat <> 'CA' --A1.U_TipoMat <> 'CA' and A3.U_TipoMat <> 'SP'
+Where Cast (OINM.CreateDate as DATE) < @FechaIS 
+--and OINM.AppObjAbs <> -1 
+and OINM.AppObjAbs = 42020
+
+Union All	
+Select OINM.ItemCode AS CODIGO
+	, 0 AS ENTRADA
+	, (OINM.InQty - OINM.OutQty) AS SALIDA
+	, OINM.AppObjAbs
+From OINM  
+--Inner Join WOR1 on OINM.AppObjAbs = WOR1.DocEntry 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' --and (A3.U_TipoMat = 'CA' or A3.U_TipoMat = 'SP')
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat <> 'CA' --and A1.U_TipoMat <> 'CA' and A3.U_TipoMat <> 'SP'
+Where Cast(OWOR.CloseDate as DATE) < @FechaIS 
+--and OINM.AppObjAbs <> -1 
+and OINM.AppObjAbs = 42020
+) KDX
+Inner Join OITM on KDX.CODIGO = OITM.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10 
+--Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price, KDX.AppObjAbs 
+--Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 and KDX.AppObjAbs = 42020
+Order By ARTICULO
+
+
+--Select * from WOR1 Where DocEntry = 42020
+
+Select Cast(OINM.CreateDate as Date) AS FECHA
+	, OINM.ItemCode AS CODIGO
+	, OINM.Dscription AS MATERIAL
+	, OINM.Price AS PRECIO
+	, OINM.Currency AS MONEDA
+	, OINM.InQty AS ENTRADA
+	, OINM.OutQty AS SALIDA
+	, OINM.Warehouse AS ALMACEN
+	, OINM.*
+From OINM  
+--Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+--Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' --and (A3.U_TipoMat = 'CA' or A3.U_TipoMat = 'SP')
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat <> 'CA' --and A1.U_TipoMat <> 'CA' and A3.U_TipoMat <> 'SP'
+Where OINM.AppObjAbs = 42020 --Cast(OWOR.CloseDate as DATE) < @FechaIS 
+and OINM.ItemCode = '10057'
+
+*/
 
 
 
+/*
+-- Calcula materiales cargados a las OP para CA la fecha de Corte.
+Select SUM((KDX.ENTRADA + KDX.SALIDA)*ITM1.Price) AS IMPORTE
+From (
+Select OINM.ItemCode AS CODIGO
+	, (OINM.OutQty -OINM.InQty) AS ENTRADA
+	, 0 AS SALIDA
+	, OINM.AppObjAbs
+From OINM 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat = 'CA'
+Where Cast (OINM.CreateDate as DATE) < @FechaIS 
+and OINM.AppObjAbs <> -1 
+Union All	
+Select OINM.ItemCode AS CODIGO
+	, 0 AS ENTRADA
+	, (OINM.InQty - OINM.OutQty) AS SALIDA
+	, OINM.AppObjAbs
+From OINM  
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and A3.U_TipoMat = 'CA' 
+Inner Join OITM A1 on OINM.ItemCode = A1.ItemCode and A1.U_TipoMat = 'CA'
+Where Cast(OWOR.CloseDate as DATE) < @FechaIS 
+and OINM.AppObjAbs <> -1 
+) KDX
+Inner Join OITM on KDX.CODIGO = OITM.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10 
+--Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+--Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 
+--Order By ARTICULO
+*/
+
+
+/*
+-- CONEJILLO DE INDIAS...
+ Select Cast(OINM.CreateDate as Date) AS FECHA
+	, OINM.ItemCode AS CODIGO
+	, OINM.Dscription AS MATERIAL
+	, OINM.Price AS PRECIO
+	, OINM.Currency AS MONEDA
+	, OINM.InQty AS ENTRADA
+	, OINM.OutQty AS SALIDA
+	, OINM.Warehouse AS ALMACEN
+	
+	, OINM.AppObjAbs AS OP
+	, OINM.TransType AS MOVIMIENTO
+	, OINM.Ref1 AS REF_1
+	, OINM.Ref2 AS REF_2
+	, OINM.Comments AS COMENTARIO
+	, OINM.JrnlMemo AS NOTAS
+From OINM  
+--Inner join OITM on OINM.ItemCode = OITM.ItemCode 
+--Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
+--Inner Join WOR1 on OINM.AppObjAbs = WOR1.DocEntry -- and OINM.ItemCode = WOR1.ItemCode and WOR1.IssueType = 'M'
+--Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry --and (OWOR.Status <> 'C' or OWOR.Status <> 'L')
+--Where Cast(OWOR.CloseDate as DATE) < @FechaIS and (OINM.Warehouse = 'AMP-ST' or OINM.Warehouse =  'AMP-CC')
+Where 
+
+ OINM.AppObjAbs = 42020
+ --Cast (OINM.CreateDate as DATE) < @FechaIS --and (OINM.Warehouse = 'AMP-ST' or OINM.Warehouse =  'AMP-CC')
+and OINM.ItemCode = '10057'
+-- and OINM.TransType = 67
+
+--and OINM.Warehouse = 'APG-ST'
+Order by Cast(OINM.CreateDate as Date), MATERIAL
+
+*/
+
+
+/* ==============================================================================================
+============================================================================================== 
+============================================================================================== 
+============================================================================================== 
+PARA BORRA SOLO MIENTRAS SE REALIZAN CALCULO DE CONSULTAS
+============================================================================================== 
+============================================================================================== 
+============================================================================================== */
+
+
+/*
+-- Reporte Agrupado por Modelos.
+Select PD.CODE_PT AS CODE_PT, PD.MODELO AS MODELO, SUM(PD.CANT) AS PZA, SUM(PD.VS) AS T_VS 
+From (
+-- Reporte Produccion Detallado Area 175
+Select	CAST(CP.U_FechaHora as DATE) as FECHA
+		, OP.DocEntry AS OP
+		, OP.ItemCode AS CODE_PT
+		, A3.ItemName AS MODELO
+		, OP.PlannedQty AS CANT
+		, OP.PlannedQty * A3.U_VS AS VS 
+from OWOR OP 
+inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
+inner join OITM A3 on OP.ItemCode = A3.ItemCode 
+Where Cast(CP.U_FechaHora as DATE) BETWEEN @FechaIS and @FechaFS and (CP.U_CT=175) 
+) PD 
+Group by PD.CODE_PT, PD.MODELO
+Order by MODELO
+*/
 
 
 
+-- Se Inicio como carga de materiales a los OP para generar entrada, cambio a salida por consumo de OP
+-- Se maneja con el Libro de Almacen.
+-- Esta no me funciona porque quita las cargas que se hicieron de forma manual
+/*
+ Select OINM.ItemCode AS CODIGO
+	, OITM.ItemName AS MATERIAL
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, OINM.InQty AS ENTRADAS
+	, OINM.OutQty AS SALIDAS
+	, OINM.AppObjAbs AS OP
+	, OWOR.ItemCode AS CODE
+	, A3.ItemName AS MUEBLE
+	, A3.U_VS AS VS
+	--, OINM.*
+From OINM  
+Inner join OITM on OINM.ItemCode = OITM.ItemCode 
+Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
+Left Join OWOR on OWOR.DocEntry = OINM.AppObjAbs 
+Left Join OITM A3 on A3.ItemCode = OWOR.ItemCode
+Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
+--and OINM.Warehouse = 'AMP-ST' 
+and OINM.TransType = 60 -- Emisiones de Produccion
+--and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
+and A3.U_TipoMat = 'PT'
+and OWOR.DocEntry = 41373
+--Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+Order by MATERIAL
+*/
+
+/*
+-- Presenta materiales consumidos por las OP
+ Select OINM.ItemCode AS CODIGO
+	, OITM.ItemName AS MATERIAL
+	--, OITM.InvntryUom AS UDM
+	--, ITM1.Price as PRECIO
+--	, OINM.InQty AS ENTRADA
+	--, OINM.OutQty AS CONSUMO
+	--, SUM((OINM.InQty-OINM.OutQty) * -1) as CANTIDAD
+	, OINM.*
+From OINM  
+Inner join OITM on OINM.ItemCode = OITM.ItemCode 
+Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
+Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
+and OINM.Warehouse = 'APG-ST' 
+and OINM.TransType = 60 -- Emisiones de Produccion
+--and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
+ and OINM.CardCode <> '_SYS00000000350'
+ and OINM.CardCode <> '_SYS00000000351'
+and OITM.U_TipoMat <> 'PT'
+--Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+--Order by MATERIAL
+*/
+
+
+
+/*
+eS PARA EL CALCULO DE LAS DEVOLUCIONES, SE INTEGRO EN TRASLADOS AL ALMACEN
+-- Se maneja con el Libro de Almacen.
+ Select OINM.ItemCode AS CODIGO
+	, OITM.ItemName AS MATERIAL
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, SUM(OINM.OutQty) as CANTIDAD
+From OINM  
+Inner join OITM on OINM.ItemCode = OITM.ItemCode 
+Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
+Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
+and OINM.Warehouse = 'APG-ST' 
+and OINM.OutQty > 0
+and OINM.TransType = 67 -- Codigo para Traslados
+and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
+and OITM.U_TipoMat <> 'PT'
+Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+Order by MATERIAL
+*/
 
 /* ==============================================================================================
 |  Calcular los Materiales Comprados para un producto.                                          |
@@ -647,4 +926,3 @@ and C1.U_TipoMat <> 'PT'
 Order by DESCRIPCION,  OP, CANTIDAD Desc
 
 */
-

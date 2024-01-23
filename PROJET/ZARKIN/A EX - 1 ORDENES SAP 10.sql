@@ -106,6 +106,9 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen material de AMP-ST 
 -- excepto las ordenes de Herrajes.
+-- Se cancela esta excepcion ya que se inicio a meter muchos materiales a consumo manual.
+-- 231230
+/*
 	Select '035 OP CONSUME AMP-ST' AS REPORTE_035, OWOR.Status, WOR1.DocEntry, OWOR.ItemCode, WOR1.ItemCode, OITM.ItemName
 	, WOR1.wareHouse, OITM.U_GrupoPlanea 
 	from WOR1
@@ -119,7 +122,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.ItemCode <> '19416'
 	and OITM.U_GrupoPlanea <> '6' and OITM.U_GrupoPlanea <> 11
 	Order by WOR1.DocEntry
-	
+*/
 -- Ordenes de Produccion con Material PIEL cargado almacen Diferente al de AMP-ST
 	Select '040 PIEL DIF. AMP-ST' AS REPORTE_40, OWOR.Status, WOR1.DocEntry, WOR1.ItemCode, OITM.ItemName, WOR1.wareHouse
 	from WOR1
@@ -137,6 +140,8 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and WOR1.wareHouse = 'AMP-CC'
 
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen material de AMP-CC
+-- Se cancela esta excepcion ya que se cargan mas materiales de otro almacen 231230
+/*
 	Select '050 CONSUME <> APG-ST' AS REPORTE_050, OWOR.Status, WOR1.DocEntry, OWOR.ItemCode, WOR1.ItemCode, OITM.ItemName, WOR1.wareHouse
 	from WOR1
 	inner join OWOR on WOR1.DocEntry = OWOR.DocEntry
@@ -148,7 +153,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	and OWOR.ItemCode <> '20414' and OWOR.ItemCode <> '20415' and OWOR.ItemCode <> '18943'
 	and OWOR.ItemCode <> '19416'
 	and WOR1.wareHouse <> 'APG-ST' and OITM.U_GrupoPlanea <> 6  and OITM.U_GrupoPlanea <> 11
-
+*/
 	
 	-- La 050 la cancele segun creo solo la 045 esta mas completa.
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen <> de APP-ST
@@ -279,9 +284,11 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OP.Status = 'P' 
 
 	/*
-	delete [@CP_OF] where Code = 514540
-delete [@CP_OF] where Code =514539
-delete [@CP_OF] where Code =510631
+delete [@CP_OF] where Code = 514509
+delete [@CP_OF] where Code =514511
+delete [@CP_OF] where Code =514510
+
+
 delete [@CP_OF] where Code =510633
 delete [@CP_OF] where Code =510632
 delete [@CP_OF] where Code =510634
@@ -385,6 +392,8 @@ Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
 ORDER BY OWOR.DocNum, A1.ItemName
 
 -- Ordenes de Produccion con materiales a Manual sin haber cargado, Ordenes Planificadas.
+-- 231230 se cancela esta excepcion ya que se cargan por parte de almacen muchos materiales.
+/*
 	SELECT '135 MP MANUAL LIBERADAS' AS REPORTE_135
 		, OWOR.DocNum AS OP 
 		, OWOR.ItemCode AS CODIGO
@@ -400,7 +409,7 @@ ORDER BY OWOR.DocNum, A1.ItemName
 	and WOR1.IssueType = 'M' and A1.ItmsGrpCod <> '113' 
 	and WOR1.IssuedQty = 0 and A1.U_GrupoPlanea <> 11
 ORDER BY OWOR.DocNum, A1.ItemName
-
+*/
 
 /*
 ---------------------------------------------------------------------------------------------------------------------------------

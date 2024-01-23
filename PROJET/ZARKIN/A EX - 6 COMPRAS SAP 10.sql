@@ -2,83 +2,104 @@
 -- Elaborado: Vicente Cueva Ramirez.
 -- Actualizado: 15 de Julio del 2019; Inicio.
 -- Actualizado: 26 de Julio del 2021; SAP-10.
+-- Actualizado: 16 de Enero del 2026; Depurar
 
+/* ================================================================================================
+|    EXCEPCIONES ASIGNACION DE COMPRADOR AL ARTICULO.                                             |
+================================================================================================= */
 
 -- Asigna comprador a Materiales, segun tipo de Material.
 -- SP		Sub-Productos		PL	Planeación
 -- CA		Cascos				PL	Planeación
 -- PT		Producto Terminado	PL	Planeación
+-- HB		Habilitado			PL  Planeación
+-- RF		Refacciones			PL  Planeación
 
--- MP		Materia Prima		KE	Depto de Compras
--- RF		Refacciones			KE	Depto de Compras
--- Solo estos se actualizaron el 15 de Julio, para que los actualice
--- Compras de acuerdo al Comprador.
+-- MP		Materia Prima		C1	Depto de Compras
+-- GF		Gastos Financieros  C1  Depto de Compras
 
--- Para CA, PT y SP cargar como comprador PL
-	SELECT '005 ! COMPRADOR PL' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Comprador
-	from OITM 
-	Where U_Comprador <> 'PL' and (U_TipoMat = 'CA' or U_TipoMat = 'SP' or U_TipoMat = 'PT')
-
-	-- Para MP material Habilitados cargar a comprador PL
-	SELECT '010 ! COMP. PL HAB' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Comprador
-	from OITM 
-	Where QryGroup30 = 'Y' and U_Comprador <> 'PL'
-
--- Para MP material Patas de Madera cargar comprador PL
-	SELECT '015 ! COMP. PL PATA' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Comprador
-	from OITM 
-	Where QryGroup31 = 'Y' and U_Comprador <> 'PL'
-
-	
--- Materias Primas y Refacciones  se cargan a KE (Se valida segun vayan dando de
--- alta los materiales ya que se supone que esto lo asignara compras.
-
-	SELECT '020 ! COMP. KE ' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Comprador
-	from OITM 
-	Where U_TipoMat = 'MP' and U_Comprador <> 'C1'
-
-	-- Update OITM Set U_Comprador = 'C1' Where U_TipoMat = 'MP' and U_Comprador <> 'C1'	
-
-	SELECT '025 ! COMP. KE REF' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_Comprador
-	from OITM 
-	Where U_TipoMat = 'RF' and U_Comprador <> 'PL' and U_Comprador <> 'KE'
-
-
-/* EXCEPCIONES DE PROVEEDORES SOLO PROVEEDORES ACTIVOS (frozenfor <> 'Y') */
-
--- Provedores sin lista de compras o equivocada.
-	Select '004 SIN LISTA A-COMPRAS' AS REPORTE, OCRD.CardCode, OCRD.CardName, OCRD.CardType, OCRD.GroupCode, OCRD.ListNum
-	from OCRD
-	Where OCRD.CardType = 'S' and OCRD.ListNum <> 9
-
-	Select '004 SIN LISTA A-COMPRAS' AS REPORTE, OCRD.CardCode, OCRD.CardName, OCRD.CardType, OCRD.GroupCode, OCRD.ListNum
-	from OCRD
-	Where OCRD.CardType = 'S' and OCRD.ListNum IS NULL
-
--- Actualizar los Tiempo de Entrega.
--- PT Tiempo de Entrega a 21 dias.
-
-Select '014 LEAD 21 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME
+-- Para CA, PT, HB y SP cargar como comprador PL
+Select '001 COMPRADOR PL' AS REP_001
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.U_Comprador AS COMPRADOR
 From OITM 
-Where OITM.U_TipoMat='PT' and OITM.LeadTime <> 21 or OITM.U_TipoMat='PT' and LeadTime is null and OITM.frozenFor='Y'
+Where U_Comprador <> 'PL' and (U_TipoMat = 'CA' or U_TipoMat = 'SP' or U_TipoMat = 'PT' or U_TipoMat = 'HB' or U_TipoMat = 'RF')
+
+-- Para MP y GF se asigna C1 Depto de Compras.
+Select '003 COMPRADOR 1' AS REP_003
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.U_Comprador AS COMPRADOR
+From OITM 
+Where U_Comprador <> 'C1' and (U_TipoMat = 'MP' or U_TipoMat = 'GF')
+
+/* ================================================================================================
+|    EXCEPCIONES LISTA DE PRECIOS (PROVEEDORES ACTIVOS).                                          |
+================================================================================================= */
+	
+-- Provedores sin lista de compras o equivocada.
+Select '005 LISTA EQUIVOCADA' AS REP_005
+	, OCRD.CardCode AS CODIGO
+	, OCRD.CardName AS NOMBRE
+	, OCRD.CardType AS TIPO
+	, OCRD.GroupCode AS GRUPO
+	, OCRD.ListNum AS L_PRECIOS
+From OCRD
+Where OCRD.CardType = 'S' and OCRD.ListNum <> 9
+
+Select '007 SIN LISTA A-COMPRAS' AS REP_007
+	, OCRD.CardCode AS CODIGO
+	, OCRD.CardName AS NOMBRE
+	, OCRD.CardType AS TIPO
+	, OCRD.GroupCode AS GRUPO
+	, OCRD.ListNum AS L_PRECIOS
+From OCRD
+Where OCRD.CardType = 'S' and OCRD.ListNum IS NULL
+
+/* ================================================================================================
+|    EXCEPCIONES ARTICULOS CON TIEMPO DE ENTREGA.                                                 |
+================================================================================================= */
+
+-- Articulos sin tiempo de entrega.
+Select '009 NULL; 15 DIAS' AS REP_009
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.LeadTime AS LEADTIME
+From OITM 
+Where OITM.LeadTime is null and OITM.frozenFor = 'N'
+
+-- Articulos PT Tiempo de Entrega a 21 dias.
+Select '011 PT; 21 DIAS' AS REP_011
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.LeadTime AS LEADTIME
+From OITM 
+Where OITM.U_TipoMat = 'PT' and OITM.LeadTime <> 21 and OITM.frozenFor = 'N'
  
  -- Cascos Tiempo de Entrega a 7 días
-
- Select '016 LEAD 7 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME 
- From OITM 
- Where OITM.QryGroup29='Y'  and OITM.LeadTime <> 7 or OITM.QryGroup29='Y' and LeadTime is null and OITM.frozenFor='Y'
+Select '013 CA; 7 DIAS' AS REP_013
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.LeadTime AS LEADTIME 
+From OITM 
+Where OITM.U_TipoMat = 'CA' and OITM.LeadTime <> 7 and OITM.frozenFor = 'N'
  
- -- Verificar que los Habilitado (Propiedad 30) tengan un Lead Time de 15 dias.
-
-Select '018 LEAD 15 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME 
+ -- Habilitado Tiempo de Entrega a 15 dias.
+Select '015 HB; 15 DIAS' AS REP_015
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.LeadTime AS LEADTIME 
 From OITM 
-Where OITM.QryGroup30='Y'  and OITM.LeadTime <> 15 or OITM.QryGroup30='Y' and LeadTime is null and OITM.frozenFor='Y'
+Where OITM.U_TipoMat = 'HB' and OITM.LeadTime <> 15 and OITM.frozenFor = 'N'
 
--- Verificar que los Complementos de Madera (Propiedad 31) tengan un Lead Time de 15 dias.
-
-Select '020 LEAD 15 DIAS' AS REPORTE, OITM.ItemCode AS CODIGO, OITM.ItemName AS ARTICULO, OITM.LeadTime AS LEADTIME 
+-- Sub-Producto Tiempo de Entrega a 15 dias.
+Select '017 SP; 15 DIAS' AS REP_017
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.LeadTime AS LEADTIME 
 From OITM 
-Where OITM.QryGroup31='Y'  and OITM.LeadTime <> 15 or OITM.QryGroup31='Y' and LeadTime is null and OITM.frozenFor='Y'
+Where OITM.U_TipoMat = 'SP' and OITM.LeadTime <> 15 and OITM.frozenFor = 'N'
 
 
 --< EOF > EXCEPCIONES DEL AREA DE COMPRAS.

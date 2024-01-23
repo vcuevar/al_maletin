@@ -14,8 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2023/12/01', 102)
-
+Set @FechaInac =  CONVERT (DATE, '2024/01/16', 102)
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
 
@@ -210,12 +209,6 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Where OITM.QryGroup31 = 'Y' and OITM.U_GrupoPlanea <> '14'  
 	Order By OITM.[ItemName]
 
--- Articulo Diferente MP con Comprador diferente a Planeacion.
-	Select '075 COMPRA->ES PLANEA' AS REPORTE_075
-		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_Comprador
-	From OITM
-	Where OITM.U_TipoMat <> 'MP' and OITM.U_Comprador <> 'PL'  
-	Order By OITM.[ItemName]
 
 -- Articulo Diferente MP con Metodo diferente a JIT.
 	Select '080 METODO->ES JIT' AS REPORTE_080
@@ -224,12 +217,9 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Where OITM.U_TipoMat <> 'MP' and OITM.U_Metodo <> 'JIT'  
 	Order By OITM.[ItemName]
 
--- Articulo Igual a MP con Comprador asignado com Planeacion.
-	Select '085 COMPRA->NO PLANEA' AS REPORTE_085
-		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_Comprador
-	From OITM
-	Where OITM.U_TipoMat = 'MP' and OITM.U_Comprador = 'PL'  
-	Order By OITM.[ItemName]
+
+
+
 
 -- Articulo Diferente MP con Metodo diferente a MRP.
 	Select '089 METODO->NO ES JIT !' AS REPORTE_089
@@ -600,7 +590,7 @@ Order By OITM.ItemName
 	, OITM.U_Linea AS LINEA
 	FROM OITM 
 	Left Join ITT1 on ITT1.Code = OITM.ItemCode
-	WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea = '01'
+	WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_TipoMat <> 'GF' and OITM.U_Linea = '01'
 	and OITM.U_GrupoPlanea <> '9' 	and OITM.U_GrupoPlanea <> '11'  
 	and OITM.CreateDate < @FechaIS and IsNull(OITM.LastPurDat, @FechaIS) <= @FechaIS 
 	ORDER BY OITM.ItemName
@@ -1752,5 +1742,68 @@ Select '810 TELAS OP MANUAL' AS REPORTE_810
 	and OWOR.CmpltQty < OWOR.PlannedQty and OWOR.Status <> 'C' and OWOR.Status <> 'L'
 	and WOR1.wareHouse <> 'AMP-ST' --and  A1.ItemCode = '19604'
 	ORDER BY A1.ItemName, OWOR.DocNum
+
+
+
+/* ================================================================================================
+|    EXCEPCIONES ARTICULO OBSOLETOS SIN EXISTENCIA INHABILITAR.                                                          |
+================================================================================================= */
+
+-- Inactivar codigos que queden en cero del Tipo ZIN
+Select	'901 INHB. ZIN' AS REP_901
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.U_TipoMat AS TM
+	, OITM.U_Linea AS LINE
+	, OITM.OnHand AS EXI_TOTAL
+	, OITM.FrozenFor AS INACTIVO 
+From OITM
+Where OITM.ItemCode like '%ZIN%'
+and OITM.OnHand = 0 
+and OITM.OnOrder = 0 
+and OITM.IsCommited = 0
+and frozenFor = 'N'
+
+-- Inactivar codigos que queden en cero y son Obsoletos (Se Asigna a Macro 127)
+/*
+Select	OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, OITM.U_Linea AS LINE
+	, OITM.OnHand AS EXI_TOTAL
+	, OITM.U_GrupoPlanea AS GRUPO
+	, OITM.U_TipoMat AS TM
+	, OITM.AvgPrice AS PRECIO
+	, OITM.LastPurDat AS FE_MODIF	
+From OITM
+Where OITM.U_Linea <> '01' 
+and OITM.OnHand = 0 
+and OITM.OnOrder = 0 
+and OITM.IsCommited = 0
+and frozenFor = 'N'
+and Cast(OITM.LastPurDat as DATE) < DATEADD(MM, -5, GETDATE())
+and U_IsModel = 'N'
+Union All
+
+Select	OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, OITM.U_Linea AS LINE
+	, OITM.OnHand AS EXI_TOTAL
+	, OITM.U_GrupoPlanea AS GRUPO
+	, OITM.U_TipoMat AS TM
+	, OITM.AvgPrice AS PRECIO
+	, OITM.LastPurDat AS FE_MODIF
+From OITM
+Where OITM.U_Linea <> '01' 
+and OITM.OnHand = 0 
+and OITM.OnOrder = 0 
+and OITM.IsCommited = 0
+and frozenFor = 'N'
+and Cast(OITM.LastPurDat as DATE) is null
+and U_IsModel = 'N'
+Order by OITM.ItemName
+
+*/
 
 --< EOF > EXCEPCIONES PARA LOS ARTICULOS.
