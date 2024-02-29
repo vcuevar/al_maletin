@@ -8,8 +8,8 @@ DECLARE @FechaIS date
 DECLARE @FechaFS date
 
 --Parametros Fecha Inicial y Fecha Final (aaaa-mm-dd)
-Set @FechaIS = CONVERT (DATE, '2022-01-31', 102)
-Set @FechaFS = CONVERT (DATE, '2022-02-27', 102) 
+Set @FechaIS = CONVERT (DATE, '2024-01-01', 102)
+Set @FechaFS = CONVERT (DATE, '2024-02-04', 102) 
 
 -- Contador de Ordenes Cerradas.
 Select COUNT(CIERRE.ItemCode) as Cerrados
@@ -39,7 +39,7 @@ OINM.JrnlMemo, OINM.ItemCode, OINM.Dscription, ITM1.Price as COST01, OINM.RevalT
   order by COUNT(ROMPER.ItemCode) DESC, ROMPER.Dscription
   
 -- Detalle del Rompimiento
-Select	OINM.CreateDate AS FECHA,
+Select	Cast(OINM.CreateDate as  DATE) AS FECHA,
 		OINM.AppObjAbs AS NO_OP,
 		OWOR.ItemCode as MODELO,
 		A3.ItemName AS MUEBLE,

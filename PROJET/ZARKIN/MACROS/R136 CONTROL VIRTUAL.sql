@@ -30,12 +30,12 @@ Declare @FechaFS as Date
 Declare @xCodProd AS VarChar(20)
 
 Set @FechaIS = CONVERT (DATE, '2024-01-01', 102)
-Set @FechaFS = CONVERT (DATE, '2024-01-14', 102)
+Set @FechaFS = CONVERT (DATE, '2024-01-19', 102)
 
 --Set @xCodProd =  '3707-07-P0596'
 --Set @xCodProd =  '3936-38-V0340'
 --Set @xCodProd =  '393638-ESTRUCTURA'
-Set @xCodProd =  '17164' 
+Set @xCodProd =  '17871' 
 
 /* ==============================================================================================
 |  Reporte de Produccion Agrupado por Modelos. Hoja 2 de Excel                                  |
@@ -117,9 +117,39 @@ where  ITT1.Father = '3936-38-V0340' and OITM.QryGroup29 = 'N' and OITM.QryGroup
 Order by MATERIAL
 */
 
+
 /* ==============================================================================================
-|     MATERIAL MOVIMIENTO EN WIP POR PARTE DEL ALMACEN.      Hoja 5 de Excel                    |
+|     MATERIAL MOVIMIENTO EN WIP.                             Hoja 5 de Excel                    |
 ============================================================================================== */
+/*
+Select ALM.CODIGO
+	, ALM.MATERIAL
+	, ALM.UDM
+	, ALM.PRECIO
+	, ISNULL(SUM(ALM.TRASLADOS), 0) AS TRASLADO
+	, ISNULL(SUM(ALM.CON_OP), 0) AS CON_OP
+	, ISNULL(SUM(ALM.RECLASIFICA),0) AS RECLASIFICA
+	, ISNULL(SUM(ALM.CONSUMO), 0) AS CONSUMO
+From (
+Select OINM.ItemCode AS CODIGO
+	, OITM.ItemName AS MATERIAL
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, Case When OINM.TransType = 67 then SUM(OINM.InQty - OINM.OutQty) end AS TRASLADOS
+	, Case When OINM.TransType = 59 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') or OINM.TransType = 60 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') then SUM(OINM.InQty - OINM.OutQty) end AS CON_OP
+	, Case When OINM.TransType = 59 and OINM.CardCode = '_SYS00000000350' or OINM.TransType = 60 and OINM.CardCode = '_SYS00000000350' then SUM(OINM.InQty - OINM.OutQty) end AS RECLASIFICA
+	, Case When OINM.TransType = 59 and OINM.CardCode = '_SYS00000000351' or OINM.TransType = 60 and OINM.CardCode = '_SYS00000000351' then SUM(OINM.InQty - OINM.OutQty) end AS CONSUMO
+From OINM  
+Inner join OITM on OINM.ItemCode = OITM.ItemCode 
+Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
+Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
+and OINM.Warehouse = 'APG-ST' 
+and OITM.U_TipoMat <> 'PT'
+Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price, OINM.TransType, OINM.CardCode ) ALM
+Group By ALM.CODIGO, ALM.MATERIAL, ALM.UDM, ALM.PRECIO 
+Order by ALM.MATERIAL
+*/
+
 /*
 -- Para Sacar lo entregado de los almacenes de Stock a Producción
 -- Se utiliza traslados 67 y ajustes entrada 59 sobre APG-ST.
@@ -145,21 +175,55 @@ Order by MATERIAL
 |     CATALOGO COMPLETO DE ARTICULOS MATERIALES COMPRADOS. Hoja 6 de Excel.                                      |
 ============================================================================================== */
 /*
+Select EXT_AC.CODIGO
+	, EXT_AC.ARTICULO
+	, EXT_AC.UDM
+	, EXT_AC.PRECIO
+	, SUM(EXT_AC.EXI_ACTUAL) AS EXI_ACTUAL
+From (
+
 Select OITM.ItemCode AS CODIGO
 		, OITM.ItemName AS ARTICULO
 		, OITM.InvntryUom AS UDM
-		, ITM1.Price as PRECIO
+		, ITM1.Price AS PRECIO
+		, OITW.OnHand AS EXI_ACTUAL		
 From OITM
 inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList=10
-where OITM.U_TipoMat <> 'GF' and OITM.U_TipoMat <> 'PT' and OITM.frozenFor = 'N' 
-Order By ARTICULO
-*/
+inner join OITW on OITM.ItemCode=OITW.ItemCode and OITW.WhsCode = 'APG-ST'
+where OITM.U_TipoMat <> 'PT' and OITM.frozenFor = 'N' 
 
+Union All
+Select OW.ItemCode AS CODIGO
+	, A1.ItemName AS ARTICULO
+	, A1.InvntryUom AS UDM
+	, L10.Price AS PRECIO
+	, OW.IssuedQty AS EXI_ACTUAL		 
+From Vw_BackOrderExcel BO 
+Inner join WOR1 OW on BO.OP = OW.DocEntry 
+Inner join OITM A1 on OW.ItemCode = A1.ItemCode 
+inner join ITM1 L10 on A1.ItemCode= L10.ItemCode and L10.PriceList = 10 
+where BO.U_Starus = '06' and A1.ItmsGrpCod <> 113 and OW.IssuedQty > 0 
+Union All
+Select OW.ItemCode AS CODIGO
+	, A1.ItemName AS ARTICULO
+	, A1.InvntryUom AS UDM
+	, L10.Price AS PRECIO
+	, OW.IssuedQty AS EXI_ACTUAL	
+From Vw_BackOrderExcel BO 
+inner join WOR1 OW on BO.OP = OW.DocEntry 
+inner join OITM A1 on OW.ItemCode = A1.ItemCode 
+inner join ITM1 L10 on A1.ItemCode= L10.ItemCode and L10.PriceList=10 
+where BO.U_Starus = '06' and A1.ItmsGrpCod = 113 
+) EXT_AC
+Group By EXT_AC.CODIGO, EXT_AC.ARTICULO, EXT_AC.UDM, EXT_AC.PRECIO
+Order By EXT_AC.ARTICULO
+*/
 /* ==============================================================================================
 | Materiales Cargados a Ordenes de Produccion, sin Casco, solo PT y RF--> Hoja 07 de Excel.      |
 ============================================================================================== */
-/*
+
 -- Calcula materiales cargados a las OP para PT y RF la fecha de Corte.
+/*
 Select KDX.CODIGO AS CODIGO
 	, OITM.ItemName AS ARTICULO
 	, OITM.InvntryUom AS UDM
@@ -195,7 +259,6 @@ Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0
 Order By ARTICULO
 */
 
-
 /* ==============================================================================================
 | INVENTARIO INICIAL MENOR QUE A LA FECHA DE INICIO. ALMACEN APG-ST --> Hoja 11 de Excel.       |
 ============================================================================================== */
@@ -219,8 +282,50 @@ Order by ARTICULO
 */
 
 /* ==============================================================================================
-|     Materiales consumidos por OP a Primer Nivel.  Hoja 12 de Excel.                           |
+|     Materiales Cargados a las OP en el Periodo.  Hoja 12 de Excel.                            |
 ============================================================================================== */
+/*
+-- Materiales Cargados a las OP.
+Select KDX.CODIGO AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price as PRECIO
+	, SUM(KDX.ENTRADA) AS ENTRADA 
+	, SUM(KDX.SALIDA) AS SALIDA
+	, SUM(KDX.ENTRADA + KDX.SALIDA) AS EX_INI
+From (
+Select OINM.ItemCode AS CODIGO
+	, (OINM.OutQty -OINM.InQty) AS ENTRADA
+	, 0 AS SALIDA
+	, OINM.AppObjAbs
+From OINM 
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and (A3.U_TipoMat = 'PT' or A3.U_TipoMat = 'RF')
+Where Cast (OINM.CreateDate as DATE) BETWEEN @FechaIS and @FechaFS
+and OINM.AppObjAbs <> -1 
+
+Union All	
+
+Select OINM.ItemCode AS CODIGO
+	, 0 AS ENTRADA
+	, (OINM.InQty - OINM.OutQty) AS SALIDA
+	, OINM.AppObjAbs
+From OINM  
+Inner Join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode and (A3.U_TipoMat = 'PT' or A3.U_TipoMat = 'RF') 
+Where Cast(OWOR.CloseDate as DATE) BETWEEN @FechaIS and @FechaFS
+and OINM.AppObjAbs <> -1 
+
+) KDX
+Inner Join OITM on KDX.CODIGO = OITM.ItemCode
+Inner Join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10 
+Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price
+Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 and KDX.CODIGO = @xCodProd
+Order By ARTICULO
+
+*/
+
+
 /*
 -- Consumo de Ordenes de Produccion mediante Libro de almacen Tipo = 60 Recibos de Produccion.
 Select OINM.ItemCode AS CODIGO
@@ -263,15 +368,9 @@ and OINM.ItemCode = @xCodProd
 Order By MATERIAL
 */
 
-
-
-
-
 /* ==============================================================================================
 |     KARDEX DE MATERIALES.   Hoja 14 de Excel.                                                                  |
 ============================================================================================== */
-
-/*
 
 -- KARDEX detallado, Se maneja con el Libro de Almacen.
  Select Cast(OINM.DocDate as date) AS FECHA
@@ -308,7 +407,9 @@ Order By MATERIAL
 	, OINM.JrnlMemo AS MOVI
 	, OINM.BASE_REF AS REFERENCIA
 	, ISNULL(OINM.Ref2, OINM.AppObjAbs) AS ALMA_OP
-	, Case When OINM.TransType = 60 and OINM.JrnlMemo Not like '%Salida%' then A3.ItemName else '' end AS PT
+	, OINM.TransType AS TIPO_MOV
+	, OINM.CardCode AS CUEN_CONT
+	--, Case When OINM.TransType = 60 and OINM.JrnlMemo Not like '%Salida%' then A3.ItemName else '' end AS PT
 	--, OINM.* 
 From OINM  
 Inner join OITM on OINM.ItemCode = OITM.ItemCode 
@@ -324,7 +425,7 @@ and OITM.U_TipoMat <> 'PT'
 and OINM.ItemCode = @xCodProd
 --Group By Month(OINM.DocDate), OINM.TransType, OINM.JrnlMemo, OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
 Order by FECHA, MOVIMIENTO
-*/
+
 
 /*
 -- KARDEX Resumido, Se maneja con el Libro de Almacen.
@@ -520,409 +621,8 @@ Order by Cast(OINM.CreateDate as Date), MATERIAL
 */
 
 
-/* ==============================================================================================
-============================================================================================== 
-============================================================================================== 
-============================================================================================== 
-PARA BORRA SOLO MIENTRAS SE REALIZAN CALCULO DE CONSULTAS
-============================================================================================== 
-============================================================================================== 
-============================================================================================== */
-
-
-/*
--- Reporte Agrupado por Modelos.
-Select PD.CODE_PT AS CODE_PT, PD.MODELO AS MODELO, SUM(PD.CANT) AS PZA, SUM(PD.VS) AS T_VS 
-From (
--- Reporte Produccion Detallado Area 175
-Select	CAST(CP.U_FechaHora as DATE) as FECHA
-		, OP.DocEntry AS OP
-		, OP.ItemCode AS CODE_PT
-		, A3.ItemName AS MODELO
-		, OP.PlannedQty AS CANT
-		, OP.PlannedQty * A3.U_VS AS VS 
-from OWOR OP 
-inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
-inner join OITM A3 on OP.ItemCode = A3.ItemCode 
-Where Cast(CP.U_FechaHora as DATE) BETWEEN @FechaIS and @FechaFS and (CP.U_CT=175) 
-) PD 
-Group by PD.CODE_PT, PD.MODELO
-Order by MODELO
-*/
 
 
 
--- Se Inicio como carga de materiales a los OP para generar entrada, cambio a salida por consumo de OP
--- Se maneja con el Libro de Almacen.
--- Esta no me funciona porque quita las cargas que se hicieron de forma manual
-/*
- Select OINM.ItemCode AS CODIGO
-	, OITM.ItemName AS MATERIAL
-	, OITM.InvntryUom AS UDM
-	, ITM1.Price as PRECIO
-	, OINM.InQty AS ENTRADAS
-	, OINM.OutQty AS SALIDAS
-	, OINM.AppObjAbs AS OP
-	, OWOR.ItemCode AS CODE
-	, A3.ItemName AS MUEBLE
-	, A3.U_VS AS VS
-	--, OINM.*
-From OINM  
-Inner join OITM on OINM.ItemCode = OITM.ItemCode 
-Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
-Left Join OWOR on OWOR.DocEntry = OINM.AppObjAbs 
-Left Join OITM A3 on A3.ItemCode = OWOR.ItemCode
-Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
---and OINM.Warehouse = 'AMP-ST' 
-and OINM.TransType = 60 -- Emisiones de Produccion
---and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
-and A3.U_TipoMat = 'PT'
-and OWOR.DocEntry = 41373
---Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
-Order by MATERIAL
-*/
-
-/*
--- Presenta materiales consumidos por las OP
- Select OINM.ItemCode AS CODIGO
-	, OITM.ItemName AS MATERIAL
-	--, OITM.InvntryUom AS UDM
-	--, ITM1.Price as PRECIO
---	, OINM.InQty AS ENTRADA
-	--, OINM.OutQty AS CONSUMO
-	--, SUM((OINM.InQty-OINM.OutQty) * -1) as CANTIDAD
-	, OINM.*
-From OINM  
-Inner join OITM on OINM.ItemCode = OITM.ItemCode 
-Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
-Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
-and OINM.Warehouse = 'APG-ST' 
-and OINM.TransType = 60 -- Emisiones de Produccion
---and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
- and OINM.CardCode <> '_SYS00000000350'
- and OINM.CardCode <> '_SYS00000000351'
-and OITM.U_TipoMat <> 'PT'
---Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
---Order by MATERIAL
-*/
 
 
-
-/*
-eS PARA EL CALCULO DE LAS DEVOLUCIONES, SE INTEGRO EN TRASLADOS AL ALMACEN
--- Se maneja con el Libro de Almacen.
- Select OINM.ItemCode AS CODIGO
-	, OITM.ItemName AS MATERIAL
-	, OITM.InvntryUom AS UDM
-	, ITM1.Price as PRECIO
-	, SUM(OINM.OutQty) as CANTIDAD
-From OINM  
-Inner join OITM on OINM.ItemCode = OITM.ItemCode 
-Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10  
-Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
-and OINM.Warehouse = 'APG-ST' 
-and OINM.OutQty > 0
-and OINM.TransType = 67 -- Codigo para Traslados
-and OITM.QryGroup29 = 'N' and OITM.QryGroup30 = 'N' and OITM.QryGroup31 = 'N' and OITM.QryGroup32 = 'N'
-and OITM.U_TipoMat <> 'PT'
-Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
-Order by MATERIAL
-*/
-
-/* ==============================================================================================
-|  Calcular los Materiales Comprados para un producto.                                          |
-============================================================================================== */
-/*
--- Primer parte MP a Nivel 1
-
-Select	'NIVEL 1' AS TITULO
-		, L1.Code AS CODE_MP
-		, A1.ItemName AS MATERIAL
-		, L1.Quantity AS CANT_MP
-from OITM A3 
-Inner Join ITT1 L1 on L1.Father = A3.ItemCode
-Inner Join OITM A1 on L1.Code = A1.ItemCode
-Where (A1.QryGroup29 = 'N' and A1.QryGroup30 = 'N' and A1.QryGroup31 = 'N' and A1.QryGroup32 = 'N')
-and L1.Father = '3936-38-V0340'
-
--- Segunda Parte Materiales del Primer Sub-Ensamble
-
-Select	L2.Code AS CODE_MP
-		, L2.Quantity AS CANT_MP
-from OITM A5 
-Inner Join ITT1 L2 on L2.Father = A5.ItemCode
-Inner Join OITM A4 on L2.Code = A4.ItemCode
-Where (A4.QryGroup29 = 'Y' or A4.QryGroup30 = 'Y' or A4.QryGroup31 = 'Y' or A4.QryGroup32 = 'Y')
-and L2.Father = '3936-38-V0340'
-
-Select 'SEGUNDA PARTE' AS TITULO
-	, L2.Code AS CODE_MP
-	, A7.ItemName AS MATERIAL
-	, SUM(L2.Quantity * NIV.CANT_MP) AS CANT_MP
-From ITT1 L2
-Inner Join OITM A7 on L2.Code = A7.ItemCode
-Inner Join (
-	Select	L1.Code AS CODE_MP
-			, A1.ItemName AS MATERIAL
-			, SUM(L1.Quantity * OP.PlannedQty) AS CANT_MP
-	from OWOR OP 
-	Inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
-	Inner join OITM A3 on OP.ItemCode = A3.ItemCode 
-	Inner Join ITT1 L1 on L1.Father = A3.ItemCode
-	Inner Join OITM A1 on L1.Code = A1.ItemCode
-	Where Cast(CP.U_FechaHora as DATE) BETWEEN @FechaIS and @FechaFS and (CP.U_CT=175) 
-	and (A1.QryGroup29 = 'Y' or A1.QryGroup30 = 'Y' or A1.QryGroup31 = 'Y' or A1.QryGroup32 = 'Y')
-	Group by L1.Code, A1.ItemName, A1.U_TipoMat ) NIV on L2.Father = NIV.CODE_MP
-Where (A7.QryGroup29 = 'N' and A7.QryGroup30 = 'N' and A7.QryGroup31 = 'N' and A7.QryGroup32 = 'N')
-Group by L2.Code, A7.ItemName
-
-Order By MATERIAL
--- (MP) and (A1.QryGroup29 = 'N' and A1.QryGroup30 = 'N' and A1.QryGroup31 = 'N' and A1.QryGroup32 = 'N')
--- (sub) and (A1.QryGroup29 = 'Y' or A1.QryGroup30 = 'Y' or A1.QryGroup31 = 'Y' or A1.QryGroup32 = 'Y')
-
--- Tercer Parte Parte Materiales del Segundo Sub-Ensamble
-Select 'TERCER PARTE' AS TITULO
-	, L3.Code AS CODE_MP
-	, A8.ItemName AS MATERIAL
-	, SUM(L3.Quantity * NIV2.CANT_MP) AS CANT_MP
-From ITT1 L3
-Inner Join OITM A8 on A8.ItemCode = L3.Code
-Inner Join (
-	Select L2.Code AS CODE_MP
-		, A7.ItemName AS MATERIAL
-		, SUM(L2.Quantity * NIV.CANT_MP) AS CANT_MP
-	From ITT1 L2
-	Inner Join OITM A7 on L2.Code = A7.ItemCode
-	Inner Join (
-		Select	L1.Code AS CODE_MP
-			, A1.ItemName AS MATERIAL
-			, SUM(L1.Quantity * OP.PlannedQty) AS CANT_MP
-		from OWOR OP 
-		Inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
-		Inner join OITM A3 on OP.ItemCode = A3.ItemCode 
-		Inner Join ITT1 L1 on L1.Father = A3.ItemCode
-		Inner Join OITM A1 on L1.Code = A1.ItemCode
-		Where Cast(CP.U_FechaHora as DATE) BETWEEN @FechaIS and @FechaFS and (CP.U_CT=175) 
-		and (A1.QryGroup29 = 'Y' or A1.QryGroup30 = 'Y' or A1.QryGroup31 = 'Y' or A1.QryGroup32 = 'Y')
-		Group by L1.Code, A1.ItemName, A1.U_TipoMat ) NIV on L2.Father = NIV.CODE_MP
-	Where (A7.QryGroup29 = 'N' and A7.QryGroup30 = 'N' and A7.QryGroup31 = 'N' and A7.QryGroup32 = 'N')
-	Group by L2.Code, A7.ItemName ) NIV2 on L3.Father = NIV2.CODE_MP
-Group by L3.Code, A8.ItemName
-Order By MATERIAL
-
--- Cuarta Parte Materiales del Tercer Sub-Ensamble
-
-Select 'CUARTA PARTE' AS TITULO
-	, L4.Code AS CODE_MP
-	, A9.ItemName AS MATERIAL
-From ITT1 L4
-Inner Join OITM A9 on L4.Code = A9.ItemCode
-Inner Join (
-	Select L3.Code AS CODE_MP
-		, A8.ItemName AS MATERIAL
-		, SUM(L3.Quantity * NIV2.CANT_MP) AS CANT_MP
-	From ITT1 L3
-	Inner Join OITM A8 on A8.ItemCode = L3.Code
-	Inner Join (
-		Select L2.Code AS CODE_MP
-			, A7.ItemName AS MATERIAL
-			, SUM(L2.Quantity * NIV.CANT_MP) AS CANT_MP
-		From ITT1 L2
-		Inner Join OITM A7 on L2.Code = A7.ItemCode
-		Inner Join (
-			Select	L1.Code AS CODE_MP
-				, A1.ItemName AS MATERIAL
-				, SUM(L1.Quantity * OP.PlannedQty) AS CANT_MP
-			from OWOR OP 
-			Inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
-			Inner join OITM A3 on OP.ItemCode = A3.ItemCode 
-			Inner Join ITT1 L1 on L1.Father = A3.ItemCode
-			Inner Join OITM A1 on L1.Code = A1.ItemCode
-			Where Cast(CP.U_FechaHora as DATE) BETWEEN @FechaIS and @FechaFS and (CP.U_CT=175) 
-			and (A1.QryGroup29 = 'Y' or A1.QryGroup30 = 'Y' or A1.QryGroup31 = 'Y' or A1.QryGroup32 = 'Y')
-			Group by L1.Code, A1.ItemName, A1.U_TipoMat ) NIV on L2.Father = NIV.CODE_MP
-		Where (A7.QryGroup29 = 'Y' or A7.QryGroup30 = 'Y' or A7.QryGroup31 = 'Y' or A7.QryGroup32 = 'Y')
-		Group by L2.Code, A7.ItemName ) NIV2 on L3.Father = NIV2.CODE_MP 
-	Group by L3.Code, A8.ItemName
-	) NIV3 on L4.Father = NIV3.CODE_MP
-Group by L4.Code, A9.ItemName
---Where (A9.QryGroup29 = 'Y' or A9.QryGroup30 = 'Y' or A9.QryGroup31 = 'Y' or A9.QryGroup32 = 'Y')
-Order By MATERIAL
-*/
-
-
-/* ==============================================================================================
-|     MATERIAL CON QUE CERRO LA OP.                                                             |
-============================================================================================== */
-
-/*
-Select OP.DocNum AS NUM_OP
-	, OP.ItemCode AS COD_PT
-	, A3.ItemName AS PRODUCTO
-	, OP.PlannedQty AS CANTIDAD
-	, LO.ItemCode AS COD_MAT
-	, A1.ItemName AS MATERIAL
-	, LO.IssuedQty AS CAN_MAT
-	, Case  When A1.QryGroup29 = 'Y' then 'CASCO' 
-			When A1.QryGroup30 = 'Y' then 'HABIL'
-			When A1.QryGroup31 = 'Y' then 'PATAS' 
-			When A1.QryGroup32 = 'Y' and A1.U_GrupoPlanea = '28' then 'COMPL' 
-			When A1.QryGroup32 = 'Y' and A1.U_GrupoPlanea = '6' then 'HULES' 
-			When A1.QryGroup32 = 'Y' and A1.U_GrupoPlanea = '13' then 'REFAC' 
-			When A1.QryGroup32 = 'Y' and A1.U_GrupoPlanea = '4' then 'ESTRU' 
-			When A1.QryGroup32 = 'Y' and A1.U_GrupoPlanea = '3' then 'EMPAQ'
-			Else 'MA-PR'
-	End AS SUB_ENS 
-From OWOR OP
-inner join WOR1 LO on LO.DocEntry = OP.DocEntry
-inner join OITM A3 on OP.ItemCode = A3.ItemCode
-inner join OITM A1 on LO.ItemCode = A1.ItemCode
-Where OP.DocNum = 39380
-
-*/
-
-
-
--- ================================================================================================
--- |     Existencia en Almacenes Resumen por Tipo de Material.                                    |
--- ================================================================================================
-/*
-Select INV.CODIGO
-	, B0.ItemName AS DESCRIPCION
-	, INV.EXI_ALMA AS EXI_ALMA
-	, Case
-		When B0.QryGroup29 = 'Y' then 'CASCO' 
-		When B0.QryGroup30 = 'Y' then 'HABIL'
-		When B0.QryGroup31 = 'Y' then 'PATAS'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '28' then 'COMPL'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '6' then 'HULE'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '13' then 'REFA'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '4' then 'ESTR'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '3' then 'EMPA'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '26' then 'MAQI'
-	 End AS SUB_ENS 
-From OITM B0 
-Inner Join 
-(Select B1.ItemCode AS CODIGO
-	, SUM(B1.OnHand) AS EXI_ALMA
-From OITW B1
-Where (B1.WhsCode = 'AMP-ST' or B1.WhsCode = 'AMP-CC' or B1.WhsCode = 'APT-PA' or B1.WhsCode = 'APP-ST')
-and  B1.OnHand > 0
-Group By B1.ItemCode ) INV on INV.CODIGO = B0.ItemCode
-Where (B0.QryGroup29 = 'Y' or B0.QryGroup30 = 'Y'or B0.QryGroup31 = 'Y' or B0.QryGroup32 = 'Y')
-Order By B0.ItemName
-*/
-
-/* ==============================================================================================
-|     ORDENES GENERADAS PARA LOS SUB-ENSAMBLES.                                                  |
-============================================================================================== */
-/*
-Select W0.ItemCode AS CODIGO
-	, W3.ItemName AS DESCRIPCION
-	, QW1.CANT AS CANT
-	, Case
-		When W3.QryGroup29 = 'Y' then 'CASCO' 
-		When W3.QryGroup30 = 'Y' then 'HABIL'
-		When W3.QryGroup31 = 'Y' then 'PATAS'
-		When W3.QryGroup32 = 'Y' and W3.U_GrupoPlanea = '28' then 'COMPL'
-		When W3.QryGroup32 = 'Y' and W3.U_GrupoPlanea = '6' then 'HULE'
-		When W3.QryGroup32 = 'Y' and W3.U_GrupoPlanea = '13' then 'REFA'
-		When W3.QryGroup32 = 'Y' and W3.U_GrupoPlanea = '4' then 'ESTR'
-		When W3.QryGroup32 = 'Y' and W3.U_GrupoPlanea = '3' then 'EMPA'
-		When W3.QryGroup32 = 'Y' and W3.U_GrupoPlanea = '26' then 'MAQI'
-	 End AS SUB_ENS 
-From OWOR W0
-Inner Join OITM W3 on W0.ItemCode = W3.ItemCode
-Inner Join (
-Select W1.ItemCode AS CODIGO,
-	SUM(W1.PlannedQty) AS CANT
-From OWOR W1 
-Where W1.Status <> 'C' and W1.Status <> 'L'
-Group By W1.ItemCode ) QW1 on QW1.CODIGO = W0.ItemCode
-
-*/
-
--- ================================================================================================
--- |     DETALLE POR ALMACEN EXISTENCIA.                                                          |
--- ================================================================================================
-/*
-Select B1.WhsCode AS COD_ALMA
-	, B2.WhsName AS ALMACEN
-	, B0.ItemCode AS CODIGO
-	, B0.ItemName AS DESCRIPCION
-	, B0.InvntryUom AS UDM
-	, B1.OnHand AS EXISTE
-	, Case
-		When B0.QryGroup29 = 'Y' then 'CASCO' 
-		When B0.QryGroup30 = 'Y' then 'HABIL'
-		When B0.QryGroup31 = 'Y' then 'PATAS'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '28' then 'COMPL'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '6' then 'HULE'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '13' then 'REFA'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '4' then 'ESTR'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '3' then 'EMPA'
-		When B0.QryGroup32 = 'Y' and B0.U_GrupoPlanea = '26' then 'MAQI'
-	 End AS SUB_ENS 
-From OITM B0 
-inner join OITW B1 on B0.ItemCode = B1.ItemCode 
-inner join OWHS B2 on B2.WhsCode = B1.WhsCode 
-Where (B1.WhsCode = 'AMP-ST' or B1.WhsCode = 'AMP-CC' or B1.WhsCode = 'APT-PA' or B1.WhsCode = 'APP-ST')
-and  B1.OnHand > 0
-and (B0.QryGroup29 = 'Y' or B0.QryGroup30 = 'Y'or B0.QryGroup31 = 'Y' or B0.QryGroup32 = 'Y')
-Order By ALMACEN, B0.ItemName
-
-*/
-
-/*================================================================================================
-|     DETALLE DE OP PARA LOS SUB ENSAMBLES.                                                      |
-================================================================================================*/
-
-/*
-Select Case
-	When C0.Status = 'P' then 'PLANIFICADO'
-		When C0.Status = 'R' then 'LIBERADO'
-	End AS ESTATUS
-	, C0.DocEntry AS OP 
-	, C0.ItemCode AS CODIGO
-	, C1.ItemName AS DESCRIPCION
-	
-	, CP.U_Recibido-CP.U_Entregado AS CANTIDAD
-
-	, (ISNULL(RT.Name,  
-		Case 
-		When C0.U_Starus = '01' then '010 Detenido Ventas.  '
-		When C0.U_Starus = '02'	then '020 Falta Informacion.' 
-		When C0.U_Starus = '03' then '030 Falta Piel o Tela.' 
-		When C0.U_Starus = '04' then '040 Revision de Piel. ' 
-		When C0.U_Starus = '05' then '050 Por Ordenar.      ' 
-		When C0.U_Starus = '06' then  'Proceso de Fabricacion.'
-		End
-	)) AS AVANCE
-
-	, C0.PostDate AS FEC_ELABORA
-	, C0.DueDate AS FEC_TERMINO
-
-
-		, Case
-		When C1.QryGroup29 = 'Y' then 'CASCO' 
-		When C1.QryGroup30 = 'Y' then 'HABIL'
-		When C1.QryGroup31 = 'Y' then 'PATAS'
-		When C1.QryGroup32 = 'Y' and C1.U_GrupoPlanea = '28' then 'COMPL'
-		When C1.QryGroup32 = 'Y' and C1.U_GrupoPlanea = '6' then 'HULE'
-		When C1.QryGroup32 = 'Y' and C1.U_GrupoPlanea = '13' then 'REFA'
-		When C1.QryGroup32 = 'Y' and C1.U_GrupoPlanea = '4' then 'ESTR'
-		When C1.QryGroup32 = 'Y' and C1.U_GrupoPlanea = '3' then 'EMPA'
-		When C1.QryGroup32 = 'Y' and C1.U_GrupoPlanea = '26' then 'MAQI'
-	 End AS SUB_ENS
-	
-From OWOR C0
-inner join OITM C1 on C0.ItemCode = C1.ItemCode 
-Left Join [@CP_OF] CP  on CP.U_DocEntry = C0.DocEntry 
-Left Join [@PL_RUTAS] RT on CP.U_CT = RT.Code
-
-Where C0.PlannedQty-C0.CmpltQty > 0 
-and C0.Status <> 'C' and C0.Status <> 'L'
-and C1.U_TipoMat <> 'PT' 
-Order by DESCRIPCION,  OP, CANTIDAD Desc
-
-*/

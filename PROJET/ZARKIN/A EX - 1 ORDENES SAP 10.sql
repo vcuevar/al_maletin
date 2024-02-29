@@ -284,28 +284,24 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	where OP.Status = 'P' 
 
 	/*
-delete [@CP_OF] where Code = 514509
-delete [@CP_OF] where Code =514511
-delete [@CP_OF] where Code =514510
+delete [@CP_OF] where Code = 541752
+delete [@CP_OF] where Code = 541757
+delete [@CP_OF] where Code = 541755
+delete [@CP_OF] where Code = 541753
+delete [@CP_OF] where Code = 541756
+delete [@CP_OF] where Code = 541754
+delete [@CP_OF] where Code = 541751
+delete [@CP_OF] where Code = 541758
 
 
-delete [@CP_OF] where Code =510633
-delete [@CP_OF] where Code =510632
-delete [@CP_OF] where Code =510634
-delete [@CP_OF] where Code =514538
-delete [@CP_OF] where Code =510630
-delete [@CP_OF] where Code =514541
-delete [@CP_OF] where Code =510629
 
-	delete [@CP_OF] where Code = 497807
-	delete [@CP_OF] where Code = 497799
-	delete [@CP_OF] where Code = 497797
-	delete [@CP_OF] where Code = 497809
-	delete [@CP_OF] where Code = 497795
-	delete [@CP_OF] where Code = 497800
-	delete [@CP_OF] where Code = 497804
-	delete [@CP_OF] where Code = 497801
-	*/
+delete [@CP_OF] where Code = 530929
+delete [@CP_OF] where Code = 530930
+delete [@CP_OF] where Code = 530933
+delete [@CP_OF] where Code = 530932
+delete [@CP_OF] where Code = 530931
+
+*/
 	
 /*ORDENES DE PRODUCCION GENERADAS NIVEL CABECERA. */
 /*  Orden Generada como tipo diferente a STANDAR, Cambiar a STANDAR  */

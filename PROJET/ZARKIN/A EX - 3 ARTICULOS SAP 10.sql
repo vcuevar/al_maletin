@@ -14,9 +14,9 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2024/01/16', 102)
+Set @FechaInac =  CONVERT (DATE, '2024/02/26', 102)
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
-Set @FechaIS = (SELECT DATEADD(MM, -5, GETDATE()))
+Set @FechaIS = (SELECT DATEADD(MM, -12, GETDATE()))
 
 -- ================================================================================================
 -- |               DATOS MAESTROS DE ARTICULO CABECERA.                                           |
@@ -228,7 +228,7 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Where OITM.U_TipoMat = 'MP' and OITM.U_Metodo <> 'MRP'  
 	Order By OITM.[ItemName]
 
-	Update OITM Set OITM.U_Metodo = 'MRP'  Where OITM.U_TipoMat = 'MP' and OITM.U_Metodo <> 'MRP'
+	--Update OITM Set OITM.U_Metodo = 'MRP'  Where OITM.U_TipoMat = 'MP' and OITM.U_Metodo <> 'MRP'
 
 -- Obtener Determinacion del Almacen por defauld para PT => APT-ST.
 	SELECT '095 DEFAULT PT <> APT-ST' AS REPORTE_095
@@ -580,7 +580,7 @@ Order By OITM.ItemName
 -- Se concidera tambien que el modelo que lo contiene no este obsoleto.
 
 -- Materiales No Piel y No tela. Pasa a Obsoleto de Forma Automatica.
-	SELECT '235 !! A OBS. 5 MES' AS REPO_235
+SELECT '235 PASAR A OBS. 5 MES' AS REPO_235
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, Cast(@FechaIS as date) AS FEC_BASE
@@ -588,22 +588,25 @@ Order By OITM.ItemName
 	, Cast(IsNull(OITM.LastPurDat, @FechaIS)  as date) AS FEC_COMP
 	, ITT1.Code AS CODE
 	, OITM.U_Linea AS LINEA
-	FROM OITM 
-	Left Join ITT1 on ITT1.Code = OITM.ItemCode
-	WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_TipoMat <> 'GF' and OITM.U_Linea = '01'
-	and OITM.U_GrupoPlanea <> '9' 	and OITM.U_GrupoPlanea <> '11'  
-	and OITM.CreateDate < @FechaIS and IsNull(OITM.LastPurDat, @FechaIS) <= @FechaIS 
-	ORDER BY OITM.ItemName
+FROM OITM 
+Left Join ITT1 on ITT1.Code = OITM.ItemCode
+WHERE ITT1.Code IS NULL 
+and OITM.U_TipoMat = 'MP'
+--and OITM.U_TipoMat <> 'PT' and OITM.U_TipoMat <> 'GF'
+and OITM.U_Linea = '01'
+and OITM.U_GrupoPlanea <> '9' 	and OITM.U_GrupoPlanea <> '11'  
+and OITM.CreateDate < @FechaIS and IsNull(OITM.LastPurDat, @FechaIS) <= @FechaIS 
+ORDER BY OITM.ItemName
 
-	Update OITM set OITM.U_Linea = '10'
-	FROM OITM 
-	Left Join ITT1 on ITT1.Code = OITM.ItemCode
-	WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea = '01'
-	and OITM.U_GrupoPlanea <> '9' 	and OITM.U_GrupoPlanea <> '11'  
-	and OITM.CreateDate < @FechaIS and IsNull(OITM.LastPurDat, @FechaIS) <= @FechaIS 
+--Update OITM set OITM.U_Linea = '10'
+--FROM OITM 
+--	Left Join ITT1 on ITT1.Code = OITM.ItemCode
+--	WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea = '01'
+--	and OITM.U_GrupoPlanea <> '9' 	and OITM.U_GrupoPlanea <> '11'  
+--	and OITM.CreateDate < @FechaIS and IsNull(OITM.LastPurDat, @FechaIS) <= @FechaIS 
 	
 -- Materiales Piel y Tela pasan a FUERA DE LINEA.
-	SELECT '237 !! A F_LIN. 5 MES' AS REPO_235
+	SELECT '237 A F_LIN. 12 MES' AS REPO_235
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, Cast(@FechaIS as date) AS FEC_BASE
@@ -618,15 +621,15 @@ Order By OITM.ItemName
 	and OITM.CreateDate < @FechaIS and OITM.LastPurDat < @FechaIS 
 	ORDER BY OITM.ItemName
 
-	Update OITM set OITM.U_Linea = '05'
-	FROM OITM 
-	Left Join ITT1 on ITT1.Code = OITM.ItemCode
-	WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea = '01'
-	and (OITM.U_GrupoPlanea = '9' or OITM.U_GrupoPlanea = '11')  
-	and OITM.CreateDate < @FechaIS and OITM.LastPurDat < @FechaIS 
+	--Update OITM set OITM.U_Linea = '05'
+	--FROM OITM 
+	--Left Join ITT1 on ITT1.Code = OITM.ItemCode
+	--WHERE ITT1.Code IS NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea = '01'
+	--and (OITM.U_GrupoPlanea = '9' or OITM.U_GrupoPlanea = '11')  
+	--and OITM.CreateDate < @FechaIS and OITM.LastPurDat < @FechaIS 
 	
 -- Materiales que ESTA COMO OBSOLETO y se encuentra cargado en las Estructuras y estas esten de Linea.
-	SELECT '240 !! REGRESAR A LINEA' AS REPO_240
+	SELECT '240 REGRESAR A LINEA' AS REPO_240
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, Cast(OITM.CreateDate as date) AS FEC_CREA
@@ -635,34 +638,53 @@ Order By OITM.ItemName
 	, OITM.U_Linea AS LINEA
 	FROM OITM 
 	Left Join (Select Distinct LDM.Code from ITT1 LDM ) LDM on LDM.Code = OITM.ItemCode
-	WHERE LDM.Code IS NOT NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea <> '01'
+	WHERE LDM.Code IS NOT NULL and OITM.U_TipoMat = 'MP' and OITM.U_Linea <> '01'
 	and OITM.U_GrupoPlanea <> '9' and OITM.U_GrupoPlanea <> '11'  
 	ORDER BY OITM.ItemName
 
-	Update OITM set OITM.U_Linea = '01'
-	FROM OITM 
-	Left Join (Select Distinct LDM.Code from ITT1 LDM ) LDM on LDM.Code = OITM.ItemCode
-	WHERE LDM.Code IS NOT NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea <> '01'
-	and OITM.U_GrupoPlanea <> '9' and OITM.U_GrupoPlanea <> '11'  
+--	Update OITM set OITM.U_Linea = '01'
+--	FROM OITM 
+--	Left Join (Select Distinct LDM.Code from ITT1 LDM ) LDM on LDM.Code = OITM.ItemCode
+--	WHERE LDM.Code IS NOT NULL and OITM.U_TipoMat <> 'PT' and OITM.U_Linea <> '01'
+--	and OITM.U_GrupoPlanea <> '9' and OITM.U_GrupoPlanea <> '11'  
 	
 -- PT se pasan a Obsoleto todos los codigo ZAR
-SELECT '241 !! A OBS. PT ZAR' AS REPO_241
+SELECT '241 A OBS. PT ZAR' AS REPO_241
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
-	, Cast(@FechaIS as date) AS FEC_BASE
+	--, Cast(@FechaIS as date) AS FEC_BASE
 	, Cast(OITM.CreateDate as date) AS FEC_CREA
 	, Cast(OITM.LastPurDat as date) AS FEC_COMP
 	, OITM.U_Linea AS LINEA
 	FROM OITM 
 	WHERE OITM.U_TipoMat = 'PT' and OITM.U_Linea = '01' and OITM.ItemCode like 'ZAR%'
 	ORDER BY OITM.ItemName
-
+	/*
 	Update OITM set OITM.U_Linea = '10'
 	FROM OITM 
 	WHERE OITM.U_TipoMat = 'PT' and OITM.U_Linea = '01' and OITM.ItemCode like 'ZAR%'
+	*/
 
+-- ARTICULOS CODIGO ZIN SON OBSOLETOS.
+SELECT '242 A OBS. PT ZAR' AS REPO_242
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, Cast(OITM.CreateDate as date) AS FEC_CREA
+	, Cast(OITM.LastPurDat as date) AS FEC_COMP
+	, OITM.U_Linea AS LINEA
+	FROM OITM 
+	WHERE OITM.U_Linea = '01' and OITM.ItemCode like 'ZIN%'
+	ORDER BY OITM.ItemName
+
+	/*
+	Update OITM set OITM.U_Linea = '10'
+	FROM OITM 
+	WHERE OITM.U_Linea = '01' and OITM.ItemCode like 'ZIN%'
+	*/
+	   
 -- PT Que su MODELO este OBSOLETO.
-SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
+/*
+SELECT '242 A OBS. PT MOD-OBS' AS REPO_242
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, Cast(@FechaIS as date) AS FEC_BASE
@@ -676,13 +698,72 @@ SELECT '242 !! A OBS. PT MOD-OBS' AS REPO_242
 	WHERE OITM.U_TipoMat = 'PT' and OITM.U_IsModel = 'N' and OITM.U_Linea = '01' 
 	and MD.MODEL is null
 	ORDER BY OITM.ItemName
+*/
+-- PT Que su MODELO este OBSOLETO.
+SELECT '242 A LIN. PT MOD-LIN' AS REPO_242
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, Cast(OITM.CreateDate as date) AS FEC_CREA
+	, Cast(OITM.LastPurDat as date) AS FEC_COMP
+	, MD.MODEL AS MODELO
+	, OITM.U_Linea AS LINEA
+	, OITM.U_TipoMat AS TIPO
+FROM OITM 
+Left Join (Select A3.ItemCode AS MODEL From OITM A3 Where A3.U_IsModel = 'S' and A3.U_Linea = '01') MD on MD.MODEL = SubString(OITM.ItemCode, 1, 4)
+Where OITM.U_TipoMat <> 'GF' and  OITM.U_TipoMat <> 'MP'   -- SP, CA, HB, PT, RF 
+and OITM.U_IsModel = 'N'
+and OITM.U_Linea = '01' 
+and MD.MODEL is null
+and Cast(Left(OITM.ItemCode, 1) as INTEGER) > 2
+and OITM.ItemCode <> '70000'
+ORDER BY OITM.ItemName
 
-	Update OITM set OITM.U_Linea = '10'
-	FROM OITM 
-	LEFT JOIN (Select A3.ItemCode AS MODEL From OITM A3 Where A3.U_IsModel = 'S' and A3.U_Linea = '01') 
-	MD on MD.MODEL = SubString(OITM.ItemCode, 1, 4)
-	WHERE OITM.U_TipoMat = 'PT' and OITM.U_IsModel = 'N' and OITM.U_Linea = '01' 
-	and MD.MODEL is null
+/*
+Update OITM set OITM.U_Linea = '10'
+FROM OITM 
+Left Join (Select A3.ItemCode AS MODEL From OITM A3 Where A3.U_IsModel = 'S' and A3.U_Linea = '01') MD on MD.MODEL = SubString(OITM.ItemCode, 1, 4)
+Where OITM.U_TipoMat <> 'GF' and  OITM.U_TipoMat <> 'MP' 
+and OITM.U_IsModel = 'N'
+and OITM.U_Linea = '01' 
+and MD.MODEL is null
+and Cast(Left(OITM.ItemCode, 1) as INTEGER) > 2
+*/
+
+-- PT Que su MODELO este linea pasar a LINEA.
+SELECT '243 A LIN. PT MOD-LIN' AS REPO_243
+	, OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	--, Cast(@FechaIS as date) AS FEC_BASE
+	, Cast(OITM.CreateDate as date) AS FEC_CREA
+	, Cast(OITM.LastPurDat as date) AS FEC_COMP
+	, MD.MODEL AS MODELO
+	, OITM.U_Linea AS LINEA
+	, OITM.U_TipoMat AS TIPO
+FROM OITM 
+Left Join (Select A3.ItemCode AS MODEL From OITM A3 Where A3.U_IsModel = 'S' and A3.U_Linea = '01') MD on MD.MODEL = SubString(OITM.ItemCode, 1, 4)
+Where OITM.U_TipoMat <> 'GF' and  OITM.U_TipoMat <> 'MP'  
+and OITM.U_IsModel = 'N'
+and OITM.U_Linea = '10' 
+and MD.MODEL is not null
+and OITM.frozenFor = 'N'
+ORDER BY OITM.ItemName
+
+
+/*
+
+-- Alineada el 02FEB2024
+Update OITM set OITM.U_Linea = '01'
+FROM OITM 
+Left Join (Select A3.ItemCode AS MODEL From OITM A3 Where A3.U_IsModel = 'S' and A3.U_Linea = '01') MD on MD.MODEL = SubString(OITM.ItemCode, 1, 4)
+Where OITM.U_TipoMat <> 'GF' and  OITM.U_TipoMat <> 'MP'  
+and OITM.U_IsModel = 'N'
+and OITM.U_Linea = '10' 
+and MD.MODEL is not null
+and OITM.frozenFor = 'N'
+
+*/
+
+
 
 -- Articulo poner en U_CodAnt 'NOUSA' a todos los NULL
 SELECT '245 ART. ANT NULL' AS REPO_245
@@ -699,6 +780,31 @@ Update OITM set OITM.U_CodAnt = 'NOUSA'
 FROM OITM 
 Where OITM.U_CodAnt is null
 */
+
+
+/*
+SELECT OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, OITM.U_Linea AS LINEA
+	, OITM.OnHand AS EXISTENCIA
+	, OITM.U_GrupoPlanea AS GRUPO
+	, OITM.U_TipoMat AS TIPO
+	, OITM.AvgPrice AS PRECIO
+	 , OITM.frozenFor
+FROM OITM 
+Where OITM.U_Linea = '01'  
+and OITM.frozenFor = 'Y'
+ORDER BY OITM.ItemName
+*/
+
+
+
+
+
+
+
+
 
 /* ------------------------------------------------------------------------------------------------
 |                       FIN DE BLOQUE                                                             |

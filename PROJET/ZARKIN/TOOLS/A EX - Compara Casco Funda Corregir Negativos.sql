@@ -41,16 +41,17 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_DocEntry = 43252  where Code=2135
-	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 2135
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2135
-	update [@CP_OF] set U_Recibido= 1 where Code= 2135
+	update [@CP_OF] set U_DocEntry = 43198  where Code=2137
+	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 2137
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2137
+	update [@CP_OF] set U_Recibido= 1 where Code= 2137
+
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 40923
+	Set @NumOrd = 43395
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -61,7 +62,7 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 40923    -- and U_CT = 112 and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 42119    -- and U_CT = 112 and U_idEmpleado = 79
 	order by  U_FechaHora, U_CT
 	 
 	Select * from  [@CP_LOGOF] where Code = 388700
@@ -91,7 +92,7 @@ ORDER BY CP.U_DocEntry
 	
 
 
-DELETE [@CP_LOGOF] WHERE Code = 532605
+DELETE [@CP_LOGOF] WHERE Code = 545320
 DELETE [@CP_LOGOF] WHERE Code = 495333
 
 DELETE [@CP_LOGOF] WHERE Code = 474694

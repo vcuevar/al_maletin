@@ -85,8 +85,9 @@ Where SUPER.NOMBRE Like '%NO_ASIGNADO%'
 	inner join OWOR on DUDA.BaseRef= OWOR.DocEntry
 	inner join OITM A3 on OWOR.ItemCode=A3.ItemCode
 	inner join OIGN RB on DUDA.Recibo1=RB.DocEntry
-	where DUDA.Duplicado > 1  and Cast(RB.DocDate as DATE) >  CONVERT (DATE, '2023/12/31', 102)
-	and DUDA.BaseRef <> 40923
+	where DUDA.Duplicado > 1  and Cast(RB.DocDate as DATE) >  CONVERT (DATE, '2023/10/10', 102)
+	and DUDA.BaseRef <> 40923 
+	and DUDA.BaseRef <> 42119 -- Reporto Andrea 240206
 	order by RB.DocDate,A3.ItemName
 
 

@@ -64,6 +64,30 @@ Select Case When (
 ''
 	end AS DIA_4_TC
 
+-- Tipo de Cambio autorizados
+Select Top(1) *, 'Fijado US pord David Z.' AS NOTAS from SIZ_TipoCambio
+Order By TC_date desc
 
+/*
+Declare @Fecha as date
+Declare @CAN as decimal(10,4)
+Declare @USA as decimal(10,4)
+Declare @EUR as decimal(10,4)
+
+-- 14/Feb/2024 David Zarkin me dijo que este seria el tipo de cambio en Dolares, los otros dos los deje 
+-- como venian del año pasado.
+
+Set @Fecha = Cast('2024-02-14' as date)
+Set @CAN = 13.40
+Set @USA = 17.50
+Set @EUR = 19.80
+
+Insert Into [dbo].[SIZ_TipoCambio]
+			( [TC_date], [TC_can], [TC_usd], [TC_eur])
+		Values
+			(@Fecha, @CAN, @USA, @EUR)
+Go
+
+*/
 
 --< EOF > EXCEPCIONES PARA EL AREA DE FINANZAS.

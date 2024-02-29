@@ -7,15 +7,17 @@
 -- Variables: Estaciones de Fundas.
 Declare @EstIni nvarchar(10)
 Declare @EstFin nvarchar(10)
-Set @EstIni = '151'		-- Kiting
+Set @EstIni = '154'		-- Enfundado Tapiceria
 Set @EstFin = '175'		-- Inspeccion Final
 
--- Calculo Comparativo Existencia de Casco contra fundas de Kittin a Inspeccion Final. 
-Select	CASC.ART_CODE, CASC.ART_NOMBRE, CASC.UDM
+-- Calculo Comparativo Existencia de Casco contra fundas de Enfundado a Inspeccion Final. 
+Select	CASC.ART_CODE
+	, CASC.ART_NOMBRE
+	, CASC.UDM
 	, SUM(CASC.EXISTENCIA) AS EXIST
 	, SUM(CASC.NEC_TAPIZ) AS NECES
+	, ITM1.Price AS PRECIO
 From (
-
 Select OITM.ItemCode AS ART_CODE
 	, OITM.ItemName AS ART_NOMBRE
 	, OITM.InvntryUom AS UDM
@@ -25,9 +27,7 @@ from OITW
 inner join OITM on OITM.ItemCode = OITW.ItemCode 
 inner join OWHS on OWHS.WhsCode = OITW.WhsCode and OITW.WhsCode = 'APG-ST'
 where OITW.OnHand > 0 and OITM.U_TipoMat = 'CA'
-
 Union All
-
 Select	 WOR1.ItemCode AS ART_CODE
 		, OITM.ItemName AS ART_NOMBRE
 		, OITM.InvntryUom AS UDM
@@ -42,7 +42,8 @@ WHERE (OWOR.Status <> 'C') AND (OWOR.Status <> 'L') AND (OITM.U_TipoMat = 'CA')
 and CP.U_CT BETWEEN @EstIni and @EstFin 
 Group By WOR1.ItemCode, OITM.ItemName, OITM.InvntryUom 
 ) CASC
-Group By CASC.ART_CODE, CASC.ART_NOMBRE, CASC.UDM
+inner join ITM1 on ITM1.ItemCode = CASC.ART_CODE and ITM1.PriceList=10
+Group By CASC.ART_CODE, CASC.ART_NOMBRE, CASC.UDM, ITM1.Price
 Order by CASC.ART_NOMBRE 
 
 
