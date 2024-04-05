@@ -71,7 +71,7 @@ BC_Cuenta_Id = '601-327-000'
 
 -- Balanza de Comprobación Azaret
 
-Select * from RPT_BalanzaComprobacionAzaret Where BC_Ejercicio = 2023 and BC_Cuenta_Id like '101-%' --and BC_Cuenta_Id =  '604-000-017'-- and BC_Movimiento_01 <> 0
+Select * from RPT_BalanzaComprobacionAzaret Where BC_Ejercicio = 2024 and BC_Cuenta_Id like '101-%' --and BC_Cuenta_Id =  '604-000-017'-- and BC_Movimiento_01 <> 0
 
 -- Update RPT_BalanzaComprobacionAzaret Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
 
@@ -101,7 +101,8 @@ Para tener los datos que corresponden al reporte.
 
 15.- BASURA
 
-select RGC_BC_Cuenta_Id, RGC_hoja, RGC_sociedad from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 -- and RGC_sociedad = 3 
+select RGC_BC_Cuenta_Id, RGC_hoja, RGC_sociedad 
+from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 -- and RGC_sociedad = 3 
 Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
 
 
@@ -115,8 +116,8 @@ Campo RGC_Sociedad
 -- Consulta de cuentas por Reporte
 
 select * from RPT_RG_ConfiguracionTabla 
---where RGC_hoja = 2 and RGC_sociedad = 2
-where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2
+where RGC_hoja = 1 and RGC_sociedad = 3
+--where RGC_BC_Cuenta_Id = '300-910-000' --and RGC_hoja = 2  and RGC_sociedad = 2
 Order by RGC_tabla_linea
 
 -- Ajustar Orden de una Cuenta en el Reporte
@@ -133,18 +134,18 @@ where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2
 -- Cambiar algun campo a la configuracion, del reporte y de la cuenta.
 
 update RPT_RG_ConfiguracionTabla set 
-        --RGC_BC_Cuenta_Id = '602-000-000'
+        --RGC_BC_Cuenta_Id = '300-910-000'
         --, RGC_tipo_renglon = 'CUENTA'
-        , RGC_hoja = 15
-        --, RGC_tabla_titulo = 'GASTOS DE OPERACION'
-        --, RGC_tabla_linea = 17
-        --, RGC_descripcion_cuenta = 'GASTOS DE VENTAS' 
-        , RGC_fecha_alta = '2023-10-04'
-        --, RGC_multiplica = 1
-        , RGC_sociedad = 3
-        , RGC_BC_Cuenta_Id2 = '-1'
-        , RGC_hojaDescripcion  = '02 ESTADO DE RESULTADOS'
- where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2 
+        --, RGC_hoja = 1
+        --, RGC_tabla_titulo = 'RESULTADOS'
+        --, RGC_tabla_linea = 32
+        --, RGC_descripcion_cuenta = 'RESULTADO DEL EJERCICIO 2023' 
+        --, RGC_fecha_alta = '2023-10-04'
+         RGC_multiplica = -1
+        --, RGC_sociedad = 3
+        --, RGC_BC_Cuenta_Id2 = '-1'
+        --, RGC_hojaDescripcion  = '01 BALANCE GENERAL'
+ where RGC_BC_Cuenta_Id = '300-910-000' and RGC_hoja = 1  and RGC_sociedad = 3 
         
 -- Para dar alta a una nueva cuenta
 

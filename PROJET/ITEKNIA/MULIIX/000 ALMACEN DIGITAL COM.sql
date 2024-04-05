@@ -3,8 +3,8 @@
 -- Actualizado: Miercoles 12 de Julio del 2023; Origen.
 -- Actualizado: Domingo 23 de Julio del 2023; Completar Filtros y Consulta General.
 -- Consulta para los botones de los Filtros.
-/*
 
+/*
 -- Boton Filtro Requisiciones Convertidas
 -- Seleccionas Registro y se guarda
 Select  REQ_CodigoRequisicion AS REQUISION

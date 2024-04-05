@@ -26,7 +26,7 @@ inner join OrdenesTrabajo on OCD_OT_OrdenTrabajoId = OT_OrdenTrabajoId
 inner join OrdenesTrabajoDetalleArticulos on OTDA_OT_OrdenTrabajoId = OT_OrdenTrabajoId
 inner join Articulos A3 on OTDA_ART_ArticuloId = A3.ART_ArticuloId
 left join OrdenesCompraFechasRequeridas on OCD_PartidaId = OCFR_OCD_PartidaId 
-where OC_Borrado = 0 
+where OC_Borrado = 0  
 --and (select top(1) EAR_CantidadEnsamble from EstructurasArticulos Where EAR_ART_ArticuloPadreId = A3.ART_ArticuloId and EAR_ART_ComponenteId = A1.ART_ArticuloId) = 0
 Order by OC_CodigoOC
 
@@ -34,7 +34,11 @@ select top (10)* from Articulos
 
 
 
-Select * from ControlesMaestrosMultiples Where CMM_ControlId = 'D35984E5-4B40-4643-9F2F-4AABA4293794'
+Select * from ControlesMaestrosMultiples 
+Where CMM_Control = 'CMM_EstadoOC'
+CMM_Control like 'Abiert%' 
+
+CMM_ControlId = 'D35984E5-4B40-4643-9F2F-4AABA4293794'
 
 
 

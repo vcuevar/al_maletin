@@ -22,9 +22,10 @@ Where EMP_Activo = 1 and EMP_Comentarios not like '%NO NOMINA%'
 Order by EMPLEADO
 
 
-
 Select * from Usuarios
-Where USU_Nombre = '0836'
+Where USU_Nombre = '784'
+
+
  USU_PER_PermisoId = 'EBEF7BB0-784C-45E6-9876-327B3360FF67' and USU_Activo = 1
 
 

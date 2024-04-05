@@ -57,5 +57,7 @@ select EMP_CodigoEmpleado AS CODIGO
 from Usuarios
 Inner Join Empleados on EMP_EmpleadoId = USU_EMP_EmpleadoId
 Inner Join Permisos on PER_PermisoId = USU_PER_PermisoId
-where USU_Activo = 1 and EMP_Activo = 0
+--where USU_Activo = 1 and EMP_Activo = 0
+where EMP_CodigoEmpleado like '%10%'
+order by EMP_CodigoEmpleado
 
