@@ -1,0 +1,54 @@
+{
+	"folders": {},
+	"connections": {
+		"microsoft-18eec9a6eb0-46b1a1deaef42b3d": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "ItekniaDB",
+			"save-password": true,
+			"configuration": {
+				"host": "itekniaapp.serveftp.com",
+				"port": "1433",
+				"database": "ItekniaDB",
+				"url": "jdbc:sqlserver://;serverName\u003ditekniaapp.serveftp.com;databaseName\u003dItekniaDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		},
+		"microsoft-18eed0a4396-2176044d5ff20ab3": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "nmITEKNIA_2016",
+			"save-password": true,
+			"configuration": {
+				"host": "192.168.0.110\\COMPAC12",
+				"port": "1433",
+				"database": "nmITEKNIA_2016",
+				"url": "jdbc:sqlserver://;serverName\u003d192.168.0.110\\COMPAC12;databaseName\u003dnmITEKNIA_2016",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

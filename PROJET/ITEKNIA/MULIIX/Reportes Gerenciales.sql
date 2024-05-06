@@ -65,7 +65,7 @@ BC_Cuenta_Id = '601-327-000'
 --update RPT_BalanzaComprobacion set BC_Saldo_Inicial=0, BC_Saldo_Final=0, BC_Movimiento_01=0, BC_Movimiento_04=0 where BC_Cuenta_Id = '108-003-716'
 
 -- Balanza de Comprobacion Comercializadora
-	Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2023
+	Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2024 Order by BC_Cuenta_Id 
 	
 -- Update RPT_BalanzaComprobacionComercializadora Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
 

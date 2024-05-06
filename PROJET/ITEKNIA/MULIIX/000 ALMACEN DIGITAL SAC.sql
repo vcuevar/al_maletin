@@ -1,6 +1,34 @@
 -- Consultas relacionadas a Almacen Digital.
 -- Elaborado: Ing. Vicente Cueva Ramirez.
 -- Actualizado: Jueves 03 de Junio del 2021; Origen.
+-- Actualizado: Jueves 02 de Mayo del 2024; Cambio a Muliix y desarrollo Francisco.
+
+-- Botones de Filtros
+-- Busqueda por Ordenes de Ventas.
+
+Select OV_CodigoOV AS DOC_ID
+, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
+From OrdenesVenta
+left join Proyectos on OV_PRO_ProyectoId = PRY_ProyectoId
+Order By OV_CodigoOV 
+
+-- Busqueda por Ordenes de Compra del Cliente.
+
+Select OV_ReferenciaOC  AS DOC_ID
+, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
+From OrdenesVenta
+left join Proyectos on OV_PRO_ProyectoId = PRY_ProyectoId
+Where Str(OV_ReferenciaOC,1,1) <> ' '
+Order By OV_ReferenciaOC  
+
+and OV_CodigoOV = 'OV01356'
+
+
+
+
+
+
+
 
 -- Tabla de Empleados
 select * from empleados

@@ -1,0 +1,337 @@
+2024-04-17 09:03:12.350 - DBeaver 23.0.2.202304091457 is starting
+2024-04-17 09:03:12.351 - OS: Linux 6.5.0-27-generic (amd64)
+2024-04-17 09:03:12.351 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
+2024-04-17 09:03:12.352 - Install path: '/usr/share/dbeaver-ce'
+2024-04-17 09:03:12.352 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
+2024-04-17 09:03:12.352 - Memory available 64Mb/1024Mb
+2024-04-17 09:03:12.363 - Create display
+2024-04-17 09:03:12.519 - Initializing DBeaver 23.0.2
+2024-04-17 09:03:12.520 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
+2024-04-17 09:03:12.520 - Initialize desktop platform...
+2024-04-17 09:03:12.766 - BounceCastle bundle found. Use JCE provider BC
+> Start Core File Systems [org.eclipse.core.filesystem 1.9.500.v20220817-1539]
+> Start Core Resource Management [org.eclipse.core.resources 3.18.100.v20221025-2047]
+> Start DBeaver UI Navigator [org.jkiss.dbeaver.ui.navigator 1.0.103.202304091457]
+> Start Núcleo del equipo de soporte [org.eclipse.team.core 3.9.600.v20220902-2219]
+2024-04-17 09:03:13.111 - Initialize base platform...
+> Start Expression Language [org.eclipse.core.expressions 3.8.200.v20220613-1047]
+2024-04-17 09:03:13.164 - Platform initialized (644ms)
+> Start DBeaver UI Editors - Base [org.jkiss.dbeaver.ui.editors.base 1.0.103.202304091457]
+2024-04-17 09:03:13.187 - Starting RMI server at 33825
+2024-04-17 09:03:13.275 - Run workbench
+> Start DBeaver UI [org.jkiss.dbeaver.ui 5.1.118.202304091457]
+> Start Eclipse e4 Workbench SWT [org.eclipse.e4.ui.workbench.swt 0.16.700.v20221024-2137]
+> Start Eclipse Application Services [org.eclipse.e4.core.services 2.3.400.v20220915-1347]
+> Start Eclipse UI Application Services [org.eclipse.e4.ui.services 1.5.100.v20221024-2137]
+> Start Eclipse e4 Progress View [org.eclipse.e4.ui.progress 0.3.600.v20221024-2137]
+> Start EMF XML/XMI Persistence [org.eclipse.emf.ecore.xmi 2.17.0.v20220817-1334]
+> Start Eclipse CSS SWT Theme Support [org.eclipse.e4.ui.css.swt.theme 0.13.200.v20221024-2137]
+> Start Eclipse e4 Workbench Add-ons [org.eclipse.e4.ui.workbench.addons.swt 1.4.500.v20221028-0801]
+> Start Eclipse e4 Workbench SWT Renderer [org.eclipse.e4.ui.workbench.renderers.swt 0.15.700.v20221024-2137]
+> Start Eclipse Bindings Support [org.eclipse.e4.ui.bindings 0.13.200.v20221024-2137]
+> Start Eclipse Dependency Injection Extensions [org.eclipse.e4.core.di.extensions 0.17.200.v20220613-1008]
+> Start Eclipse CSS SWT Support [org.eclipse.e4.ui.css.swt 0.14.700.v20221102-0748]
+Warning: NLS unused message: BlockedJobsDialog_UserInterfaceTreeElement in: org.eclipse.ui.internal.progress.messages
+2024-04-17 09:03:15.945 - Configure workbench window
+> Start Núcleo del sistema de ayuda [org.eclipse.help 3.9.100.v20210721-0601]
+2024-04-17 09:03:16.118 - Create actions
+2024-04-17 09:03:16.131 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2024-04-17 09:03:16.132 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2024-04-17 09:03:16.133 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
+Warning: NLS unused message: controls_client_homes_panel_button_add_home in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_button_remove_home in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_confirm_remove_home_text in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_confirm_remove_home_title in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_dialog_title in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_group_information in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_label_id in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_label_name in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_label_path in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_label_product_name in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: controls_client_homes_panel_label_product_version in: org.jkiss.dbeaver.core.CoreResources
+Warning: NLS unused message: actions_menu_reset_workspace_state_message in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
+Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
+2024-04-17 09:03:16.921 - Initialize workbench window
+2024-04-17 09:03:16.929 - Finish initialization
+> Start Editor de texto predeterminado [org.eclipse.ui.editors 3.14.400.v20220730-1844]
+> Start Entorno de trabajo [org.eclipse.ui.workbench.texteditor 3.16.600.v20220809-1658]
+> Start DBeaver UI Editors - Data [org.jkiss.dbeaver.ui.editors.data 1.0.103.202304091457]
+> Start DBeaver SQL Model [org.jkiss.dbeaver.model.sql 1.0.93.202304091457]
+> Start DBeaver UI Editors - SQL [org.jkiss.dbeaver.ui.editors.sql 1.0.103.202304091457]
+> Start Soporte de Core Compare [org.eclipse.compare.core 3.7.100.v20220812-1406]
+> Start Equinox Java Authentication and Authorization Service (JAAS) [org.eclipse.equinox.security 1.3.1000.v20220801-1135]
+> Start Java Native Access [com.sun.jna 5.12.1.v20221103-2317]
+> Start Interfaz de usuario de manejo de conexión a Internet [org.eclipse.ui.net 1.4.100.v20220812-1406]
+> Start Internet Connection Management [org.eclipse.core.net 1.4.0.v20220813-1037]
+> Start DBeaver Sample Database [org.jkiss.dbeaver.ext.sample.database 1.0.140.202304091457]
+> Start DBeaver Tip of the day [org.jkiss.dbeaver.ext.ui.tipoftheday 1.0.109.202304091457]
+> Start Draw2d [org.eclipse.draw2dl 3.12.100.20230406122456]
+> Start GEF3 GEF (MVC) [org.eclipse.gef3 3.12.100.20230406122456]
+> Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.63.202304091457]
+> Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.63.202304091457]
+2024-04-17 09:03:19.576 - Total database drivers: 101 (101)
+> Start Consola [org.eclipse.ui.console 3.11.400.v20221012-0524]
+Warning: NLS unused message: InputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
+Warning: NLS unused message: OutputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
+> Start Núcleo de depuración [org.eclipse.debug.core 3.20.0.v20220811-0741]
+> Start DBeaver UI Editors - Connections [org.jkiss.dbeaver.ui.editors.connection 1.0.94.202304091457]
+2024-04-17 09:04:14.841 - Can't determine object class 'org.jkiss.dbeaver.registry.DataSourceDescriptor'
+java.lang.ClassNotFoundException: org.jkiss.dbeaver.registry.DataSourceDescriptor cannot be found by org.jkiss.dbeaver.ext.mssql_1.0.197.202304091457
+	at org.eclipse.osgi.internal.loader.BundleLoader.generateException(BundleLoader.java:541)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass0(BundleLoader.java:536)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:416)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:168)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.loadClass(EquinoxBundle.java:622)
+	at org.jkiss.dbeaver.model.impl.AbstractDescriptor.getObjectClass(AbstractDescriptor.java:311)
+	at org.jkiss.dbeaver.model.impl.AbstractDescriptor.getObjectClass(AbstractDescriptor.java:304)
+	at org.jkiss.dbeaver.model.impl.AbstractDescriptor.getObjectClass(AbstractDescriptor.java:299)
+	at org.jkiss.dbeaver.ui.navigator.actions.NavigatorHandlerObjectCreateNew.execute(NavigatorHandlerObjectCreateNew.java:98)
+	at org.eclipse.ui.internal.handlers.HandlerProxy.execute(HandlerProxy.java:283)
+	at org.eclipse.ui.internal.handlers.E4HandlerProxy.execute(E4HandlerProxy.java:97)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invokeUsingClass(InjectorImpl.java:317)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invoke(InjectorImpl.java:251)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.invoke(ContextInjectionFactory.java:173)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceHandler.execute(HandlerServiceHandler.java:156)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:488)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:485)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.executeHandler(HandlerServiceImpl.java:213)
+	at org.eclipse.ui.internal.handlers.LegacyHandlerService.executeCommand(LegacyHandlerService.java:389)
+	at org.eclipse.ui.menus.CommandContributionItem.handleWidgetSelection(CommandContributionItem.java:785)
+	at org.eclipse.ui.menus.CommandContributionItem.lambda$3(CommandContributionItem.java:762)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:5855)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1529)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:5065)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4517)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.jkiss.dbeaver.ui.app.standalone.DBeaverApplication.start(DBeaverApplication.java:297)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+> Start DBeaver SQL Server UI Support [org.jkiss.dbeaver.ext.mssql.ui 1.0.102.202304091457]
+> Start DBeaver SQL Server Support [org.jkiss.dbeaver.ext.mssql 1.0.197.202304091457]
+2024-04-17 09:04:29.274 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-04-17 09:05:58.245 - Connect with 'jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=iteknia' (microsoft-18eec97d8db-d2655c9cb6f508f)
+2024-04-17 09:05:58.276 - Execution context opened (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=iteknia; Main; 0)
+2024-04-17 09:05:58.652 - Impossible d'ouvrir la base de données "iteknia" demandée par la connexion. La connexion a échoué. ClientConnectionId:75a28490-c954-47be-abce-b559ad72ccc5
+com.microsoft.sqlserver.jdbc.SQLServerException: Impossible d'ouvrir la base de données "iteknia" demandée par la connexion. La connexion a échoué. ClientConnectionId:75a28490-c954-47be-abce-b559ad72ccc5
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.TDSTokenHandler.onEOF(tdsparser.java:283)
+	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:129)
+	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:37)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.sendLogon(SQLServerConnection.java:5332)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.logon(SQLServerConnection.java:4068)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.access$000(SQLServerConnection.java:85)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection$LogonCommand.doExecute(SQLServerConnection.java:4006)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectHelper(SQLServerConnection.java:2768)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.login(SQLServerConnection.java:2418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectInternal(SQLServerConnection.java:2265)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connect(SQLServerConnection.java:1291)
+	at com.microsoft.sqlserver.jdbc.SQLServerDriver.connect(SQLServerDriver.java:881)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$1(JDBCDataSource.java:212)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$0(JDBCDataSource.java:225)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.openConnection(JDBCDataSource.java:244)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.<init>(JDBCRemoteInstance.java:61)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.initializeRemoteInstance(JDBCDataSource.java:130)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:108)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:99)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.<init>(SQLServerDataSource.java:80)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerDataSourceProvider.openDataSource(SQLServerDataSourceProvider.java:137)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1191)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1056)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectionTestJob.run(ConnectionTestJob.java:103)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-04-17 09:06:23.306 - Connect with 'jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=master' (microsoft-18eec983ac4-73a2d6ca90952565)
+2024-04-17 09:06:23.308 - Execution context opened (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=master; Main; 1)
+2024-04-17 09:06:24.002 - Connected (microsoft-18eec983ac4-73a2d6ca90952565, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 09:06:24.060 - Execution context closed (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=master, 1)
+2024-04-17 09:06:24.060 - Disconnected (microsoft-18eec983ac4-73a2d6ca90952565)
+2024-04-17 09:06:43.797 - Connect with 'master 2' (microsoft-18eec967cd0-1790637c351f36aa)
+2024-04-17 09:06:43.798 - Execution context opened (master 2; Main; 2)
+2024-04-17 09:06:43.838 - Execution context opened (master 2; Metadata; 3)
+2024-04-17 09:06:43.948 - Connected (microsoft-18eec967cd0-1790637c351f36aa, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 09:07:28.224 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-04-17 09:07:51.101 - Connect with 'jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=ItekniaDB' (microsoft-18eec9991af-2c6149129552e103)
+2024-04-17 09:07:51.105 - Execution context opened (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=ItekniaDB; Main; 4)
+2024-04-17 09:07:51.343 - Connected (microsoft-18eec9991af-2c6149129552e103, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 09:07:51.394 - Execution context closed (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=ItekniaDB, 4)
+2024-04-17 09:07:51.394 - Disconnected (microsoft-18eec9991af-2c6149129552e103)
+2024-04-17 09:07:59.520 - Execution context closed (master 2, 2)
+2024-04-17 09:07:59.570 - Execution context closed (master 2, 3)
+2024-04-17 09:07:59.571 - Disconnected (microsoft-18eec967cd0-1790637c351f36aa)
+2024-04-17 09:07:59.624 - Connect with 'master 2' (microsoft-18eec967cd0-1790637c351f36aa)
+2024-04-17 09:07:59.626 - Execution context opened (master 2; Main; 5)
+2024-04-17 09:07:59.651 - Can't connect - connect/disconnect is in progress
+2024-04-17 09:07:59.664 - Execution context opened (master 2; Metadata; 6)
+2024-04-17 09:07:59.793 - Connected (microsoft-18eec967cd0-1790637c351f36aa, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 09:08:06.233 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-04-17 09:08:47.716 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-04-17 09:10:37.471 - Connect with 'jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=ItekniaDB' (microsoft-18eec9c1b95-47303addaff87a96)
+2024-04-17 09:10:37.474 - Execution context opened (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=ItekniaDB; Main; 7)
+2024-04-17 09:10:38.015 - Connected (microsoft-18eec9c1b95-47303addaff87a96, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 09:10:38.066 - Execution context closed (jdbc:sqlserver://;serverName=itekniaapp.serveftp.com;databaseName=ItekniaDB, 7)
+2024-04-17 09:10:38.066 - Disconnected (microsoft-18eec9c1b95-47303addaff87a96)
+2024-04-17 09:10:58.030 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+2024-04-17 09:10:58.031 - Execution context opened (ItekniaDB; Main; 8)
+2024-04-17 09:10:58.068 - Execution context opened (ItekniaDB; Metadata; 9)
+2024-04-17 09:10:58.181 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 09:10:58.197 - Execution context opened (ItekniaDB; SQLEditor <000 ALMACEN DIGITAL SAC.sql>; 10)
+> Start DBeaver Tasks View [org.jkiss.dbeaver.tasks.ui.view 1.0.52.202304091457]
+> Start DBeaver Tasks - General UI [org.jkiss.dbeaver.tasks.ui 1.0.81.202304091457]
+2024-04-17 09:11:40.722 - Execution context closed (master 2, 5)
+2024-04-17 09:11:40.772 - Execution context closed (master 2, 6)
+2024-04-17 09:11:40.773 - Disconnected (microsoft-18eec967cd0-1790637c351f36aa)
+2024-04-17 09:12:06.137 - Execution context opened (ItekniaDB; SQLEditor <Script.sql>; 11)
+2024-04-17 09:16:12.758 - Execution context closed (ItekniaDB, 11)
+2024-04-17 09:17:09.539 - No active connection
+2024-04-17 09:17:16.189 - Execution context opened (ItekniaDB; SQLEditor <ALMACEN DIGITAL AUDITORIA.sql>; 12)
+2024-04-17 09:23:23.710 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 13)
+2024-04-17 09:34:53.332 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-04-17 09:35:43.646 - Connect with 'jdbc:sqlserver://;serverName=Compac_Server\Compac12;databaseName=master' (microsoft-18eecb31716-171239bfb38cbb1)
+2024-04-17 09:35:43.649 - Execution context opened (jdbc:sqlserver://;serverName=Compac_Server\Compac12;databaseName=master; Main; 14)
+2024-04-17 09:35:58.222 - Error al establecer la conexión con el host Compac_Server, instancia con nombre Compac12. Error: "java.net.UnknownHostException: Compac_Server". Verifique los nombres del servidor y la instancia, y compruebe que no haya ningún firewall bloqueando el tráfico UDP al puerto 1434. Para SQL Server 2005 o versiones posteriores, verifique que el servicio SQL Server Browser se esté ejecutando en el host.
+com.microsoft.sqlserver.jdbc.SQLServerException: Error al establecer la conexión con el host Compac_Server, instancia con nombre Compac12. Error: "java.net.UnknownHostException: Compac_Server". Verifique los nombres del servidor y la instancia, y compruebe que no haya ningún firewall bloqueando el tráfico UDP al puerto 1434. Para SQL Server 2005 o versiones posteriores, verifique que el servicio SQL Server Browser se esté ejecutando en el host.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getInstancePort(SQLServerConnection.java:6231)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.primaryPermissionCheck(SQLServerConnection.java:2661)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.login(SQLServerConnection.java:2402)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectInternal(SQLServerConnection.java:2265)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connect(SQLServerConnection.java:1291)
+	at com.microsoft.sqlserver.jdbc.SQLServerDriver.connect(SQLServerDriver.java:881)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$1(JDBCDataSource.java:212)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.lambda$0(JDBCDataSource.java:225)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.openConnection(JDBCDataSource.java:244)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.<init>(JDBCRemoteInstance.java:61)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.initializeRemoteInstance(JDBCDataSource.java:130)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:108)
+	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:99)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.<init>(SQLServerDataSource.java:80)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerDataSourceProvider.openDataSource(SQLServerDataSourceProvider.java:137)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1191)
+	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1056)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
+	at org.jkiss.dbeaver.runtime.jobs.ConnectionTestJob.run(ConnectionTestJob.java:103)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-04-17 11:10:56.763 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-04-17 11:12:04.793 - Connect with 'jdbc:sqlserver://;serverName=192.168.0.110\COMPAC12;databaseName=nmITEKNIA_2016' (microsoft-18eed0b4db4-73dd9b7136c2fcb1)
+2024-04-17 11:12:04.796 - Execution context opened (jdbc:sqlserver://;serverName=192.168.0.110\COMPAC12;databaseName=nmITEKNIA_2016; Main; 15)
+abr 17, 2024 11:12:05 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-04-17 11:12:06.039 - Connected (microsoft-18eed0b4db4-73dd9b7136c2fcb1, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-04-17 11:12:06.091 - Execution context closed (jdbc:sqlserver://;serverName=192.168.0.110\COMPAC12;databaseName=nmITEKNIA_2016, 15)
+2024-04-17 11:12:06.091 - Disconnected (microsoft-18eed0b4db4-73dd9b7136c2fcb1)
+2024-04-17 12:47:20.862 - System suspend detected! Reinitialize all remote connections.
+2024-04-17 13:03:17.383 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: Expiró el tiempo de conexión
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.terminate(SQLServerConnection.java:3208)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.write(IOBuffer.java:2080)
+	at com.microsoft.sqlserver.jdbc.TDSWriter.flush(IOBuffer.java:4323)
+	at com.microsoft.sqlserver.jdbc.TDSWriter.writePacket(IOBuffer.java:4225)
+	at com.microsoft.sqlserver.jdbc.TDSWriter.endMessage(IOBuffer.java:3269)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.startResponse(IOBuffer.java:7780)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:870)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeQueryInternal(SQLServerStatement.java:699)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getSchema(SQLServerConnection.java:5698)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:345)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.net.SocketException: Expiró el tiempo de conexión
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.write(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(Unknown Source)
+	at java.base/java.net.Socket$SocketOutputStream.write(Unknown Source)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.write(IOBuffer.java:2075)
+	... 27 more
+2024-04-17 13:03:17.394 - Invalidate datasource 'ItekniaDB' connections...
+2024-04-17 13:03:17.407 - Invalidate datasource 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+2024-04-17 13:03:17.408 - 	Invalidate context 'Main' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-04-17 13:03:17.408 - Execution context closed (ItekniaDB, 8)
+2024-04-17 13:03:17.545 - 	Invalidate context 'Metadata' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-04-17 13:03:17.597 - Execution context closed (ItekniaDB, 9)
+2024-04-17 13:03:17.660 - 	Invalidate context 'SQLEditor <000 ALMACEN DIGITAL SAC.sql>' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-04-17 13:03:17.660 - Execution context closed (ItekniaDB, 10)
+2024-04-17 13:03:17.718 - 	Invalidate context 'SQLEditor <ALMACEN DIGITAL AUDITORIA.sql>' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-04-17 13:03:17.719 - Execution context closed (ItekniaDB, 12)
+2024-04-17 13:03:17.782 - 	Invalidate context 'SQLEditor <000 EXCEPCIONES ITEKNIA.sql>' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-04-17 13:03:17.832 - Execution context closed (ItekniaDB, 13)
+2024-04-17 13:03:17.890 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 15 more
+2024-04-17 19:42:07.021 - Execution context closed (ItekniaDB, 10)
+2024-04-17 19:42:07.085 - Execution context closed (ItekniaDB, 13)
+2024-04-17 19:42:07.219 - Execution context closed (ItekniaDB, 12)
+2024-04-17 19:42:07.668 - DBeaver is stopping
+2024-04-17 19:42:07.671 - Stop RMI server
+2024-04-17 19:42:07.678 - RMI controller has been stopped
+2024-04-17 19:42:07.679 - DBeaver shutdown completed

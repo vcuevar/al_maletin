@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+	<item id="Suggestion/NodeList/SQLServerTableColumn">
+		<column name="Column Name" visible="true" order="0" width="150"/>
+		<column name="#" visible="true" order="1" width="32"/>
+		<column name="Type" visible="false" order="2" width="103"/>
+		<column name="Length" visible="false" order="3" width="100"/>
+		<column name="Scale" visible="false" order="4" width="100"/>
+		<column name="Precision" visible="false" order="5" width="100"/>
+		<column name="Not Null" visible="false" order="6" width="100"/>
+		<column name="Identity" visible="true" order="2" width="63"/>
+		<column name="Default" visible="false" order="8" width="100"/>
+		<column name="Collation" visible="false" order="9" width="100"/>
+		<column name="Description" visible="true" order="3" width="93"/>
+	</item>
+	<item id="projectExplorer">
+		<column name="Name" visible="true" order="0" width="178"/>
+		<column name="DataSource" visible="true" order="1" width="124"/>
+	</item>
+	<item id="scriptSelectorViewer">
+		<column name="Script" visible="true" order="0" width="290"/>
+		<column name="Time" visible="true" order="1" width="81"/>
+		<column name="Info" visible="true" order="2" width="57"/>
+		<column name="Folder" visible="true" order="3" width="73"/>
+	</item>
+</items>
