@@ -5,6 +5,10 @@
 -- Actualizado: Lunes 13 de Marzo del 2023; Agregar Telas a 140 por metros.
 -- Actualizado: Lunes 10 de Abril del 2023; Dejar solo Tela cuando no hay consumo de Piel, Elias.
 
+
+-- NOTA: En la macro la hojas PARAMETROS tiene clave de edicion VMA2023
+
+
 -- Parametros Fecha Inicial y Final
 Declare @FechaIS date
 Declare @FechaFS date

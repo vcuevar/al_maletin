@@ -31,7 +31,7 @@ select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where SIZ_AlmacenesTransferencias.Dept = '15' 
+where SIZ_AlmacenesTransferencias.Dept = '5' 
 --SIZ_AlmacenesTransferencias.Code = 'AMG-ST' --and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
 
@@ -60,7 +60,7 @@ Order by Dept
 
 BEGIN      
 	INSERT INTO SIZ_AlmacenesTransferencias (Code, Dept, Label, SolicitudMateriales, TrasladoDeptos)
-    VALUES ('APT-PR','15','APT-PR - ALMACEN PRESIDENCIA.','D','O')
+    VALUES ('AMP-CO','15','AMP-CO - ALMACEN COMPRAS.','','D')
       
 	--PRINT 'Ingresado: CODIGO ' + cast(@CODI as varchar(10))  + '  ' + cast(@NAME as varchar (50))
 END
@@ -68,19 +68,19 @@ END
 GO
 
 
-
-
 Select * from SIZ_AlmacenesTransferencias 
-where SIZ_AlmacenesTransferencias.Code = 'APT-TR' and TrasladoDeptos = 'O'
+where SIZ_AlmacenesTransferencias.Dept = '5' and SIZ_AlmacenesTransferencias.Code = 'APT-PA'
 
---update SIZ_AlmacenesTransferencias set SolicitudMateriales = '', TrasladoDeptos = 'D' 
---where SIZ_AlmacenesTransferencias.Dept = '20' and SIZ_AlmacenesTransferencias.Code = 'APT-TR'
+--where SIZ_AlmacenesTransferencias.Code = 'APT-TR' and TrasladoDeptos = 'O'
 
+-- Cambios realizado en Calidad solicitados por Eduardo Belis.
+
+--Delete SIZ_AlmacenesTransferencias where Dept = 5 and Code = 'APP-ST' 
+
+update SIZ_AlmacenesTransferencias set SolicitudMateriales = 'D' where SIZ_AlmacenesTransferencias.Dept = '5' and SIZ_AlmacenesTransferencias.Code = 'APT-PA'
 
 
 Select * from SIZ_AlmacenesTransferencias where Dept = 9 and Code = 'AMP-CC'
-
-Delete SIZ_AlmacenesTransferencias where Dept = 9 and Code = 'AMP-CC' 
 
 
 

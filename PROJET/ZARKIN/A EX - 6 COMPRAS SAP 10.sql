@@ -93,6 +93,7 @@ Select '015 HB; 15 DIAS' AS REP_015
 From OITM 
 Where OITM.U_TipoMat = 'HB' and OITM.LeadTime <> 15 and OITM.frozenFor = 'N'
 
+
 -- Sub-Producto Tiempo de Entrega a 15 dias.
 Select '017 SP; 15 DIAS' AS REP_017
 	, OITM.ItemCode AS CODIGO
@@ -100,6 +101,46 @@ Select '017 SP; 15 DIAS' AS REP_017
 	, OITM.LeadTime AS LEADTIME 
 From OITM 
 Where OITM.U_TipoMat = 'SP' and OITM.LeadTime <> 15 and OITM.frozenFor = 'N'
+Order By OITM.ItemCode Desc
+
+
+-- Sub-Producto Tiempo de Entrega.
+
+-- CA		Cascos				7 dias
+-- HB		Habilitado			15 dias
+-- SP		Sub-Productos		15 dias
+-- RF		Refacciones			15 dias
+-- GF		Gastos Financieros  15 dias
+-- PT		Producto Terminado	21 dias
+
+-- MP		Materia Prima		Se define con Proveedor
+
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, OITM.LeadTime AS LEADTIME 
+	, OITM.U_TipoMat AS TM
+	, NLT.N_LT AS NEW_LT
+	, 'POR ACTUALIZAR' AS ACCION
+From OITM 
+inner Join (
+Select A5.ItemCode AS CODE
+	, Case 
+			When A5.U_TipoMat = 'CA' then 7 
+			When A5.U_TipoMat = 'HB' then 15 
+			When A5.U_TipoMat = 'SP' then 15 
+			When A5.U_TipoMat = 'RF' then 15 
+			When A5.U_TipoMat = 'GF' then 15 
+			When A5.U_TipoMat = 'PT' then 21
+	End AS N_LT
+From OITM A5
+Where A5.U_TipoMat <> 'MP') NLT on OITM.ItemCode = NLT.CODE
+Where OITM.U_TipoMat <> 'MP' and OITM.LeadTime <> NLT.N_LT and OITM.LeadTime <> 15 and OITM.frozenFor = 'N'
+Order By OITM.ItemCode Desc
+
+
+
+
 
 
 --< EOF > EXCEPCIONES DEL AREA DE COMPRAS.

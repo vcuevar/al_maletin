@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2024/02/26', 102)
+Set @FechaInac =  CONVERT (DATE, '2024/04/04', 102)
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -12, GETDATE()))
 
@@ -352,7 +352,7 @@ SELECT '195 ALM-DFT SB. ' AS REPORTE_195
 		, T0.U_GrupoPlanea AS GRUPO
 FROM  [dbo].[OITM] T0  
 WHERE T0.[DfltWH] <> 'APG-ST' and T0.[QryGroup32] = 'Y' and T0.U_GrupoPlanea <> '5' and T0.U_GrupoPlanea <> '6' 
-and T0.U_GrupoPlanea <> '13' and T0.U_GrupoPlanea <> '26'and T0.U_GrupoPlanea <> '28'
+and T0.U_GrupoPlanea <> '13' and T0.U_GrupoPlanea <> '26'and T0.U_GrupoPlanea <> '27' and T0.U_GrupoPlanea <> '28'
 Order By T0.[ItemName]
 
 SELECT '196 ALM-DFT HE. ' AS REPORTE_196

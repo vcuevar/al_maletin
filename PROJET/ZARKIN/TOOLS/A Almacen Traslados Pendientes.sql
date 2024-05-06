@@ -34,32 +34,32 @@ E	Linea para Traslado Externo		S-T
  From SIZ_SolicitudesMP
  inner join SIZ_MaterialesTraslados on SIZ_MaterialesTraslados.Id_Solicitud = SIZ_SolicitudesMP.Id_Solicitud 
  inner join OITM on SIZ_MaterialesTraslados.ItemCode = OITM.ItemCode
- Where  SIZ_SolicitudesMP.Id_Solicitud = 41249
+ Where  SIZ_SolicitudesMP.Id_Solicitud = 56085
  --and SIZ_MaterialesTraslados.EstatusLinea <> 'S' 
  --and SIZ_SolicitudesMP.Status like 'Cancelada'
  --SIZ_MaterialesTraslados.ItemCode = '17653'
   Order By SIZ_SolicitudesMP.Id_Solicitud
 
 
-  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 48486
+  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 56085
 
-  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 48486 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
+  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 56267 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
 
   Select * from SIZ_MaterialesTraslados Where ItemCode = '17653'
 
-  Select * from SIZ_MaterialesSolicitudes Where ItemCode = '17653' and Id_Solicitud = 42855
+  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = 56267
 
 
 -- Para cancelar una solicitud.
   Update SIZ_MaterialesTraslados set Cant_Pendiente = 0, EstatusLinea = 'C' Where SIZ_MaterialesTraslados.Id_Solicitud = 48486 --and EstatusLinea = 'S'
 
-  Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 48486
+  Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 56267
   
   
   Select * from SIZ_MaterialesTraslados  Where Id = 4791
   Update SIZ_MaterialesTraslados Set EstatusLinea = 'E' Where Id = 19814
 
-   Select * from SIZ_MaterialesSolicitudes Where Id = 43089
+   Select * from SIZ_MaterialesSolicitudes Where Id = 56267
    Update SIZ_MaterialesSolicitudes Set EstatusLinea = 'T' Where Id = 43089
 
  Select DISTINCT EstatusLinea, Status 

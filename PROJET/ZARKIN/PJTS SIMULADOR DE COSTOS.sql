@@ -21,6 +21,14 @@ Set @NumeList = 7  -- Pruebas por Sistemas (COSTOS) (Usuario 777)
 --Set @NumeList = 1 -- Calculo de Diseño   (Usuario 1)
 --Set @NumeList = 9 -- A_COMPRAS            (Usuario 2) 
 
+-- Procedimiento para detener los trabajos de Lista de Precios
+-- Actualizado: Miercoles 17 de abril del 2024; Origen.
+-- Soporte proporcionado por el Ing. Luis Alberto Jimenez Medina.
+
+--Select * from jobs Where queue like '%Precio%'
+-- Borrar los procesos que corresponden a las lista de precios.
+--Delete jobs Where queue like '%Precio%'
+
 -- ================================================================================================
 -- |              Primer Pantalla Resumen de Modelos.                                             |
 -- ================================================================================================

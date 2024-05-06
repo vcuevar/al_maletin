@@ -88,6 +88,7 @@ Where SUPER.NOMBRE Like '%NO_ASIGNADO%'
 	where DUDA.Duplicado > 1  and Cast(RB.DocDate as DATE) >  CONVERT (DATE, '2023/10/10', 102)
 	and DUDA.BaseRef <> 40923 
 	and DUDA.BaseRef <> 42119 -- Reporto Andrea 240206
+	and DUDA.BaseRef <> 40084 and DUDA.BaseRef <> 42445 -- Duplicadas de Marzo 2024
 	order by RB.DocDate,A3.ItemName
 
 

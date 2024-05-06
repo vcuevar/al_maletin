@@ -4,10 +4,10 @@
 
 -- Consultar 
 select * from FaltanteEmbarcar
-Where ID = 922
+Where ID = 24463
 
 --Regresar Cantidad Original al Registro dividido.
-update FaltanteEmbarcar set Cantidad = 7, CantidadA = 2 Where ID = 922        
+update FaltanteEmbarcar set Cantidad = 7, CantidadA = 7 Where ID = 24463        
 
 -- Cambiar parte de la Informacion.
 
@@ -147,6 +147,11 @@ update FaltanteEmbarcar set ItemCode = '3680-02-P0301', Dscription = 'ZIAMO, -2-
 update FaltanteEmbarcar set ItemCode = '3680-03-P0301', Dscription = 'ZIAMO, -3-, PIEL 0301 NEGRO.', Cantidad = 1, CantidadA = 1 Where ID = 4157
 update FaltanteEmbarcar set ItemCode = '3755-18-P0471', Dscription = 'IZZOLA NEW, -1BBI-, PIEL 0471 VAPOR.', Cantidad = 1, CantidadA = 1 Where ID = 4158
 update FaltanteEmbarcar set ItemCode = '3755-19-P0471', Dscription = 'IZZOLA NEW, -1BBD-, PIEL 0471 VAPOR.', Cantidad = 1, CantidadA = 1 Where ID = 4159
+
+-- CAmbio por error al dividir registro no supe por que supongo por Almacen Diseño???
+update FaltanteEmbarcar set ItemCode = 'ZAR0126', Dscription = 'CAZZY (PROTO), -SILLA S/B-, PIEL 0596 OLIVE', Cantidad = 1, CantidadA = 1 Where ID = 25250
+
+
 
 
 

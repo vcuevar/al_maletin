@@ -8,8 +8,8 @@ DECLARE @FechaIS date
 DECLARE @FechaFS date
 
 --Parametros Fecha Inicial y Fecha Final (aaaa-mm-dd)
-Set @FechaIS = CONVERT (DATE, '2024-01-01', 102)
-Set @FechaFS = CONVERT (DATE, '2024-02-04', 102) 
+Set @FechaIS = CONVERT (DATE, '2024-02-05', 102)
+Set @FechaFS = CONVERT (DATE, '2024-03-03', 102) 
 
 -- Contador de Ordenes Cerradas.
 Select COUNT(CIERRE.ItemCode) as Cerrados

@@ -396,8 +396,8 @@ and OITM.InvntItem = 'Y' and OITM.U_TipoMat = 'MP' and OITM.AvgPrice > 0 and OIT
 Order By OITM.ItemName 
 
 -- Usar Revalorizacion de Inventarios. MP sin Existencia.
-Select '415 REVAL. MP c/e' AS REPORTE_415
-	, OITM.ItemCode AS RE_055
+Select --'415 REVAL. MP c/e' AS REPORTE_415
+	 OITM.ItemCode AS RE_055
 	, OITM.ItemName AS NOMBRE
 	, OITM.InvntryUom as UDM
 	, OITM.OnHand AS EXISTENCIA 

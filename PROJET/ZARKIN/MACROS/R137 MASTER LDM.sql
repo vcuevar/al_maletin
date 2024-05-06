@@ -6,7 +6,7 @@
 /* ==============================================================================================
 |     PARAMETROS GENERALES.                                                                     |
 ============================================================================================== */
-
+/*
 Declare @xCodiBase AS VarChar(20)
 Declare @xCodiNuev AS VarChar(20)
 Declare @xCodiAcab AS VarChar(20)
@@ -54,6 +54,65 @@ Left Join SIZ_Acabados ACAB on A1.ItemCode = ACAB.Arti and ACAB.CODIDATO = @xCod
 Left Join OITM A4 on ACAB.Surtir = A4.ItemCode
 where  ITT1.Father = @xCodiBase
 Order by MATERIAL
+*/
+
+
+-- Consultas para Proyecto de SIZ Gestion de Modelos.
+-- Objetivo: Modulo en SIZ para Generacion de Codigos en forma automatica.
+-- Desarrollado: Ing. Vicente Cueva Ramirez.
+-- Actualizado: Jueves 29 de febrero del 2024; Origen.
+
+/* ==============================================================================================
+|     LISTADO DE MODELOS PARA EDITAR.                                                                     |
+============================================================================================== */
+
+-- Tabla para los modelos
+Select A3.ItemCode AS CODIGO
+	, A3.ItemName AS MODELO
+	, A3.U_Linea AS ESTADO
+	, UFD1.Descr AS NOMB_Estado
+From OITM A3
+inner join UFD1 on A3.U_Linea= UFD1.FldValue and UFD1.TableID='OITM'and UFD1.FieldID=7
+Where A3.U_TipoMat = 'PT' and A3.U_IsModel = 'S'
+Order by A3.ItemName
+
+-- Proximo Modelo
+Select Top(1) A3.ItemCode AS ULTIMO
+	, Cast(A3.ItemCode as int) + 1 AS NEW_CODE
+From OITM A3
+Where A3.U_TipoMat = 'PT' and A3.U_IsModel = 'S'
+Order by A3.ItemCode Desc
+
+
+select * from UFD1 Where 10 = UFD1.FldValue and UFD1.TableID='OITM'and UFD1.FieldID=7
+
+-- Tabla para los muebles
+Select Left(A3.ItemCode, 7) AS CODIGO
+	, A3.ItemName AS MODELO
+	, A3.U_Linea AS ESTADO
+	, UFD1.Descr AS NOMB_Estado
+From OITM A3
+inner join UFD1 on A3.U_Linea= UFD1.FldValue and UFD1.TableID='OITM'and UFD1.FieldID=7
+Where  A3.U_TipoMat = 'PT' and A3.U_IsModel = 'N'
+Group By Left(A3.ItemCode, 7), A3.ItemName, A3.U_Linea, UFD1.Descr
+Order by A3.ItemName
+
+Left(A3.ItemCode,4) = '3881' and
+
+
+
+-- Tabla para los acabados
+Select Right(A3.ItemCode, 5) AS CODIGO
+	, A3.ItemName AS MODELO
+	, A3.U_Linea AS ESTADO
+	, UFD1.Descr AS NOMB_Estado
+From OITM A3
+inner join UFD1 on A3.U_Linea= UFD1.FldValue and UFD1.TableID='OITM'and UFD1.FieldID=7
+Where  A3.U_TipoMat = 'PT' and A3.U_IsModel = 'N'
+--Group By Left(A3.ItemCode, 7), A3.ItemName, A3.U_Linea, UFD1.Descr
+Order by A3.ItemName
+
+
+
 
 Select * from SIZ_Acabados
-
