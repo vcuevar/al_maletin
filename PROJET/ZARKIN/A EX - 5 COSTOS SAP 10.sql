@@ -371,8 +371,8 @@ Select OITM.ItemCode AS REP_051
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-200-000' AS C_AUMENTA	
-	, '501-200-000' AS C_DISMINUYE	
+	, '501-300-000' AS C_AUMENTA	
+	, '501-300-000' AS C_DISMINUYE	
 From OITM 
 Inner JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where OITM.AvgPrice = 0 and OITM.EvalSystem = 'S' and ITM1.Price <> 0 
@@ -387,8 +387,8 @@ Select OITM.ItemCode AS REP_053
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-200-000' AS C_AUMENTA	
-	, '501-200-000' AS C_DISMINUYE	
+	, '501-300-000' AS C_AUMENTA	
+	, '501-300-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
@@ -404,13 +404,13 @@ Select --'415 REVAL. MP c/e' AS REPORTE_415
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-200-000' AS C_AUMENTA	
-	, '501-200-000' AS C_DISMINUYE	
+	, '501-300-000' AS C_AUMENTA	
+	, '501-300-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y'  and  OITM.frozenFor = 'N'
-and OITM.U_TipoMat = 'MP' 
+and OITM.U_TipoMat = 'MP' and OITM.EvalSystem <> 'A'
 and OITM.AvgPrice > 0 and OITM.OnHand > 0
 Order By OITM.ItemName 
 
@@ -424,8 +424,8 @@ Select OITM.ItemCode AS REP_057
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-200-000' AS C_AUMENTA	
-	, '501-200-000' AS C_DISMINUYE	
+	, '501-300-000' AS C_AUMENTA	
+	, '501-300-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
@@ -442,8 +442,8 @@ Select OITM.ItemCode AS REP_059
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-200-000' AS C_AUMENTA	
-	, '501-200-000' AS C_DISMINUYE	
+	, '501-300-000' AS C_AUMENTA	
+	, '501-300-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
@@ -468,7 +468,12 @@ Order By OITM.ItemName
 		where OITM.ItemCode like '%ZIN%' and frozenFor = 'N'
 		and (OITM.OnHand + OITM.OnOrder + OITM.IsCommited > 0)
 		Order By OITM.ItemName
+
+Select * from OITM Where OITM.EvalSystem = 'A'
+
 */
+
+
 
 
 -- Estas dos refacciones las cargaron a LDM, cambia MP y modifique directo Metodo a S

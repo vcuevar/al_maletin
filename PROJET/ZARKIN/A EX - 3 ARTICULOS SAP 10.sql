@@ -673,7 +673,7 @@ SELECT '242 A OBS. PT ZAR' AS REPO_242
 	, Cast(OITM.LastPurDat as date) AS FEC_COMP
 	, OITM.U_Linea AS LINEA
 	FROM OITM 
-	WHERE OITM.U_Linea = '01' and OITM.ItemCode like 'ZIN%'
+	WHERE OITM.U_Linea = '01' and OITM.ItemCode like 'ZIN%' and OITM.ItemCode <> '3774-42-B0051'
 	ORDER BY OITM.ItemName
 
 	/*

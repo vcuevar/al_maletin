@@ -283,88 +283,15 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM A3 on OP.ItemCode = A3.ItemCode 
 	where OP.Status = 'P' 
 
+
 	/*
-delete [@CP_OF] where Code = 554657
-delete [@CP_OF] where Code = 554661
-delete [@CP_OF] where Code = 572488
-delete [@CP_OF] where Code = 467517
-delete [@CP_OF] where Code = 508645
-delete [@CP_OF] where Code = 554651
-delete [@CP_OF] where Code = 568324
-delete [@CP_OF] where Code = 572486
-delete [@CP_OF] where Code = 571493
-delete [@CP_OF] where Code = 571518
-delete [@CP_OF] where Code = 554614
-delete [@CP_OF] where Code = 554645
-delete [@CP_OF] where Code = 467516
-delete [@CP_OF] where Code = 508643
-delete [@CP_OF] where Code = 554653
-delete [@CP_OF] where Code = 572484
-delete [@CP_OF] where Code = 554659
-delete [@CP_OF] where Code = 554670
-delete [@CP_OF] where Code = 554663
-delete [@CP_OF] where Code = 571492
-delete [@CP_OF] where Code = 554642
-delete [@CP_OF] where Code = 554665
-delete [@CP_OF] where Code = 554667
-delete [@CP_OF] where Code = 571495
-delete [@CP_OF] where Code = 571512
-delete [@CP_OF] where Code = 565209
-delete [@CP_OF] where Code = 572485
-delete [@CP_OF] where Code = 572487
-delete [@CP_OF] where Code = 508642
-delete [@CP_OF] where Code = 554647
-delete [@CP_OF] where Code = 554655
-delete [@CP_OF] where Code = 554648
-delete [@CP_OF] where Code = 508644
-delete [@CP_OF] where Code = 554650
-delete [@CP_OF] where Code = 554652
-delete [@CP_OF] where Code = 568323
-delete [@CP_OF] where Code = 575689
-delete [@CP_OF] where Code = 467518
-delete [@CP_OF] where Code = 571494
-delete [@CP_OF] where Code = 554617
-delete [@CP_OF] where Code = 572489
-delete [@CP_OF] where Code = 571508
-delete [@CP_OF] where Code = 554649
-delete [@CP_OF] where Code = 571490
-delete [@CP_OF] where Code = 571491
-delete [@CP_OF] where Code = 554611
-delete [@CP_OF] where Code = 554613
-delete [@CP_OF] where Code = 554668
-delete [@CP_OF] where Code = 554669
-delete [@CP_OF] where Code = 565191
 
-delete [@CP_OF] where Code = 554637
-delete [@CP_OF] where Code = 554646
-delete [@CP_OF] where Code = 554629
-delete [@CP_OF] where Code = 554643
-delete [@CP_OF] where Code = 554644
+	delete [@CP_OF] from [@CP_OF] CP 
+	inner join OWOR OP on CP.U_DocEntry= OP.DocEntry 
+	inner join OITM A3 on OP.ItemCode = A3.ItemCode 
+	where OP.Status = 'P' 
 
-
-
-delete [@CP_OF] where Code = 567414
-delete [@CP_OF] where Code = 568322
-delete [@CP_OF] where Code = 567413
-delete [@CP_OF] where Code = 567411
-delete [@CP_OF] where Code = 568318
-delete [@CP_OF] where Code = 568325
-delete [@CP_OF] where Code = 567412
-delete [@CP_OF] where Code = 568319
-delete [@CP_OF] where Code = 568320
-delete [@CP_OF] where Code = 568321
-delete [@CP_OF] where Code = 568316
-
-delete [@CP_OF] where Code = 564256
-delete [@CP_OF] where Code = 564255
-delete [@CP_OF] where Code = 564258
-delete [@CP_OF] where Code = 564253
-delete [@CP_OF] where Code = 564251
-delete [@CP_OF] where Code = 530933
-delete [@CP_OF] where Code = 564257
-delete [@CP_OF] where Code = 564254
-
-*/
+	*/
 	
 /*ORDENES DE PRODUCCION GENERADAS NIVEL CABECERA. */
 /*  Orden Generada como tipo diferente a STANDAR, Cambiar a STANDAR  */
