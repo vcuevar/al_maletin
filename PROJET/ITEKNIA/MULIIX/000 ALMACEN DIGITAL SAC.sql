@@ -5,23 +5,57 @@
 
 -- Botones de Filtros
 -- Busqueda por Ordenes de Ventas.
-
 Select OV_CodigoOV AS DOC_ID
-, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
+	, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
+	, OV_CodigoOV AS LLAVE
 From OrdenesVenta
 left join Proyectos on OV_PRO_ProyectoId = PRY_ProyectoId
 Order By OV_CodigoOV 
 
 -- Busqueda por Ordenes de Compra del Cliente.
-
 Select OV_ReferenciaOC  AS DOC_ID
-, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
+	, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
+	, OV_CodigoOV AS LLAVE
 From OrdenesVenta
 left join Proyectos on OV_PRO_ProyectoId = PRY_ProyectoId
-Where Str(OV_ReferenciaOC,1,1) <> ' '
+Where OV_ReferenciaOC <> ' '
 Order By OV_ReferenciaOC  
 
-and OV_CodigoOV = 'OV01356'
+-- Busqueda por Facturas al Cliente
+Select FTR_NumeroFactura AS DOC_ID
+	, Clientes.CLI_RazonSocial  AS CLIENTE
+	, Clientes.CLI_NombreComercial AS NOM_COMER
+	, OV_CodigoOV AS LLAVE
+From Facturas
+Inner Join OrdenesVenta on FTR_OV_OrdenVentaId = OV_OrdenVentaId
+Inner Join Clientes on OV_CLI_ClienteId = CLI_ClienteId
+where FTR_Eliminado = 0 
+Order by FTR_NumeroFactura 
+
+-- Busqueda por pagos recibidos
+Select CXCP_CodigoPago AS DOC_ID
+	, Clientes.CLI_RazonSocial  AS CLIENTE
+	, Clientes.CLI_NombreComercial AS NOM_COMER
+	, OrdenesVenta.OV_CodigoOV AS LLAVE
+From CXCPagos   
+Inner Join CXCPagosDetalle on CXCP_CXCPagoId = CXCPD_CXCP_CXCPagoId  
+Inner Join Facturas on  FTR_FacturaId = CXCPD_FTR_FacturaId
+Inner Join OrdenesVenta on FTR_OV_OrdenVentaId = OV_OrdenVentaId
+Inner Join Clientes on OV_CLI_ClienteId = CLI_ClienteId
+Where CXCP_Eliminado = 0 AND CXCP_CodigoPago IS NOT NULL 
+Group By CXCP_CodigoPago, Clientes.CLI_RazonSocial, Clientes.CLI_NombreComercial, OrdenesVenta.OV_CodigoOV
+Order By CXCP_CodigoPago
+
+-- Busqueda por Ordenes de Trabajo
+Select OT_Codigo AS DOC_ID
+	, Articulos.ART_Nombre AS ARTICULO
+	, OrdenesVenta.OV_CodigoOV  AS LLAVE
+from OrdenesTrabajo
+inner join OrdenesTrabajoReferencia on OT_OrdenTrabajoId = OTRE_OT_OrdenTrabajoId
+inner join OrdenesTrabajoDetalleArticulos on OT_OrdenTrabajoId = OTDA_OT_OrdenTrabajoId
+inner join OrdenesVenta on OV_OrdenVentaId = OTRE_OV_OrdenVentaId
+inner join Articulos on OrdenesTrabajoDetalleArticulos.OTDA_ART_ArticuloId = Articulos.ART_ArticuloId 
+Order By OrdenesTrabajo.OT_Codigo
 
 
 
@@ -29,7 +63,7 @@ and OV_CodigoOV = 'OV01356'
 
 
 
-
+-- DATOS ANTERIORES DEL ALMACEN DIGITAL DESARROLLADO POR JUAN NAVARRETE.
 -- Tabla de Empleados
 select * from empleados
 

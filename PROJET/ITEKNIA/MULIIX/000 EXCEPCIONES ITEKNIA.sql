@@ -181,10 +181,15 @@ Order By OV_CodigoOV
 Select 'SIN CONTACTO PROV' AS EXC_040 
 	, PRO_CodigoProveedor 
 	, PRO_Nombre 
-	, PCON_Nombre 
+	, PCON_Nombre
+	, ProveedoresContactos.*
 From Proveedores
-Left Join ProveedoresContactos on PRO_ProveedorId = PCON_PRO_ProveedorId
-Where PRO_Activo = 1 and PCON_Nombre is NULL 
+Left Join ProveedoresContactos on PRO_ProveedorId = PCON_PRO_ProveedorId and PCON_Eliminado = 0
+Where PRO_Activo = 1  and PCON_Nombre is NULL  
+--AND PRO_CodigoProveedor  = 'P0348'
+
+
+Select ProveedoresContactos
 
 
 
