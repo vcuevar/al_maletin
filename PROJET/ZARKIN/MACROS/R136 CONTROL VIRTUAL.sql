@@ -29,8 +29,8 @@ Declare @FechaIS as Date
 Declare @FechaFS as Date
 Declare @xCodProd AS VarChar(20)
 
-Set @FechaIS = CONVERT (DATE, '2024-01-01', 102)
-Set @FechaFS = CONVERT (DATE, '2024-01-19', 102)
+Set @FechaIS = CONVERT (DATE, '2024-06-03', 102)
+Set @FechaFS = CONVERT (DATE, '2024-06-30', 102)
 
 --Set @xCodProd =  '3707-07-P0596'
 --Set @xCodProd =  '3936-38-V0340'
@@ -121,12 +121,13 @@ Order by MATERIAL
 /* ==============================================================================================
 |     MATERIAL MOVIMIENTO EN WIP.                             Hoja 5 de Excel                    |
 ============================================================================================== */
-/*
+
 Select ALM.CODIGO
 	, ALM.MATERIAL
 	, ALM.UDM
 	, ALM.PRECIO
 	, ISNULL(SUM(ALM.TRASLADOS), 0) AS TRASLADO
+	, ISNULL(SUM(ALM.PROD_OP), 0) AS PROD_OP
 	, ISNULL(SUM(ALM.CON_OP), 0) AS CON_OP
 	, ISNULL(SUM(ALM.RECLASIFICA),0) AS RECLASIFICA
 	, ISNULL(SUM(ALM.CONSUMO), 0) AS CONSUMO
@@ -136,7 +137,10 @@ Select OINM.ItemCode AS CODIGO
 	, OITM.InvntryUom AS UDM
 	, ITM1.Price as PRECIO
 	, Case When OINM.TransType = 67 then SUM(OINM.InQty - OINM.OutQty) end AS TRASLADOS
-	, Case When OINM.TransType = 59 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') or OINM.TransType = 60 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') then SUM(OINM.InQty - OINM.OutQty) end AS CON_OP
+	
+	, Case When OINM.TransType = 59 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') or OINM.TransType = 60 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') then SUM(OINM.InQty) end AS PROD_OP
+	, Case When OINM.TransType = 59 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') or OINM.TransType = 60 and (OINM.CardCode = '_SYS00000000022' or OINM.CardCode = '_SYS00000000023') then SUM(OINM.OutQty*-1) end AS CON_OP
+
 	, Case When OINM.TransType = 59 and OINM.CardCode = '_SYS00000000350' or OINM.TransType = 60 and OINM.CardCode = '_SYS00000000350' then SUM(OINM.InQty - OINM.OutQty) end AS RECLASIFICA
 	, Case When OINM.TransType = 59 and OINM.CardCode = '_SYS00000000351' or OINM.TransType = 60 and OINM.CardCode = '_SYS00000000351' then SUM(OINM.InQty - OINM.OutQty) end AS CONSUMO
 From OINM  
@@ -145,10 +149,11 @@ Inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList = 10
 Where Cast (OINM.CreateDate as DATE) between @FechaIS and @FechaFS
 and OINM.Warehouse = 'APG-ST' 
 and OITM.U_TipoMat <> 'PT'
+
 Group By OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price, OINM.TransType, OINM.CardCode ) ALM
 Group By ALM.CODIGO, ALM.MATERIAL, ALM.UDM, ALM.PRECIO 
 Order by ALM.MATERIAL
-*/
+
 
 /*
 -- Para Sacar lo entregado de los almacenes de Stock a Producción
@@ -371,7 +376,7 @@ Order By MATERIAL
 /* ==============================================================================================
 |     KARDEX DE MATERIALES.   Hoja 14 de Excel.                                                                  |
 ============================================================================================== */
-
+/*
 -- KARDEX detallado, Se maneja con el Libro de Almacen.
  Select Cast(OINM.DocDate as date) AS FECHA
 		, Case When Month(OINM.DocDate) = 1 then '01_ENE'
@@ -425,7 +430,7 @@ and OITM.U_TipoMat <> 'PT'
 and OINM.ItemCode = @xCodProd
 --Group By Month(OINM.DocDate), OINM.TransType, OINM.JrnlMemo, OINM.ItemCode, OITM.ItemName, OITM.InvntryUom, ITM1.Price
 Order by FECHA, MOVIMIENTO
-
+*/
 
 /*
 -- KARDEX Resumido, Se maneja con el Libro de Almacen.

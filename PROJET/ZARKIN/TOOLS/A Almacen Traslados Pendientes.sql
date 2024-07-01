@@ -34,20 +34,20 @@ E	Linea para Traslado Externo		S-T
  From SIZ_SolicitudesMP
  inner join SIZ_MaterialesTraslados on SIZ_MaterialesTraslados.Id_Solicitud = SIZ_SolicitudesMP.Id_Solicitud 
  inner join OITM on SIZ_MaterialesTraslados.ItemCode = OITM.ItemCode
- Where  SIZ_SolicitudesMP.Id_Solicitud = 56085
+ Where  SIZ_SolicitudesMP.Id_Solicitud = 60215
  --and SIZ_MaterialesTraslados.EstatusLinea <> 'S' 
  --and SIZ_SolicitudesMP.Status like 'Cancelada'
  --SIZ_MaterialesTraslados.ItemCode = '17653'
   Order By SIZ_SolicitudesMP.Id_Solicitud
 
 
-  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 56085
+  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 11496
 
-  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 56267 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
+  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 11496 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
 
   Select * from SIZ_MaterialesTraslados Where ItemCode = '17653'
 
-  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = 56267
+  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = 60215
 
 
 -- Para cancelar una solicitud.
@@ -55,12 +55,14 @@ E	Linea para Traslado Externo		S-T
 
   Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 56267
   
-  
+  -- Cambiar estatus a linea de los materiales trasladados. T Terminada C Cancelada
   Select * from SIZ_MaterialesTraslados  Where Id = 4791
-  Update SIZ_MaterialesTraslados Set EstatusLinea = 'E' Where Id = 19814
+  Update SIZ_MaterialesTraslados Set EstatusLinea = 'T' Where Id = 19814
+
 
    Select * from SIZ_MaterialesSolicitudes Where Id = 56267
-   Update SIZ_MaterialesSolicitudes Set EstatusLinea = 'T' Where Id = 43089
+
+   Update SIZ_MaterialesSolicitudes Set EstatusLinea = 'T', Cant_PendienteA = 0  Where Id = 64412
 
  Select DISTINCT EstatusLinea, Status 
  from SIZ_MaterialesSolicitudes

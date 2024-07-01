@@ -119,6 +119,23 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	--WHERE Cast(OITM.UpdateDate as date) > Cast(@FechaInac as date) and OITM.frozenFor='Y'
 	Order by Cast(OITM.UpdateDate as date) DESC
 
+
+-- Auditar los Inactivos y tratar de eliminar
+		select '047 INACTIVO->ELIMINAR' as REPORTE_045
+		, OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OITM.InvntryUom AS UDM
+		, OITM.OnHand AS EXISTENCIA
+		, OITM.AvgPrice AS CONTABLE
+		, OITM.frozenFor AS INACTIVO
+		, Cast(OITM.frozenFrom as date) AS FECH_INACT
+		, Cast(OITM.UpdateDate as date) AS FECH_CAMBIOI
+		,OITM.FrozenComm AS NOTAS
+	from OITM
+	WHERE OITM.frozenFor='Y' and  OITM.AvgPrice = 0 
+	and left(OITM.ItemName, 5) <> 'ZON I'
+	Order by Cast(OITM.UpdateDate as date) DESC
+
 -- Articulos con Factor en la pestaña compras.
 	Select '050 ? CON FACTOR DE CANTIDAD' AS REPORTE_050
 		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.PurFactor1
@@ -715,7 +732,7 @@ and OITM.U_IsModel = 'N'
 and OITM.U_Linea = '01' 
 and MD.MODEL is null
 and Cast(Left(OITM.ItemCode, 1) as INTEGER) > 2
-and OITM.ItemCode <> '70000'
+and OITM.ItemCode <> '70000' and OITM.ItemCode <> '3774-42-B0051'
 ORDER BY OITM.ItemName
 
 /*

@@ -371,8 +371,8 @@ Select OITM.ItemCode AS REP_051
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-300-000' AS C_AUMENTA	
-	, '501-300-000' AS C_DISMINUYE	
+	, '501-500-000' AS C_AUMENTA	
+	, '501-500-000' AS C_DISMINUYE	
 From OITM 
 Inner JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where OITM.AvgPrice = 0 and OITM.EvalSystem = 'S' and ITM1.Price <> 0 
@@ -387,8 +387,8 @@ Select OITM.ItemCode AS REP_053
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-300-000' AS C_AUMENTA	
-	, '501-300-000' AS C_DISMINUYE	
+	, '501-500-000' AS C_AUMENTA	
+	, '501-500-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
@@ -404,8 +404,8 @@ Select --'415 REVAL. MP c/e' AS REPORTE_415
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-300-000' AS C_AUMENTA	
-	, '501-300-000' AS C_DISMINUYE	
+	, '501-500-000' AS C_AUMENTA	
+	, '501-500-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
@@ -424,8 +424,8 @@ Select OITM.ItemCode AS REP_057
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-300-000' AS C_AUMENTA	
-	, '501-300-000' AS C_DISMINUYE	
+	, '501-500-000' AS C_AUMENTA	
+	, '501-500-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
@@ -442,8 +442,8 @@ Select OITM.ItemCode AS REP_059
 	, Cast(Cast(OITM.AvgPrice as decimal(16,4)) as varchar) + ' MXP' AS ESTANDAR
 	, Cast(Cast(ITM1.Price as decimal(16,4)) as varchar) + ' MXP' AS PRECIO_10
 	, OITM.DfltWH AS ALMACEN
-	, '501-300-000' AS C_AUMENTA	
-	, '501-300-000' AS C_DISMINUYE	
+	, '501-500-000' AS C_AUMENTA	
+	, '501-500-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
