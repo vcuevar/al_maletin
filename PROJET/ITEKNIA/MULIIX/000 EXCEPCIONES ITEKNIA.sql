@@ -4,11 +4,11 @@
 -- Actualizado: 07 de Enero del 2022; Origen.
 
 --Validar Usuario Vigentes y con Empleado NO ACTIVO, Actividad Dar de Baja Como Usuario.
-select '001 DAR BAJA USUARIO' AS REPORTE
-        , EMP_CodigoEmpleado AS CODIGO
+--Se cargo a las Alertas.
+/*
+select EMP_CodigoEmpleado AS CODIGO
         , EMP_Nombre + '  ' + EMP_PrimerApellido + '  ' + EMP_SegundoApellido AS NOMBRE
         , Case When EMP_Activo = 1 then 'ACTIVO' else 'DAR DE BAJA' end AS ACTIVO
-        , USU_Contrasenia AS CONTRASEÑA
         , PER_CodigoPermiso AS COD_PERMISO	
         , PER_TipoPermiso AS TIPO_PERMISO
 from Usuarios
@@ -16,9 +16,12 @@ Inner Join Empleados on EMP_EmpleadoId = USU_EMP_EmpleadoId
 Inner Join Permisos on PER_PermisoId = USU_PER_PermisoId
 where USU_Activo = 1 and EMP_Activo = 0
 --Where EMP_CodigoEmpleado = '788'
+*/
 
 --Validar Usuario Inactivo sin fecha de Baja. (VEN EN MULIIX CREO FUERON BORRADOS PARA PONER FECHA BAJA IGUAL A FECHA ALTA)
-select '002 SIN FECHA BAJA' AS REPORTE
+-- Se cargo a las Alertas el 05 de Junio del 2024.
+/*
+ select '002 SIN FECHA BAJA' AS REPORTE
         , EMP_EmpleadoId AS ID
         , EMP_CodigoEmpleado AS CODIGO
         , EMP_Nombre + '  ' + EMP_PrimerApellido + '  ' + EMP_SegundoApellido AS NOMBRE
@@ -34,6 +37,19 @@ from Empleados
 --Inner Join Permisos on PER_PermisoId = USU_PER_PermisoId
 --where EMP_CodigoEmpleado = '759' 
 Where EMP_Activo = 0 and EMP_FechaEgreso is null
+
+
+
+select '002 SIN FECHA BAJA' AS REPORTE
+        , EMP_CodigoEmpleado AS CODIGO
+        , EMP_Nombre + '  ' + EMP_PrimerApellido + '  ' + EMP_SegundoApellido AS NOMBRE
+        , Case When EMP_Activo = 1 then 'ACTIVO' else 'DAR DE BAJA' end AS ACTIVO
+        , Cast(EMP_FechaIngreso as date) AS FECH_ING
+        , Cast(EMP_FechaEgreso as date) AS FECH_BAJA
+from Empleados
+Where EMP_Activo = 0 and EMP_FechaEgreso is null
+*/
+
 
 /*
 Excepcion del 9 de Marzo del 2023. Solicite informacion a Jaq/Este.
@@ -64,8 +80,6 @@ Where ART_Activo = 1 and ART_CantMaximaOrden > 0.01 and ART_NoDiasAbastecimiento
 
 --and (ART_NoDiasAbastecimiento = 0 or ART_NoDiasAbastecimiento is null)
 --and (ART_CantMaximaOrden > 0 or ART_CantMaximaOrden is not null)
-
-
 
 -- Para Bateria de Excepciones de MULIIX
 -- Validar y ver que funcion tienen estas dos 
@@ -107,16 +121,10 @@ Order By OV_CodigoOV
 
 --Update OrdenesVenta Set OV_MONP_Paridad = 17.238 Where OV_CodigoOV = 'OV01340'
 
-
-
-
-
 --identificar estatus de bultos y sus tablas iteknia
 -- Para hacer la validacion de las existencias contra los bultos
 --PARA SABER QUE EL BULTO ESTA RECIBIDO bultos
 -- Pendiente 230420 se termine de hacer movimientos de bultos para generar la relacion.
-
-
 
 --Select *
 --from Bultos
@@ -132,8 +140,6 @@ Order By OV_CodigoOV
 --from Bultos
 --left join BultosDetalle on BULD_BUL_BultoId = BUL_BultoPadreId
 --Where BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_Eliminado = 0  and BUL_CMM_TipoBultoId = 'A00E0707-1CC9-4F59-8BA6-CD1DC4D82DD4'
-
-
 
 --PARA SABER QUE EL BULTO ESTA RECIBIDO Y SE CONSIDERE EXISTENTE EN ALMACEN NO TIENE QUE ESTAR PRE-EMBARCADO 
 --Select *
@@ -178,6 +184,8 @@ Order By OV_CodigoOV
 
 
 -- Validar que todos los proveedores cuenten con un contacto por default.
+-- Se cargo a las Alertas el 05 de Junio del 2024.
+/*
 Select 'SIN CONTACTO PROV' AS EXC_040 
 	, PRO_CodigoProveedor 
 	, PRO_Nombre 
@@ -187,14 +195,73 @@ From Proveedores
 Left Join ProveedoresContactos on PRO_ProveedorId = PCON_PRO_ProveedorId and PCON_Eliminado = 0
 Where PRO_Activo = 1  and PCON_Nombre is NULL  
 --AND PRO_CodigoProveedor  = 'P0348'
+*/
+
+--Consulta para Lista de Presion sin Predeterminado.
+Select ART_CodigoArticulo as CODIGO
+	, ART_Nombre as DESCRIPCION
+	, (Select CMUM_Nombre from ControlesMaestrosUM Where CMUM_UnidadMedidaId = ART_CMUM_UMInventarioId) as UM_INV
+	, (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = ART_CMM_SubcategoriaId) as SUB_CATEG
+	, PRO_CodigoProveedor as C_PROV
+	, PRO_Nombre as PROVEEDOR
+	, LPC_FechaVigencia as F_VIGENTE
+from ListaPreciosCompra
+inner join Articulos on LPC_ART_ArticuloId = ART_ArticuloId
+inner join Proveedores on LPC_PRO_ProveedorId = PRO_ProveedorId
+Where LPC_Eliminado = 0 
+and (Select sum(convert (int,LPC_ProvPreProgramado)) from ListaPreciosCompra where LPC_ART_ArticuloId = ART_ArticuloId AND LPC_Eliminado = 0) = 0 
+Order by ART_Nombre, PRO_Nombre
 
 
-Select ProveedoresContactos
-
-
-
-
-
+-- Lista de Precios de Proveedores. Fecha de Vencimiento pasada y material de linea.
+      Select ART_CodigoArticulo as CODIGO
+	, ART_Nombre as DESCRIPCION
+	, (Select CMUM_Nombre from ControlesMaestrosUM Where CMUM_UnidadMedidaId = ART_CMUM_UMInventarioId) as UM_INV
+	, (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = ART_CMM_SubcategoriaId) as SUB_CATEG
+	, PRO_CodigoProveedor as C_PROV
+	, PRO_Nombre as PROVEEDOR
+	, LPC_FechaVigencia as F_VIGENTE
+from ListaPreciosCompra
+inner join Articulos on LPC_ART_ArticuloId = ART_ArticuloId
+inner join Proveedores on LPC_PRO_ProveedorId = PRO_ProveedorId
+Where LPC_Eliminado = 0 
+and Cast(LPC_FechaVigencia AS DATE) < Cast(getdate() AS DATE) and ART_CMM_SubcategoriaId = '27BC3A6A-D075-4C6C-AFDF-1DEE95B23DC1'
+Order by ART_Nombre, PRO_Nombre
+            
+     
+-- Consulta para Traslados pendientes o en transito
+-- Tomar Fecha de Un mes hacia atras y al dia de ayer se cargo a Alertas 12 de Junio del 2024.
+Select * 
+From (Select TSM_CodigoSolicitud
+	, CMM_Valor
+	, CAST(TSM_FechaSolicitud AS DATE) AS FECHA
+	, ART_CodigoArticulo
+	, ART_Nombre
+    , '('+ ORIGEN.ALM_CodigoAlmacen + ') ' + ORIGEN.ALM_Nombre AS ORIGEN
+    , '('+ DESTINO.ALM_CodigoAlmacen + ') ' + DESTINO.ALM_Nombre AS DESTINO
+    , TSDM_Cantidad AS CANTIDAD_SOLICITADA  
+    , SUM(ISNULL(TDM_CantidadATraspasar,0)) AS CANTIDAD_SURTIDA
+    , ISNULL(CANTIDAD_RECIBIDA,0) AS CANTIDAD_RECIBIDA
+    From TraspasosSolicitudesManufactura
+    INNER JOIN TraspasosSolicitudesDetalleManufactura ON TSDM_TSM_TraspasoSolicitudId = TSM_TraspasoSolicitudId
+    INNER JOIN Articulos ON ART_ArticuloId = TSDM_ART_ArticuloId
+    INNER JOIN ControlesMaestrosMultiples ON CMM_ControlId = TSM_CMM_EstatusSolicitudId
+    INNER JOIN Almacenes ORIGEN ON ORIGEN.ALM_AlmacenId = TSM_ALM_AlmacenOrigenId
+    INNER JOIN Almacenes DESTINO ON DESTINO.ALM_AlmacenId = TSM_ALM_AlmacenDestinoId
+    LEFT JOIN TraspasosDetalleManufactura ON TDM_TSDM_DetalleId = TSDM_DetalleId AND TDM_Eliminado = 0
+    LEFT JOIN (SELECT TRM_TDM_TraspasoDetalleId, SUM(ISNULL(TRM_CantidadRecibo,0)) AS CANTIDAD_RECIBIDA 
+            	FROM TraspasosRecibosManufactura 
+            	WHERE TRM_Eliminado = 0
+            	GROUP BY TRM_TDM_TraspasoDetalleId
+    			) AS RECIBO ON RECIBO.TRM_TDM_TraspasoDetalleId = TDM_TraspasoDetalleId
+     WHERE ISNULL(TSM_Eliminado,0) = 0
+     AND TSM_CMM_EstatusSolicitudId <> 'AFD19273-9945-49BA-B857-CBF06852F5D1' -- Cerrada por el usuario
+     AND CAST(TSM_FechaSolicitud AS DATE) between Cast(DATEADD(DAY,-30,getdate()) AS DATE) and Cast(DATEADD(DAY,-1,getdate()) AS DATE) 
+     GROUP BY TSM_CodigoSolicitud, TSM_FechaSolicitud, CMM_Valor,ART_CodigoArticulo, ART_Nombre
+    , ORIGEN.ALM_CodigoAlmacen, ORIGEN.ALM_Nombre, DESTINO.ALM_CodigoAlmacen, DESTINO.ALM_Nombre, TSDM_Cantidad, CANTIDAD_RECIBIDA
+	) AS QUERY
+WHERE CANTIDAD_SURTIDA > 0 AND CANTIDAD_RECIBIDA <= 0
+ORDER BY TSM_CodigoSolicitud,FECHA
 
 
 
