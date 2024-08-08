@@ -198,7 +198,8 @@ Where PRO_Activo = 1  and PCON_Nombre is NULL
 */
 
 --Consulta para Lista de Presion sin Predeterminado.
-Select ART_CodigoArticulo as CODIGO
+Select 'YA EN ALERTA; SIN PREDETERMINADO' AS REPORTE_201 
+	, ART_CodigoArticulo as CODIGO
 	, ART_Nombre as DESCRIPCION
 	, (Select CMUM_Nombre from ControlesMaestrosUM Where CMUM_UnidadMedidaId = ART_CMUM_UMInventarioId) as UM_INV
 	, (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = ART_CMM_SubcategoriaId) as SUB_CATEG
@@ -213,8 +214,11 @@ and (Select sum(convert (int,LPC_ProvPreProgramado)) from ListaPreciosCompra whe
 Order by ART_Nombre, PRO_Nombre
 
 
+
+
 -- Lista de Precios de Proveedores. Fecha de Vencimiento pasada y material de linea.
-      Select ART_CodigoArticulo as CODIGO
+      Select 'YA EN ALERTA;VENCIDO PRECIO' AS REPORTE_210 
+    , ART_CodigoArticulo as CODIGO
 	, ART_Nombre as DESCRIPCION
 	, (Select CMUM_Nombre from ControlesMaestrosUM Where CMUM_UnidadMedidaId = ART_CMUM_UMInventarioId) as UM_INV
 	, (Select CMM_Valor from ControlesMaestrosMultiples Where CMM_ControlId = ART_CMM_SubcategoriaId) as SUB_CATEG

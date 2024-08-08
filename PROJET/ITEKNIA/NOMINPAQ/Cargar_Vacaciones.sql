@@ -14,8 +14,8 @@ Declare @IdEmpleado as Integer
 --Declare @FechaIS as varchar(30)
 --Declare @NumDias as Integer
 
-Set @Anual = 2022
-Set @Semana = 50
+Set @Anual = 2024
+Set @Semana = 25
 Set @IdPeriodo = 0
 Set @IdEmpleado = 0
 Set @NumEmpl = '211' --GABRIEL

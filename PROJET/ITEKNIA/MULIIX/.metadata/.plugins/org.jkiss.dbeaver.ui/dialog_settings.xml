@@ -3,8 +3,8 @@
 	<section name="DBeaver.DriverTabbedViewer">
 	</section>
 	<section name="DBeaver.ActiveWizardDialog.NewConnectionWizard">
-		<item key="DIALOG_X_ORIGIN" value="351"/>
-		<item key="DIALOG_Y_ORIGIN" value="0"/>
+		<item key="DIALOG_X_ORIGIN" value="178"/>
+		<item key="DIALOG_Y_ORIGIN" value="-21"/>
 		<item key="DIALOG_WIDTH" value="827"/>
 		<item key="DIALOG_HEIGHT" value="732"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
@@ -40,17 +40,17 @@
 	</section>
 	<section name="DBeaver.StandardErrorDialog">
 		<item key="showDetails" value="true"/>
-		<item key="DIALOG_X_ORIGIN" value="85"/>
+		<item key="DIALOG_X_ORIGIN" value="-159"/>
 		<item key="DIALOG_Y_ORIGIN" value="224"/>
 		<item key="DIALOG_WIDTH" value="1164"/>
 		<item key="DIALOG_HEIGHT" value="381"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
 	</section>
 	<section name="DBeaver.EditConnectionDialog">
-		<item key="DIALOG_X_ORIGIN" value="317"/>
-		<item key="DIALOG_Y_ORIGIN" value="9"/>
+		<item key="DIALOG_X_ORIGIN" value="-27"/>
+		<item key="DIALOG_Y_ORIGIN" value="-7"/>
 		<item key="DIALOG_WIDTH" value="700"/>
-		<item key="DIALOG_HEIGHT" value="705"/>
+		<item key="DIALOG_HEIGHT" value="700"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
 	</section>
 	<section name="DBeaver.SelectDataSourceDialog">
@@ -70,5 +70,16 @@
 	<section name="DBeaver.AutoRefresh">
 		<section name="ResultSetViewer">
 		</section>
+	</section>
+	<section name="ValueViewDialog">
+	</section>
+	<section name="DriverDownload">
+	</section>
+	<section name="DBeaver.DriverDownloadDialog">
+		<item key="DIALOG_X_ORIGIN" value="196"/>
+		<item key="DIALOG_Y_ORIGIN" value="-11"/>
+		<item key="DIALOG_WIDTH" value="613"/>
+		<item key="DIALOG_HEIGHT" value="498"/>
+		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
 	</section>
 </section>

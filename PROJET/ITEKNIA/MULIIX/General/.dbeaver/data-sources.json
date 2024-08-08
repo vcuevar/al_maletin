@@ -38,6 +38,22 @@
 				},
 				"auth-model": "sqlserver_database"
 			}
+		},
+		"postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "comeritk-odoo-dev-14432757",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "5432",
+				"database": "comeritk-odoo-dev-14432757",
+				"url": "jdbc:postgresql://localhost:5432/comeritk-odoo-dev-14432757",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {},
+				"auth-model": "native"
+			}
 		}
 	},
 	"connection-types": {
