@@ -4,7 +4,7 @@
 	</section>
 	<section name="DBeaver.ActiveWizardDialog.NewConnectionWizard">
 		<item key="DIALOG_X_ORIGIN" value="178"/>
-		<item key="DIALOG_Y_ORIGIN" value="-21"/>
+		<item key="DIALOG_Y_ORIGIN" value="0"/>
 		<item key="DIALOG_WIDTH" value="827"/>
 		<item key="DIALOG_HEIGHT" value="732"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
@@ -30,6 +30,48 @@
 		</section>
 		<section name="ErrorPresentation">
 		</section>
+		<section name="panel-column-aggregate">
+			<item key="groupByColumns" value="false"/>
+			<item key="groupAsStrings" value="false"/>
+			<section name="functions">
+				<section name="count">
+					<item key="enabled" value="true"/>
+					<item key="index" value="0"/>
+				</section>
+				<section name="countDistinct">
+					<item key="enabled" value="true"/>
+					<item key="index" value="1"/>
+				</section>
+				<section name="countNulls">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+				<section name="sum">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+				<section name="avg">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+				<section name="min">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+				<section name="max">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+				<section name="median">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+				<section name="mode">
+					<item key="enabled" value="false"/>
+					<item key="index" value="-1"/>
+				</section>
+			</section>
+		</section>
 	</section>
 	<section name="DBeaver.ShowTipOfTheDayDialog">
 		<item key="DIALOG_X_ORIGIN" value="482"/>
@@ -40,17 +82,17 @@
 	</section>
 	<section name="DBeaver.StandardErrorDialog">
 		<item key="showDetails" value="true"/>
-		<item key="DIALOG_X_ORIGIN" value="-159"/>
+		<item key="DIALOG_X_ORIGIN" value="0"/>
 		<item key="DIALOG_Y_ORIGIN" value="224"/>
 		<item key="DIALOG_WIDTH" value="1164"/>
 		<item key="DIALOG_HEIGHT" value="381"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
 	</section>
 	<section name="DBeaver.EditConnectionDialog">
-		<item key="DIALOG_X_ORIGIN" value="-27"/>
-		<item key="DIALOG_Y_ORIGIN" value="-7"/>
+		<item key="DIALOG_X_ORIGIN" value="0"/>
+		<item key="DIALOG_Y_ORIGIN" value="0"/>
 		<item key="DIALOG_WIDTH" value="700"/>
-		<item key="DIALOG_HEIGHT" value="700"/>
+		<item key="DIALOG_HEIGHT" value="705"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
 	</section>
 	<section name="DBeaver.SelectDataSourceDialog">

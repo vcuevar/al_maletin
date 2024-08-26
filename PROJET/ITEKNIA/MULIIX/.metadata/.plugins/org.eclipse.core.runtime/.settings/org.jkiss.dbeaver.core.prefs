@@ -1,4 +1,4 @@
-dialog.default.folder=/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX
+dialog.default.folder=/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/NOMINPAQ
 driver.selector.orderBy=score
 eclipse.preferences.version=1
 org.jkiss.dbeaver.core.confirm.close_result_tabs=always
@@ -6,5 +6,5 @@ org.jkiss.dbeaver.core.confirm.exit=always
 resultset.presentation.active=spreadsheet
 sample.database.canceled=true
 tipOfTheDayInitializer.notFirstRun=true
-ui.auto.update.check.time=1723045389953
+ui.auto.update.check.time=1724256794453
 ui.show.tip.of.the.day.on.startup=false

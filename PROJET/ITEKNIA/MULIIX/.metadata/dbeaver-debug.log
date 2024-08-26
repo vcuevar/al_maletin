@@ -1,24 +1,24 @@
-2024-08-07 10:09:29.654 - DBeaver 23.0.2.202304091457 is starting
-2024-08-07 10:09:29.655 - OS: Linux 6.5.0-45-generic (amd64)
-2024-08-07 10:09:29.656 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
-2024-08-07 10:09:29.656 - Install path: '/usr/share/dbeaver-ce'
-2024-08-07 10:09:29.656 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
-2024-08-07 10:09:29.657 - Memory available 64Mb/1024Mb
-2024-08-07 10:09:29.670 - Create display
-2024-08-07 10:09:29.909 - Initializing DBeaver 23.0.2
-2024-08-07 10:09:29.911 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
-2024-08-07 10:09:29.912 - Initialize desktop platform...
-2024-08-07 10:09:30.169 - BounceCastle bundle found. Use JCE provider BC
+2024-08-21 10:13:03.378 - DBeaver 23.0.2.202304091457 is starting
+2024-08-21 10:13:03.379 - OS: Linux 6.8.0-40-generic (amd64)
+2024-08-21 10:13:03.380 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
+2024-08-21 10:13:03.381 - Install path: '/usr/share/dbeaver-ce'
+2024-08-21 10:13:03.381 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
+2024-08-21 10:13:03.382 - Memory available 128Mb/1024Mb
+2024-08-21 10:13:03.394 - Create display
+2024-08-21 10:13:03.593 - Initializing DBeaver 23.0.2
+2024-08-21 10:13:03.595 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
+2024-08-21 10:13:03.595 - Initialize desktop platform...
+2024-08-21 10:13:03.937 - BounceCastle bundle found. Use JCE provider BC
 > Start Core File Systems [org.eclipse.core.filesystem 1.9.500.v20220817-1539]
 > Start Core Resource Management [org.eclipse.core.resources 3.18.100.v20221025-2047]
-> Start Núcleo del equipo de soporte [org.eclipse.team.core 3.9.600.v20220902-2219]
 > Start DBeaver UI Navigator [org.jkiss.dbeaver.ui.navigator 1.0.103.202304091457]
-2024-08-07 10:09:30.529 - Initialize base platform...
+> Start Núcleo del equipo de soporte [org.eclipse.team.core 3.9.600.v20220902-2219]
+2024-08-21 10:13:04.317 - Initialize base platform...
 > Start Expression Language [org.eclipse.core.expressions 3.8.200.v20220613-1047]
-2024-08-07 10:09:30.562 - Platform initialized (650ms)
+2024-08-21 10:13:04.356 - Platform initialized (761ms)
 > Start DBeaver UI Editors - Base [org.jkiss.dbeaver.ui.editors.base 1.0.103.202304091457]
-2024-08-07 10:09:30.580 - Starting RMI server at 62667
-2024-08-07 10:09:30.628 - Run workbench
+2024-08-21 10:13:04.375 - Starting RMI server at 31031
+2024-08-21 10:13:04.445 - Run workbench
 > Start DBeaver UI [org.jkiss.dbeaver.ui 5.1.118.202304091457]
 > Start Eclipse e4 Workbench SWT [org.eclipse.e4.ui.workbench.swt 0.16.700.v20221024-2137]
 > Start Eclipse Application Services [org.eclipse.e4.core.services 2.3.400.v20220915-1347]
@@ -32,12 +32,12 @@
 > Start Eclipse Dependency Injection Extensions [org.eclipse.e4.core.di.extensions 0.17.200.v20220613-1008]
 > Start Eclipse CSS SWT Support [org.eclipse.e4.ui.css.swt 0.14.700.v20221102-0748]
 Warning: NLS unused message: BlockedJobsDialog_UserInterfaceTreeElement in: org.eclipse.ui.internal.progress.messages
-2024-08-07 10:09:33.473 - Configure workbench window
+2024-08-21 10:13:06.794 - Configure workbench window
 > Start Núcleo del sistema de ayuda [org.eclipse.help 3.9.100.v20210721-0601]
-2024-08-07 10:09:33.629 - Create actions
-2024-08-07 10:09:33.637 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
-2024-08-07 10:09:33.639 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
-2024-08-07 10:09:33.640 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
+2024-08-21 10:13:06.948 - Create actions
+2024-08-21 10:13:06.958 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2024-08-21 10:13:06.959 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2024-08-21 10:13:06.959 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
 Warning: NLS unused message: controls_client_homes_panel_button_add_home in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: controls_client_homes_panel_button_remove_home in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: controls_client_homes_panel_confirm_remove_home_text in: org.jkiss.dbeaver.core.CoreResources
@@ -51,8 +51,8 @@ Warning: NLS unused message: controls_client_homes_panel_label_product_name in: 
 Warning: NLS unused message: controls_client_homes_panel_label_product_version in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: actions_menu_reset_workspace_state_message in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
 Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
-2024-08-07 10:09:34.366 - Initialize workbench window
-2024-08-07 10:09:34.373 - Finish initialization
+2024-08-21 10:13:07.732 - Initialize workbench window
+2024-08-21 10:13:07.746 - Finish initialization
 > Start Editor de texto predeterminado [org.eclipse.ui.editors 3.14.400.v20220730-1844]
 > Start Entorno de trabajo [org.eclipse.ui.workbench.texteditor 3.16.600.v20220809-1658]
 > Start DBeaver UI Editors - Data [org.jkiss.dbeaver.ui.editors.data 1.0.103.202304091457]
@@ -69,147 +69,1002 @@ Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jk
 > Start GEF3 GEF (MVC) [org.eclipse.gef3 3.12.100.20230406122456]
 > Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.63.202304091457]
 > Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.63.202304091457]
-2024-08-07 10:09:37.328 - Total database drivers: 101 (101)
+2024-08-21 10:13:12.633 - Total database drivers: 101 (101)
 > Start Consola [org.eclipse.ui.console 3.11.400.v20221012-0524]
 Warning: NLS unused message: InputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
 Warning: NLS unused message: OutputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
 > Start Núcleo de depuración [org.eclipse.debug.core 3.20.0.v20220811-0741]
-2024-08-07 10:09:38.681 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d88050e-255db97d1e709627)
+2024-08-21 10:13:13.729 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+> Start DBeaver SQL Server Support [org.jkiss.dbeaver.ext.mssql 1.0.197.202304091457]
+2024-08-21 10:13:13.772 - Execution context opened (ItekniaDB; Main; 0)
+2024-08-21 10:13:14.461 - Open [https://dbeaver.io/product/version.xml]
+2024-08-21 10:13:14.662 - Execution context opened (ItekniaDB; Metadata; 1)
+2024-08-21 10:13:15.421 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-08-21 10:13:15.460 - Execution context opened (ItekniaDB; SQLEditor <Prestaciones de Empleados.sql>; 2)
+2024-08-21 10:13:36.509 - Connect with 'nmITEKNIA_2016' (microsoft-18eed0a4396-2176044d5ff20ab3)
+2024-08-21 10:13:36.510 - Execution context opened (nmITEKNIA_2016; Main; 3)
+ago 21, 2024 10:13:36 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:13:36.628 - Execution context opened (nmITEKNIA_2016; Metadata; 4)
+ago 21, 2024 10:13:36 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:13:36.960 - Connected (microsoft-18eed0a4396-2176044d5ff20ab3, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-08-21 10:13:36.983 - Execution context opened (nmITEKNIA_2016; SQLEditor <Constancia de Vacaciones.sql>; 5)
+ago 21, 2024 10:13:37 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:15:43.511 - Cancel operation timed out
+org.jkiss.dbeaver.model.exec.DBCException: Cancel operation timed out
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead$PumpVisualizer.runInUIThread(ResultSetJobDataRead.java:185)
+	at org.eclipse.ui.progress.UIJob.lambda$0(UIJob.java:148)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:132)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:5040)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4520)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.jkiss.dbeaver.ui.app.standalone.DBeaverApplication.start(DBeaverApplication.java:297)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+> Start DBeaver UI Editors - Connections [org.jkiss.dbeaver.ui.editors.connection 1.0.94.202304091457]
+2024-08-21 10:16:07.952 - Execution context closed (ItekniaDB, 0)
+2024-08-21 10:16:08.003 - Execution context closed (ItekniaDB, 1)
+2024-08-21 10:16:08.005 - Can't read execution warnings
+org.jkiss.dbeaver.model.exec.DBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.getStatementWarnings(JDBCStatementImpl.java:620)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:694)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.checkClosed(SQLServerStatement.java:1063)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getWarnings(SQLServerStatement.java:1219)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.getWarnings(JDBCStatementImpl.java:567)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.getStatementWarnings(JDBCStatementImpl.java:597)
+	... 12 more
+2024-08-21 10:16:08.010 - Can't check for connection warnings
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getWarnings(SQLServerConnection.java:3721)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.close(JDBCConnectionImpl.java:327)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:136)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:16:08.054 - Execution context closed (ItekniaDB, 2)
+2024-08-21 10:16:08.054 - Disconnected (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+2024-08-21 10:16:08.128 - SQL Error [08S01]: La conexión está cerrada.
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:422)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:190)
+	... 15 more
+2024-08-21 10:16:08.140 - Internal error: data read status is empty
+2024-08-21 10:16:12.571 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+2024-08-21 10:16:12.572 - Execution context opened (ItekniaDB; Main; 6)
+2024-08-21 10:16:12.665 - Execution context opened (ItekniaDB; Metadata; 7)
+2024-08-21 10:16:12.790 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-08-21 10:16:12.796 - Execution context opened (ItekniaDB; SQLEditor <Prestaciones de Empleados.sql>; 8)
+2024-08-21 10:23:02.262 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: Socket closed
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.terminate(SQLServerConnection.java:3208)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2066)
+	at com.microsoft.sqlserver.jdbc.TDSReader.readPacket(IOBuffer.java:6617)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.startResponse(IOBuffer.java:7803)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:870)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeQueryInternal(SQLServerStatement.java:699)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getSchema(SQLServerConnection.java:5698)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:345)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.read(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(Unknown Source)
+	at java.base/java.net.Socket$SocketInputStream.read(Unknown Source)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2058)
+	... 25 more
+2024-08-21 10:23:02.265 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getCatalog(SQLServerConnection.java:3681)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:336)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:23:02.267 - Can't check for connection warnings
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getWarnings(SQLServerConnection.java:3721)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.close(JDBCConnectionImpl.java:327)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:136)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:23:02.384 - SQL Error [08S01]: La conexión está cerrada.
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 15 more
+2024-08-21 10:27:24.489 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getCatalog(SQLServerConnection.java:3681)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:336)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:27:24.491 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:27:24.498 - Invalidate datasource 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+2024-08-21 10:27:24.499 - 	Invalidate context 'Main' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-08-21 10:27:24.551 - Execution context closed (ItekniaDB, 6)
+2024-08-21 10:27:24.686 - 	Invalidate context 'Metadata' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-08-21 10:27:24.687 - org.jkiss.dbeaver.DBException: Error loading object metadata from database
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructLookupCache.reloadObject(JDBCStructLookupCache.java:131)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructLookupCache.getObject(JDBCStructLookupCache.java:61)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema.getChild(SQLServerSchema.java:272)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema.getChild(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.findNestedObject(DBUtils.java:368)
+	at org.jkiss.dbeaver.model.sql.SQLSearchUtils.findObjectByPath(SQLSearchUtils.java:151)
+	at org.jkiss.dbeaver.model.sql.SQLSearchUtils.findObjectByFQN(SQLSearchUtils.java:105)
+	at org.jkiss.dbeaver.model.sql.SQLSearchUtils.findObjectByFQN(SQLSearchUtils.java:65)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.runAnalyzer(SQLCompletionAnalyzer.java:302)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.runAnalyzer(SQLCompletionAnalyzer.java:103)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.run(SQLCompletionAnalyzer.java:87)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.run(SQLCompletionAnalyzer.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.syntax.SQLCompletionProcessor$ProposalSearchJob.run(SQLCompletionProcessor.java:334)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3408)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:260)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareLookupStatement(SQLServerSchema.java:412)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareLookupStatement(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructLookupCache.reloadObject(JDBCStructLookupCache.java:110)
+	... 15 more
+2024-08-21 10:27:24.689 - org.jkiss.dbeaver.DBException: Error loading object metadata from database
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructLookupCache.reloadObject(JDBCStructLookupCache.java:131)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructLookupCache.getObject(JDBCStructLookupCache.java:61)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema.getChild(SQLServerSchema.java:272)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema.getChild(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.findNestedObject(DBUtils.java:368)
+	at org.jkiss.dbeaver.model.sql.SQLSearchUtils.findObjectByPath(SQLSearchUtils.java:151)
+	at org.jkiss.dbeaver.model.sql.SQLSearchUtils.findObjectByFQN(SQLSearchUtils.java:122)
+	at org.jkiss.dbeaver.model.sql.SQLSearchUtils.findObjectByFQN(SQLSearchUtils.java:65)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.runAnalyzer(SQLCompletionAnalyzer.java:302)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.runAnalyzer(SQLCompletionAnalyzer.java:103)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.run(SQLCompletionAnalyzer.java:87)
+	at org.jkiss.dbeaver.model.sql.completion.SQLCompletionAnalyzer.run(SQLCompletionAnalyzer.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.syntax.SQLCompletionProcessor$ProposalSearchJob.run(SQLCompletionProcessor.java:334)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3408)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:260)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareLookupStatement(SQLServerSchema.java:412)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareLookupStatement(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructLookupCache.reloadObject(JDBCStructLookupCache.java:110)
+	... 15 more
+2024-08-21 10:27:24.736 - Execution context closed (ItekniaDB, 7)
+2024-08-21 10:27:24.806 - 	Invalidate context 'SQLEditor <Prestaciones de Empleados.sql>' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-08-21 10:27:24.857 - Execution context closed (ItekniaDB, 8)
+2024-08-21 10:27:24.940 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 15 more
+2024-08-21 10:31:22.769 - SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+
+Error position:
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: El nombre de columna ' ' no es válido.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 12 more
+2024-08-21 10:32:18.274 - SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: El nombre de columna ' ' no es válido.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 12 more
+2024-08-21 10:32:48.047 - SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+
+Error position:
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: El nombre de columna ' ' no es válido.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 12 more
+2024-08-21 10:33:51.385 - SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+
+Error position: line: 2
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: El nombre de columna ' ' no es válido.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 12 more
+2024-08-21 10:34:39.290 - SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: El nombre de columna ' ' no es válido.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 12 more
+2024-08-21 10:35:05.833 - SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+
+Error position: line: 1
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [207] [S0001]: El nombre de columna ' ' no es válido.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: El nombre de columna ' ' no es válido.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 12 more
+2024-08-21 10:37:48.282 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: Socket closed
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.terminate(SQLServerConnection.java:3208)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2066)
+	at com.microsoft.sqlserver.jdbc.TDSReader.readPacket(IOBuffer.java:6617)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.startResponse(IOBuffer.java:7803)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:870)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeQueryInternal(SQLServerStatement.java:699)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getSchema(SQLServerConnection.java:5698)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:345)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.read(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(Unknown Source)
+	at java.base/java.net.Socket$SocketInputStream.read(Unknown Source)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2058)
+	... 25 more
+2024-08-21 10:37:48.287 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getCatalog(SQLServerConnection.java:3681)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:336)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:37:48.289 - Can't check for connection warnings
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getWarnings(SQLServerConnection.java:3721)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.close(JDBCConnectionImpl.java:327)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:136)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:37:48.409 - SQL Error [08S01]: La conexión está cerrada.
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 15 more
+2024-08-21 10:37:54.827 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getCatalog(SQLServerConnection.java:3681)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:336)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:37:54.828 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:37:54.828 - Invalidate datasource 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+2024-08-21 10:37:54.828 - 	Invalidate context 'Main' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-08-21 10:37:54.878 - Execution context closed (ItekniaDB, 6)
+2024-08-21 10:37:54.965 - 	Invalidate context 'Metadata' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-08-21 10:37:54.966 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:37:54.966 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:37:54.966 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:37:54.967 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:37:54.968 - Invalidate datasource 'ItekniaDB' connections...
+2024-08-21 10:37:55.015 - Execution context closed (ItekniaDB, 7)
+2024-08-21 10:37:55.056 - 	Invalidate context 'SQLEditor <Prestaciones de Empleados.sql>' for microsoft-18eec9a6eb0-46b1a1deaef42b3d
+2024-08-21 10:37:55.106 - Execution context closed (ItekniaDB, 8)
+2024-08-21 10:37:55.139 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 15 more
+2024-08-21 10:37:55.167 - Datasource 'ItekniaDB' was already invalidated
+2024-08-21 10:37:55.167 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.DBException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:177)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.getChildren(JDBCStructCache.java:221)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerTableBase.getAttributes(SQLServerTableBase.java:133)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.extractPropertyValue(DBNDatabaseNode.java:964)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1036)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadTreeItems(DBNDatabaseNode.java:595)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadChildren(DBNDatabaseNode.java:464)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:227)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl.getColumnNodes(SuggestionInformationControl.java:254)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl$4.run(SuggestionInformationControl.java:194)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3408)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:260)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:453)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:96)
+	... 18 more
+2024-08-21 10:37:55.168 - Datasource 'ItekniaDB' was already invalidated
+2024-08-21 10:37:55.168 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.DBException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:177)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.getChildren(JDBCStructCache.java:221)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerTableBase.getAttributes(SQLServerTableBase.java:133)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.extractPropertyValue(DBNDatabaseNode.java:964)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1036)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadTreeItems(DBNDatabaseNode.java:595)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadChildren(DBNDatabaseNode.java:464)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:227)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl.getColumnNodes(SuggestionInformationControl.java:254)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl$4.run(SuggestionInformationControl.java:194)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3408)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:260)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:453)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:96)
+	... 18 more
+2024-08-21 10:37:55.168 - Datasource 'ItekniaDB' was already invalidated
+2024-08-21 10:37:55.168 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [08S01]: Socket closed
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCPreparedStatementImpl.executeStatement(JDBCPreparedStatementImpl.java:208)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:98)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.getChildren(JDBCStructCache.java:221)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerTableBase.getAttributes(SQLServerTableBase.java:133)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.extractPropertyValue(DBNDatabaseNode.java:964)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1036)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadTreeItems(DBNDatabaseNode.java:595)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadChildren(DBNDatabaseNode.java:464)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:227)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl.getColumnNodes(SuggestionInformationControl.java:254)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl$4.run(SuggestionInformationControl.java:194)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Socket closed
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.terminate(SQLServerConnection.java:3208)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2066)
+	at com.microsoft.sqlserver.jdbc.TDSReader.readPacket(IOBuffer.java:6617)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.startResponse(IOBuffer.java:7803)
+	at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:600)
+	at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:524)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.execute(SQLServerPreparedStatement.java:505)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCPreparedStatementImpl.execute(JDBCPreparedStatementImpl.java:261)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCPreparedStatementImpl.executeStatement(JDBCPreparedStatementImpl.java:205)
+	... 19 more
+Caused by: java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.read(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(Unknown Source)
+	at java.base/java.net.Socket$SocketInputStream.read(Unknown Source)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2058)
+	... 30 more
+2024-08-21 10:37:55.169 - Datasource 'ItekniaDB' was already invalidated
+2024-08-21 10:37:55.169 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.DBException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:177)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.getChildren(JDBCStructCache.java:221)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerTableBase.getAttributes(SQLServerTableBase.java:133)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.extractPropertyValue(DBNDatabaseNode.java:964)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1036)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadTreeItems(DBNDatabaseNode.java:595)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadChildren(DBNDatabaseNode.java:464)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:227)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl.getColumnNodes(SuggestionInformationControl.java:254)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl$4.run(SuggestionInformationControl.java:194)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3408)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:260)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:453)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:96)
+	... 18 more
+2024-08-21 10:37:55.176 - Datasource 'ItekniaDB' was already invalidated
+2024-08-21 10:37:55.177 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.DBException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:177)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.getChildren(JDBCStructCache.java:221)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerTableBase.getAttributes(SQLServerTableBase.java:133)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.extractPropertyValue(DBNDatabaseNode.java:964)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1036)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode$PropertyValueReader.run(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadTreeItems(DBNDatabaseNode.java:595)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.loadChildren(DBNDatabaseNode.java:464)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:227)
+	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl.getColumnNodes(SuggestionInformationControl.java:254)
+	at org.jkiss.dbeaver.ui.editors.sql.dialogs.SuggestionInformationControl$4.run(SuggestionInformationControl.java:194)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3772)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.prepareStatement(SQLServerConnection.java:3408)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:260)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:453)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerSchema$TableCache.prepareChildrenStatement(SQLServerSchema.java:1)
+	at org.jkiss.dbeaver.model.impl.jdbc.cache.JDBCStructCache.loadChildren(JDBCStructCache.java:96)
+	... 18 more
+2024-08-21 10:41:09.082 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: Socket closed
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.terminate(SQLServerConnection.java:3208)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2066)
+	at com.microsoft.sqlserver.jdbc.TDSReader.readPacket(IOBuffer.java:6617)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.startResponse(IOBuffer.java:7803)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:870)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeQueryInternal(SQLServerStatement.java:699)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getSchema(SQLServerConnection.java:5698)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:345)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.read(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(Unknown Source)
+	at java.base/java.net.Socket$SocketInputStream.read(Unknown Source)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.read(IOBuffer.java:2058)
+	... 25 more
+2024-08-21 10:41:09.105 - Table not found. 
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getCatalog(SQLServerConnection.java:3681)
+	at org.jkiss.dbeaver.ext.mssql.SQLServerUtils.getTableFromQuery(SQLServerUtils.java:336)
+	at org.jkiss.dbeaver.ext.mssql.model.SQLServerDataSource.isForceTransform(SQLServerDataSource.java:539)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1379)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:41:09.109 - Can't check for connection warnings
+com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.getWarnings(SQLServerConnection.java:3721)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.close(JDBCConnectionImpl.java:327)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:136)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2024-08-21 10:41:09.201 - SQL Error [08S01]: La conexión está cerrada.
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 15 more
+2024-08-21 10:41:10.983 - Invalidate datasource 'nmITEKNIA_2016' connections...
+2024-08-21 10:41:10.983 - Invalidate datasource 'nmITEKNIA_2016' (microsoft-18eed0a4396-2176044d5ff20ab3)
+2024-08-21 10:41:10.984 - 	Invalidate context 'Main' for microsoft-18eed0a4396-2176044d5ff20ab3
+2024-08-21 10:41:11.035 - Execution context closed (nmITEKNIA_2016, 3)
+ago 21, 2024 10:41:11 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:41:11.078 - 	Invalidate context 'Metadata' for microsoft-18eed0a4396-2176044d5ff20ab3
+2024-08-21 10:41:11.128 - Execution context closed (nmITEKNIA_2016, 4)
+ago 21, 2024 10:41:11 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:41:11.158 - 	Invalidate context 'SQLEditor <Constancia de Vacaciones.sql>' for microsoft-18eed0a4396-2176044d5ff20ab3
+2024-08-21 10:41:11.208 - Execution context closed (nmITEKNIA_2016, 5)
+ago 21, 2024 10:41:11 A. M. com.microsoft.sqlserver.jdbc.TDSChannel enableSSL
+ADVERTENCIA: TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:41:11.235 - Operation failed. Retry count remains = 1
+org.jkiss.dbeaver.model.impl.jdbc.JDBCException: SQL Error [08S01]: La conexión está cerrada.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:209)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:1)
+	at org.jkiss.dbeaver.model.DBUtils.createStatement(DBUtils.java:1448)
+	at org.jkiss.dbeaver.model.DBUtils.makeStatement(DBUtils.java:1414)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:558)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.run(SQLQueryJob.java:238)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: La conexión está cerrada.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.checkClosed(SQLServerConnection.java:1217)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.createStatement(SQLServerConnection.java:3756)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.createStatement(JDBCConnectionImpl.java:413)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCConnectionImpl.prepareStatement(JDBCConnectionImpl.java:131)
+	... 10 more
+2024-08-21 10:41:12.757 - SQL Warning (DataSource: nmITEKNIA_2016; Code: 0; State: null): TLSv1 was negotiated. Please update server and client to use TLSv1.2 at minimum.
+2024-08-21 10:46:13.351 - Connect with 'master' (microsoft-1914defdee7-3b8c84f3e57077bd)
+2024-08-21 10:46:13.351 - Execution context opened (master; Main; 9)
+2024-08-21 10:46:13.440 - Execution context opened (master; Metadata; 10)
+2024-08-21 10:46:13.969 - Connected (microsoft-1914defdee7-3b8c84f3e57077bd, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-08-21 10:46:14.005 - Execution context opened (master; SQLEditor <000 ALMACEN DIGITAL COM.sql>; 11)
+2024-08-21 11:00:32.944 - org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [156] [S0001]: Sintaxis incorrecta cerca de la palabra clave 'Where'.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.run(SQLQueryJob.java:238)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Sintaxis incorrecta cerca de la palabra clave 'Where'.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement$StmtExecCmd.doExecute(SQLServerStatement.java:767)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7418)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:3274)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:247)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:222)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.execute(SQLServerStatement.java:743)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.execute(JDBCStatementImpl.java:329)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
+	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
+	... 7 more
+> Start DBeaver Data Transfer [org.jkiss.dbeaver.data.transfer 2.0.87.202304091457]
+2024-08-21 11:10:45.564 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
 > Start DBeaver PostgreSQL Support [org.jkiss.dbeaver.ext.postgresql 2.1.176.202304091457]
 > Start DBeaver GIS Support [org.jkiss.dbeaver.data.gis 1.0.127.202304091457]
-2024-08-07 10:09:38.870 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 0)
-2024-08-07 10:09:38.879 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
-2024-08-07 10:09:38.899 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
-> Start DBeaver SQL Server Support [org.jkiss.dbeaver.ext.mssql 1.0.197.202304091457]
-2024-08-07 10:09:38.913 - Execution context opened (ItekniaDB; Main; 1)
-> Start DBeaver UI Editors - Connections [org.jkiss.dbeaver.ui.editors.connection 1.0.94.202304091457]
-2024-08-07 10:09:40.025 - Execution context opened (ItekniaDB; Metadata; 2)
-2024-08-07 10:09:40.256 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
-2024-08-07 10:09:40.262 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 3)
-2024-08-07 10:09:46.443 - Error creating driver 'PostgreSQL' instance.
-Most likely required jar files are missing.
-You should configure jars in driver settings.
-
-Reason: can't load driver class 'org.postgresql.Driver'
-org.jkiss.dbeaver.DBException: Error creating driver 'PostgreSQL' instance.
-Most likely required jar files are missing.
-You should configure jars in driver settings.
-
-Reason: can't load driver class 'org.postgresql.Driver'
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.loadDriver(DriverDescriptor.java:1188)
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.loadDriver(DriverDescriptor.java:1122)
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.getDriverInstance(DriverDescriptor.java:675)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.getDriverInstance(JDBCDataSource.java:697)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.openConnection(JDBCDataSource.java:177)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.openConnection(PostgreDataSource.java:527)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDatabase.checkInstanceConnection(PostgreDatabase.java:226)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDatabase.<init>(PostgreDatabase.java:119)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.createDatabaseImpl(PostgreDataSource.java:276)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.initializeRemoteInstance(PostgreDataSource.java:171)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:108)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:99)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.<init>(PostgreDataSource.java:104)
-	at org.jkiss.dbeaver.ext.postgresql.PostgreDataSourceProvider.openDataSource(PostgreDataSourceProvider.java:114)
-	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1191)
-	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1056)
-	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
-	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.runSync(ConnectJob.java:97)
-	at org.jkiss.dbeaver.ui.actions.datasource.DataSourceHandler.connectToDataSource(DataSourceHandler.java:109)
-	at org.jkiss.dbeaver.ui.actions.datasource.UIServiceConnectionsImpl.initConnection(UIServiceConnectionsImpl.java:87)
-	at org.jkiss.dbeaver.model.navigator.DBNDataSource.initializeNode(DBNDataSource.java:158)
-	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:225)
-	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
-	at org.jkiss.dbeaver.model.navigator.DBNUtils.getNodeChildrenFiltered(DBNUtils.java:80)
-	at org.jkiss.dbeaver.ui.navigator.database.load.TreeLoadService.evaluate(TreeLoadService.java:49)
-	at org.jkiss.dbeaver.ui.navigator.database.load.TreeLoadService.evaluate(TreeLoadService.java:1)
-	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:88)
-	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:72)
-	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-Caused by: java.lang.ClassNotFoundException: org.postgresql.Driver
-	at java.base/java.net.URLClassLoader.findClass(Unknown Source)
-	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
-	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
-	at java.base/java.lang.Class.forName0(Native Method)
-	at java.base/java.lang.Class.forName(Unknown Source)
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.loadDriver(DriverDescriptor.java:1186)
-	... 31 more
-> Start DBeaver PostgreSQL Support UI [org.jkiss.dbeaver.ext.postgresql.ui 1.0.79.202304091457]
-2024-08-07 10:09:54.727 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
-2024-08-07 10:10:03.335 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d88050e-255db97d1e709627)
-2024-08-07 10:10:03.336 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 4)
-2024-08-07 10:10:03.337 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
-2024-08-07 10:10:08.936 - Error creating driver 'PostgreSQL' instance.
-Most likely required jar files are missing.
-You should configure jars in driver settings.
-
-Reason: can't load driver class 'org.postgresql.Driver'
-org.jkiss.dbeaver.DBException: Error creating driver 'PostgreSQL' instance.
-Most likely required jar files are missing.
-You should configure jars in driver settings.
-
-Reason: can't load driver class 'org.postgresql.Driver'
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.loadDriver(DriverDescriptor.java:1188)
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.loadDriver(DriverDescriptor.java:1122)
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.getDriverInstance(DriverDescriptor.java:675)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.getDriverInstance(JDBCDataSource.java:697)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.openConnection(JDBCDataSource.java:177)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.openConnection(PostgreDataSource.java:527)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext.connect(JDBCExecutionContext.java:103)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCRemoteInstance.initializeMainContext(JDBCRemoteInstance.java:102)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDatabase.checkInstanceConnection(PostgreDatabase.java:226)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDatabase.<init>(PostgreDatabase.java:119)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.createDatabaseImpl(PostgreDataSource.java:276)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.initializeRemoteInstance(PostgreDataSource.java:171)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:108)
-	at org.jkiss.dbeaver.model.impl.jdbc.JDBCDataSource.<init>(JDBCDataSource.java:99)
-	at org.jkiss.dbeaver.ext.postgresql.model.PostgreDataSource.<init>(PostgreDataSource.java:104)
-	at org.jkiss.dbeaver.ext.postgresql.PostgreDataSourceProvider.openDataSource(PostgreDataSourceProvider.java:114)
-	at org.jkiss.dbeaver.registry.DataSourceDescriptor.openDataSource(DataSourceDescriptor.java:1191)
-	at org.jkiss.dbeaver.registry.DataSourceDescriptor.connect(DataSourceDescriptor.java:1056)
-	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.run(ConnectJob.java:70)
-	at org.jkiss.dbeaver.runtime.jobs.ConnectJob.runSync(ConnectJob.java:97)
-	at org.jkiss.dbeaver.ui.actions.datasource.DataSourceHandler.connectToDataSource(DataSourceHandler.java:109)
-	at org.jkiss.dbeaver.ui.actions.datasource.UIServiceConnectionsImpl.initConnection(UIServiceConnectionsImpl.java:87)
-	at org.jkiss.dbeaver.model.navigator.DBNDataSource.initializeNode(DBNDataSource.java:158)
-	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:225)
-	at org.jkiss.dbeaver.model.navigator.DBNDatabaseNode.getChildren(DBNDatabaseNode.java:1)
-	at org.jkiss.dbeaver.model.navigator.DBNUtils.getNodeChildrenFiltered(DBNUtils.java:80)
-	at org.jkiss.dbeaver.ui.navigator.database.load.TreeLoadService.evaluate(TreeLoadService.java:49)
-	at org.jkiss.dbeaver.ui.navigator.database.load.TreeLoadService.evaluate(TreeLoadService.java:1)
-	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:88)
-	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:72)
-	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-Caused by: java.lang.ClassNotFoundException: org.postgresql.Driver
-	at java.base/java.net.URLClassLoader.findClass(Unknown Source)
-	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
-	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
-	at java.base/java.lang.Class.forName0(Native Method)
-	at java.base/java.lang.Class.forName(Unknown Source)
-	at org.jkiss.dbeaver.registry.driver.DriverDescriptor.loadDriver(DriverDescriptor.java:1186)
-	... 31 more
-2024-08-07 10:10:21.461 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d88050e-255db97d1e709627)
-2024-08-07 10:10:21.462 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 5)
-2024-08-07 10:10:21.463 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
-2024-08-07 10:10:38.949 - Open [https://repo1.maven.org/maven2/org/postgresql/postgresql/42.5.0/postgresql-42.5.0.jar]
-2024-08-07 10:10:39.581 - Open [https://repo1.maven.org/maven2/org/checkerframework/checker-qual/3.5.0/checker-qual-3.5.0.jar]
-2024-08-07 10:10:39.660 - Open [https://repo1.maven.org/maven2/net/postgis/postgis-jdbc/2.5.0/postgis-jdbc-2.5.0.pom]
-2024-08-07 10:10:39.700 - Open [https://repo1.maven.org/maven2/net/postgis/postgis-java-aggregator/2.5.0/postgis-java-aggregator-2.5.0.pom]
-2024-08-07 10:10:39.752 - Open [https://repo1.maven.org/maven2/org/testcontainers/testcontainers-bom/1.13.0/testcontainers-bom-1.13.0.pom]
-2024-08-07 10:10:39.800 - Open [https://repo1.maven.org/maven2/net/postgis/postgis-jdbc/2.5.0/postgis-jdbc-2.5.0.jar]
-2024-08-07 10:10:39.843 - Open [https://repo1.maven.org/maven2/net/postgis/postgis-geometry/2.5.0/postgis-geometry-2.5.0.pom]
-2024-08-07 10:10:39.886 - Open [https://repo1.maven.org/maven2/net/postgis/postgis-geometry/2.5.0/postgis-geometry-2.5.0.jar]
-2024-08-07 10:10:39.931 - Open [https://repo1.maven.org/maven2/com/github/waffle/waffle-jna/1.9.1/waffle-jna-1.9.1.jar]
-2024-08-07 10:10:39.985 - Open [https://repo1.maven.org/maven2/net/java/dev/jna/jna/4.5.1/jna-4.5.1.jar]
-2024-08-07 10:10:40.252 - Open [https://repo1.maven.org/maven2/net/java/dev/jna/jna-platform/4.5.1/jna-platform-4.5.1.jar]
-2024-08-07 10:10:40.657 - Open [https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar]
-2024-08-07 10:10:40.703 - Open [https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar]
-2024-08-07 10:10:40.750 - Open [https://repo1.maven.org/maven2/com/github/ben-manes/caffeine/caffeine/2.6.2/caffeine-2.6.2.jar]
-2024-08-07 10:10:40.895 - Open [https://raw.githubusercontent.com/pgjdbc/pgjdbc/master/LICENSE]
-2024-08-07 10:10:41.519 - Conexión rehusada
+2024-08-21 11:10:45.677 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 12)
+2024-08-21 11:10:45.678 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:10:45.784 - Conexión rehusada
 java.net.ConnectException: Conexión rehusada
 	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
 	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
@@ -227,13 +1082,11 @@ java.net.ConnectException: Conexión rehusada
 	at org.postgresql.Driver.access$100(Driver.java:61)
 	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
 	at java.base/java.lang.Thread.run(Unknown Source)
-> Start DBeaver Tasks View [org.jkiss.dbeaver.tasks.ui.view 1.0.52.202304091457]
-> Start DBeaver Tasks - General UI [org.jkiss.dbeaver.tasks.ui 1.0.81.202304091457]
-2024-08-07 10:11:10.263 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
-2024-08-07 10:12:08.282 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d88050e-255db97d1e709627)
-2024-08-07 10:12:08.284 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 6)
-2024-08-07 10:12:08.284 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
-2024-08-07 10:12:08.305 - Conexión rehusada
+2024-08-21 11:13:11.720 - Execution context opened (ItekniaDB; SQLEditor <Prestaciones de Empleados.sql>; 13)
+2024-08-21 11:13:11.808 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:13:11.809 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 14)
+2024-08-21 11:13:11.809 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:13:11.860 - Conexión rehusada
 java.net.ConnectException: Conexión rehusada
 	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
 	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
@@ -251,11 +1104,10 @@ java.net.ConnectException: Conexión rehusada
 	at org.postgresql.Driver.access$100(Driver.java:61)
 	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
 	at java.base/java.lang.Thread.run(Unknown Source)
-2024-08-07 10:12:17.618 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
-2024-08-07 10:13:00.869 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
-2024-08-07 10:13:00.872 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 7)
-2024-08-07 10:13:00.872 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
-2024-08-07 10:13:00.881 - Conexión rehusada
+2024-08-21 11:13:12.173 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:13:12.175 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 15)
+2024-08-21 11:13:12.175 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:13:12.277 - Conexión rehusada
 java.net.ConnectException: Conexión rehusada
 	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
 	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
@@ -273,9 +1125,142 @@ java.net.ConnectException: Conexión rehusada
 	at org.postgresql.Driver.access$100(Driver.java:61)
 	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
 	at java.base/java.lang.Thread.run(Unknown Source)
-2024-08-07 11:57:36.126 - System suspend detected! Reinitialize all remote connections.
-2024-08-07 13:44:24.415 - Execution context closed (ItekniaDB, 3)
-2024-08-07 13:44:24.803 - DBeaver is stopping
-2024-08-07 13:44:24.804 - Stop RMI server
-2024-08-07 13:44:24.805 - RMI controller has been stopped
-2024-08-07 13:44:24.805 - DBeaver shutdown completed
+2024-08-21 11:14:10.887 - Execution context closed (ItekniaDB, 13)
+2024-08-21 11:14:26.384 - Execution context opened (ItekniaDB; SQLEditor <Prestaciones de Empleados.sql>; 16)
+2024-08-21 11:14:26.438 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:14:26.439 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 17)
+2024-08-21 11:14:26.439 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:14:26.460 - Conexión rehusada
+java.net.ConnectException: Conexión rehusada
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:241)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:109)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
+	at org.postgresql.Driver.makeConnection(Driver.java:434)
+	at org.postgresql.Driver.access$100(Driver.java:61)
+	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
+	at java.base/java.lang.Thread.run(Unknown Source)
+2024-08-21 11:14:26.866 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:14:26.867 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 18)
+2024-08-21 11:14:26.867 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:14:26.927 - Conexión rehusada
+java.net.ConnectException: Conexión rehusada
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:241)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:109)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
+	at org.postgresql.Driver.makeConnection(Driver.java:434)
+	at org.postgresql.Driver.access$100(Driver.java:61)
+	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
+	at java.base/java.lang.Thread.run(Unknown Source)
+2024-08-21 11:16:28.495 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:16:28.496 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 19)
+2024-08-21 11:16:28.496 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:16:28.527 - Conexión rehusada
+java.net.ConnectException: Conexión rehusada
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:241)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:109)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
+	at org.postgresql.Driver.makeConnection(Driver.java:434)
+	at org.postgresql.Driver.access$100(Driver.java:61)
+	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
+	at java.base/java.lang.Thread.run(Unknown Source)
+2024-08-21 11:25:33.779 - Can't get column 'is_hidden': El nombre de columna is_hidden no es válido.
+2024-08-21 11:28:58.015 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:28:58.016 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 20)
+2024-08-21 11:28:58.016 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:28:58.137 - Conexión rehusada
+java.net.ConnectException: Conexión rehusada
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:241)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:109)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
+	at org.postgresql.Driver.makeConnection(Driver.java:434)
+	at org.postgresql.Driver.access$100(Driver.java:61)
+	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
+	at java.base/java.lang.Thread.run(Unknown Source)
+2024-08-21 11:29:20.765 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:29:20.766 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 21)
+2024-08-21 11:29:20.766 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:29:20.789 - Conexión rehusada
+java.net.ConnectException: Conexión rehusada
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:241)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:109)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
+	at org.postgresql.Driver.makeConnection(Driver.java:434)
+	at org.postgresql.Driver.access$100(Driver.java:61)
+	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
+	at java.base/java.lang.Thread.run(Unknown Source)
+2024-08-21 11:30:56.641 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 22)
+2024-08-21 11:30:56.915 - Connect with 'comeritk-odoo-dev-14432757' (postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99)
+2024-08-21 11:30:56.917 - Execution context opened (comeritk-odoo-dev-14432757; Main <comeritk-odoo-dev-14432757>; 23)
+2024-08-21 11:30:56.917 - Initiate connection to PostgreSQL database [comeritk-odoo-dev-14432757@localhost] for Main <comeritk-odoo-dev-14432757>
+2024-08-21 11:30:56.975 - Conexión rehusada
+java.net.ConnectException: Conexión rehusada
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:241)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:109)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
+	at org.postgresql.Driver.makeConnection(Driver.java:434)
+	at org.postgresql.Driver.access$100(Driver.java:61)
+	at org.postgresql.Driver$ConnectThread.run(Driver.java:344)
+	at java.base/java.lang.Thread.run(Unknown Source)
+2024-08-21 11:31:17.677 - Execution context closed (master, 11)
+2024-08-21 11:40:57.127 - Execution context closed (ItekniaDB, 22)
+2024-08-21 11:40:57.313 - Execution context closed (nmITEKNIA_2016, 5)
+2024-08-21 11:40:57.408 - Execution context closed (ItekniaDB, 8)
+2024-08-21 11:40:57.786 - Execution context closed (ItekniaDB, 16)
+2024-08-21 11:40:58.258 - DBeaver is stopping
+2024-08-21 11:40:58.259 - Stop RMI server
+2024-08-21 11:40:58.264 - RMI controller has been stopped
+2024-08-21 11:40:58.265 - DBeaver shutdown completed

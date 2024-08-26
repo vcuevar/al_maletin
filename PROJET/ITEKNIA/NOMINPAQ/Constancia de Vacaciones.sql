@@ -13,23 +13,24 @@ Set @Anual = 2024
 Set @NumEmpl = '00021' -- ABRAHAM.
 
 -- Derecho de Vacaciones antes del Periodo.
-Select SUM(Cast((Case When NOM10007.IdConcepto = 21 then (NOM10007.Valor)/.25 else 0 end) as Decimal(16,2))) AS VAC_Derecho
+Select NOM10001.codigoempleado, NOM10001.nombrelargo, SUM(Cast((Case When NOM10007.IdConcepto = 21 then (NOM10007.Valor)/.25 else 0 end) as Decimal(16,2))) AS VAC_Derecho
 from nom10007 
 Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
 Inner Join NOM10002 on NOM10002.idperiodo = NOM10007.idperiodo  
-where NOM10002.ejercicio < @Anual and 
-NOM10001.codigoempleado = @NumEmpl
+where NOM10002.ejercicio < @Anual 
+--and NOM10001.codigoempleado = @NumEmpl
 and NOM10007.IdConcepto = 21
+Group by NOM10001.codigoempleado, NOM10001.nombrelargo
 
 -- Vacaciones Tomadas
-Select SUM(Cast((Case When NOM10007.IdConcepto = 20 then NOM10007.Valor else 0 end) as Decimal(16,2))) AS VAC_TOMADAS
+Select NOM10001.codigoempleado, NOM10001.nombrelargo, SUM(Cast((Case When NOM10007.IdConcepto = 20 then NOM10007.Valor else 0 end) as Decimal(16,2))) AS VAC_TOMADAS
 from nom10007 
 Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
 Inner Join NOM10002 on NOM10002.idperiodo = NOM10007.idperiodo  
-where NOM10002.ejercicio < @Anual and 
-NOM10001.codigoempleado = @NumEmpl
+where NOM10002.ejercicio < @Anual 
+--and NOM10001.codigoempleado = @NumEmpl
 and NOM10007.IdConcepto = 20
-
+Group by NOM10001.codigoempleado, NOM10001.nombrelargo
 -- Datos del Periodo Actual. 
 
 Select NOM10001.codigoempleado AS CODE_EMPLEADO
@@ -71,3 +72,16 @@ NOM10001.codigoempleado = @NumEmpl
 and NOM10007.IdConcepto = 21 -- Vacaciones Derecho
 
 Order By PERIODO  
+
+
+
+
+Select NOM10001.codigoempleado AS CODE_EMPLEADO
+	, NOM10001.nombre + ' ' + NOM10001.apellidopaterno  + ' ' + NOM10001.apellidomaterno AS NOMBRE
+	, NOM10001.sueldodiario  AS SUELDO_DIA	
+	, Cast(NOM10001.fechasueldodiario as date) AS FEC_SDIA
+	, Cast(NOM10001.fechareingreso as date) AS FEC_INGRESO
+from nom10001
+where NOM10001.codigoempleado = '00021'
+
+

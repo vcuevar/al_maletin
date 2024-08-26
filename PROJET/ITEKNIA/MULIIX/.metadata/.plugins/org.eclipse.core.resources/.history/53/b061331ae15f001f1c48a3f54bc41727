@@ -1,0 +1,26 @@
+
+
+
+select * from RPT_VACACIONES 
+Where VAC_EMP_EmpleadoId = '021'
+
+Select DISTINCT (OV_CMM_EstadoOVId) from OrdenesVenta 
+
+3CE37D96-1E8A-49A7-96A1-2E837FA3DCF5	CMM_VEN_EstadoOV	Abierta
+2209C8BF-8259-4D8C-A0E9-389F52B33B46	CMM_VEN_EstadoOV	Cerrada Por Usuario
+D528E9EC-83CF-49BE-AEED-C3751A3B0F27	CMM_VEN_EstadoOV	Embarque Completo
+
+Parece que estas no se usan.
+3C387542-8DFC-42CC-8C49-5B6D32092C0C	CMM_VEN_EstadoOV	Embarque Parcial
+90CAC435-DE6B-4148-BD20-16BCE3112936	CMM_VEN_EstadoOV	Facturado Completo
+C580C240-44D7-4CE7-9EED-339F2DA967F5	CMM_VEN_EstadoOV	Facturado Parcial
+
+
+
+
+Select * from ControlesMaestrosMultiples 
+--Where CMM_ControlId = '2209C8BF-8259-4D8C-A0E9-389F52B33B46' 
+Where CMM_Control = 'CMM_VEN_EstadoOV'
+
+
+exec SP_RPT_VAC_VACACIONES_KARDEX_XANIO '021', '2024'

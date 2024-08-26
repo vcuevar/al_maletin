@@ -269,11 +269,17 @@ ORDER BY TSM_CodigoSolicitud,FECHA
 
 
 
+-- ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA
 
+Select F.EMP_employeeNumber, E.EMP_CodigoEmpleado, * from RPT_EMPLOYEES F 
+left Join Empleados E on E.EMP_CodigoEmpleado = SubString(F.EMP_employeeNumber, 2, 4) 
+Where E.EMP_Activo = 1
 
+--Select * from Usuarios where USU_Nombre = '972'
+--Select * from Empleados 
+--Where EMP_Activo = 1 and 
+--Cast(EMP_CodigoEmpleado as int) = 1005
+--Order By EMP_CodigoEmpleado desc 
 
-
-
-
-
+--Select * from RPT_EMPLOYEES --Where EMP_employeeNumber = '01005'
 

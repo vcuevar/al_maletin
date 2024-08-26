@@ -182,3 +182,7 @@ Where ND_Eliminado = 0
 --Para el caso de que sea cualquier otro parametro el filtro es por el Codigo de la OC
 Where ADC.GRUPO_ID = 'OC08617'
 
+
+
+
+Select * from ControlesMaestrosMultiples Where CMM_Control = 'CMM_COC_EstadoOrdenCompra'
