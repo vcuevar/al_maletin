@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2024/04/04', 102)
+Set @FechaInac =  CONVERT (DATE, '2024/08/20', 102)
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -12, GETDATE()))
 
@@ -132,7 +132,8 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 		, Cast(OITM.UpdateDate as date) AS FECH_CAMBIOI
 		,OITM.FrozenComm AS NOTAS
 	from OITM
-	WHERE OITM.frozenFor='Y' and  OITM.AvgPrice = 0 
+	WHERE OITM.frozenFor='Y'
+	and  OITM.AvgPrice = 0 
 	and left(OITM.ItemName, 5) <> 'ZON I'
 	Order by Cast(OITM.UpdateDate as date) DESC
 
@@ -361,6 +362,9 @@ Order By T0.[ItemName]
 
 -- Obtener Determinacion del Almacen por defauld para SP (32) VARIOS => APG-ST Grupo Diferentes
 -- a 5, 13, 26 y 28.
+-- Se rompio la excepcion 12/Agosto/2024 al generar articulos sub-ensambles que en realidad son materias primas
+-- con otro nombre para que se distiga segun eso de los muebles de cine normal a los de Reparaciones REFURNISH.
+/*
 SELECT '195 ALM-DFT SB. ' AS REPORTE_195
 	, T0.[ItemCode] AS CODIGO
 		, T0.[ItemName] AS DESCRIPCION
@@ -371,6 +375,7 @@ FROM  [dbo].[OITM] T0
 WHERE T0.[DfltWH] <> 'APG-ST' and T0.[QryGroup32] = 'Y' and T0.U_GrupoPlanea <> '5' and T0.U_GrupoPlanea <> '6' 
 and T0.U_GrupoPlanea <> '13' and T0.U_GrupoPlanea <> '26'and T0.U_GrupoPlanea <> '27' and T0.U_GrupoPlanea <> '28'
 Order By T0.[ItemName]
+*/
 
 SELECT '196 ALM-DFT HE. ' AS REPORTE_196
 	, T0.[ItemCode] AS CODIGO
@@ -498,6 +503,7 @@ Order By OITM.ItemName
 	and OITM.ItemName not like '%BASTON%' and OITM.ItemName not like '%CAJA%' and OITM.ItemName not like '%CUBIERTA%'
 	and OITM.ItemName not like '%BOTON%' and OITM.ItemName not like '%MESA%' and OITM.ItemName not like '%VISTA%'
 	and OITM.ItemName not like '%CASCO%' and OITM.ItemName not like '%BASE%' and OITM.ItemName not like '%ZOCLO%' 
+	and OITM.ItemName not like '%ENGROSADO%' 
 	ORDER BY OITM.ItemName		
 		
 -- VER-160414 VALIDAR ALMACEN DE COMPLEMENTOS SEA APT-PA 
@@ -716,6 +722,7 @@ SELECT '242 A OBS. PT MOD-OBS' AS REPO_242
 	and MD.MODEL is null
 	ORDER BY OITM.ItemName
 */
+
 -- PT Que su MODELO este OBSOLETO.
 SELECT '242 A LIN. PT MOD-LIN' AS REPO_242
 	, OITM.ItemCode AS CODIGO

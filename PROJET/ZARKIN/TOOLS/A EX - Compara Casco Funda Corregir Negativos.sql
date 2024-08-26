@@ -12,12 +12,12 @@ algo pasa que no captura la cantidad recibida */
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 399822
 	update [@CP_OF] set U_Recibido= 1 where Code= 23199
 
-	delete [@CP_OF] where Code = 588174
+	delete [@CP_OF] where Code = 624642
 	delete [@CP_OF] where Code = 388704
 	delete [@CP_OF] where Code = 388705
 	delete [@CP_OF] where Code = 388700
 	delete [@CP_OF] where Code = 506616
-	delete [@CP_OF] where Code = 506649
+	delete [@CP_OF] where Code = 607268
 
 
 
@@ -41,17 +41,17 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_DocEntry = 45934 where Code=2662
-	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 591902
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2662
-	update [@CP_OF] set U_Recibido= 1 where Code= 2662
+	update [@CP_OF] set U_DocEntry = 45934 where Code=2664
+	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 2664
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2664
+	update [@CP_OF] set U_Recibido= 1 where Code= 2664
 
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 47101
+	Set @NumOrd = 52059
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -62,7 +62,7 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 47101 --and U_CT = 172   --and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 49809  --and U_CT = 172   --and U_idEmpleado = 79
 	order by  U_FechaHora, U_CT
 	 
 	Select * from  [@CP_LOGOF] where Code = 388700
@@ -70,7 +70,7 @@ ORDER BY CP.U_DocEntry
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 44 Where Code = 603595
+	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 636884
 	update [@CP_LOGOF] set U_idEmpleado = 272 Where Code = 603596
 
 	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 507416
@@ -92,7 +92,7 @@ ORDER BY CP.U_DocEntry
 	
 
 
-DELETE [@CP_LOGOF] WHERE Code = 603593
+DELETE [@CP_LOGOF] WHERE Code = 617222
 DELETE [@CP_LOGOF] WHERE Code = 603594
 
 DELETE [@CP_LOGOF] WHERE Code = 495333

@@ -427,16 +427,19 @@ inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
 Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P') 
 
 -- Ordenes de Subensamble ACABADOS.
-
-Select '150 OP ACABADO' AS REPORTE_150
-	, OWOR.DocNum AS OP
-	, OWOR.ItemCode AS CODIGO
-	, A3.ItemName AS DESCRIPCION
-	, A3.InvntryUom AS UDM
-	, 'CANCELAR O CERRAR' AS ACCION
-from OWOR
-inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
-Where (OWOR.Status = 'R' or OWOR.Status = 'P') and A3.QryGroup32 = 'Y' and A3.ItemName like '%ACABA%'
+-- Esta consulta se desarrollo para cuidar que no generaran ordenes de acabados.
+--Pero generaro 01/08/2024 codigo PIZZA ELECTRICO REFURNISH 1R, -KIT ACABADO-,
+-- Y se rompio la excepsion.
+--Select '150 OP ACABADO' AS REPORTE_150
+--	, OWOR.DocNum AS OP
+--	, OWOR.ItemCode AS CODIGO
+--	, A3.ItemName AS DESCRIPCION
+--	, A3.InvntryUom AS UDM
+--	, 'CANCELAR O CERRAR' AS ACCION
+--from OWOR
+--inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
+--Where (OWOR.Status = 'R' or OWOR.Status = 'P') and A3.QryGroup32 = 'Y'
+--and A3.ItemName like '%ACABA%'
 
 
 

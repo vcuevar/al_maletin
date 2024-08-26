@@ -4,7 +4,9 @@
 
 -- Consulta los Reportes ya Asignados.
 
-Select * from SIZ_RBEV Where CodeRepo = 'GZ-VMA-2307-135' Order By NombRepo
+Select * from SIZ_RBEV 
+--Where CodeRepo = 'GZ-VMA-2307-135' 
+Order By NombRepo
 
 -- Modificar un Reporte a su Nueva Version
 
@@ -16,9 +18,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'GZ-VMA-2405-140'
-Set @Nomb = 'Inspeccion de Materiales.'
-Set @Vers = 'VMA240517A'
+Set @Code = 'GZ-VMA-2408-010'
+Set @Nomb = 'Back Order Costeado.'
+Set @Vers = 'VMA240816A'
 
 Insert Into [dbo].[SIZ_RBEV]
 			( [CodeRepo], [NombRepo], [NumeVers])

@@ -66,6 +66,8 @@
 
 
 --El articulo contiene CINTI debe ser Refaccion
+-- Se rompio la Excepcion al armar subensambles para los articulo de cines REFURNISH.
+/*
 	SELECT '022 CINTLLO RF' AS REPORTE_022
 		, OITT.Code AS CODIGO
 		, A3.ItemName AS DESCRIPCION
@@ -77,7 +79,7 @@
 	inner join OITM A3 on OITT.Code = A3.ItemCode
 	WHERE  A3.ItemName LIKE '%CINTI%' and A3.U_TipoMat <> 'RF' 
 	ORDER BY A3.ItemName	
-	   
+*/	   
 --El almacen de las refacciones que contiene palabra CINTI deben caer al almacen APG-ST
 	SELECT '023 CINTLLO APG-ST ENTREGA' AS REPORTE_023
 		, OITT.Code AS CODIGO
@@ -448,7 +450,106 @@
 	FROM OITM
 	WHERE OITM.U_TipoMat <> 'MP' AND OITM.U_GrupoPlanea = 6 
 
+	
 
+
+-- ================================================================================================
+-- |                    SUB ENSAMBLES QUE SE ENCUENTRAN EN NIVEL 4                                |
+-- ================================================================================================
+	
+-- Subensambles que estan en Nivel 4.
+SELECT '920 SP EN NIV-4' AS REPORTE_920
+	, LD4.Code AS CODIGO4 
+	, INV4.ItemName AS NOMBRE4
+	, INV4.InvntryUom AS UDM4
+	, INV4.U_TipoMat AS TIPO4
+	, INV4.QryGroup29 AS CASCO4
+	, INV4.QryGroup30 AS HABILITADO4
+	, INV4.QryGroup31 AS PATAS4
+	, INV4.QryGroup32 AS VARIOS4
+FROM 
+(
+SELECT LD3.Code AS CODIGO3 
+	, INV3.ItemName AS NOMBRE3
+	, INV3.InvntryUom AS UDM3
+	, INV3.U_TipoMat AS TIPO3
+	, INV3.QryGroup29 AS CASCO3
+	, INV3.QryGroup30 AS HABILITADO3
+	, INV3.QryGroup31 AS PATAS3
+	, INV3.QryGroup32 AS VARIOS3
+FROM
+(
+SELECT LD2.Code AS CODIGO2 
+	, INV2.ItemName AS NOMBRE2
+	, INV2.InvntryUom AS UDM2
+	, INV2.U_TipoMat AS TIPO2
+	, INV2.QryGroup29 AS CASCO2
+	, INV2.QryGroup30 AS HABILITADO2
+	, INV2.QryGroup31 AS PATAS2
+	, INV2.QryGroup32 AS VARIOS2
+FROM 
+(
+SELECT N1.ItemCode AS CODIGO1
+	, N1.ItemName AS NOMBRE1
+	, N1.InvntryUom AS UDM1
+	, N1.U_TipoMat AS TIPO1
+	, N1.QryGroup29 AS CASCO1
+	, N1.QryGroup30 AS HABILITADO1
+	, N1.QryGroup31 AS PATAS1
+	, N1.QryGroup32 AS VARIOS1
+FROM OITM N1
+WHERE (N1.QryGroup29 = 'Y' 
+OR N1.QryGroup30 = 'Y' 
+OR N1.QryGroup31 = 'Y' 
+OR N1.QryGroup32 = 'Y')
+) N2
+INNER JOIN ITT1 LD2 ON LD2.Father = N2.CODIGO1
+INNER JOIN OITM INV2 ON LD2.Code = INV2.ItemCode 
+WHERE (INV2.QryGroup29 = 'Y' 
+OR INV2.QryGroup30 = 'Y' 
+OR INV2.QryGroup31 = 'Y' 
+OR INV2.QryGroup32 = 'Y')
+) N3
+INNER JOIN ITT1 LD3 ON LD3.Father = N3.CODIGO2
+INNER JOIN OITM INV3 ON LD3.Code = INV3.ItemCode
+WHERE (INV3.QryGroup29 = 'Y' 
+OR INV3.QryGroup30 = 'Y' 
+OR INV3.QryGroup31 = 'Y' 
+OR INV3.QryGroup32 = 'Y')
+) N4
+INNER JOIN ITT1 LD4 ON LD4.Father = N4.CODIGO3
+INNER JOIN OITM INV4 ON LD4.Code = INV4.ItemCode
+WHERE (INV4.QryGroup29 = 'Y' 
+OR INV4.QryGroup30 = 'Y' 
+OR INV4.QryGroup31 = 'Y' 
+OR INV4.QryGroup32 = 'Y')
+GROUP BY LD4.Code, INV4.ItemName
+	, INV4.InvntryUom 
+	, INV4.U_TipoMat 
+	, INV4.QryGroup29 
+	, INV4.QryGroup30 
+	, INV4.QryGroup31 
+	, INV4.QryGroup32
+ORDER BY INV4.ItemName
+
+-- ================================================================================================
+-- |                    SUB ENSAMBLES QUE NADIE LO REQUIERE                                       |
+-- ================================================================================================
+	
+-- Subensambles que no requiere nadie.
+SELECT '930 SP NO REQUERIDOS' AS REPORTE_920
+	, LD.Father AS PADRE
+	, INV.ItemCode AS CODIGO
+	, INV.ItemName AS DESCRIPCION
+	, INV.InvntryUom AS UDM
+
+FROM OITM INV
+LEFT JOIN ITT1 LD ON INV.ItemCode = LD.Code
+WHERE (INV.QryGroup29 = 'Y' 
+OR INV.QryGroup30 = 'Y' 
+OR INV.QryGroup31 = 'Y' 
+OR INV.QryGroup32 = 'Y') AND LD.Father IS NULL
+AND INV.frozenFor = 'N'
 
 
 

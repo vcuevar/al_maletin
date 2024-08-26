@@ -19,7 +19,7 @@ INNER JOIN OUBR ON OHEM.branch=OUBR.Code
 LEFT JOIN HEM6 ON OHEM.empID = HEM6.empID 
 LEFT JOIN OHTY ON HEM6.roleID = OHTY.typeID 
 LEFT JOIN OHST ON OHEM.status = OHST.statusID 
-where OHEM.Status = 1 --And OHEM.dept = 7 
+where OHEM.Status = 1 And  OHEM.U_CP_CT like '%136%' 
 order by OUBR.Name, OHEM.jobTitle, ohem.firstname
  
 

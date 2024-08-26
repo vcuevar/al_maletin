@@ -2,6 +2,14 @@
 -- Desarrollado: Ing. Vicente Cueva Ramirez.
 -- Actualizado: Viernes 16 de febrero del 2024; Origen.
 
+
+-- Parece que la Vista que hace el calculo corresponde a View_MRP2017_2
+-- Martes 20 de agosto del 2024.
+
+Select * from View_MRP2017_2
+Where ItemCode = '16590'
+
+
 Select BO.OP AS OP
 	, BO.Pedido AS PEDIDO
 	, BO.CODIGO AS CODE
@@ -19,8 +27,9 @@ Select BO.OP AS OP
 From SIZ_View_ReporteBO BO
 Inner Join WOR1 on BO.OP = WOR1.DocEntry
 Inner Join ITT1 on BO.CODIGO  = ITT1.Father and  WOR1.ItemCode = ITT1.Code
-Where WOR1.ItemCode = '19600'
-Order By BO.SEMANA3
+Where WOR1.ItemCode = '16590' --    BO.SEMANA4 = 2434  
+Order By BO.Descripcion
+
 
 --Select top(10) * from ITT1
 

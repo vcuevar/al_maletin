@@ -193,7 +193,7 @@ Order By OITM.ItemName
 */
 /*
 -- No usar cambios al Estandar ya que dira David como se hara Marzo 22
--- Validar DIFERENCIAS SOLO MP, ENTRE 7 Y 10 SE CORRIGE MACRO SIN EXISTENCIAS
+-- Validar DIFERENCIAS SOLO MP, ENTRE 7 Y 10 SE CORRIGE MACRO SIN EXISTENCIAS (Jorge Suarez y Marcos Elias)
 Select	'310 MP 7 <> 10 s/exit' AS FINANZAS_310
 		, OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
@@ -435,7 +435,7 @@ Order By OITM.ItemName
 
 -- Usar Revalorizacion de Inventarios. PT diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
-Select OITM.ItemCode AS REP_059
+Select Top(200) OITM.ItemCode AS REP_059
 	, OITM.ItemName AS NOMBRE
 	, OITM.InvntryUom as UDM
 	, OITM.OnHand AS EXISTENCIA 
@@ -446,7 +446,7 @@ Select OITM.ItemCode AS REP_059
 	, '501-500-000' AS C_DISMINUYE	
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
-Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4)) 
+Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4)) 
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 
 and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 

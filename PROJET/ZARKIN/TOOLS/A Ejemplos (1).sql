@@ -2,7 +2,7 @@
 
 
 
-Uso de clï¿½usulas HAVING y WHERE en la misma consulta
+Uso de cláusulas HAVING y WHERE en la misma consulta
 
 -- Definir variables sobre todo fechas
 
@@ -47,12 +47,6 @@ DATEPART(ISO_Week, '2017/14/04') As Viernes, DATEPART(ISO_Week, '2017/15/04') As
 DATEPART(ISO_Week, '2017/16/04') As Domingo, DATEPART(ISO_Week, '2017/17/04') As Lunes      
 
 
-
---Restar o sumar dias a una fecha o al dia de hoy.
-SELECT DATEADD(DAY,-1,@VFecha)
-
-SELECT DATEADD(DAY,-1,getdate())
-
 /* Uso del Case when */
 -- Para hacer que en una sola columna se presenten la opciones.
 Select ODLN.DocEntry, ODLN.DocDate,
@@ -91,39 +85,39 @@ uSO DEL if VALIDAR.
 if P1.existencia is null then 0 else P1.existencia end as Disponible,
 
 -- GETDATE Devuelve la fecha con hora del sistema.Devuelve un valor datetime que contiene la fecha y hora del equipo
--- en el que la instancia de SQL Server se estï¿½ ejecutando. El ajuste de zona horaria no estï¿½ incluido.
+-- en el que la instancia de SQL Server se está ejecutando. El ajuste de zona horaria no está incluido.
 select GETDATE(),* from [@CP_LOGOF] where U_DocEntry=48784 order by U_CT
 
-Este artï¿½culo se tradujo de forma manual. Mueva el puntero sobre las frases del artï¿½culo para ver el texto original. Mï¿½s informaciï¿½n.
-Traducciï¿½n Original
+Este artículo se tradujo de forma manual. Mueva el puntero sobre las frases del artículo para ver el texto original. Más información.
+Traducción Original
 GETDATE (Transact-SQL)
 
 SQL Server 2014 Otras versiones 
-Devuelve la marca de tiempo del sistema de base de datos actual como un valor datetime sin el ajuste de zona horaria de la base de datos. Este valor se deriva del sistema operativo del equipo donde la instancia de SQL Server se estï¿½ ejecutando.
+Devuelve la marca de tiempo del sistema de base de datos actual como un valor datetime sin el ajuste de zona horaria de la base de datos. Este valor se deriva del sistema operativo del equipo donde la instancia de SQL Server se está ejecutando.
 Nota Nota
-SYSDATETIME y SYSUTCDATETIME tienen mï¿½s precisiï¿½n de fracciones de segundo que GETDATE y GETUTCDATE. SYSDATETIMEOFFSET incluye el ajuste de zona horaria del sistema. SYSDATETIME, SYSUTCDATETIME y SYSDATETIMEOFFSET pueden asignarse a una variable de cualquier tipo de fecha y hora.
-Para obtener informaciï¿½n general acerca de todos los tipos de datos y funciones de fecha y hora de Transact-SQL, vea Tipos de datos y funciones de fecha y hora (Transact-SQL).
-Se aplica a: SQL Server (SQL Server 2008 a versiï¿½n actual), Windows Azure SQL Database (Versiï¿½n inicial a versiï¿½n actual).
-Icono de vï¿½nculo a temas Convenciones de sintaxis de Transact-SQL
+SYSDATETIME y SYSUTCDATETIME tienen más precisión de fracciones de segundo que GETDATE y GETUTCDATE. SYSDATETIMEOFFSET incluye el ajuste de zona horaria del sistema. SYSDATETIME, SYSUTCDATETIME y SYSDATETIMEOFFSET pueden asignarse a una variable de cualquier tipo de fecha y hora.
+Para obtener información general acerca de todos los tipos de datos y funciones de fecha y hora de Transact-SQL, vea Tipos de datos y funciones de fecha y hora (Transact-SQL).
+Se aplica a: SQL Server (SQL Server 2008 a versión actual), Windows Azure SQL Database (Versión inicial a versión actual).
+Icono de vínculo a temas Convenciones de sintaxis de Transact-SQL
 Sintaxis
  GETDATE ( )
 Tipo de valor devuelto
 datetime
 Comentarios
 Las instrucciones Transact-SQL pueden hacer referencia a GETDATE en cualquier parte desde la que puedan
-hacer referencia a una expresiï¿½n datetime.
-GETDATE es una funciï¿½n no determinista. 
-Las vistas y las expresiones que hacen referencia a esta funciï¿½n en una columna no se pueden indizar.
+hacer referencia a una expresión datetime.
+GETDATE es una función no determinista. 
+Las vistas y las expresiones que hacen referencia a esta función en una columna no se pueden indizar.
 
-Usar SWITCHOFFSET con la funciï¿½n GETDATE() puede hacer que la consulta se ejecute lentamente debido
+Usar SWITCHOFFSET con la función GETDATE() puede hacer que la consulta se ejecute lentamente debido
 a que el optimizador de consultas no puede obtener estimaciones de cardinalidad precisas para el valor
-de GETDATE. Se recomienda calcular previamente el valor de GETDATE y despuï¿½s especificar el valor
+de GETDATE. Se recomienda calcular previamente el valor de GETDATE y después especificar el valor
 en la consulta como se muestra en el ejemplo siguiente.
 
-Ademï¿½s, se debe usar la sugerencia de consulta OPTION (RECOMPILE) para obligar al optimizador de
-consultas a que vuelva a compilar un plan de consulta la prï¿½xima vez que se ejecute la misma consulta. 
-De este modo, el optimizador tendrï¿½ estimaciones de cardinalidad precisas para GETDATE() y generarï¿½
-un plan de consulta mï¿½s eficaz.
+Además, se debe usar la sugerencia de consulta OPTION (RECOMPILE) para obligar al optimizador de
+consultas a que vuelva a compilar un plan de consulta la próxima vez que se ejecute la misma consulta. 
+De este modo, el optimizador tendrá estimaciones de cardinalidad precisas para GETDATE() y generará
+un plan de consulta más eficaz.
 
 DECLARE @dt datetimeoffset = switchoffset (CONVERT(datetimeoffset, GETDATE()), '-04:00'); 
 SELECT * FROM t  
@@ -132,7 +126,7 @@ WHERE c1 > @dt OPTION (RECOMPILE);
 Ejemplos
 Los ejemplos siguientes usan las seis funciones de sistema de SQL Server que devuelven la fecha y hora
 actuales para devolver la fecha, la hora o ambas. Los valores se devuelven en serie; por consiguiente,
-sus fracciones de segundo podrï¿½an ser diferentes.
+sus fracciones de segundo podrían ser diferentes.
 A.Obtener la fecha y hora actuales del sistema
 
 SELECT SYSDATETIME()
