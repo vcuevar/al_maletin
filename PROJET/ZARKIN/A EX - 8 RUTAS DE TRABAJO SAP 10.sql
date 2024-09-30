@@ -278,6 +278,7 @@ Rutas con Estaciones No Autorizadas 103 Activar Orden	*/
 	from OITM
 	Where OITM.ItemName Like '%CINTI%' AND OITM.U_TipoMat = 'RF'
 	AND OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136'
+	and OITM.frozenFor = 'N'
 						
 
 	/*

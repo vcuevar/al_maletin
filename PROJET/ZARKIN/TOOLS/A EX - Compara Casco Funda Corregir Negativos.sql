@@ -12,12 +12,12 @@ algo pasa que no captura la cantidad recibida */
 	update [@CP_OF] set U_Entregado = 3, U_Procesado = 3 where Code = 399822
 	update [@CP_OF] set U_Recibido= 1 where Code= 23199
 
-	delete [@CP_OF] where Code = 624642
+	delete [@CP_OF] where Code = 636373
 	delete [@CP_OF] where Code = 388704
 	delete [@CP_OF] where Code = 388705
 	delete [@CP_OF] where Code = 388700
 	delete [@CP_OF] where Code = 506616
-	delete [@CP_OF] where Code = 607268
+
 
 
 
@@ -41,17 +41,17 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-	update [@CP_OF] set U_DocEntry = 45934 where Code=2664
-	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 2664
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2664
-	update [@CP_OF] set U_Recibido= 1 where Code= 2664
-
+	update [@CP_OF] set U_DocEntry = 51820 where Code=2667
+	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 2667
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2667
+	update [@CP_OF] set U_Recibido= 248 where Code= 2667
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
+		delete [@CP_OF] where Code = 636082
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 52059
+	Set @NumOrd = 51820
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -62,19 +62,18 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 49809  --and U_CT = 172   --and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 52810 -- and U_CT = 415   --and U_idEmpleado = 79
 	order by  U_FechaHora, U_CT
 	 
-	Select * from  [@CP_LOGOF] where Code = 388700
+	Select * from  [@CP_LOGOF] where Code = 648110
 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
+	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 652473
+
 	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 636884
 	update [@CP_LOGOF] set U_idEmpleado = 272 Where Code = 603596
-
-	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 507416
-
 
 	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 530338
 	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 530339
@@ -82,17 +81,8 @@ ORDER BY CP.U_DocEntry
 	update [@CP_LOGOF] set U_idEmpleado = 65 Where Code = 530341
 	update [@CP_LOGOF] set U_idEmpleado = 85 Where Code = 530342
 
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27417 and U_CT = 112 and U_idEmpleado = 79
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27418 and U_CT = 112 and U_idEmpleado = 79
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27419 and U_CT = 112 and U_idEmpleado = 79
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27420 and U_CT = 112 and U_idEmpleado = 79
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27421 and U_CT = 112 and U_idEmpleado = 79
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27422 and U_CT = 112 and U_idEmpleado = 79
-	update [@CP_LOGOF] set U_idEmpleado = 37 where U_DocEntry= 27423 and U_CT = 112 and U_idEmpleado = 79
-	
 
-
-DELETE [@CP_LOGOF] WHERE Code = 617222
+DELETE [@CP_LOGOF] WHERE Code = 648060
 DELETE [@CP_LOGOF] WHERE Code = 603594
 
 DELETE [@CP_LOGOF] WHERE Code = 495333
@@ -108,18 +98,8 @@ DELETE [@CP_LOGOF] WHERE Code = 474701
 DELETE [@CP_LOGOF] WHERE Code = 474702
 DELETE [@CP_LOGOF] WHERE Code = 474703
 
-	DELETE [@CP_LOGOF] WHERE Code = 474678
-	DELETE [@CP_LOGOF] WHERE Code = 474679
-	DELETE [@CP_LOGOF] WHERE Code = 474680
-	DELETE [@CP_LOGOF] WHERE Code = 474681
-	DELETE [@CP_LOGOF] WHERE Code = 474682
-	DELETE [@CP_LOGOF] WHERE Code = 474683
-	DELETE [@CP_LOGOF] WHERE Code = 381584
-	DELETE [@CP_LOGOF] WHERE Code = 381585
-	DELETE [@CP_LOGOF] WHERE Code = 381586
-	
 
-	update [@CP_LOGOF] set U_Cantidad = 8 Where Code = 407346
+update [@CP_LOGOF] set U_Cantidad = 10 Where Code = 497367
 
 
 De la OP 36994 se borraron estos renglones que no fueron reales 18 de Agosto 2023.

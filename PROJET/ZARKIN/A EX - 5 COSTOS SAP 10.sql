@@ -380,6 +380,9 @@ and OITM.InvntItem = 'Y' and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
 
 -- Usar Revalorizacion de Inventarios. MP sin Existencia.
+-- 20 de Septiembre solo se deja lo que este con costo estandar cero, 
+--parece que ya entendieron los contadores que no necesitamos igualar.
+/*
 Select OITM.ItemCode AS REP_053
 	, OITM.ItemName AS NOMBRE
 	, OITM.InvntryUom as UDM
@@ -432,9 +435,10 @@ Where Cast(OITM.AvgPrice as decimal(16,4)) < Cast(ITM1.Price as decimal(16,4))
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 and OITM.OnHand = 0
 and OITM.U_TipoMat <> 'MP' and OITM.U_TipoMat <> 'PT' and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
-
+*/
 -- Usar Revalorizacion de Inventarios. PT diferente sin existencia.
 -- 01/DIC/21 SUSPENDO HASTA VER QUE PASOS DA PABLO AL VER DIFERENCIAS.
+/*
 Select Top(200) OITM.ItemCode AS REP_059
 	, OITM.ItemName AS NOMBRE
 	, OITM.InvntryUom as UDM
@@ -450,10 +454,10 @@ Where Cast(OITM.AvgPrice as decimal(16,4)) <> Cast(ITM1.Price as decimal(16,4))
 and OITM.InvntItem = 'Y' and OITM.AvgPrice > 0 
 and OITM.U_TipoMat = 'PT' and OITM.OnHand = 0 and  OITM.frozenFor = 'N'
 Order By OITM.ItemName 
-
+*/
 -- Articulos Pendientes por Inactivar que aun tienen Existencia
 -- Al 12/Agosto/2022 Quedan 539 Articulos.
-/*
+
 	Select	'431 PENDIENTES POR INHABILITAR' AS REPO_431, 
 					OITM.ItemCode AS CODIGO,
 					OITM.ItemName AS DESCRIPCION,
@@ -466,12 +470,12 @@ Order By OITM.ItemName
 		from ITM1 L10
 		inner join OITM on L10.ItemCode = OITM.ItemCode and L10.PriceList=10
 		where OITM.ItemCode like '%ZIN%' and frozenFor = 'N'
-		and (OITM.OnHand + OITM.OnOrder + OITM.IsCommited > 0)
+		and (OITM.OnHand + OITM.OnOrder + OITM.IsCommited = 0)
 		Order By OITM.ItemName
 
-Select * from OITM Where OITM.EvalSystem = 'A'
+--Select * from OITM Where OITM.EvalSystem = 'A'
 
-*/
+
 
 
 

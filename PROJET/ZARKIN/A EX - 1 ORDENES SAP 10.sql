@@ -348,7 +348,7 @@ Order By ORDR.DocEntry
 
 Declare @Complejo as nvarchar(100)
 Declare @Pedido as integer
-Set @Pedido = 1655
+Set @Pedido = 2267
 Set @Complejo = (Select ORDR.U_comp from ORDR Where ORDR.DocEntry = @Pedido)
 
 Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido

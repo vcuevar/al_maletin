@@ -177,3 +177,100 @@ INNER JOIN ITM1 L7 on OITM.ItemCode = L7.ItemCode and L7.PriceList = 7
 INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 1 
 Where L7.Price = 0  and OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' --and OITM.U_TipoMat = 'MP' 
 Order By OITM.ItemName 
+
+
+-- ================================================================================================
+-- |              PARA ASIGNAR PRECIO ESTANDAR EN BASE A LISTA 7.                                 |
+-- ================================================================================================
+-- Hoja 6 de la Macro.
+-- Actualizado al 19 de Septiembre del 2024.
+-- Presenta los MATERIALES COMPRADOS estandar diferente, con existencia validacion manual. 
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, ISNULL(LS.Price, 0) AS Pre_STD
+	, LS.Currency AS Mon_STD
+	, 10 AS LISTA
+	, ITM1.Price AS Pre_7
+	, ITM1.Currency AS Mon_7
+	, (Case When OITM.OnHand > 0 then  'VALIDAR MANUAL' else 'POR ACTUALIZAR' end ) AS ACCION 
+	, OITM.U_TipoMat AS TM 
+From OITM 
+INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
+INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
+Where OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' and ITM1.Price <> ISNULL(LS.Price, 0)
+and OITM.U_TipoMat = 'SP' 
+and OITM.QryGroup32 = 'Y'
+and OITM.OnHand = 0
+Order By OITM.ItemName 
+
+-- ================================================================================================
+-- |              SUB ESNSAMBLES PENDIENTES DE AJUSTAR A BASE A LISTA 7.                          |
+-- ================================================================================================
+-- Hoja 2 de la Macro.
+-- Actualizado al 19 de Septiembre del 2024.
+-- Presenta los MATERIALES TODO TIPO DE SUB-ENSAMBLE estandar diferente, con existencia validacion manual. 
+Select OITM.ItemCode AS CODE
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom AS UDM
+	, OITM.OnHand AS EXIST
+	, LS.Price AS PRECIO_LS
+	, L7.Price AS PRECIO_7
+	, Cast((OITM.OnHand * (L7.Price - LS.Price)) as decimal(16,4)) AS INCREMENTO
+	, Cast(OITM.LastPurDat as date) AS FECHULT 
+From OITM 
+INNER JOIN ITM1 L7 on OITM.ItemCode = L7.ItemCode and L7.PriceList=7 
+INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
+Where Cast(L7.Price as decimal(16,3)) <> Cast(ISNULL(LS.Price, 0) as decimal(16,3)) 
+and OITM.EvalSystem = 'S' 
+and OITM.frozenFor = 'N'
+and U_TipoMat <> 'MP' and U_TipoMat <> 'PT' 
+Order By OITM.ItemName 
+
+-- ================================================================================================
+-- |              PRODUCTOS TERMINADOS PENDIENTES DE AJUSTAR A BASE A LISTA 7.                    |
+-- ================================================================================================
+-- Hoja 3 de la Macro.
+-- Actualizado al 19 de Septiembre del 2024.
+-- Presenta los MATERIALES PRODUCTO TERMINADO estandar diferente, con existencia validacion manual. 
+Select OITM.ItemCode AS CODE
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom AS UDM
+	, OITM.OnHand AS EXIST
+	, LS.Price AS PRECIO_LS
+	, L7.Price AS PRECIO_7
+	, Cast((OITM.OnHand * (L7.Price - LS.Price)) as decimal(16,2)) AS INCREMENTO
+	, Cast(OITM.LastPurDat as date) AS FECHULT 
+From OITM 
+INNER JOIN ITM1 L7 on OITM.ItemCode = L7.ItemCode and L7.PriceList=7 
+INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
+Where Cast(L7.Price as decimal(16,3)) <> Cast(LS.Price as decimal(16,3)) 
+and OITM.EvalSystem = 'S' 
+and OITM.frozenFor = 'N'
+and U_TipoMat = 'PT' 
+Order By OITM.ItemName 
+
+
+-- ================================================================================================
+-- |       ARTICULOS GLOBALES IGUALAR A ESTANDAR LISTA PRUEBA PARA INICIAR CAMBIOS.               |
+-- ================================================================================================
+-- Hoja 6 de la Macro.
+-- Actualizado al 20 de Septiembre del 2024.
+-- Presenta los ARTICULO diferente a lista prueba a estandar, par igualar al estandar. 
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, ITM1.Price AS Pre_7
+	, ITM1.Currency AS Mon_7
+	, 7 AS LISTA
+	, ISNULL(LS.Price, 0) AS Pre_STD
+	, LS.Currency AS Mon_STD
+	, 'POR ACTUALIZAR' AS ACCION 
+	, OITM.U_TipoMat AS TM 
+	, OITM.OnHand AS EXT 
+From OITM 
+INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
+INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
+Where OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' and ITM1.Price <> ISNULL(LS.Price, 0)
+Order By OITM.ItemName 
+
