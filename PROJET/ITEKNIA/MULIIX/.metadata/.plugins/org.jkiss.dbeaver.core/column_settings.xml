@@ -15,6 +15,17 @@
 		<column name="Not Null" visible="true" order="11" width="100"/>
 		<column name="Auto" visible="true" order="12" width="100"/>
 	</item>
+	<item id="NodeList/SQLServerDatabase">
+		<column name="Name" visible="true" order="0" width="143"/>
+		<column name="Database description" visible="true" order="1" width="844"/>
+	</item>
+	<item id="NodeList/SQLServerProcedureParameter">
+		<column name="Name" visible="true" order="0" width="167"/>
+		<column name="Type" visible="true" order="1" width="100"/>
+		<column name="Kind" visible="true" order="2" width="100"/>
+		<column name="#" visible="true" order="3" width="100"/>
+		<column name="Default" visible="true" order="4" width="442"/>
+	</item>
 	<item id="PrefPageConfirmationsEditor">
 		<column name="Confirmación" visible="true" order="0" width="227"/>
 		<column name="Mostre diálogo" visible="true" order="1" width="117"/>
@@ -22,17 +33,17 @@
 		<column name="Grupo" visible="true" order="3" width="481"/>
 	</item>
 	<item id="Suggestion/NodeList/SQLServerTableColumn">
-		<column name="Column Name" visible="true" order="0" width="162"/>
-		<column name="#" visible="true" order="1" width="42"/>
+		<column name="Column Name" visible="true" order="0" width="176"/>
+		<column name="#" visible="true" order="1" width="24"/>
 		<column name="Type" visible="false" order="2" width="103"/>
 		<column name="Length" visible="false" order="3" width="100"/>
 		<column name="Scale" visible="false" order="4" width="100"/>
 		<column name="Precision" visible="false" order="5" width="100"/>
 		<column name="Not Null" visible="false" order="6" width="100"/>
-		<column name="Identity" visible="true" order="2" width="79"/>
+		<column name="Identity" visible="true" order="2" width="55"/>
 		<column name="Default" visible="false" order="8" width="100"/>
 		<column name="Collation" visible="false" order="9" width="100"/>
-		<column name="Description" visible="true" order="3" width="103"/>
+		<column name="Description" visible="true" order="3" width="83"/>
 	</item>
 	<item id="projectExplorer">
 		<column name="Name" visible="true" order="0" width="178"/>

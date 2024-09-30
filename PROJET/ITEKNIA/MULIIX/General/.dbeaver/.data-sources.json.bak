@@ -39,21 +39,6 @@
 				"auth-model": "sqlserver_database"
 			}
 		},
-		"postgres-jdbc-1912d9bc9e2-1d6b7c75a3825e99": {
-			"provider": "postgresql",
-			"driver": "postgres-jdbc",
-			"name": "comeritk-odoo-dev-14432757",
-			"save-password": true,
-			"configuration": {
-				"host": "localhost",
-				"port": "5432",
-				"database": "comeritk-odoo-dev-14432757",
-				"url": "jdbc:postgresql://localhost:5432/comeritk-odoo-dev-14432757",
-				"configurationType": "MANUAL",
-				"type": "dev",
-				"auth-model": "native"
-			}
-		},
 		"microsoft-1914defdee7-3b8c84f3e57077bd": {
 			"provider": "sqlserver",
 			"driver": "microsoft",
@@ -64,6 +49,25 @@
 				"port": "1430",
 				"database": "itekniaDB",
 				"url": "jdbc:sqlserver://;serverName\u003ditekniaapp.serveftp.com;port\u003d1430;databaseName\u003ditekniaDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		},
+		"microsoft-191bd7ecfad-613effad898b5592": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "ItekniaDB 1",
+			"save-password": true,
+			"configuration": {
+				"host": "192.168.0.19",
+				"port": "1433",
+				"database": "ItekniaDB",
+				"url": "jdbc:sqlserver://;serverName\u003d192.168.0.19;databaseName\u003dItekniaDB",
 				"configurationType": "MANUAL",
 				"type": "dev",
 				"provider-properties": {

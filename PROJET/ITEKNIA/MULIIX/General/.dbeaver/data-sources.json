@@ -57,6 +57,44 @@
 				},
 				"auth-model": "sqlserver_database"
 			}
+		},
+		"microsoft-191bd7ecfad-613effad898b5592": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "ItekniaDB 1",
+			"save-password": true,
+			"configuration": {
+				"host": "192.168.0.19",
+				"port": "1433",
+				"database": "ItekniaDB",
+				"url": "jdbc:sqlserver://;serverName\u003d192.168.0.19;databaseName\u003dItekniaDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		},
+		"microsoft-1922993c65b-6adb2d61b9488cd5": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "Comercializadora",
+			"save-password": true,
+			"configuration": {
+				"host": "itekniaapp.serveftp.com",
+				"port": "1431",
+				"database": "ComercializadoraDB",
+				"url": "jdbc:sqlserver://;serverName\u003ditekniaapp.serveftp.com;port\u003d1431;databaseName\u003dComercializadoraDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
 		}
 	},
 	"connection-types": {
