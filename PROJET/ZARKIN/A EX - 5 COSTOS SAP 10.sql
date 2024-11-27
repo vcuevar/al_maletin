@@ -8,7 +8,6 @@
 |    EXCEPCIONES TIPO DE CAMBIO ASIGNADOS.                                                        |
 ================================================================================================= */
 
--- Select * from SIZ_TipoCambio
 Declare @TC_USD as Integer
 Declare @TC_CAN as Integer
 Declare @TC_EUR as Integer
@@ -657,6 +656,8 @@ inner join ITM1 on ITM1.ItemCode = OITM.ItemCode and ITM1.PriceList=10
 Where OITM.SWeight1 > 0 and OITM.LastPurPrc > 0 
 Order By OITM.ItemName
 */
+
+
 
 --< EOF > EXCEPCIONES COSTOS Y MANEJO DE LISTA DE PRECIOS.
 

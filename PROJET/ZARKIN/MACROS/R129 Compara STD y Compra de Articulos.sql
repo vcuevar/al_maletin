@@ -10,20 +10,20 @@
 Declare @FechaIS nvarchar(30)
 Declare @FechaFS nvarchar(30)
 
-Set @FechaIS = CONVERT (DATE, '2022/10/03', 102)
-Set @FechaFS = CONVERT (DATE, '2022/10/19', 102)
+Set @FechaIS = CONVERT (DATE, '2024/09/30', 102)
+Set @FechaFS = CONVERT (DATE, '2024/11/03', 102)
 
 -- ================================================================================================
 -- |               DESARROLLO DEL PROCESO.                                                        |
 -- ================================================================================================
 
-
+/*
 Select *
 From PDN1
 inner join OPDN on OPDN.DocEntry = PDN1.DocEntry 
 Where Cast(OPDN.DocDate as DATE) Between @FechaIS and @FechaFS 
 Order by PDN1.DocEntry 
-
+*/
 
 
 
@@ -41,7 +41,8 @@ Select OPDN.CardCode as PROVCOD
 	, PDN1.NumPerMsr as X_PAQ
 	, (PDN1.Quantity*PDN1.NumPerMsr) as Q_INV, (PDN1.Price / PDN1.NumPerMsr) as PREC_UNIT
 	, PDN1.LineTotal as IMPORTE
-	, OITM.AvgPrice as COSTOESTANDAR
+	--, OITM.AvgPrice as COSTOESTANDAR
+	, L10.Price as COSTOESTADAR
 	, ITM1.Price as LIS_COMPRA
 	, ITM1.Currency as M_L
 	, PDN1.Currency as M_C
@@ -53,6 +54,7 @@ From PDN1
 inner join OPDN on OPDN.DocEntry = PDN1.DocEntry 
 left join OITM on PDN1.ItemCode = OITM.ItemCode 
 left join ITM1 on PDN1.ItemCode = ITM1.ItemCode and ITM1.PriceList= 9 
+left join ITM1 L10 on PDN1.ItemCode = L10.ItemCode and L10.PriceList= 10 
 left join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=9 
 Where OITM.ItemCode is not null AND  OITM.U_TipoMat <> 'GF' AND Cast(OPDN.DocDate as DATE) Between @FechaIS and @FechaFS 
 Order by PDN1.DocEntry 

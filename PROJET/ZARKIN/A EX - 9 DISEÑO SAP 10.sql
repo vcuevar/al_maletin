@@ -273,8 +273,9 @@
 	and ITT1.Father <> '18626' and ITT1.Father <> '18696' and ITT1.Father <> '18559' and ITT1.Father <> '18943' and ITT1.Father <> '19053'  
 	and ITT1.Father <> '18761' and ITT1.Father <> '10436' and ITT1.Father <> '19416' and ITT1.Father <> '18939'  and ITT1.Father <> '19430'  
 	and ITT1.Father <> '19415' and ITT1.Father <> '20357' and ITT1.Father <> '20358' and ITT1.Father <> '20414' and ITT1.Father <> '20415'
-	and ITT1.Father <> '20156' and ITT1.Father <> '20846' and ITT1.Father <> '20925'
-	and ITT1.Father <> '20988'
+	and ITT1.Father <> '20156' and ITT1.Father <> '20846' and ITT1.Father <> '20925' and ITT1.Father <> '21012'
+	and ITT1.Father <> '20988' and ITT1.Father <> '20876' and ITT1.Father <> '21017'
+
 	Order by A3.ItemName	
 	
 	
@@ -543,6 +544,8 @@ SELECT '930 SP NO REQUERIDOS' AS REPORTE_920
 	, INV.ItemCode AS CODIGO
 	, INV.ItemName AS DESCRIPCION
 	, INV.InvntryUom AS UDM
+	, INV.OnHand AS EXISTENCIA
+	, INV.IsCommited AS COMPROMETIDO
 
 FROM OITM INV
 LEFT JOIN ITT1 LD ON INV.ItemCode = LD.Code
@@ -551,6 +554,7 @@ OR INV.QryGroup30 = 'Y'
 OR INV.QryGroup31 = 'Y' 
 OR INV.QryGroup32 = 'Y') AND LD.Father IS NULL
 AND INV.frozenFor = 'N'
+Order by INV.ItemName 
 
 
 

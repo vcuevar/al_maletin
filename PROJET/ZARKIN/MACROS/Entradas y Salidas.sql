@@ -16,10 +16,11 @@ Declare @Articulo as nvarchar(30)
 Declare @nLista as Int
 
 Set @nLista = 10
-Set @FechaIS = '2021/11/01'
-Set @FechaFS = '2022/03/30'
+Set @FechaIS = '2024/10/03'
+Set @FechaFS = '2024/10/03'
 Set @Articulo = '10837'
 
+/*
 Select	OINM.ItemCode AS CODIGO
 		, OINM.Dscription AS DESCRIPCION
 		,Cast(OINM.CreateDate as date) AS FEC_CREA
@@ -49,8 +50,29 @@ Where Cast (OINM.CreateDate as DATE) between  @FechaIS and @FechaFS
 and OINM.ItemCode = @Articulo
 Group By OINM.ItemCode, OINM.Dscription, SubString(OINM.JrnlMemo,1,15),  OINM.Warehouse  , OINM.CreateDate
 order by Cast(OINM.CreateDate as date), SubString(OINM.JrnlMemo,1,15)
+*/
 
+-- Modificacion realizada el 07 de Noviembre para poder usar costo Historico 
+-- y el Precio de la lista actualizado.
 
+  Select OINM.CardName, OINM.BASE_REF, OINM.AppObjAbs, OINM.DocDate, OINM.CreateDate
+	, OINM.JrnlMemo, OINM.ItemCode, OINM.Dscription
+	, ITM1.Price as COST01
+	, OINM.Price as COSTO_H
+	, OINM.RevalTotal,(OINM.InQty-OINM.OutQty) as Movimiento
+	, OINM.UserSign, OUSR.U_NAME, OINM.Warehouse AS ALM_ORG
+	, ISNULL(OINM.Ref2, 'N/A') AS ALM_DES, OITM.U_VS, OINM.Comments
+	, OITM.U_TipoMat, OINM.DocTime, OWOR.ItemCode as OPModelo 
+from OINM  inner join OUSR on OINM.UserSign=OUSR.USERID 
+inner join OITM on OINM.ItemCode=OITM.ItemCode 
+left join OWOR on OINM.AppObjAbs = OWOR.DocEntry 
+inner join ITM1 on OINM.ItemCode= ITM1.ItemCode and ITM1.PriceList = @nLista 
+Where Cast (OINM.CreateDate as DATE) between  @FechaIS and @FechaFS 
+and OINM.ItemCode = @Articulo
+--and ITM1.PriceList = " & nLista & "  
+--Where Cast (OINM.CreateDate as DATE) between  '" & FechaIS & "' and '" & FechaFS & "' 
+order by OINM.AppObjAbs, OINM.TransNum 
+  
 
 
 /*

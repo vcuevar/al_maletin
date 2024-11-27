@@ -14,6 +14,16 @@
 --		Validar Estatus Si esta en PROCESO y estatus en Planificado.
 --		Registros de Control de Piso.
 
+/*
+	--  Borrado de Registros Basura.
+	delete [@CP_OF] from [@CP_OF] CP 
+	inner join OWOR OP on CP.U_DocEntry= OP.DocEntry 
+	inner join OITM A3 on OP.ItemCode = A3.ItemCode 
+	where OP.Status = 'P' 
+
+	*/
+
+
 -- ================================================================================================
 -- |               Informacion acumulada del Mes.                                                 |
 -- ================================================================================================
@@ -285,7 +295,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 
 
 	/*
-
+	--  Borrado de Registros Basura.
 	delete [@CP_OF] from [@CP_OF] CP 
 	inner join OWOR OP on CP.U_DocEntry= OP.DocEntry 
 	inner join OITM A3 on OP.ItemCode = A3.ItemCode 

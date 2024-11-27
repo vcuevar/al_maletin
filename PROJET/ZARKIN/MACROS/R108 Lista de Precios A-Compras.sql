@@ -7,25 +7,24 @@
 
 Select	OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
-		, OITM.InvntryUom AS UDM
-		--, OITM.U_TipoMat AS TMAT
-		--, OITB.ItmsGrpNam AS GRUPO
-		
-		, ITM1.Price AS PRECIO
-		, ITM1.PriceList AS LISTA
+		, OITM.PurPackMsr AS UDC
+		, Cast(OITM.NumInBuy as Decimal(14,0)) AS FACTOR
+		, OITM.InvntryUom AS UDM	
+		, OITM.OnHand AS EXISTENCIA
+		, Cast(ITM1.Price as Decimal(14,4)) AS PRECIO
 		, ITM1.Currency AS MON
-		--, OITM.AvgPrice AS SYSTEMA_E
-		--, OITM.LastPurPrc AS ULT_PRE
-		--, OITM.LastPurCur AS ULT_MON
-		--, OITM.LastPurDat AS ULT_FEC
-		, OITM.NumInBuy as FACTOR
+		, HE.HE_PrecioEstandar
+		, HE.HE_Moneda
+		, HE.HE_FechaCambio
+		, HE.HE_NotasCambio
 From OITM 
 INNER JOIN OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10 
+Inner Join SIZ_HistoryEstandar HE on HE.HE_ItemCode = OITM.ItemCode
 Where 
-OITM.U_TipoMat = 'MP'
+OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 Order By OITM.ItemName 
 
-
+--Select * from SIZ_HistoryEstandar
 
 

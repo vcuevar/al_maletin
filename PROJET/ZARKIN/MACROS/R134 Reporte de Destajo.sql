@@ -15,8 +15,8 @@ Declare @FechaFS date
 Declare @EstaTra integer
 Declare @Modelo VarChar(5)
 
-Set @FechaIS = CONVERT(DATE, '2023-03-27', 102)
-Set @FechaFS = CONVERT(DATE, '2023-04-02', 102)
+Set @FechaIS = CONVERT(DATE, '2024-10-03', 102)
+Set @FechaFS = CONVERT(DATE, '2024-10-13', 102)
 Set @EstaTra = 112
 Set @Modelo = '3841'
 
@@ -40,9 +40,10 @@ Select CAST(CP.U_FechaHora as DATE) as FECHA
 	, ISNULL((Select  SUM(ITT1.Quantity)  from ITT1
 		Inner Join OITM A1 on ITT1.Code = A1.ItemCode and A1.ItmsGrpCod = '113'
 		Where ITT1.Father = OP.ItemCode),
+
 		ISNULL((Select  SUM(ITT1.Quantity) * 140 from ITT1
 		Inner Join OITM A1 on ITT1.Code = A1.ItemCode and A1.ItmsGrpCod = '114' and A1.U_GrupoPlanea = '11'
-		Where ITT1.Father = OP.ItemCode),0)) AS PIEL_TEORICO
+		Where ITT1.Father = OP.ItemCode),0)) * CP.U_Cantidad AS PIEL_TEORICO
 			
 	, ISNULL(SG.GPO_157, 'NA') AS GRUPO_157
 	, ISNULL(SG.GPO_160, 'NA') AS GRUPO_160 
@@ -96,7 +97,7 @@ Select CAST(CP.U_FechaHora as DATE) as FECHA
 		Where ITT1.Father = OP.ItemCode),
 		ISNULL((Select  SUM(ITT1.Quantity) * 140 from ITT1
 		Inner Join OITM A1 on ITT1.Code = A1.ItemCode and A1.ItmsGrpCod = '114' and A1.U_GrupoPlanea = '11'
-		Where ITT1.Father = OP.ItemCode),0)) AS PIEL_TEORICO
+		Where ITT1.Father = OP.ItemCode),0)) * CP.U_Cantidad AS PIEL_TEORICO
 
 	, ISNULL(SG.GPO_157, 'NA') AS GRUPO_157
 	, ISNULL(SG.GPO_160, 'NA') AS GRUPO_160 

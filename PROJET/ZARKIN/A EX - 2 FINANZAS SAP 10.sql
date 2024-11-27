@@ -65,27 +65,31 @@ Select Case When (
 	end AS DIA_4_TC
 
 -- Tipo de Cambio autorizados
-Select Top(1) *, 'Fijado US pord David Z.' AS NOTAS from SIZ_TipoCambio
-Order By TC_date desc
 
+Select * from SIZ_TipoCambio Order By TC_date desc
+
+-- Para realizar nuevo registro de Tipos de Cambio.
 /*
-Declare @Fecha as date
-Declare @CAN as decimal(10,4)
-Declare @USA as decimal(10,4)
-Declare @EUR as decimal(10,4)
-
 -- 14/Feb/2024 David Zarkin me dijo que este seria el tipo de cambio en Dolares, los otros dos los deje 
 -- como venian del año pasado.
 
-Set @Fecha = Cast('2024-02-14' as date)
-Set @CAN = 13.40
-Set @USA = 17.50
-Set @EUR = 19.80
+-- 21/Octubre/24 Al no definir el cambio de Estandar y con tantos ajustes no autorizados, cambie el 
+-- tipo de cambio con los siguientes datos, registrados en SAP.
 
-Insert Into [dbo].[SIZ_TipoCambio]
+Declare @FechaCrea as date
+Declare @TC_USD as decimal(10,4)
+Declare @TC_CAN as decimal(10,4)
+Declare @TC_EUR as decimal(10,4)
+
+Set @FechaCrea = GETDATE()
+Set @TC_USD = 19.95
+Set @TC_CAN = 14.50
+Set @TC_EUR = 21.51
+
+Insert Into [dbo].SIZ_TipoCambio
 			( [TC_date], [TC_can], [TC_usd], [TC_eur])
 		Values
-			(@Fecha, @CAN, @USA, @EUR)
+			(@FechaCrea, @TC_CAN, @TC_USD, @TC_EUR)
 Go
 
 */

@@ -256,7 +256,7 @@ Order By OITM.ItemName
 -- ================================================================================================
 -- Hoja 6 de la Macro.
 -- Actualizado al 20 de Septiembre del 2024.
--- Presenta los ARTICULO diferente a lista prueba a estandar, par igualar al estandar. 
+-- Presenta los ARTICULO diferente a lista prueba a estandar, para igualar al estandar. 
 Select OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
@@ -273,4 +273,5 @@ INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7
 INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
 Where OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' and ITM1.Price <> ISNULL(LS.Price, 0)
 Order By OITM.ItemName 
+
 

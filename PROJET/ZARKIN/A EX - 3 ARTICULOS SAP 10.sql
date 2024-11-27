@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2024/09/23', 102)
+Set @FechaInac =  CONVERT (DATE, '2024/11/20', 102)
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -12, GETDATE()))
 
@@ -984,7 +984,8 @@ Order By DESCRIPCION
 	-- Provisionalmente dejo estos dos codigos fuera mientras definimos que se hara con ellos
 	and A3.ItemCode <> '19018' and A3.ItemCode <> '20052' and A3.ItemCode <> '18988'
 	and A3.ItemCode <> '19019' and A3.ItemCode <> '18990' and A3.ItemCode <> '20913'
-	and A3.ItemCode <> '20988'
+	and A3.ItemCode <> '20988' and A3.ItemCode <> '21017' and A3.ItemCode <> '397438'
+
 	ORDER BY A3.ItemName	
 	
 -- ARTICULO PROPIEDAD 32 NO MARCADOS COMO SP o RF.
