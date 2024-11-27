@@ -271,15 +271,47 @@ ORDER BY TSM_CodigoSolicitud,FECHA
 
 -- ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA
 
-Select F.EMP_employeeNumber, E.EMP_CodigoEmpleado, * from RPT_EMPLOYEES F 
-left Join Empleados E on E.EMP_CodigoEmpleado = SubString(F.EMP_employeeNumber, 2, 4) 
-Where E.EMP_Activo = 1
+Select F.EMP_numeroEmpleado AS CODIGO
+	, E.EMP_Nombre + ' ' + E.EMP_PrimerApellido + ' ' + E.EMP_SegundoApellido  AS NOMBRE
+	, F.EMP_semana AS SEMANA
+	, F.EMP_anio AS AÑO
+	, F.EMP_status  AS ESTATUS 
+	, Cast(F.EMP_fechaAceptadoRechazado as date)  AS F_ACEPTADO
+	, Cast(F.EMP_fechaAceptadoRechazado as time) AS HORA
+	
+from RPT_EMPLOYEES F 
+Left Join Empleados E on E.EMP_CodigoEmpleado = SubString(F.EMP_numeroEmpleado, 2, 4) 
+--Where F.EMP_numeroEmpleado lIKE '%55%'
 
---Select * from Usuarios where USU_Nombre = '972'
+--Estatus de Nomina
+-- accepted
+-- new
+-- rejected
+
+Select DISTINCT EMP_status  from RPT_EMPLOYEES F 
+
+--Select * from Usuarios where USU_Nombre = '392'
 --Select * from Empleados 
 --Where EMP_Activo = 1 and 
 --Cast(EMP_CodigoEmpleado as int) = 1005
 --Order By EMP_CodigoEmpleado desc 
 
 --Select * from RPT_EMPLOYEES --Where EMP_employeeNumber = '01005'
+
+
+
+SELECT * from Empleados e 
+select * from AlmacenDigitalCHIndice ADCH_INEValido
+
+
+/*
+--NIvel de Autorizaciones
+Select EMP_CodigoEmpleado AS CODIGO 
+	, EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE
+	, EMP_PresupuestoAutorizado AS NIVEL_AUT 
+from Empleados 
+Where EMP_Activo = 1 and EMP_PresupuestoAutorizado > 0
+Order By EMP_PresupuestoAutorizado 
+*/
+
 

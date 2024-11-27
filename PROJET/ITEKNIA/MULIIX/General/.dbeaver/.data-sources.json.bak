@@ -26,10 +26,10 @@
 			"name": "nmITEKNIA_2016",
 			"save-password": true,
 			"configuration": {
-				"host": "192.168.0.110\\COMPAC12",
+				"host": "192.168.0.220\\COMPAC12",
 				"port": "1433",
 				"database": "nmITEKNIA_2016",
-				"url": "jdbc:sqlserver://;serverName\u003d192.168.0.110\\COMPAC12;databaseName\u003dnmITEKNIA_2016",
+				"url": "jdbc:sqlserver://;serverName\u003d192.168.0.220\\COMPAC12;databaseName\u003dnmITEKNIA_2016",
 				"configurationType": "MANUAL",
 				"type": "dev",
 				"provider-properties": {
@@ -42,7 +42,7 @@
 		"microsoft-1914defdee7-3b8c84f3e57077bd": {
 			"provider": "sqlserver",
 			"driver": "microsoft",
-			"name": "master",
+			"name": "QA",
 			"save-password": true,
 			"configuration": {
 				"host": "itekniaapp.serveftp.com",
@@ -68,6 +68,25 @@
 				"port": "1433",
 				"database": "ItekniaDB",
 				"url": "jdbc:sqlserver://;serverName\u003d192.168.0.19;databaseName\u003dItekniaDB",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		},
+		"microsoft-1922993c65b-6adb2d61b9488cd5": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "Comercializadora",
+			"save-password": true,
+			"configuration": {
+				"host": "itekniaapp.serveftp.com",
+				"port": "1431",
+				"database": "ComercializadoraDB",
+				"url": "jdbc:sqlserver://;serverName\u003ditekniaapp.serveftp.com;port\u003d1431;databaseName\u003dComercializadoraDB",
 				"configurationType": "MANUAL",
 				"type": "dev",
 				"provider-properties": {

@@ -1,39 +1,58 @@
--- Nombre: Calculo de la Lista de Raya Neto.
--- Objetivo: Tener la de lo comprometido Neto a pagar al empleado.
+-- Nombre: MACRO 048 LayOut Banorte.
+-- Query: LayOut Banorte
+-- Objetivo: Generar archivo para cargar a Nomina Banorte.
 -- Sistema: Nomimpaq (SQL)
 -- Desarrollado: Ing. Vicente Cueva Ramirez.
--- Actualizado: Jueves 13 de Octubre del 2022; Origen.
+-- Actualizado: Miercoles 16 de Octubre del 2024; Origen.
 
 -- Parámetros 
 Declare @Anual as Integer
 Declare @Semana as Integer
 Declare @IdPeriodo as Integer
-Declare @NumEmpl as varchar(30)
-Declare @IdEmpleado as Integer
-Declare @Percepciones as decimal(16,2) 
 
-Set @Anual = 2022
-Set @Semana = 41
+Set @Anual = 2024
+Set @Semana = 45
 Set @IdPeriodo = 0
-Set @Percepciones = 0
-
---Set @NumEmpl = '034' --GUILLERMO 
-Set @NumEmpl = '283' --GABRIEL
---Set @NumEmpl = '994'  --YOLANDA
-Set @IdEmpleado = 0
---Set @FechaIS = CONVERT (DATE, '2022/09/26', 102)
 
 -- Determina el Id del la Semana.
 Set @IdPeriodo = (Select idperiodo from NOM10002 Where numeroperiodo = @Semana and ejercicio = @Anual)
 
--- Para un solo Empleado. determina el Id del Empleado.
-Set @IdEmpleado = (Select idempleado from NOM10001 Where CodigoEmpleado = @NumEmpl)
+-- Empleado que se pagan mediante el Banco Banorte.
+Select NOM10001.codigoempleado AS NO_EMPLEADO
+	, NOM10001.Nombre + '  ' + NOM10001.ApellidoPaterno + '  ' + NOM10001.ApellidoMaterno AS NOMBRE
+	, Cast(NOM10007.ImporteTotal as Decimal(16,2)) AS IMPORTE
+	, NOM10001.bancopagoelectronico AS BAN_RECEPTOR    
+	, '01' AS TIP_CUENTA
+	, NOM10001.cuentapagoelectronico AS N_CUENTA
+	, NOM10007.*
+from NOM10007
+Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
+Where idperiodo = @IdPeriodo
+and NOM10007.IdConcepto = 1 
+and NOM10001.bancopagoelectronico <> '072' and NOM10001.bancopagoelectronico <> '014'
+Order By NOMBRE
+ 
+ 
+/*
 
--- Lista de Raya sin Incidencias del Periodo Seleccionado. Calculado en funcion a los sueldos diario e Integrado.
-Select  @Anual AS AÑO
+Posbible Basura limpiar si no se ha usado al 3 de enero del 2025.
+
+--Declare @NumEmpl as varchar(30)
+--Declare @IdEmpleado as Integer
+--Declare @Percepciones as decimal(16,2) 
+--Set @Percepciones = 0
+
+--Set @NumEmpl = '00363' --JOSE GUADALUPE
+--Set @IdEmpleado = 0
+--Set @FechaIS = CONVERT (DATE, '2022/09/26', 102)
+
+-- Para un solo Empleado. determina el Id del Empleado.
+--Set @IdEmpleado = (Select idempleado from NOM10001 Where CodigoEmpleado = @NumEmpl)
+		@Anual AS AÑO
         , @Semana AS PERIODO
         , NOM10001.CodigoEmpleado AS CODIGO
-        , NOM10001.Nombre + '  ' + NOM10001.ApellidoPaterno + '  ' + NOM10001.ApellidoMaterno AS NOMBRE
+        
+        
         , Cast(NOM10001.SueldoDiario as Decimal(16,2)) AS SUEL_DIA
         , Cast(NOM10001.SueldoIntegrado as Decimal(16,2))AS SUEL_INT
         
@@ -52,15 +71,8 @@ Select  @Anual AS AÑO
          (SUM(Case When NOM10007.IdConcepto = 93 then NOM10007.ImporteTotal else 0 end))
          )/7) * 30.4) as Decimal(16,2)) AS NETO_MENSUAL
      
-from NOM10007
-Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
-Where idperiodo = @IdPeriodo
---and NOM10007.idEmpleado = @IdEmpleado
-Group by NOM10001.CodigoEmpleado, NOM10001.Nombre, NOM10001.ApellidoPaterno, NOM10001.ApellidoMaterno
-, NOM10001.SueldoDiario, NOM10001.SueldoIntegrado 
- Order By NOMBRE
 
-/*
+
 
 -- Lista de Raya Calculando los componentes creo que me sale muy diferente. Actualizada. Calculando mediante la tabla de Impuestos.
 
@@ -108,6 +120,14 @@ Where idperiodo = @IdPeriodo
  -- Select * from NOM10057
  
  
--- Select * from nom10026
+--  
 
 */
+ 
+ 
+ --Select * from nom10001 Where codigoempleado = '00363'
+ 
+ 
+ 
+ 
+ 

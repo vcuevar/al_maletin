@@ -16,12 +16,12 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'IT-VMA-2208-047'
-Set @Nomb = '047 CONSTANCIA DE VACACIONES.'
-Set @Vers = 'VMA240828A'
+Set @Code = 'IT-VMA-2410-049'
+Set @Nomb = '049 LAYOUT NOMINA SANTANDER.'
+Set @Vers = 'VMA241023A'
 
 INSERT INTO [dbo].[RBEV]
            ([CodeRepo], [NombRepo], [NumeVers])
      VALUES
            (@Code, @Nomb, @Vers)
-GO
+
