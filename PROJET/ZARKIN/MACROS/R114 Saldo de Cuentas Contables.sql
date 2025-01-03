@@ -6,15 +6,8 @@
 Declare @FechaIS date
 Declare @FechaFS date
 
-Set @FechaIS = CONVERT(DATE, '2021-03-01', 102)
-Set @FechaFS = CONVERT(DATE, '2021-04-12', 102)
-
-
---Declare @FechaIS varchar (30)
---Declare @FechaFS varchar (30)
-
---Set @FechaIS = '2021-04-01'
---Set @FechaFS = '2021-04-12'
+Set @FechaIS = CONVERT(DATE, '2024-11-01', 102)
+Set @FechaFS = CONVERT(DATE, '2024-12-31', 102)
 
 -- Desarrollo de la Consulta
 
@@ -31,14 +24,21 @@ Select	Cast(JDT1.DueDate as Date) AS FECHA
 from JDT1
 inner join OUSR on OUSR.USERID = JDT1.UserSign
 Where Cast (JDT1.DueDate as Date) Between @FechaIS and @FechaFS 
-and JDT1.Account = '_SYS00000000344'
+and JDT1.Account = '_SYS00000000367'
 Order By Cast(JDT1.DueDate as Date), JDT1.TransId
 
-Go
 
+/*
+-- Catalodo de Cuentas Contables
+Select FormatCode AS CUENTA
+	, AcctName AS NOMBRE
+	, AcctCode AS ID
+from OACT Where FormatCode = '501300000'
 
+501200000	COSTO DE RECLASIFICACION MATERIA PRIMA	_SYS00000000350
+501300000	CONSUMO AREAS ESTAFF	_SYS00000000351
+501500000	REVALORIZAR STANDAR INTERNO	_SYS00000000367
 
-
-
+*/
 
 

@@ -2,6 +2,7 @@
 -- Desarrollado: Ing. Vicente Cueva Ramirez.
 -- Actualizado: Lunes 29 de Noviembre del 2021; Origen.
 -- Actualizado: Jueves 02 de Diciembre del 2021; Cambiar Orden en Compras.
+-- 
 
 -- Para las monedas extranjeras se utilizaron los siguientes tipo de cambio:				
 -- Select * from SIZ_TipoCambio

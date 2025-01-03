@@ -34,26 +34,26 @@ E	Linea para Traslado Externo		S-T
  From SIZ_SolicitudesMP
  inner join SIZ_MaterialesTraslados on SIZ_MaterialesTraslados.Id_Solicitud = SIZ_SolicitudesMP.Id_Solicitud 
  inner join OITM on SIZ_MaterialesTraslados.ItemCode = OITM.ItemCode
- Where  SIZ_SolicitudesMP.Id_Solicitud = 79065
+ Where  SIZ_SolicitudesMP.Id_Solicitud = 81242
  --and SIZ_MaterialesTraslados.EstatusLinea <> 'S' 
  --and SIZ_SolicitudesMP.Status like 'Cancelada'
  --SIZ_MaterialesTraslados.ItemCode = '17653'
   Order By SIZ_SolicitudesMP.Id_Solicitud
 
 
-  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 63361
+  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 81242
 
   Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 11496 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
 
   Select * from SIZ_MaterialesTraslados Where ItemCode = '74616'
 
-  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = '74616'
+  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = '81242'
 
 
 -- Para cancelar una solicitud.
-  Update SIZ_MaterialesTraslados set Cant_Pendiente = 0, EstatusLinea = 'C' Where SIZ_MaterialesTraslados.Id_Solicitud = 48486 --and EstatusLinea = 'S'
+  Update SIZ_MaterialesTraslados set Cant_Pendiente = 0, EstatusLinea = 'C' Where SIZ_MaterialesTraslados.Id_Solicitud = 81242 --and EstatusLinea = 'S'
 
-  Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 63361
+  Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 81242
   
   -- Cambiar estatus a linea de los materiales trasladados. T Terminada C Cancelada
   Select * from SIZ_MaterialesTraslados  Where Id = 4791

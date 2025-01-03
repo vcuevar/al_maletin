@@ -10,7 +10,7 @@ Order By NombRepo
 
 -- Modificar un Reporte a su Nueva Version
 
-Update SIZ_RBEV set NumeVers = 'VMA241105A' Where CodeRepo = 'SA-RBV-2210-129'
+Update SIZ_RBEV set NumeVers = 'VMA241203A' Where CodeRepo = 'SA-RBV-2104-114'
 
 -- Asignar un Nuevo Registro
 

@@ -14,7 +14,7 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2024/11/20', 102)
+Set @FechaInac =  CONVERT (DATE, '2024/12/27', 102)
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -12, GETDATE()))
 
@@ -628,7 +628,7 @@ ORDER BY OITM.ItemName
 --	and OITM.U_GrupoPlanea <> '9' 	and OITM.U_GrupoPlanea <> '11'  
 --	and OITM.CreateDate < @FechaIS and IsNull(OITM.LastPurDat, @FechaIS) <= @FechaIS 
 	
--- Materiales Piel y Tela pasan a FUERA DE LINEA.
+-- Materiales Piel y Tela pasan a FUERA DE LINEA. nO SE HA COMPRADO EN 12 MESES.
 	SELECT '237 A F_LIN. 12 MES' AS REPO_235
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION

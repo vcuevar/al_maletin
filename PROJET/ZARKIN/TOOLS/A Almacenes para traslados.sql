@@ -32,7 +32,7 @@ SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
 where SIZ_AlmacenesTransferencias.Dept = '1' 
---SIZ_AlmacenesTransferencias.Code = 'AMG-ST' --and TrasladoDeptos like '%O%'
+--SIZ_AlmacenesTransferencias.Code = 'APT-SE' --and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
 
 Select Dept, Name, Label, SolicitudMateriales, TrasladoDeptos
@@ -60,7 +60,7 @@ Order by Dept
 
 BEGIN      
 	INSERT INTO SIZ_AlmacenesTransferencias (Code, Dept, Label, SolicitudMateriales, TrasladoDeptos)
-    VALUES ('AMP-CO','15','AMP-CO - ALMACEN COMPRAS.','','D')
+    VALUES ('APT-SE','1','APT-SE - SERVICIOS A CLIEN.','','D')
       
 	--PRINT 'Ingresado: CODIGO ' + cast(@CODI as varchar(10))  + '  ' + cast(@NAME as varchar (50))
 END
