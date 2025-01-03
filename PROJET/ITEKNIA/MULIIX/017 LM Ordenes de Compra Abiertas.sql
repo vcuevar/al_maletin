@@ -47,10 +47,10 @@ inner join OrdenesCompraDetalle on OCD_OC_OrdenCompraId = OC_OrdenCompraId
 Where OC_CodigoOC = 'OC03773'
 
 
-Select * from OrdenesCompra
-Where OC_CodigoOC = 'OC02936'
+Select Distinct(OC_CMM_EstadoOC), CMM_Valor from OrdenesCompra
+Inner join ControlesMaestrosMultiples on OC_CMM_EstadoOC = CMM_ControlID
 
-update OrdenesCompra set OC_Borrado = 0 Where OC_CodigoOC = 'OC03048'
+--update OrdenesCompra set OC_Borrado = 0 Where OC_CodigoOC = 'OC03048'
 
 
 -- Para corregir error de OC que trae el Factorde Conversion 0
@@ -89,3 +89,50 @@ Order by OC_CodigoOC
 
 
 Select * from OrdenesCompraFechasRequeridas
+
+
+
+
+
+
+SELECT
+    OC_OrdenCompraId AS DT_RowId,
+    OC_CodigoOC,
+    PRO_CodigoProveedor,
+    PRO_Nombre AS PRO_NombreComercial,
+    PRO_NombreComercial AS PRO_RazonSocial,
+    CMM_Valor AS OC_CMM_EstadoOC,
+    MON_Nombre,
+    ROUND(SUM(((OCFR_CantidadRequerida * OCFR_PrecioUnitario) - ((OCFR_CantidadRequerida * OCFR_PrecioUnitario) * (OCFR_PorcentajeDescuento/100))) +
+    (((OCFR_CantidadRequerida * OCFR_PrecioUnitario) - ((OCFR_CantidadRequerida * OCFR_PrecioUnitario) * (OCFR_PorcentajeDescuento/100))) * ISNULL(OCD_CMIVA_PorcentajeIVA, 0.0))),2) AS OC_Total,
+    CAST(OC_FechaOC AS DATE) AS OC_FechaOC,
+    CAST(OC_FechaUltimaModificacion AS DATETIME) AS OC_FechaUltimaModificacion
+FROM OrdenesCompra
+INNER JOIN OrdenesCompraDetalle ON OCD_OC_OrdenCompraId = OC_OrdenCompraId
+INNER JOIN OrdenesCompraFechasRequeridas ON OCFR_OC_OrdenCompraId = OC_OrdenCompraId AND OCD_PartidaId = OCFR_OCD_PartidaId
+INNER JOIN Proveedores ON PRO_ProveedorId = OC_PRO_ProveedorId
+INNER JOIN ControlesMaestrosMultiples ON CMM_ControlId = OC_CMM_EstadoOC
+INNER JOIN Monedas ON MON_MonedaId = OC_MON_MonedaId
+WHERE OC_Borrado = 0
+AND OCD_Borrado = 0
+--AND OCFR_Borrado = 0
+--AND OC_EMP_CreadoPor = '".$idEmpleado."'
+AND OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6CIN' -- ('0825D10C-15F4-4C8F-A3E9-4C480E00068D')
+GROUP BY
+    OC_OrdenCompraId,
+    OC_CodigoOC,
+    PRO_CodigoProveedor,
+    PRO_Nombre,
+    PRO_NombreComercial,
+    CMM_Valor,
+    MON_Nombre,
+    OC_FechaOC,
+    OC_FechaUltimaModificacion
+ORDER BY  OC_CodigoOC DESC
+    
+    
+    Select * from ControlesMaestrosMultiples Where CMM_Control =  'CMM_EstadoOC'
+    
+    
+Select Distinct(OC_CMM_EstadoOC), CMM_Valor from OrdenesCompra
+Inner join ControlesMaestrosMultiples on OC_CMM_EstadoOC = CMM_ControlID

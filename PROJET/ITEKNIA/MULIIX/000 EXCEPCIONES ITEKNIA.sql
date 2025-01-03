@@ -269,39 +269,67 @@ ORDER BY TSM_CodigoSolicitud,FECHA
 
 
 
--- ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA
+-- ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA 
+-- Se pidio validar el 10 de Diciembre del 2024.
 
 Select F.EMP_numeroEmpleado AS CODIGO
 	, E.EMP_Nombre + ' ' + E.EMP_PrimerApellido + ' ' + E.EMP_SegundoApellido  AS NOMBRE
 	, F.EMP_semana AS SEMANA
 	, F.EMP_anio AS AÑO
 	, F.EMP_status  AS ESTATUS 
+	, Cast(F.EMP_fechaCreacion as date) AS CREADO
 	, Cast(F.EMP_fechaAceptadoRechazado as date)  AS F_ACEPTADO
 	, Cast(F.EMP_fechaAceptadoRechazado as time) AS HORA
-	
 from RPT_EMPLOYEES F 
-Left Join Empleados E on E.EMP_CodigoEmpleado = SubString(F.EMP_numeroEmpleado, 2, 4) 
---Where F.EMP_numeroEmpleado lIKE '%55%'
+--Left Join Empleados E on Cast(E.EMP_CodigoEmpleado as integer) = Cast(F.EMP_numeroEmpleado as integer) 
+Left Join Empleados E on E.EMP_CodigoEmpleado = SUBSTRING(F.EMP_numeroEmpleado,2,4) 
+--Where F.EMP_status <> 'accepted'
+Order by CREADO, NOMBRE
+
+
+Select COUNT(F.EMP_semana) AS CUENTA
+	--, F.EMP_status  AS ESTATUS 
+	, Cast(F.EMP_fechaCreacion as date) AS CREADO
+from RPT_EMPLOYEES F 
+--Left Join Empleados E on Cast(E.EMP_CodigoEmpleado as integer) = Cast(F.EMP_numeroEmpleado as integer) 
+Left Join Empleados E on E.EMP_CodigoEmpleado = F.EMP_numeroEmpleado
+Group By Cast(F.EMP_fechaCreacion as date) --, F.EMP_status
+Order by CREADO
 
 --Estatus de Nomina
 -- accepted
 -- new
 -- rejected
 
-Select DISTINCT EMP_status  from RPT_EMPLOYEES F 
 
 --Select * from Usuarios where USU_Nombre = '392'
---Select * from Empleados 
---Where EMP_Activo = 1 and 
---Cast(EMP_CodigoEmpleado as int) = 1005
+
+Select * from Empleados 
+Where EMP_Activo = 1 and EMP_DefinidoPorUsuario1 <> '' 
+and EMP_CodigoEmpleado = '784'
+	
+Select * from RPT_EmpleadoCamposAdicionales reca 
+
+
 --Order By EMP_CodigoEmpleado desc 
 
---Select * from RPT_EMPLOYEES --Where EMP_employeeNumber = '01005'
+Select * from RPT_EMPLOYEES Where EMP_employeeNumber = '00001'
 
 
 
-SELECT * from Empleados e 
-select * from AlmacenDigitalCHIndice ADCH_INEValido
+
+
+-- Alerta para validar vencimiento de los INES
+
+Select EMP_CodigoEmpleado AS EMP_CodigoEmpleado 
+	, (EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido) AS NOMBRE_C 
+	, Cast(ADCH_INEValido as date) AS VENCIMIENTO
+from Empleados 
+Inner Join AlmacenDigitalCHIndice on ADCH_EMP_EmpleadoID = EMP_EmpleadoId and EMP_Comentarios not like '%NO NOMINA%'
+Order by NOMBRE_C
+-- where EMP_Nombre like '%MARIAN%'
+--Where ADCH_INEValido is null
+
 
 
 /*
@@ -313,5 +341,40 @@ from Empleados
 Where EMP_Activo = 1 and EMP_PresupuestoAutorizado > 0
 Order By EMP_PresupuestoAutorizado 
 */
+
+-- Empleados sin INE
+Select EMP_CodigoEmpleado AS CODIGO
+	, EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE
+	, ADCH_INEValido
+from AlmacenDigitalCHIndice
+inner join Empleados  on EMP_EmpleadoId = ADCH_EMP_EmpleadoID
+Where  EMP_Activo = 1 and EMP_Eliminado = 0 
+and ADCH_INEValido is null
+
+
+-- Empleados Por vencer INE
+Select EMP_CodigoEmpleado AS CODIGO
+	, EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE
+	, ADCH_INEValido
+from AlmacenDigitalCHIndice
+inner join Empleados  on EMP_EmpleadoId = ADCH_EMP_EmpleadoID
+Where  EMP_Activo = 1 and EMP_Eliminado = 0 
+and Cast(ADCH_INEValido as date) = Cast('2024-12-31' as date) 
+
+
+
+
+
+
+Select DISTINCT OC_CMM_EstadoOC, CMM_Valor
+from OrdenesCompra   
+Inner Join ControlesMaestrosMultiples on CMM_ControlID = OC_CMM_EstadoOC  
+
+
+Select * from ControlesMaestrosMultiples Where CMM_Control = 'CMM_EstadoOC'
+
+
+
+
 
 

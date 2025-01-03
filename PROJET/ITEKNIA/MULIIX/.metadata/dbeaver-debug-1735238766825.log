@@ -1,24 +1,24 @@
-2024-11-06 08:32:44.318 - DBeaver 23.0.2.202304091457 is starting
-2024-11-06 08:32:44.319 - OS: Linux 6.8.0-47-generic (amd64)
-2024-11-06 08:32:44.319 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
-2024-11-06 08:32:44.319 - Install path: '/usr/share/dbeaver-ce'
-2024-11-06 08:32:44.319 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
-2024-11-06 08:32:44.319 - Memory available 64Mb/1024Mb
-2024-11-06 08:32:44.335 - Create display
-2024-11-06 08:32:44.519 - Initializing DBeaver 23.0.2
-2024-11-06 08:32:44.520 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
-2024-11-06 08:32:44.521 - Initialize desktop platform...
-2024-11-06 08:32:44.789 - BounceCastle bundle found. Use JCE provider BC
+2024-12-18 14:10:16.100 - DBeaver 23.0.2.202304091457 is starting
+2024-12-18 14:10:16.101 - OS: Linux 6.8.0-49-generic (amd64)
+2024-12-18 14:10:16.101 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
+2024-12-18 14:10:16.101 - Install path: '/usr/share/dbeaver-ce'
+2024-12-18 14:10:16.102 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
+2024-12-18 14:10:16.102 - Memory available 64Mb/1024Mb
+2024-12-18 14:10:16.118 - Create display
+2024-12-18 14:10:16.313 - Initializing DBeaver 23.0.2
+2024-12-18 14:10:16.315 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
+2024-12-18 14:10:16.315 - Initialize desktop platform...
+2024-12-18 14:10:16.566 - BounceCastle bundle found. Use JCE provider BC
 > Start Core File Systems [org.eclipse.core.filesystem 1.9.500.v20220817-1539]
 > Start Core Resource Management [org.eclipse.core.resources 3.18.100.v20221025-2047]
 > Start Núcleo del equipo de soporte [org.eclipse.team.core 3.9.600.v20220902-2219]
 > Start DBeaver UI Navigator [org.jkiss.dbeaver.ui.navigator 1.0.103.202304091457]
-2024-11-06 08:32:45.240 - Initialize base platform...
+2024-12-18 14:10:16.973 - Initialize base platform...
 > Start Expression Language [org.eclipse.core.expressions 3.8.200.v20220613-1047]
-2024-11-06 08:32:45.283 - Platform initialized (762ms)
+2024-12-18 14:10:17.017 - Platform initialized (702ms)
 > Start DBeaver UI Editors - Base [org.jkiss.dbeaver.ui.editors.base 1.0.103.202304091457]
-2024-11-06 08:32:45.304 - Starting RMI server at 41418
-2024-11-06 08:32:45.378 - Run workbench
+2024-12-18 14:10:17.035 - Starting RMI server at 42473
+2024-12-18 14:10:17.107 - Run workbench
 > Start DBeaver UI [org.jkiss.dbeaver.ui 5.1.118.202304091457]
 > Start Eclipse e4 Workbench SWT [org.eclipse.e4.ui.workbench.swt 0.16.700.v20221024-2137]
 > Start Eclipse Application Services [org.eclipse.e4.core.services 2.3.400.v20220915-1347]
@@ -32,12 +32,12 @@
 > Start Eclipse Dependency Injection Extensions [org.eclipse.e4.core.di.extensions 0.17.200.v20220613-1008]
 > Start Eclipse CSS SWT Support [org.eclipse.e4.ui.css.swt 0.14.700.v20221102-0748]
 Warning: NLS unused message: BlockedJobsDialog_UserInterfaceTreeElement in: org.eclipse.ui.internal.progress.messages
-2024-11-06 08:32:48.356 - Configure workbench window
+2024-12-18 14:10:20.004 - Configure workbench window
 > Start Núcleo del sistema de ayuda [org.eclipse.help 3.9.100.v20210721-0601]
-2024-11-06 08:32:48.516 - Create actions
-2024-11-06 08:32:48.526 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
-2024-11-06 08:32:48.527 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
-2024-11-06 08:32:48.527 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
+2024-12-18 14:10:20.184 - Create actions
+2024-12-18 14:10:20.197 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2024-12-18 14:10:20.198 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2024-12-18 14:10:20.198 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
 Warning: NLS unused message: controls_client_homes_panel_button_add_home in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: controls_client_homes_panel_button_remove_home in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: controls_client_homes_panel_confirm_remove_home_text in: org.jkiss.dbeaver.core.CoreResources
@@ -51,8 +51,8 @@ Warning: NLS unused message: controls_client_homes_panel_label_product_name in: 
 Warning: NLS unused message: controls_client_homes_panel_label_product_version in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: actions_menu_reset_workspace_state_message in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
 Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
-2024-11-06 08:32:49.346 - Initialize workbench window
-2024-11-06 08:32:49.357 - Finish initialization
+2024-12-18 14:10:20.981 - Initialize workbench window
+2024-12-18 14:10:20.991 - Finish initialization
 > Start Equinox Java Authentication and Authorization Service (JAAS) [org.eclipse.equinox.security 1.3.1000.v20220801-1135]
 > Start Java Native Access [com.sun.jna 5.12.1.v20221103-2317]
 > Start Interfaz de usuario de manejo de conexión a Internet [org.eclipse.ui.net 1.4.100.v20220812-1406]
@@ -66,40 +66,38 @@ Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jk
 > Start GEF3 GEF (MVC) [org.eclipse.gef3 3.12.100.20230406122456]
 > Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.63.202304091457]
 > Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.63.202304091457]
-2024-11-06 08:32:50.978 - Total database drivers: 101 (101)
+2024-12-18 14:10:22.893 - Total database drivers: 101 (101)
 > Start Editor de texto predeterminado [org.eclipse.ui.editors 3.14.400.v20220730-1844]
 > Start Entorno de trabajo [org.eclipse.ui.workbench.texteditor 3.16.600.v20220809-1658]
-2024-11-06 08:32:53.203 - Open [https://dbeaver.io/product/version.xml]
-> Start DBeaver UI Editors - Connections [org.jkiss.dbeaver.ui.editors.connection 1.0.94.202304091457]
-2024-11-06 08:33:14.665 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
-> Start DBeaver SQL Server Support [org.jkiss.dbeaver.ext.mssql 1.0.197.202304091457]
-2024-11-06 08:33:14.711 - Execution context opened (ItekniaDB; Main; 0)
-2024-11-06 08:33:14.983 - Execution context opened (ItekniaDB; Metadata; 1)
-2024-11-06 08:33:15.406 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
 > Start Soporte de Core Compare [org.eclipse.compare.core 3.7.100.v20220812-1406]
 > Start Consola [org.eclipse.ui.console 3.11.400.v20221012-0524]
 Warning: NLS unused message: InputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
 Warning: NLS unused message: OutputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
 > Start Núcleo de depuración [org.eclipse.debug.core 3.20.0.v20220811-0741]
-2024-11-06 08:35:20.586 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 2)
-2024-11-06 08:37:21.390 - Connect with 'Comercializadora' (microsoft-1922993c65b-6adb2d61b9488cd5)
-2024-11-06 08:37:21.391 - Execution context opened (Comercializadora; Main; 3)
-2024-11-06 08:37:21.458 - Execution context opened (Comercializadora; Metadata; 4)
-2024-11-06 08:37:21.846 - Connected (microsoft-1922993c65b-6adb2d61b9488cd5, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
-2024-11-06 08:46:48.115 - Execution context opened (Comercializadora; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 5)
-2024-11-06 08:46:48.122 - Execution context closed (ItekniaDB, 2)
-2024-11-06 11:20:14.780 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 6)
-2024-11-06 11:20:14.806 - Execution context closed (Comercializadora, 5)
-2024-11-06 11:20:22.188 - org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [113] [S0001]: Falta la marca de fin de comentario '*/'.
+2024-12-18 14:11:43.238 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
+> Start DBeaver SQL Server Support [org.jkiss.dbeaver.ext.mssql 1.0.197.202304091457]
+2024-12-18 14:11:43.304 - Execution context opened (ItekniaDB; Main; 0)
+2024-12-18 14:11:43.840 - Execution context opened (ItekniaDB; Metadata; 1)
+2024-12-18 14:11:44.725 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2024-12-18 14:11:44.775 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 2)
+2024-12-18 14:16:02.366 - SQL Error [102] [S0001]: Sintaxis incorrecta cerca de 'ControlesMaestrosMultiples'.
+
+Error position:
+org.jkiss.dbeaver.model.sql.DBSQLException: SQL Error [102] [S0001]: Sintaxis incorrecta cerca de 'ControlesMaestrosMultiples'.
 	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:133)
 	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:582)
 	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
 	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
 	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
-	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.run(SQLQueryJob.java:238)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
 	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Falta la marca de fin de comentario '*/'.
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Sintaxis incorrecta cerca de 'ControlesMaestrosMultiples'.
 	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
 	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1632)
 	at com.microsoft.sqlserver.jdbc.SQLServerStatement.doExecuteStatement(SQLServerStatement.java:872)
@@ -113,10 +111,34 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Falta la marca de fi
 	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.lambda$0(JDBCStatementImpl.java:131)
 	at org.jkiss.dbeaver.utils.SecurityManagerUtils.wrapDriverActions(SecurityManagerUtils.java:96)
 	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCStatementImpl.executeStatement(JDBCStatementImpl.java:131)
-	... 7 more
-2024-11-06 12:50:18.979 - System suspend detected! Reinitialize all remote connections.
-2024-11-06 18:54:17.562 - Execution context closed (ItekniaDB, 6)
-2024-11-06 18:54:19.951 - DBeaver is stopping
-2024-11-06 18:54:19.953 - Stop RMI server
-2024-11-06 18:54:19.958 - RMI controller has been stopped
-2024-11-06 18:54:19.958 - DBeaver shutdown completed
+	... 12 more
+2024-12-18 14:16:32.425 - SQL Error [8169] [S0002]: Error de conversión al convertir de una cadena de caracteres a uniqueidentifier.
+org.jkiss.dbeaver.model.exec.DBCException: SQL Error [8169] [S0002]: Error de conversión al convertir de una cadena de caracteres a uniqueidentifier.
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCResultSetImpl.nextRow(JDBCResultSetImpl.java:183)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.fetchQueryData(SQLQueryJob.java:837)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeStatement(SQLQueryJob.java:632)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.lambda$1(SQLQueryJob.java:491)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.executeSingleQuery(SQLQueryJob.java:498)
+	at org.jkiss.dbeaver.ui.editors.sql.execute.SQLQueryJob.extractData(SQLQueryJob.java:934)
+	at org.jkiss.dbeaver.ui.editors.sql.SQLEditor$QueryResultsContainer.readData(SQLEditor.java:3864)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.lambda$0(ResultSetJobDataRead.java:123)
+	at org.jkiss.dbeaver.model.exec.DBExecUtils.tryExecuteRecover(DBExecUtils.java:189)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetJobDataRead.run(ResultSetJobDataRead.java:121)
+	at org.jkiss.dbeaver.ui.controls.resultset.ResultSetViewer$ResultSetDataPumpJob.run(ResultSetViewer.java:5091)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Error de conversión al convertir de una cadena de caracteres a uniqueidentifier.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
+	at com.microsoft.sqlserver.jdbc.SQLServerResultSet$FetchBuffer.nextRow(SQLServerResultSet.java:5448)
+	at com.microsoft.sqlserver.jdbc.SQLServerResultSet.fetchBufferNext(SQLServerResultSet.java:1771)
+	at com.microsoft.sqlserver.jdbc.SQLServerResultSet.next(SQLServerResultSet.java:1029)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCResultSetImpl.next(JDBCResultSetImpl.java:272)
+	at org.jkiss.dbeaver.model.impl.jdbc.exec.JDBCResultSetImpl.nextRow(JDBCResultSetImpl.java:180)
+	... 13 more
+2024-12-18 14:54:56.001 - System suspend detected! Reinitialize all remote connections.
+2024-12-18 19:40:20.268 - Execution context closed (ItekniaDB, 2)
+2024-12-18 19:40:20.665 - DBeaver is stopping
+2024-12-18 19:40:20.667 - Stop RMI server
+2024-12-18 19:40:20.670 - RMI controller has been stopped
+2024-12-18 19:40:20.674 - DBeaver shutdown completed

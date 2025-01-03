@@ -1,9 +1,9 @@
--- Nombre: MACRO 048 LayOut Banorte.
--- Query: LayOut Banorte
--- Objetivo: Generar archivo para cargar a Nomina Banorte.
+-- Nombre: MACRO 049 LayOut Santander.
+-- Query: LayOut Santander
+-- Objetivo: Generar archivo para cargar a Nomina Santander.
 -- Sistema: Nomimpaq (SQL)
 -- Desarrollado: Ing. Vicente Cueva Ramirez.
--- Actualizado: Miercoles 16 de Octubre del 2024; Origen.
+-- Actualizado: Miercoles 27 de Noviembre del 2024; Origen.
 
 -- Parámetros 
 Declare @Anual as Integer
@@ -17,7 +17,25 @@ Set @IdPeriodo = 0
 -- Determina el Id del la Semana.
 Set @IdPeriodo = (Select idperiodo from NOM10002 Where numeroperiodo = @Semana and ejercicio = @Anual)
 
--- Empleado que se pagan mediante el Banco Banorte.
+-- Empleado que se pagan mediante el Banco Santander.
+Select NOM10001.codigoempleado AS NO_EMPLEADO
+	, NOM10001.ApellidoPaterno AS AP_PATERNO
+	, NOM10001.ApellidoMaterno AS AP_MATERNO
+	, NOM10001.Nombre AS NOMBRE
+	, Cast(NOM10007.ImporteTotal as Decimal(16,2)) AS IMPORTE
+	, NOM10001.bancopagoelectronico AS BAN_RECEPTOR    
+	, '01' AS TIP_CUENTA
+	, NOM10001.cuentapagoelectronico AS N_CUENTA
+	, NOM10007.*
+from NOM10007
+Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
+Where idperiodo = @IdPeriodo
+and NOM10007.IdConcepto = 1 
+and NOM10001.bancopagoelectronico = '072' 
+Order By AP_PATERNO, AP_MATERNO
+ 
+
+-- Empleado que se concideran Excepciones.
 Select NOM10001.codigoempleado AS NO_EMPLEADO
 	, NOM10001.Nombre + '  ' + NOM10001.ApellidoPaterno + '  ' + NOM10001.ApellidoMaterno AS NOMBRE
 	, Cast(NOM10007.ImporteTotal as Decimal(16,2)) AS IMPORTE
@@ -29,9 +47,8 @@ from NOM10007
 Inner Join NOM10001 on NOM10001.IdEmpleado = NOM10007.IdEmpleado
 Where idperiodo = @IdPeriodo
 and NOM10007.IdConcepto = 1 
-and NOM10001.bancopagoelectronico = '014' 
+and NOM10001.bancopagoelectronico <> '072' and NOM10001.bancopagoelectronico <> '014'
 Order By NOMBRE
- 
  
 /*
 

@@ -8,7 +8,7 @@ Select * from RBEV Order By NombRepo
 
 -- Modificar un Reporte a su nueva Version.
 
-Update RBEV set NumeVers = 'VMA240918A' Where CodeRepo = 'IT-VMA-2208-047'
+Update RBEV set NumeVers = 'VMA241211A' Where CodeRepo = 'IT-VMA-2410-049'
 
 -- Asignar un nuevo registro.
 
