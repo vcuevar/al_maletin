@@ -281,54 +281,74 @@ Select F.EMP_numeroEmpleado AS CODIGO
 	, Cast(F.EMP_fechaAceptadoRechazado as date)  AS F_ACEPTADO
 	, Cast(F.EMP_fechaAceptadoRechazado as time) AS HORA
 from RPT_EMPLOYEES F 
---Left Join Empleados E on Cast(E.EMP_CodigoEmpleado as integer) = Cast(F.EMP_numeroEmpleado as integer) 
-Left Join Empleados E on E.EMP_CodigoEmpleado = SUBSTRING(F.EMP_numeroEmpleado,2,4) 
---Where F.EMP_status <> 'accepted'
-Order by CREADO, NOMBRE
+Left Join Empleados E on E.EMP_DefinidoPorUsuario1 = F.EMP_numeroEmpleado and E.EMP_Activo = 1
+Order by NOMBRE, CREADO, SEMANA 
 
-
+/*
 Select COUNT(F.EMP_semana) AS CUENTA
 	--, F.EMP_status  AS ESTATUS 
 	, Cast(F.EMP_fechaCreacion as date) AS CREADO
 from RPT_EMPLOYEES F 
 --Left Join Empleados E on Cast(E.EMP_CodigoEmpleado as integer) = Cast(F.EMP_numeroEmpleado as integer) 
-Left Join Empleados E on E.EMP_CodigoEmpleado = F.EMP_numeroEmpleado
+--inner Join Empleados E on E.EMP_DefinidoPorUsuario1 = F.EMP_numeroEmpleado
 Group By Cast(F.EMP_fechaCreacion as date) --, F.EMP_status
 Order by CREADO
+*/
 
 --Estatus de Nomina
 -- accepted
 -- new
 -- rejected
 
+/*
+-- Consulta enviada por Alberto Jimenez
+SELECT TOP (1000) [EMP_Employee_Id]
+      ,[EMP_numeroEmpleado]
+      , Empleados.[EMP_Nombre] + ' ' + Empleados.[EMP_PrimerApellido] AS NOMBRE
+      ,[EMP_status]
+      ,[EMP_fechaAceptadoRechazado]
+      ,[EMP_fechaCreacion]
+      ,[EMP_semana]
+      ,[EMP_anio]
+      ,[EMP_visto]
+      ,[EMP_fechaVisto]
+      ,[EMP_descargado]
+      ,[EMP_fechaCopiado]
+  FROM [ItekniaDB].[dbo].[RPT_EMPLOYEES]
+  INNER JOIN Empleados on 
+  RIGHT('000' + CONVERT(varchar, EMP_CodigoEmpleado), 4)  = RIGHT('000' + CONVERT(varchar, EMP_numeroEmpleado), 4)
+  where EMP_status <> 'accepted'
+-- and EMP_numeroEmpleado like '%77%'
+and EMP_numeroEmpleado not in ('00001', '00002')
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --Select * from Usuarios where USU_Nombre = '392'
 
-Select * from Empleados 
-Where EMP_Activo = 1 and EMP_DefinidoPorUsuario1 <> '' 
-and EMP_CodigoEmpleado = '784'
+--Select * from Empleados Where EMP_DefinidoPorUsuario1 = '00808' 
+--and EMP_CodigoEmpleado = '055'
 	
-Select * from RPT_EmpleadoCamposAdicionales reca 
+--Select * from RPT_EmpleadoCamposAdicionales reca 
 
 
 --Order By EMP_CodigoEmpleado desc 
 
-Select * from RPT_EMPLOYEES Where EMP_employeeNumber = '00001'
+--Select * from RPT_EMPLOYEES Where EMP_employeeNumber = '00001'
 
 
-
-
-
--- Alerta para validar vencimiento de los INES
-
-Select EMP_CodigoEmpleado AS EMP_CodigoEmpleado 
-	, (EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido) AS NOMBRE_C 
-	, Cast(ADCH_INEValido as date) AS VENCIMIENTO
-from Empleados 
-Inner Join AlmacenDigitalCHIndice on ADCH_EMP_EmpleadoID = EMP_EmpleadoId and EMP_Comentarios not like '%NO NOMINA%'
-Order by NOMBRE_C
--- where EMP_Nombre like '%MARIAN%'
---Where ADCH_INEValido is null
+--Update Empleados Set EMP_DefinidoPorUsuario1 = '' Where EMP_EmpleadoId = '27756C09-3B3D-44AB-87CD-C25727EE532C'
 
 
 
@@ -343,7 +363,8 @@ Order By EMP_PresupuestoAutorizado
 */
 
 -- Empleados sin INE
-Select EMP_CodigoEmpleado AS CODIGO
+Select 'Empleados SIN INE' AS REPO_20
+	, EMP_CodigoEmpleado AS CODIGO
 	, EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE
 	, ADCH_INEValido
 from AlmacenDigitalCHIndice
@@ -353,7 +374,8 @@ and ADCH_INEValido is null
 
 
 -- Empleados Por vencer INE
-Select EMP_CodigoEmpleado AS CODIGO
+Select 'Empleados INE VENCIDO' AS REPO_25
+	, EMP_CodigoEmpleado AS CODIGO
 	, EMP_Nombre + ' ' + EMP_PrimerApellido + ' ' + EMP_SegundoApellido AS NOMBRE
 	, ADCH_INEValido
 from AlmacenDigitalCHIndice
@@ -361,20 +383,8 @@ inner join Empleados  on EMP_EmpleadoId = ADCH_EMP_EmpleadoID
 Where  EMP_Activo = 1 and EMP_Eliminado = 0 
 and Cast(ADCH_INEValido as date) = Cast('2024-12-31' as date) 
 
+-- Estudiar Alerta para Los comprobantes no enviados
 
-
-
-
-
-Select DISTINCT OC_CMM_EstadoOC, CMM_Valor
-from OrdenesCompra   
-Inner Join ControlesMaestrosMultiples on CMM_ControlID = OC_CMM_EstadoOC  
-
-
-Select * from ControlesMaestrosMultiples Where CMM_Control = 'CMM_EstadoOC'
-
-
-
-
-
+Select * from RPT_ReferenciasCorreoPagos 
+Where RCP_CorreoEnviado = 0
 

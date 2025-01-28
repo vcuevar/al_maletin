@@ -39,12 +39,16 @@ left JOIN Articulos ON OCD_ART_ArticuloId = ART_ArticuloId
 where OC_Borrado = 0 AND 
 OCFR_CMM_EstadoFechaRequeridaId = 'B7DAE8A8-76F6-4CB4-A941-ECE2CADE427D' 
 --and OC_CodigoOC = 'OC2667'
-Order by Cast(OC_FechaOC AS DATE), OC_CodigoOC  
+Order by Cast(OC_FechaOC AS DATE), OC_CodigoOC 
+
+
+
+
 
 
 select OC_CodigoOC,  OC_FechaOC,  OCD_AFC_FactorConversion, * from OrdenesCompra
 inner join OrdenesCompraDetalle on OCD_OC_OrdenCompraId = OC_OrdenCompraId
-Where OC_CodigoOC = 'OC03773'
+Where OC_CodigoOC = 'OC00597'
 
 
 Select Distinct(OC_CMM_EstadoOC), CMM_Valor from OrdenesCompra
@@ -134,5 +138,92 @@ ORDER BY  OC_CodigoOC DESC
     Select * from ControlesMaestrosMultiples Where CMM_Control =  'CMM_EstadoOC'
     
     
-Select Distinct(OC_CMM_EstadoOC), CMM_Valor from OrdenesCompra
+Select Distinct(OC_CMM_EstadoOC) --, CMM_Valor 
+from OrdenesCompra
 Inner join ControlesMaestrosMultiples on OC_CMM_EstadoOC = CMM_ControlID
+
+Select * from ControlesMaestrosMultiples Where CMM_Control like '%OC%' Order By CMM_Control 
+
+Select * from ControlesMaestrosMultiples --Where CMM_ControlId = '0825D10C-15F4-4C8F-A3E9-4C480E00068D' 
+Where CMM_Control like 'CMM_COC_EstadoOrdenCompra'
+
+C801F991-979A-4C36-BC5C-F0BA88D05826	CMM_COC_EstadoOrdenCompra	CANCELADA
+C845EF49-4729-416C-9E7B-288B11BCDF47	CMM_COC_EstadoOrdenCompra	Por Aprobar
+DF4DA5D4-B56C-4319-89D5-A3010359BADA	CMM_COC_EstadoOrdenCompra	Cerrada
+5A8C87F2-B6F0-4580-A581-F1A7DBF70C54	CMM_COC_EstadoOrdenCompra	Etiquetada
+0825D10C-15F4-4C8F-A3E9-4C480E00068D	CMM_COC_EstadoOrdenCompra	Recibida Completa
+4C9DCE78-3461-4499-A579-8DDD5179B941	CMM_COC_EstadoOrdenCompra	Recibida Parcial
+
+Select * from ControlesMaestrosMultiples  
+Where CMM_Control like 'CMM_COC_EstadoPartidaOC'
+
+E85A2462-BE47-47B1-85E9-ED4E8AF82E19	CMM_COC_EstadoPartidaOC	Abierta
+3B2F2B9C-F9A9-40FD-A2EF-FE476106CA45	CMM_COC_EstadoPartidaOC	Completa
+C9B6428B-E1B1-44C5-AAC9-DCD65628B530	CMM_COC_EstadoPartidaOC	Correspondida Completa
+AA726CB7-987C-4607-929F-0FB5B226F616	CMM_COC_EstadoPartidaOC	Correspondida Parcial
+6D5762C9-CA9C-4DC3-A6A6-61237BC6DD06	CMM_COC_EstadoPartidaOC	Parcial
+
+Select * from ControlesMaestrosMultiples  
+Where CMM_Control = 'CMM_EstadoOC'
+
+C801F991-979A-4C36-BC5C-F0BA88D05826	CMM_EstadoOC	CANCELADA
+C845EF49-4729-416C-9E7B-288B11BCDF47	CMM_EstadoOC	Por Aprobar
+59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C	CMM_EstadoOC	Abierta
+CFD16CB6-91DD-423F-AF53-5CAA86701D7F	CMM_EstadoOC	Completa
+545CF84B-BBBA-46FE-ADEC-586AEEF4ED78	CMM_EstadoOC	Correspondida Completa
+1C086C08-E99B-4166-895C-FFDEE5D8437D	CMM_EstadoOC	Correspondida Parcial
+F005FA77-8026-472F-A288-8680DFD711C0	CMM_EstadoOC	Parcial
+
+
+select * from OrdenesCompra
+inner join OrdenesCompraDetalle on OCD_OC_OrdenCompraId = OC_OrdenCompraId
+Where OC_CodigoOC = 'OC11336'
+
+Select * from Empleados Where EMP_EmpleadoId ='FF6BED60-4F54-42DD-83E9-6DB365B9EE00'
+Select * from Empleados Where EMP_EmpleadoId = '973FE41A-7BCF-4550-9957-4695BEE4BA73'
+
+
+
+-- Correccion de Estatus despues de los cambios que hizo Francisco 250116
+-- Envio correo Elizbeth para cambiar estatus.
+
+Select OC_CMM_EstadoOC,  * from OrdenesCompra Where  OC_CodigoOC = 'OC11337' 
+
+
+-- Deben estar abiertas.
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11337'
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11333'
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11323'
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11322'
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11321'
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11288'
+Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11280'
+
+--Deben estar Completas.
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11292'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11320'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11319'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11045'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11778'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10736'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10655'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10638'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10633'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10584'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10429'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10395'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10263'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10220'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10192'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10142'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC10139'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC09955'
+
+--250122 Se deja parcial para que las modifiquen.
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'F005FA77-8026-472F-A288-8680DFD711C0' Where OC_CodigoOC = 'OC11319'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'F005FA77-8026-472F-A288-8680DFD711C0' Where OC_CodigoOC = 'OC11320'
+
+-- 250122 Seregresan a Completas.
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11320'
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11319'
+

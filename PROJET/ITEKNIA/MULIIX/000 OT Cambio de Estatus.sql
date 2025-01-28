@@ -8,6 +8,8 @@
 
 -- Relacion de Estatus para OT
 
+Select * from ControlesMaestrosMultiples Where CMM_ControlId	='3887AF19-EA11-4464-A514-8FA6030E5E93'
+
 --  CMM_ControlId	                        CMM_Valor
 -- 3C843D99-87A6-442C-8B89-1E49322B265A	Abierta                                         Aparece en Movil
 -- 3887AF19-EA11-4464-A514-8FA6030E5E93	Cerrada Por Usuario                             Aparece en Movil
@@ -20,8 +22,11 @@
 Select OT_Codigo, CMM_Valor
 from OrdenesTrabajo
 inner join ControlesMaestrosMultiples on CMM_ControlId	= OT_CMM_Estatus
-Where OT_Codigo like 'OT03939'
+Where OT_Codigo like 'OT02513'
 Order by OT_Codigo
+
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT02512'
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT02513'
 
 
 update OrdenesTrabajo set OT_CMM_Estatus = '3E35C727-DAEE-47FE-AA07-C50EFD93B25F' Where OT_Codigo = 'OT00005' -- Cerrado y Costeado
