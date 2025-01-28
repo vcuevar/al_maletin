@@ -13,7 +13,7 @@ from ITT1
 inner join OITM A3 on A3.ItemCode=ITT1.Father
 inner join OITM A1 on A1.ItemCode=ITT1.Code
 where A3.U_TipoMat = 'PT' and ITT1.warehouse <> 'APG-ST' 
-and A1.ItmsGrpCod <> '113' and A3.InvntItem = 'Y'
+and A1.ItmsGrpCod <> '113' and A1.ItmsGrpCod <> '114' and A3.InvntItem = 'Y'
 ORDER BY A3.ItemName
 
 -- Almacen de Consumo para Piel al AMP-ST.
@@ -76,7 +76,8 @@ select '005 SB CONSUME AMP-CC' AS REPORTE, ITT1.Father, A3.ItemName, ITT1.Code, 
 	inner join OWOR on WOR1.DocEntry=OWOR.DocEntry 
 	inner join OITW on A1.ItemCode=OITW.ItemCode AND OITW.WhsCode = 'APG-ST'
 	where  OWOR.Status = 'R' and A1.U_TipoMat <> 'CG' and WOR1.IssueType = 'M' and
-	WOR1.IssuedQty < WOR1.PlannedQty and OWOR.CmpltQty=0  and A1.ItmsGrpCod <> 113 and A1.QryGroup30='N'
+	WOR1.IssuedQty < WOR1.PlannedQty and OWOR.CmpltQty=0  and A1.ItmsGrpCod <> 113 
+	and A1.ItmsGrpCod <> '114' and A1.QryGroup30='N'
 		
 -- Validar que los PT (ESTRUCTURA) CONSUMAN DEL APG-ST (NO KIT de VENTAS)
 -- CARGADO A LAS ALERTAS DE SAP 10/DIC/2021
@@ -91,7 +92,7 @@ select '005 SB CONSUME AMP-CC' AS REPORTE, ITT1.Father, A3.ItemName, ITT1.Code, 
 	inner join OITM A3 on A3.ItemCode=ITT1.Father
 	inner join OITM A1 on A1.ItemCode=ITT1.Code
 	where A3.U_TipoMat = 'PT' and ITT1.warehouse <> 'APG-ST' 
-	and A1.ItmsGrpCod <> '113' and A3.InvntItem = 'Y'
+	and A1.ItmsGrpCod <> '113' and A1.ItmsGrpCod <> '114' and A3.InvntItem = 'Y'
 	ORDER BY A3.ItemName
 
 -- Articulos Sin unidad de Inventario. 

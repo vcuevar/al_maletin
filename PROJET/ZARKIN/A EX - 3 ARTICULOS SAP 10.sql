@@ -14,7 +14,8 @@ Declare @FechaIS nvarchar(30)
 Set @FechaCrea = CONVERT (DATE, '2023/01/23', 102)
 --Set @FechaCrea = '2022/03/30'
 -- Fecha de Inactivos Modificacion. aaaa/mm/dd
-Set @FechaInac =  CONVERT (DATE, '2024/12/27', 102)
+--Set @FechaInac =  CONVERT (DATE, '2024/12/27', 102)
+Set @FechaInac = (SELECT DATEADD(day,-1,CAST(GETDATE() as date)))
 -- Fecha 3 meses atras para enviar a Obsoletos aaa/dd/mm
 Set @FechaIS = (SELECT DATEADD(MM, -12, GETDATE()))
 
@@ -786,11 +787,8 @@ and MD.MODEL is not null
 and OITM.frozenFor = 'N'
 
 */
-
-
-
 -- Articulo poner en U_CodAnt 'NOUSA' a todos los NULL
-SELECT '245 ART. ANT NULL' AS REPO_245
+SELECT '245 COMPL-NOUSA ?' AS REPO_245
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
@@ -1799,6 +1797,7 @@ Order By DESCRIPCION
 -- =================================================================================================================
 	
 -- 230920 Validar que los articulos MP TELAS y TELAS Y VINILES Tengan Emision Manual. 
+-- 250103 Se valida que sea Articulo Inventariable ya que metieron telas que no se inventarian.
 	Select '785 TELAS ART. MANUAL' AS REPORTE_785
 		, A1.ItemCode AS CODIGO
 		, A1.ItemName AS DESCRIPCION
@@ -1806,9 +1805,10 @@ Order By DESCRIPCION
 		, A1.ItmsGrpCod AS GRUPO
 		, A1.U_GrupoPlanea AS PLANEA
 		, A1.IssueMthd AS EMISION
+		, A1.InvntItem 
 	From OITM A1   
 	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
-	and A1.IssueMthd <> 'M' and A1.U_Linea = '01'
+	and A1.IssueMthd <> 'M' and A1.U_Linea = '01' and A1.InvntItem = 'Y'
 	ORDER BY A1.ItemName
 
 
@@ -1824,7 +1824,7 @@ Select '801 TELAS LDM MANUAL' AS REPORTE_801
 	From OITM A1  
 	inner Join ITT1 on A1.ItemCode = ITT1.Code
 	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
-	and ITT1.IssueMthd <> 'M' -- and  A1.ItemCode = '20704'
+	and ITT1.IssueMthd <> 'M' and A1.InvntItem = 'Y'
 	ORDER BY A1.ItemName
 
 -- 230920 Validar que las OP los componentes MP TELAS y TELAS Y VINILES Tengan Emision Manual.

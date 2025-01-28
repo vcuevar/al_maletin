@@ -78,6 +78,15 @@ Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 Order By DESCRIPCION
 
 
+-- PARA BORRAR UN REGISTRO 
+
+Select * from SIZ_HistoryEstandar Where HE_ItemCode = '17202'
+and HE_FechaCambio = '2024-10-09'
+
+Delete SIZ_HistoryEstandar Where HE_ItemCode = '17202' and HE_FechaCambio = '2024-10-09'
+
+
+
 
 /*
 20558

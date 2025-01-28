@@ -46,7 +46,7 @@ Select '005 LISTA EQUIVOCADA' AS REP_005
 	, OCRD.GroupCode AS GRUPO
 	, OCRD.ListNum AS L_PRECIOS
 From OCRD
-Where OCRD.CardType = 'S' and OCRD.ListNum <> 9
+Where OCRD.CardType = 'S' and OCRD.ListNum <> 10
 
 Select '007 SIN LISTA A-COMPRAS' AS REP_007
 	, OCRD.CardCode AS CODIGO
@@ -102,6 +102,7 @@ Select '017 SP; 15 DIAS' AS REP_017
 From OITM 
 Where OITM.U_TipoMat = 'SP' and OITM.LeadTime <> 15 and OITM.frozenFor = 'N'
 Order By OITM.ItemCode Desc
+
 
 
 -- Sub-Producto Tiempo de Entrega.

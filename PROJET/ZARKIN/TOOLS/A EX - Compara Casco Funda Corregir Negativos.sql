@@ -19,8 +19,6 @@ algo pasa que no captura la cantidad recibida */
 	delete [@CP_OF] where Code = 506616
 
 
-
-
 -- Para asignar un nuevo codigo, primero ver que no exista
 
 Select * from [@CP_OF] CP  Where Name > 163132  and Name < 163140 Order by Code DESC
@@ -46,21 +44,18 @@ ORDER BY CP.U_DocEntry
 --solo es una pieza y recibido en 1
 
 	update [@CP_OF] set U_DocEntry = 52897  where Code=2677
-	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 684590
+	update [@CP_OF] set U_CT = 415, U_Orden = 415 where Code = 703990
 
 	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2677
 	update [@CP_OF] set U_Recibido= 1 where Code= 2677
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
-		delete [@CP_OF] where Code = 691432
-59670
-59632
-59671
+		delete [@CP_OF] where Code = 489971
 
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 59671 
+	Set @NumOrd = 58897 
  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
@@ -72,7 +67,7 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 57661  -- and U_CT = 415   --and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 59709  -- and U_CT = 415   --and U_idEmpleado = 79
 	order by  U_FechaHora, U_CT
 	 
 	Select * from  [@CP_LOGOF] where Code = 648110
@@ -80,7 +75,7 @@ ORDER BY CP.U_DocEntry
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 657670
+	update [@CP_LOGOF] set U_idEmpleado = 238 Where Code = 721240
 
 	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 660515
 	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 660516
@@ -95,7 +90,7 @@ ORDER BY CP.U_DocEntry
 	update [@CP_LOGOF] set U_FechaHora = '2024-11-30 14:27:00.000'  Where Code = 693252
 	2024-11-30 14:27:00.000
 
-DELETE [@CP_LOGOF] WHERE Code = 700884
+DELETE [@CP_LOGOF] WHERE Code = 721211
 
 
 DELETE [@CP_LOGOF] WHERE Code = 603594
@@ -114,7 +109,7 @@ DELETE [@CP_LOGOF] WHERE Code = 474702
 DELETE [@CP_LOGOF] WHERE Code = 474703
 
 
-update [@CP_LOGOF] set U_Cantidad = 10 Where Code = 497367
+update [@CP_LOGOF] set U_Cantidad = 5 Where Code = 497372
 
 
 De la OP 36994 se borraron estos renglones que no fueron reales 18 de Agosto 2023.

@@ -6,10 +6,24 @@
 Declare @FechaIS date
 Declare @FechaFS date
 
-Set @FechaIS = CONVERT(DATE, '2024-11-01', 102)
-Set @FechaFS = CONVERT(DATE, '2024-12-31', 102)
+Set @FechaIS = CONVERT(DATE, '2024-12-31', 102)
+Set @FechaFS = CONVERT(DATE, '2025-01-31', 102)
 
 -- Desarrollo de la Consulta
+
+/*
+-- Catalodo de Cuentas Contables
+Select FormatCode AS CUENTA
+	, AcctName AS NOMBRE
+	, AcctCode AS ID
+from OACT Where FormatCode = '501300000'
+
+501200000	COSTO DE RECLASIFICACION MATERIA PRIMA		_SYS00000000350
+501300000	CONSUMO AREAS ESTAFF						_SYS00000000351
+501500000	REVALORIZAR STANDAR INTERNO					_SYS00000000367
+
+*/
+
 
 Select	Cast(JDT1.DueDate as Date) AS FECHA
 		, JDT1.Account AS CUENTA
@@ -24,21 +38,8 @@ Select	Cast(JDT1.DueDate as Date) AS FECHA
 from JDT1
 inner join OUSR on OUSR.USERID = JDT1.UserSign
 Where Cast (JDT1.DueDate as Date) Between @FechaIS and @FechaFS 
-and JDT1.Account = '_SYS00000000367'
+and JDT1.Account = '_SYS00000000351'
 Order By Cast(JDT1.DueDate as Date), JDT1.TransId
 
-
-/*
--- Catalodo de Cuentas Contables
-Select FormatCode AS CUENTA
-	, AcctName AS NOMBRE
-	, AcctCode AS ID
-from OACT Where FormatCode = '501300000'
-
-501200000	COSTO DE RECLASIFICACION MATERIA PRIMA	_SYS00000000350
-501300000	CONSUMO AREAS ESTAFF	_SYS00000000351
-501500000	REVALORIZAR STANDAR INTERNO	_SYS00000000367
-
-*/
 
 

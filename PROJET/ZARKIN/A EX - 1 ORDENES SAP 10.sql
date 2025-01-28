@@ -451,6 +451,33 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 --Where (OWOR.Status = 'R' or OWOR.Status = 'P') and A3.QryGroup32 = 'Y'
 --and A3.ItemName like '%ACABA%'
 
+/*
+-------------------------------------------------------------------------------
+|   ORDENES PLANIFICADAS O LIBERADAS CON MAS DE 365 DIAS DE CREADAS.          |
+-------------------------------------------------------------------------------
+*/ 
+-- Provicionalmente le puse 709 dias para que se vayan depurando las OP, enviado correo a Raul.
+
+	Select 'OP ANTIGUAS, DEFINIR' AS QRY_147
+		, OWOR.DocEntry AS OP 
+		, OWOR.ItemCode AS CODIGO
+		, OITM.ItemName AS PRODUCTO
+		, OITM.InvntryUom AS UDM
+		, OITM.U_TipoMat AS TIP_MAT
+		, CP.U_CT AS AREA
+		, CP.U_Entregado AS PROCESO
+		, OWOR.PlannedQty AS CANT_PLANEA
+		, OWOR.CmpltQty AS CANT_TERMINADO
+		, Cast(OWOR.CreateDate as date) AS FEC_CREADO
+		, OWOR.Status AS ST_OP
+		, OWOR.U_Starus AS AVANCE
+	From OWOR
+	Inner Join OITM on OWOR.ItemCode = OITM.ItemCode
+	Right Join [@CP_OF] CP on CP.U_DocEntry = OWOR.DocEntry 
+	Where OWOR.Status <> 'L' and OWOR.Status <> 'C'  --Diferente de Cerrada y de Cancelada.
+	and CAST(OWOR.CreateDate as DATE) < DATEADD(day,-709,CAST(GETDATE() as DATE))
+	Order By PRODUCTO, OP
+	
 
 
 

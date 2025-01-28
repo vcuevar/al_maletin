@@ -48,3 +48,14 @@ where clv=234
 
 sELECT * FROM OHEM
 oRDER by U_EmpGiro
+
+
+
+
+Select OHEM.U_EmpGiro AS NOMINA
+	, OHEM.firstName+' '+OHEM.lastName AS NOMBRE
+	, OHEM.jobTitle as Area
+from OHEM 
+where OHEM.Status = 1 
+order by ohem.firstname
+ 

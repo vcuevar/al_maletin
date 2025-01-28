@@ -16,9 +16,9 @@ Declare @Articulo as nvarchar(30)
 Declare @nLista as Int
 
 Set @nLista = 10
-Set @FechaIS = '2024/10/03'
-Set @FechaFS = '2024/10/03'
-Set @Articulo = '10837'
+Set @FechaIS = '2024/12/01'
+Set @FechaFS = '2025/01/18'
+Set @Articulo = '10077'
 
 /*
 Select	OINM.ItemCode AS CODIGO
