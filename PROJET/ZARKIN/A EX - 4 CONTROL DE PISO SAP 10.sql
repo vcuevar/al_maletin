@@ -89,7 +89,7 @@ Where SUPER.NOMBRE Like '%NO_ASIGNADO%'
 	and DUDA.BaseRef <> 40923 
 	and DUDA.BaseRef <> 42119 -- Reporto Andrea 240206
 	and DUDA.BaseRef <> 40084 and DUDA.BaseRef <> 42445 -- Duplicadas de Marzo 2024
-	and DUDA.BaseRef <> 45343 and DUDA.BaseRef <> 45342
+	and DUDA.BaseRef <> 45343 and DUDA.BaseRef <> 45342 and DUDA.BaseRef <> 56503
 	order by RB.DocDate,A3.ItemName
 
 

@@ -539,14 +539,14 @@ ORDER BY INV4.ItemName
 -- ================================================================================================
 	
 -- Subensambles que no requiere nadie.
-SELECT '930 SP NO REQUERIDOS' AS REPORTE_920
+SELECT '930 SP NO REQUERIDOS' AS REPORTE_930
 	, LD.Father AS PADRE
 	, INV.ItemCode AS CODIGO
 	, INV.ItemName AS DESCRIPCION
 	, INV.InvntryUom AS UDM
 	, INV.OnHand AS EXISTENCIA
 	, INV.IsCommited AS COMPROMETIDO
-
+	, Cast(INV.CreateDate as date) AS F_CREADO
 FROM OITM INV
 LEFT JOIN ITT1 LD ON INV.ItemCode = LD.Code
 WHERE (INV.QryGroup29 = 'Y' 
@@ -554,7 +554,7 @@ OR INV.QryGroup30 = 'Y'
 OR INV.QryGroup31 = 'Y' 
 OR INV.QryGroup32 = 'Y') AND LD.Father IS NULL
 AND INV.frozenFor = 'N'
-Order by INV.ItemName 
+Order by F_CREADO desc, DESCRIPCION 
 
 
 

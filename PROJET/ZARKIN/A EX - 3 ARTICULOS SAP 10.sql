@@ -724,6 +724,8 @@ SELECT '242 A OBS. PT MOD-OBS' AS REPO_242
 	ORDER BY OITM.ItemName
 */
 
+/*
+La inavilite porque ya no entendi que es lo que hago con esta consulta.
 -- PT Que su MODELO este OBSOLETO.
 SELECT '242 A LIN. PT MOD-LIN' AS REPO_242
 	, OITM.ItemCode AS CODIGO
@@ -739,9 +741,10 @@ Where OITM.U_TipoMat <> 'GF' and  OITM.U_TipoMat <> 'MP'   -- SP, CA, HB, PT, RF
 and OITM.U_IsModel = 'N'
 and OITM.U_Linea = '01' 
 and MD.MODEL is null
-and Cast(Left(OITM.ItemCode, 1) as INTEGER) > 2
+--and Cast(Left(OITM.ItemCode, 1) as INTEGER) > 2
 and OITM.ItemCode <> '70000' and OITM.ItemCode <> '3774-42-B0051'
 ORDER BY OITM.ItemName
+*/
 
 /*
 Update OITM set OITM.U_Linea = '10'
@@ -1842,7 +1845,7 @@ Select '804 TELAS OP MANUAL' AS REPORTE_804
 	inner Join OWOR on WOR1.DocEntry = OWOR.DocEntry
 	where A1.frozenFor = 'N' and A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = '11'
 	and OWOR.CmpltQty < OWOR.PlannedQty and OWOR.Status <> 'C' and OWOR.Status <> 'L'
-	and WOR1.IssueType <> 'M' and  OWOR.U_Starus <> '06' --and A1.ItemCode = '19604' --[%] 
+	and WOR1.IssueType <> 'M' and  OWOR.U_Starus <> '06' and A1.InvntItem = 'Y' 
 	ORDER BY A1.ItemName, OWOR.DocNum
 
 -- 230920 Validar que las LDM los componentes MP TELAS y TELAS Y VINILES Tengan Almacen de AMP-ST.

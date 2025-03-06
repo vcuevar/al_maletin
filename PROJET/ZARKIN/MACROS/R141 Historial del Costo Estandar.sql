@@ -8,7 +8,7 @@
 /* ------------------------------------------------------------------------------------------------
 |  Para llenar reporte del historial de los costos estandar.                                       |
 --------------------------------------------------------------------------------------------------*/
-/*
+
 Select	OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom AS UDM	
@@ -29,9 +29,8 @@ INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10
 left join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=9 
 Left Join SIZ_HistoryEstandar HE on HE.HE_ItemCode = OITM.ItemCode
 Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
-and OITM.U_GrupoPlanea = '7'
+and OITM.U_GrupoPlanea = '7' and OITM.frozenFor = 'N'
 Order By OITM.ItemName, HE.HE_FechaCambio desc 
-*/
 
 /* ------------------------------------------------------------------------------------------------
 |  Realizar Auditoria y presenta los que esten en +- 10%.                                         |
@@ -42,6 +41,7 @@ Order By OITM.ItemName, HE.HE_FechaCambio desc
 
 --Set @FechaIS = CONVERT (DATE, '2024-12-16', 102)
 
+/*
 Select  OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
@@ -80,15 +80,17 @@ Order By DESCRIPCION
 
 -- PARA BORRAR UN REGISTRO 
 
-Select * from SIZ_HistoryEstandar Where HE_ItemCode = '17202'
+
+
+Select * from SIZ_HistoryEstandar Where HE_ItemCode = '18411'
 and HE_FechaCambio = '2024-10-09'
 
-Delete SIZ_HistoryEstandar Where HE_ItemCode = '17202' and HE_FechaCambio = '2024-10-09'
+Delete SIZ_HistoryEstandar Where HE_ItemCode = '18151' and HE_FechaCambio = '2024-10-09'
+
+Update SIZ_HistoryEstandar set HE_PrecioNew = 363 Where HE_ItemCode = '18411' and HE_FechaCambio = '2024-10-09'
 
 
 
-
-/*
 20558
 1.- 09/12/24	6.142200	USD	20.196300
 2.- 02/12/24	5.329300	USD	20.417300

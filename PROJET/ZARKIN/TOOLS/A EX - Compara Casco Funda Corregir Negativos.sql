@@ -39,23 +39,22 @@ from [@CP_OF] CP inner join OWOR OP on CP.U_DocEntry= OP.DocEntry
 inner join OITM A3 on OP.ItemCode = A3.ItemCode where OP.Status = 'C' 
 ORDER BY CP.U_DocEntry
 
-
 -- La estacion ultima en el historial, se pone la que sigue en ruta, entregado y procesado 0 cuando 
 --solo es una pieza y recibido en 1
 
-	update [@CP_OF] set U_DocEntry = 52897  where Code=2677
-	update [@CP_OF] set U_CT = 415, U_Orden = 415 where Code = 703990
+	update [@CP_OF] set U_DocEntry = 58960  where Code=72938
+	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 72938
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 72938
+	update [@CP_OF] set U_Recibido= 1 where Code= 72938
 
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 2677
-	update [@CP_OF] set U_Recibido= 1 where Code= 2677
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
-		delete [@CP_OF] where Code = 489971
+		delete [@CP_OF] where Code = 662415
 
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 58897 
+	Set @NumOrd = 57033 
  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
@@ -67,7 +66,7 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 59709  -- and U_CT = 415   --and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 56503  -- and U_CT = 415   --and U_idEmpleado = 79
 	order by  U_FechaHora, U_CT
 	 
 	Select * from  [@CP_LOGOF] where Code = 648110
@@ -90,7 +89,7 @@ ORDER BY CP.U_DocEntry
 	update [@CP_LOGOF] set U_FechaHora = '2024-11-30 14:27:00.000'  Where Code = 693252
 	2024-11-30 14:27:00.000
 
-DELETE [@CP_LOGOF] WHERE Code = 721211
+DELETE [@CP_LOGOF] WHERE Code = 731456
 
 
 DELETE [@CP_LOGOF] WHERE Code = 603594

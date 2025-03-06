@@ -265,7 +265,7 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM A1 on A1.ItemCode = WOR1.ItemCode 
 	inner join OITM A3 on A3.ItemCode = OWOR.ItemCode
 	where OWOR.Status<>'C' and OWOR.Status<>'L' and  A1.ItmsGrpCod = 114 and A1.U_GrupoPlanea = 11
-	and OWOR.U_Entrega_Piel is not null and WOR1.IssuedQty = 0
+	and OWOR.U_Entrega_Piel is not null and WOR1.IssuedQty = 0 and A1.InvntItem = 'Y'
 		  
 -- VER-150615 ORDENES QUE SE CARGO PIEL Y ESTAN EN ESTATUS DE NO PROCESO
 	Select '095 CON PIEL STATUS NO PROCESO' AS REPORTE_09S, OWOR.DocEntry as NumOrde, OWOR.Status, A1.ItemName, OWOR.U_Grupo, OWOR.U_Starus,OWOR.U_Entrega_Piel,
@@ -457,7 +457,9 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 -------------------------------------------------------------------------------
 */ 
 -- Provicionalmente le puse 709 dias para que se vayan depurando las OP, enviado correo a Raul.
-
+-- Enero 2025 Renuncia Raul, y nunca definio que se haria con estos pedidos viejos, asi que passan.
+-- A ser resueltos al estilo Zarkin se queda en el olvido y mejor dejo de dar seguimiento a esto.
+/*
 	Select 'OP ANTIGUAS, DEFINIR' AS QRY_147
 		, OWOR.DocEntry AS OP 
 		, OWOR.ItemCode AS CODIGO
@@ -477,7 +479,7 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 	Where OWOR.Status <> 'L' and OWOR.Status <> 'C'  --Diferente de Cerrada y de Cancelada.
 	and CAST(OWOR.CreateDate as DATE) < DATEADD(day,-709,CAST(GETDATE() as DATE))
 	Order By PRODUCTO, OP
-	
+	*/
 
 
 
