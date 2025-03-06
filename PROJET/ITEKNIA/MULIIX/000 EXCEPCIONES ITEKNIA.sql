@@ -214,8 +214,6 @@ and (Select sum(convert (int,LPC_ProvPreProgramado)) from ListaPreciosCompra whe
 Order by ART_Nombre, PRO_Nombre
 
 
-
-
 -- Lista de Precios de Proveedores. Fecha de Vencimiento pasada y material de linea.
       Select 'YA EN ALERTA;VENCIDO PRECIO' AS REPORTE_210 
     , ART_CodigoArticulo as CODIGO
@@ -267,77 +265,58 @@ From (Select TSM_CodigoSolicitud
 WHERE CANTIDAD_SURTIDA > 0 AND CANTIDAD_RECIBIDA <= 0
 ORDER BY TSM_CodigoSolicitud,FECHA
 
+/*
+ * ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA
+ */
 
-
--- ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA 
--- Se pidio validar el 10 de Diciembre del 2024.
-
-Select F.EMP_numeroEmpleado AS CODIGO
+Select F.EMP_numeroEmpleado + RIGHT('000000' + CAST(F.EMP_semana AS VARCHAR(6)), 2) + F.EMP_anio AS ID
+	, F.EMP_numeroEmpleado AS CODIGO
 	, E.EMP_Nombre + ' ' + E.EMP_PrimerApellido + ' ' + E.EMP_SegundoApellido  AS NOMBRE
-	, F.EMP_semana AS SEMANA
+	, RIGHT('000000' + CAST(F.EMP_semana AS VARCHAR(6)), 2) AS SEMANA
 	, F.EMP_anio AS AÑO
-	, F.EMP_status  AS ESTATUS 
-	, Cast(F.EMP_fechaCreacion as date) AS CREADO
+	, F.EMP_status  AS ESTATUS  
+	, Cast(F.EMP_fechaCreacion as date) AS F_CREADO
+	, Cast(F.EMP_fechaVisto as date) AS F_VISTO
+	, Cast(F.EMP_fechaVisto as time) AS H_VISTO
 	, Cast(F.EMP_fechaAceptadoRechazado as date)  AS F_ACEPTADO
-	, Cast(F.EMP_fechaAceptadoRechazado as time) AS HORA
+	, Cast(F.EMP_fechaAceptadoRechazado as time) AS H_ACEPTADO
+	, F.EMP_Employee_Id AS INDICE
 from RPT_EMPLOYEES F 
-Left Join Empleados E on E.EMP_DefinidoPorUsuario1 = F.EMP_numeroEmpleado and E.EMP_Activo = 1
-Order by NOMBRE, CREADO, SEMANA 
+Left Join Empleados E on E.EMP_DefinidoPorUsuario1 = F.EMP_numeroEmpleado
+--Where Cast(F.EMP_fechaCreacion as date) = Cast('2025-02-17' as date) -- SEM-07
+--Where Cast(F.EMP_fechaCreacion as date) = Cast('2025-02-20' as date) -- SEM-08
+--Where Cast(F.EMP_fechaCreacion as date) = Cast('2025-02-27' as date) -- SEM-09
+
+Where F.EMP_status = 'new'
+Order by F_CREADO, NOMBRE  
+
 
 /*
-Select COUNT(F.EMP_semana) AS CUENTA
-	--, F.EMP_status  AS ESTATUS 
-	, Cast(F.EMP_fechaCreacion as date) AS CREADO
+ * Total de Registros que autorizaron la Nomina o la rechazaron.
+ */
+/*
+Select  COUNT(F.EMP_semana) AS CUENTA
 from RPT_EMPLOYEES F 
---Left Join Empleados E on Cast(E.EMP_CodigoEmpleado as integer) = Cast(F.EMP_numeroEmpleado as integer) 
---inner Join Empleados E on E.EMP_DefinidoPorUsuario1 = F.EMP_numeroEmpleado
-Group By Cast(F.EMP_fechaCreacion as date) --, F.EMP_status
-Order by CREADO
+Where F.EMP_status <> 'new'
 */
+
+/*
+ * Registros por Estatus.
+ */
+
+Select F.EMP_status  AS ESTATUS  
+	, COUNT(F.EMP_status) AS CUENTA
+from RPT_EMPLOYEES F 
+Group By F.EMP_status
 
 --Estatus de Nomina
 -- accepted
 -- new
 -- rejected
 
-/*
--- Consulta enviada por Alberto Jimenez
-SELECT TOP (1000) [EMP_Employee_Id]
-      ,[EMP_numeroEmpleado]
-      , Empleados.[EMP_Nombre] + ' ' + Empleados.[EMP_PrimerApellido] AS NOMBRE
-      ,[EMP_status]
-      ,[EMP_fechaAceptadoRechazado]
-      ,[EMP_fechaCreacion]
-      ,[EMP_semana]
-      ,[EMP_anio]
-      ,[EMP_visto]
-      ,[EMP_fechaVisto]
-      ,[EMP_descargado]
-      ,[EMP_fechaCopiado]
-  FROM [ItekniaDB].[dbo].[RPT_EMPLOYEES]
-  INNER JOIN Empleados on 
-  RIGHT('000' + CONVERT(varchar, EMP_CodigoEmpleado), 4)  = RIGHT('000' + CONVERT(varchar, EMP_numeroEmpleado), 4)
-  where EMP_status <> 'accepted'
--- and EMP_numeroEmpleado like '%77%'
-and EMP_numeroEmpleado not in ('00001', '00002')
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --Select * from Usuarios where USU_Nombre = '392'
 
---Select * from Empleados Where EMP_DefinidoPorUsuario1 = '00808' 
+--Select * from Empleados Where EMP_DefinidoPorUsuario1 = '00965' 
 --and EMP_CodigoEmpleado = '055'
 	
 --Select * from RPT_EmpleadoCamposAdicionales reca 
@@ -348,7 +327,7 @@ and EMP_numeroEmpleado not in ('00001', '00002')
 --Select * from RPT_EMPLOYEES Where EMP_employeeNumber = '00001'
 
 
---Update Empleados Set EMP_DefinidoPorUsuario1 = '' Where EMP_EmpleadoId = '27756C09-3B3D-44AB-87CD-C25727EE532C'
+--Update Empleados Set EMP_DefinidoPorUsuario1 = '' Where EMP_EmpleadoId = 'F8FEE4C6-192F-4134-B946-FEBB11433472'
 
 
 
@@ -387,4 +366,6 @@ and Cast(ADCH_INEValido as date) = Cast('2024-12-31' as date)
 
 Select * from RPT_ReferenciasCorreoPagos 
 Where RCP_CorreoEnviado = 0
+
+
 

@@ -3,8 +3,9 @@
 -- Actualizado: Miercoles 12 de Julio del 2023; Origen.
 -- Actualizado: Domingo 23 de Julio del 2023; Completar Filtros y Consulta General.
 -- Consulta para los botones de los Filtros.
+-- Actualizado: Miercoles 29 de enero del 2025; Validar documentos.
 
-/*
+
 -- Boton Filtro Requisiciones Convertidas
 -- Seleccionas Registro y se guarda
 Select  REQ_CodigoRequisicion AS REQUISION
@@ -12,7 +13,7 @@ Select  REQ_CodigoRequisicion AS REQUISION
 From Requisiciones
 Inner Join RequisicionesDetalle on REQD_REQ_RequisicionId = REQ_RequisicionId 
 Inner Join OrdenesCompra on REQD_OC_OrdenCompraId = OC_OrdenCompraId  
-Where REQ_Eliminado = 0
+Where REQ_Eliminado = 0 and OC_CodigoOC ='OC11100'
 Order by REQ_CodigoRequisicion 
 
 
@@ -22,7 +23,8 @@ Select OC_CodigoOC AS ORDEN_COMPRA
 	, PRY_CodigoEvento + ' ' + PRY_NombreProyecto AS PROYECTO
 From OrdenesCompra
 left join Proyectos on OC_EV_ProyectoId = PRY_ProyectoId
-
+--Where OC_CodigoOC = 'OC11100'
+Where OC_OrdenCompraId = '8D35FBF7-02B9-4713-A514-164E03C649C2'
 
 -- Boton Facturas de Proveedor.
 -- Se selecciona Factura y se guarda Codigo de OC	
@@ -32,19 +34,29 @@ From FacturasProveedores
 inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
 left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
 left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId 
-Where OC_CodigoOC is not null
+Where OC_CodigoOC = 'OC11100' -- is not null
 
 -- Boton Pago de Facturas 
 -- Se selecciona Pago y se guarda la OC
 Select FP_CodigoFactura AS CODIGO_FACTURA
 		, OC_CodigoOC AS ORDEN_COMPRA
+		, CXPPagos.*
 From CXPPagos 
 inner join CXPPagosDetalle on CXPPD_CXPP_CXPPagoId = CXPP_CXPPagoId
 inner join FacturasProveedores on CXPPD_FP_FacturaProveedorId = FP_FacturaProveedorId
 inner join FacturasProveedoresDetalle on FP_FacturaProveedorId = FPD_FP_FacturaProveedorId
 left join OrdenesCompraDetalle on FPD_OC_OrdenCompraId = OCD_PartidaId
 left join OrdenesCompra on OC_OrdenCompraId = OCD_OC_OrdenCompraId
-Where OC_CodigoOC is not null
+Where OC_CodigoOC = 'OC11100'  --OC_CodigoOC is not null
+
+Select top(10) * from CXPPagos Where CXPP_IdentificacionPago = 'OC11100'
+CXPP_PRO_ProveedorId = '5CB2FB84-4849-41C5-9301-B27DFD33FB7D'
+
+Select top(10) * from CXPPagosDetalle 
+
+Select * from ControlesMaestrosMultiples Where CMM_ControlId = 'F869272C-94D1-44BD-A6B9-9EC9ECBC0A40'
+Select * from ControlesMaestrosMultiples Where CMM_ControlId = 'C9E47600-DC8A-4601-BBF7-7CAF3D9BFBBE'
+Select * from ControlesMaestrosMultiples Where CMM_ControlId = 'BC090861-2E4F-4B82-8313-A90E4FBD06F9'
  
 -- Boton Filtro por Proyecto.
 -- Se muestra Codigo y Proyecto y se guarda el ID seleccionado.

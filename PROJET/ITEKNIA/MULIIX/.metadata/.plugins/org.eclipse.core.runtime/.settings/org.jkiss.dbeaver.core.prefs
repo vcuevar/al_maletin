@@ -6,5 +6,5 @@ org.jkiss.dbeaver.core.confirm.exit=always
 resultset.presentation.active=spreadsheet
 sample.database.canceled=true
 tipOfTheDayInitializer.notFirstRun=true
-ui.auto.update.check.time=1737935916165
+ui.auto.update.check.time=1741192884324
 ui.show.tip.of.the.day.on.startup=false

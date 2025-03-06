@@ -27,11 +27,6 @@ Where EMP_Activo = 1 and EMP_CheckNomina = 1
 Order by EMPLEADO
 
 
-
-
-
-
-
 -- Empleados para APP Embarques
 
 
@@ -49,7 +44,14 @@ Order by EMPLEADO
 Select * from Usuarios
 
 
-
-
+Select (Case When DEP_Nombre = 'AZARET' then 'Z' When DEP_Nombre = 'METALMEX' then 'M' else (Case When CMM_Valor = 'Producción' then 'P' else 'A' end) end) as ID
+	, EMP_DefinidoPorUsuario1 as NUM_NOMINA
+	, EMP_PrimerApellido + '  ' + EMP_SegundoApellido + ';  ' +  EMP_Nombre as EMPLEADO
+	, DEP_Nombre 
+from Empleados
+inner join Departamentos on DEP_DeptoId = EMP_DEP_DeptoId 
+inner join ControlesMaestrosMultiples on CMM_ControlId = DEP_CMM_TipoDeptoId 
+Where EMP_Activo = 1 and EMP_CheckNomina = 1 
+Order by EMPLEADO
 
 

@@ -1,24 +1,24 @@
-2025-01-23 08:10:08.537 - DBeaver 23.0.2.202304091457 is starting
-2025-01-23 08:10:08.538 - OS: Linux 6.8.0-49-generic (amd64)
-2025-01-23 08:10:08.538 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
-2025-01-23 08:10:08.538 - Install path: '/usr/share/dbeaver-ce'
-2025-01-23 08:10:08.538 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
-2025-01-23 08:10:08.538 - Memory available 64Mb/1024Mb
-2025-01-23 08:10:08.550 - Create display
-2025-01-23 08:10:08.692 - Initializing DBeaver 23.0.2
-2025-01-23 08:10:08.693 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
-2025-01-23 08:10:08.694 - Initialize desktop platform...
-2025-01-23 08:10:08.868 - BounceCastle bundle found. Use JCE provider BC
+2025-02-26 09:14:09.267 - DBeaver 23.0.2.202304091457 is starting
+2025-02-26 09:14:09.268 - OS: Linux 6.8.0-49-generic (amd64)
+2025-02-26 09:14:09.268 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
+2025-02-26 09:14:09.268 - Install path: '/usr/share/dbeaver-ce'
+2025-02-26 09:14:09.268 - Instance path: 'file:/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX/'
+2025-02-26 09:14:09.269 - Memory available 64Mb/1024Mb
+2025-02-26 09:14:09.279 - Create display
+2025-02-26 09:14:09.440 - Initializing DBeaver 23.0.2
+2025-02-26 09:14:09.442 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.0.2.202304091457
+2025-02-26 09:14:09.442 - Initialize desktop platform...
+2025-02-26 09:14:09.656 - BounceCastle bundle found. Use JCE provider BC
 > Start Core File Systems [org.eclipse.core.filesystem 1.9.500.v20220817-1539]
 > Start Core Resource Management [org.eclipse.core.resources 3.18.100.v20221025-2047]
 > Start Núcleo del equipo de soporte [org.eclipse.team.core 3.9.600.v20220902-2219]
 > Start DBeaver UI Navigator [org.jkiss.dbeaver.ui.navigator 1.0.103.202304091457]
-2025-01-23 08:10:09.152 - Initialize base platform...
+2025-02-26 09:14:10.078 - Initialize base platform...
 > Start Expression Language [org.eclipse.core.expressions 3.8.200.v20220613-1047]
-2025-01-23 08:10:09.189 - Platform initialized (495ms)
+2025-02-26 09:14:10.131 - Platform initialized (689ms)
 > Start DBeaver UI Editors - Base [org.jkiss.dbeaver.ui.editors.base 1.0.103.202304091457]
-2025-01-23 08:10:09.212 - Starting RMI server at 37501
-2025-01-23 08:10:09.254 - Run workbench
+2025-02-26 09:14:10.154 - Starting RMI server at 40850
+2025-02-26 09:14:10.258 - Run workbench
 > Start DBeaver UI [org.jkiss.dbeaver.ui 5.1.118.202304091457]
 > Start Eclipse e4 Workbench SWT [org.eclipse.e4.ui.workbench.swt 0.16.700.v20221024-2137]
 > Start Eclipse Application Services [org.eclipse.e4.core.services 2.3.400.v20220915-1347]
@@ -32,12 +32,12 @@
 > Start Eclipse Dependency Injection Extensions [org.eclipse.e4.core.di.extensions 0.17.200.v20220613-1008]
 > Start Eclipse CSS SWT Support [org.eclipse.e4.ui.css.swt 0.14.700.v20221102-0748]
 Warning: NLS unused message: BlockedJobsDialog_UserInterfaceTreeElement in: org.eclipse.ui.internal.progress.messages
-2025-01-23 08:10:11.043 - Configure workbench window
+2025-02-26 09:14:12.707 - Configure workbench window
 > Start Núcleo del sistema de ayuda [org.eclipse.help 3.9.100.v20210721-0601]
-2025-01-23 08:10:11.151 - Create actions
-2025-01-23 08:10:11.156 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
-2025-01-23 08:10:11.157 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
-2025-01-23 08:10:11.157 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
+2025-02-26 09:14:12.863 - Create actions
+2025-02-26 09:14:12.868 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2025-02-26 09:14:12.869 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2025-02-26 09:14:12.869 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
 Warning: NLS unused message: controls_client_homes_panel_button_add_home in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: controls_client_homes_panel_button_remove_home in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: controls_client_homes_panel_confirm_remove_home_text in: org.jkiss.dbeaver.core.CoreResources
@@ -51,8 +51,8 @@ Warning: NLS unused message: controls_client_homes_panel_label_product_name in: 
 Warning: NLS unused message: controls_client_homes_panel_label_product_version in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: actions_menu_reset_workspace_state_message in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
 Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jkiss.dbeaver.ui.app.standalone.internal.CoreApplicationMessages
-2025-01-23 08:10:11.630 - Initialize workbench window
-2025-01-23 08:10:11.637 - Finish initialization
+2025-02-26 09:14:13.450 - Initialize workbench window
+2025-02-26 09:14:13.459 - Finish initialization
 > Start Editor de texto predeterminado [org.eclipse.ui.editors 3.14.400.v20220730-1844]
 > Start Entorno de trabajo [org.eclipse.ui.workbench.texteditor 3.16.600.v20220809-1658]
 > Start DBeaver UI Editors - Data [org.jkiss.dbeaver.ui.editors.data 1.0.103.202304091457]
@@ -69,27 +69,23 @@ Warning: NLS unused message: actions_menu_reset_workspace_state_title in: org.jk
 > Start GEF3 GEF (MVC) [org.eclipse.gef3 3.12.100.20230406122456]
 > Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.63.202304091457]
 > Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.63.202304091457]
-2025-01-23 08:10:13.760 - Total database drivers: 101 (101)
+2025-02-26 09:14:16.122 - Total database drivers: 101 (101)
 > Start Consola [org.eclipse.ui.console 3.11.400.v20221012-0524]
 Warning: NLS unused message: InputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
 Warning: NLS unused message: OutputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
 > Start Núcleo de depuración [org.eclipse.debug.core 3.20.0.v20220811-0741]
-2025-01-23 08:10:15.318 - Connect with 'Comercializadora' (microsoft-1922993c65b-6adb2d61b9488cd5)
+2025-02-26 09:14:17.395 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
 > Start DBeaver SQL Server Support [org.jkiss.dbeaver.ext.mssql 1.0.197.202304091457]
-2025-01-23 08:10:15.366 - Execution context opened (Comercializadora; Main; 0)
-2025-01-23 08:10:15.871 - Execution context opened (Comercializadora; Metadata; 1)
-2025-01-23 08:10:16.072 - Open [https://dbeaver.io/product/version.xml]
-2025-01-23 08:10:16.140 - Connected (microsoft-1922993c65b-6adb2d61b9488cd5, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
-2025-01-23 08:10:16.145 - Execution context opened (Comercializadora; SQLEditor <000 OT Cambio de Estatus.sql>; 2)
-2025-01-23 08:10:23.369 - Execution context closed (Comercializadora, 2)
-2025-01-23 08:10:59.381 - Connect with 'ItekniaDB' (microsoft-18eec9a6eb0-46b1a1deaef42b3d)
-2025-01-23 08:10:59.382 - Execution context opened (ItekniaDB; Main; 3)
-2025-01-23 08:10:59.459 - Execution context opened (ItekniaDB; Metadata; 4)
-2025-01-23 08:11:00.087 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
-2025-01-23 08:11:00.129 - Execution context opened (ItekniaDB; SQLEditor <017 LM Ordenes de Compra Abiertas.sql>; 5)
-2025-01-23 14:42:57.533 - System suspend detected! Reinitialize all remote connections.
-2025-01-23 19:48:20.869 - Execution context closed (ItekniaDB, 5)
-2025-01-23 19:48:21.228 - DBeaver is stopping
-2025-01-23 19:48:21.230 - Stop RMI server
-2025-01-23 19:48:21.232 - RMI controller has been stopped
-2025-01-23 19:48:21.235 - DBeaver shutdown completed
+2025-02-26 09:14:17.462 - Execution context opened (ItekniaDB; Main; 0)
+2025-02-26 09:14:18.061 - Execution context opened (ItekniaDB; Metadata; 1)
+2025-02-26 09:14:18.228 - Open [https://dbeaver.io/product/version.xml]
+2025-02-26 09:14:18.568 - Connected (microsoft-18eec9a6eb0-46b1a1deaef42b3d, Microsoft JDBC Driver 9.2 for SQL Server [9.2.0.0])
+2025-02-26 09:14:18.572 - Execution context opened (ItekniaDB; SQLEditor <000 EXCEPCIONES ITEKNIA.sql>; 2)
+> Start DBeaver Data Transfer [org.jkiss.dbeaver.data.transfer 2.0.87.202304091457]
+2025-02-26 10:53:57.716 - Execution context opened (ItekniaDB; SQLEditor <038 Empleados Mi Nomina.sql>; 3)
+2025-02-26 11:08:31.118 - Execution context closed (ItekniaDB, 3)
+2025-02-26 11:08:54.179 - Execution context closed (ItekniaDB, 2)
+2025-02-26 11:08:54.549 - DBeaver is stopping
+2025-02-26 11:08:54.550 - Stop RMI server
+2025-02-26 11:08:54.556 - RMI controller has been stopped
+2025-02-26 11:08:54.556 - DBeaver shutdown completed
