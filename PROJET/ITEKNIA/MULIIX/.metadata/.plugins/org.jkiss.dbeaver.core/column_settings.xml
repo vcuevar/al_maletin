@@ -43,7 +43,7 @@
 		<column name="Identity" visible="true" order="2" width="59"/>
 		<column name="Default" visible="false" order="8" width="100"/>
 		<column name="Collation" visible="false" order="9" width="100"/>
-		<column name="Description" visible="true" order="3" width="89"/>
+		<column name="Description" visible="true" order="3" width="79"/>
 	</item>
 	<item id="projectExplorer">
 		<column name="Name" visible="true" order="0" width="178"/>
