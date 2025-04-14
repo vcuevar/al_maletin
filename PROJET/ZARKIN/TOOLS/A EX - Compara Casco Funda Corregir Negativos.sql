@@ -44,17 +44,17 @@ ORDER BY CP.U_DocEntry
 
 	update [@CP_OF] set U_DocEntry = 58960  where Code=72938
 	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 72938
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 72938
-	update [@CP_OF] set U_Recibido= 1 where Code= 72938
+	update [@CP_OF] set U_Entregado = 50, U_Procesado = 50 where Code = 747672
+	update [@CP_OF] set U_Recibido= 61 where Code= 747672
 
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
-		delete [@CP_OF] where Code = 662415
+		delete [@CP_OF] where Code = 747580
 
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 57033 
+	Set @NumOrd = 61992 
  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
@@ -66,15 +66,13 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 56503  -- and U_CT = 415   --and U_idEmpleado = 79
+	select * from [@CP_LOGOF] where U_DocEntry= 61992 and U_CT = 409   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_FechaHora, U_CT
 	 
-	Select * from  [@CP_LOGOF] where Code = 648110
-
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 238 Where Code = 721240
+	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 766695
 
 	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 660515
 	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 660516
@@ -108,13 +106,13 @@ DELETE [@CP_LOGOF] WHERE Code = 474702
 DELETE [@CP_LOGOF] WHERE Code = 474703
 
 
-update [@CP_LOGOF] set U_Cantidad = 5 Where Code = 497372
+update [@CP_LOGOF] set U_Cantidad = 5 Where Code = 766653
 
 
-De la OP 36994 se borraron estos renglones que no fueron reales 18 de Agosto 2023.
-454761	454761	68	160	T	2023-08-11 14:09:00.000	36994	1	N
-454764	454764	85	172	T	2023-08-11 14:10:00.000	36994	1	N
-454765	454765	267	175	T	2023-08-11 14:12:24.000	36994	1	N
+--De la OP 36994 se borraron estos renglones que no fueron reales 18 de Agosto 2023.
+--454761	454761	68	160	T	2023-08-11 14:09:00.000	36994	1	N
+--454764	454764	85	172	T	2023-08-11 14:10:00.000	36994	1	N
+--454765	454765	267	175	T	2023-08-11 14:12:24.000	36994	1	N
 
 DELETE [@CP_LOGOF] WHERE Code = 454761
 DELETE [@CP_LOGOF] WHERE Code = 454764

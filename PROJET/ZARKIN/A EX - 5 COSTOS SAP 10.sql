@@ -141,7 +141,7 @@ Order By OITM.ItemName
 */
 -- Usar Revalorizacion de Inventarios. Cambios de Estandar <> LP 10 con o sin Existencia.
 -- Reactivada 31/enero/2025 Por que se guarda historial recibos de produccion con AvPrice.
-Select OITM.ItemCode AS REP_060
+Select top(500) OITM.ItemCode AS REP_060
 	, OITM.ItemName AS NOMBRE
 	, OITM.InvntryUom as UDM
 	, OITM.OnHand AS EXISTENCIA 

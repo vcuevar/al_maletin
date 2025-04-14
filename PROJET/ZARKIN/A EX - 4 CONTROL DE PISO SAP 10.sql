@@ -9,6 +9,7 @@
 -- ya que se requiere para que se les envie notificaciones de reprocesos y otros.
 -- Excepto la 100. y solo debe haber un supervisor.
 
+
 Select SUPER.REPORTE, SUPER.NOMBRE
 From (
 Select	'SUP. 100 OP PLANEACION.' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%100%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all
@@ -46,7 +47,50 @@ Select	'SUP. 415 PEGADO HULE.  ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_E
 Select	'SUP. 418 SUB-CASCO.    ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%418%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  
 ) SUPER
 Where SUPER.NOMBRE Like '%NO_ASIGNADO%'   
-	   	 
+
+-- Quitar como supervisor y dejar como operario para que SIZ control de piso no lo tome en cuenta.
+Select SUPER.REPORTE, SUPER.QUITA_SUP
+From (
+Select	'SUP. 100 OP PLANEACION.' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%100%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 106 PREPARADO PIEL' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%106%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 109 ANAQUEL CORTE ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%109%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 112 CORTE DE PIEL ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%112%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 115 INSP. DE CORTE' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%115%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 118 PEGADO COSTURA' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%118%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 121 ANAQUEL COSTUR' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%121%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 124 COSTURA RECTA ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%124%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 127 ARMADO COSTURA' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%127%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 130 PESPUNTE O DOB' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%130%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 133 TERMINADO COST' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%133%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 136 INSPECCION COS' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%136%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 139 SERIES INCOMP ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%139%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 145 ACOJINADO     ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%145%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 148 FUNDAS TERMINA' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%148%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 151 KITING        ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%151%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 154 ENFUNDADO TAPI' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%154%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 157 TAPIZ         ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%157%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 160 ARMADO TAPIZ  ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%160%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 172 EMPAQUE       ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%172%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 175 INSP. FINAL   ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%175%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 200 OP PLANEACION.' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%200%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 206 HAB. HULE CNC.' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%206%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 209 ARMADO DE HULE' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%209%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 212 PEGADO DE HULE' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%212%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 218 PEGADO DE HULE' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%218%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 221 ENTREGA HULE. ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%221%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 400 OP PLANEACION.' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%400%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 403 RECIBE HABIL. ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%403%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 406 ARMADO CASCO. ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%406%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 409 TAPADO CASCO. ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%409%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 415 PEGADO HULE.  ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%415%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  Union all
+Select	'SUP. 418 SUB-CASCO.    ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%418%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as QUITA_SUP  
+) SUPER
+Where SUPER.QUITA_SUP Not Like '%QUITAR DE SUPERVISOR%'   
+
+
+--Select	'SUP. 157 TAPIZ         ' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%157%' and OHEM.position = 4 and OHEM.status = 2),'QUITAR DE SUPERVISOR') as NOMBRE 
+
+
 -- Alerta de Lineas Duplicadas en Control de Piso.
 	Select '005 LINEAS DUPLICADAS' AS REPORTE_005
 		, U_DocEntry AS OP
