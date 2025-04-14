@@ -269,29 +269,28 @@ ORDER BY TSM_CodigoSolicitud,FECHA
  * ALERTA PARA COTEJAR QUIEN NO A AUTORIZADO SU NOMINA
  */
 
-Select F.EMP_numeroEmpleado + RIGHT('000000' + CAST(F.EMP_semana AS VARCHAR(6)), 2) 
-	+ RIGHT(F.EMP_anio,1) + RIGHT('000000' + CAST(F.EMP_Employee_Id AS VARCHAR(6)), 3) AS ID
-	, F.EMP_numeroEmpleado AS CODIGO
+Select F.EMP_numeroEmpleado AS CODIGO
 	, E.EMP_Nombre + ' ' + E.EMP_PrimerApellido + ' ' + E.EMP_SegundoApellido  AS NOMBRE
 	, RIGHT('000000' + CAST(F.EMP_semana AS VARCHAR(6)), 2) AS SEMANA
 	, F.EMP_anio AS AÑO
 	, Cast(F.EMP_fechaCreacion as date) AS F_CREADO
-	, F.EMP_status AS ESTATUS  
+	, (Case When F.EMP_status = 'new' then 'PENDIENTE' 
+	When F.EMP_status = 'rejected' then 'RECHAZADO' else 'ACEPTADO' end) AS ESTATUS  
 	, Cast(F.EMP_fechaAceptadoRechazado as date)  AS F_ACEPTADO
 	, Cast(F.EMP_fechaAceptadoRechazado as time) AS H_ACEPTADO
-	, RIGHT('000000' + CAST(F.EMP_Employee_Id AS VARCHAR(6)), 3) AS INDICE
 	, Cast(F.EMP_fechaVisto as date) AS F_VISTO
 	, Cast(F.EMP_fechaVisto as time) AS H_VISTO
 from RPT_EMPLOYEES F 
 Left Join Empleados E on E.EMP_DefinidoPorUsuario1 = F.EMP_numeroEmpleado
+Order by F_CREADO, NOMBRE  
+
+--	, RIGHT('000000' + CAST(F.EMP_Employee_Id AS VARCHAR(6)), 3) AS INDICE
 --Where Cast(F.EMP_fechaCreacion as date) = Cast('2025-02-17' as date) -- SEM-07
 --Where Cast(F.EMP_fechaCreacion as date) = Cast('2025-02-20' as date) -- SEM-08
 --Where Cast(F.EMP_fechaCreacion as date) = Cast('2025-02-27' as date) -- SEM-09
 --Where F.EMP_status = 'new'
-Order by F_CREADO, NOMBRE  
-
---, (Case When F.EMP_status = 'new' then 'PENDIENTE' 
-	--	 When F.EMP_status = 'rejected' then 'RECHAZADO' else 'ACEPTADO' end)
+--F.EMP_numeroEmpleado + RIGHT('000000' + CAST(F.EMP_semana AS VARCHAR(6)), 2) 
+--	+ RIGHT(F.EMP_anio,1) + RIGHT('000000' + CAST(F.EMP_Employee_Id AS VARCHAR(6)), 3) AS ID
 	
 /*
  * 

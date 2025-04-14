@@ -22,11 +22,11 @@ Select * from ControlesMaestrosMultiples Where CMM_ControlId	='3887AF19-EA11-446
 Select OT_Codigo, CMM_Valor
 from OrdenesTrabajo
 inner join ControlesMaestrosMultiples on CMM_ControlId	= OT_CMM_Estatus
-Where OT_Codigo like 'OT02513'
+Where OT_Codigo like 'OT02818'
 Order by OT_Codigo
 
-update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT02512'
-update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT02513'
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT02586'
+update OrdenesTrabajo set OT_CMM_Estatus = '3887AF19-EA11-4464-A514-8FA6030E5E93' Where OT_Codigo = 'OT02818'
 
 
 update OrdenesTrabajo set OT_CMM_Estatus = '3E35C727-DAEE-47FE-AA07-C50EFD93B25F' Where OT_Codigo = 'OT00005' -- Cerrado y Costeado

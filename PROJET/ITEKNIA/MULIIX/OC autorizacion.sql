@@ -34,10 +34,14 @@ Select top(10) * from OrdenesCompra
 
 Select OC_CodigoOC, OC_CMM_EstadoOC 
 From OrdenesCompra 
-Where OC_CodigoOC = 'OC11310'
+Where OC_CodigoOC = 'OC11545'
+-- Marcar como completada la orden de compra.
+Update OrdenesCompra Set OC_CMM_EstadoOC = 'CFD16CB6-91DD-423F-AF53-5CAA86701D7F' Where OC_CodigoOC = 'OC11545'
+
+
 -- Cambio efectuado el 15 de enero para ajustar la OC que no se estaba actualizando correctamente. 
 -- Al momento de Autorizar ponia un estatus equivocado.
-Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11310'
+
 Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11312'
 Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11319'
 Update OrdenesCompra Set OC_CMM_EstadoOC = '59CE1E71-3AEE-4ACC-B5DE-6A03C2983D6C' Where OC_CodigoOC = 'OC11320'
