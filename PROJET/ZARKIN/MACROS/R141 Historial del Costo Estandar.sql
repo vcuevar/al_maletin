@@ -236,3 +236,38 @@ Delete SIZ_HistoryEstandar
 
 */
 
+/* ------------------------------------------------------------------------------------------------
+| Para sacar grupos que deben tener el mismo costo.                                                |
+--------------------------------------------------------------------------------------------------*/
+
+Select  OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, Cast(ITM1.Price as decimal(18,4)) AS PRE_7
+	, ITM1.Currency AS MON_7
+	, ITM1.PriceList AS LISTA
+
+	, Cast(0.5286 as Decimal(16,4)) AS PRE_COMPRA
+	, 'MXP' AS MON_COM
+	, 1.00 AS TIP_CAMB
+	, Cast(0.5286 as Decimal(16,4)) AS NEW_STAD
+	, .10 AS VAR
+	, Cast ('2025/04/24'as DATE) AS FEC_COM
+	, 'COMPRA_01' AS COMP1
+	, 'COMPRA_02' AS COMP2
+	, 'COMPRA_03' AS COMP3
+	, 'VAR X COP+GRUPO' AS NOTA
+	, 'POR ACTUALIZAR' AS ACCION
+From OITM
+INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
+Where ItemName like 'HILO A 1.2%'
+Order By DESCRIPCION
+
+
+
+
+
+
+
+
+

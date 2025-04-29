@@ -42,10 +42,10 @@ ORDER BY CP.U_DocEntry
 -- La estacion ultima en el historial, se pone la que sigue en ruta, entregado y procesado 0 cuando 
 --solo es una pieza y recibido en 1
 
-	update [@CP_OF] set U_DocEntry = 58960  where Code=72938
-	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 72938
-	update [@CP_OF] set U_Entregado = 50, U_Procesado = 50 where Code = 747672
-	update [@CP_OF] set U_Recibido= 61 where Code= 747672
+	update [@CP_OF] set U_DocEntry = 54053  where Code=72952
+	update [@CP_OF] set U_CT = 136, U_Orden = 136 where Code = 72952
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 72952
+	update [@CP_OF] set U_Recibido= 233 where Code= 72952
 
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
@@ -54,9 +54,7 @@ ORDER BY CP.U_DocEntry
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 61992 
- 
-	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
+	Set @NumOrd = 54053	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
 	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD , HIS.U_idEmpleado --, DATEPART(WK, HIS.U_FechaHora) as SEMANA
@@ -66,16 +64,16 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 61992 and U_CT = 409   -- and U_idEmpleado = 2 -- and U_CT = 415  
+	select * from [@CP_LOGOF] where U_DocEntry= 65054 -- and U_CT = 409   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_FechaHora, U_CT
 	 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 766695
+	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 776229
 
-	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 660515
-	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 660516
+	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 769747
+	update [@CP_LOGOF] set U_idEmpleado = 67 Where Code = 769748
 
 	update [@CP_LOGOF] set U_idEmpleado = 238 Where Code = 693252
 	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 530339

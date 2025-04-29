@@ -38,3 +38,24 @@ INNER JOIN ITM1 L10 on OITM.ItemCode = L10.ItemCode and L10.PriceList=10
 left join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=9 
 Where U_TipoMat = 'MP' and OITM.frozenFor = 'N' 
 Order By OITM.ItemName 
+
+
+
+-- Buscar valores en la Lista de Compras y Pablo para igualar a Cero y cancelar Listas.
+-- 250422
+
+Select  Top(1000) OITM.ItemCode AS CODIGO
+	 --OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OITM.InvntryUom AS UDM
+		, Cast(L5.Price as decimal(16,4)) AS PRE_STD
+		, L5.Currency AS Mon_STD
+		, L5.PriceList AS LISTA
+		, Cast(0 as decimal(16,4)) AS Pre_7
+		, L10.Currency AS Mon_7
+		, 'POR ACTUALIZAR' AS ACCION
+From OITM
+inner join ITM1 L10 on OITM.ItemCode = L10.ItemCode and L10.PriceList = 10
+inner join ITM1 L5 on OITM.ItemCode = L5.ItemCode and L5.PriceList = 9
+Where L5.Price <> 0
+Order By DESCRIPCION
