@@ -229,7 +229,7 @@ inner join Proveedores on LPC_PRO_ProveedorId = PRO_ProveedorId
 Where LPC_Eliminado = 0 
 and Cast(LPC_FechaVigencia AS DATE) < Cast(getdate() AS DATE) and ART_CMM_SubcategoriaId = '27BC3A6A-D075-4C6C-AFDF-1DEE95B23DC1'
 Order by ART_Nombre, PRO_Nombre
-            
+  
      
 -- Consulta para Traslados pendientes o en transito
 -- Tomar Fecha de Un mes hacia atras y al dia de ayer se cargo a Alertas 12 de Junio del 2024.
@@ -369,5 +369,36 @@ and Cast(ADCH_INEValido as date) = Cast('2024-12-31' as date)
 Select * from RPT_ReferenciasCorreoPagos 
 Where RCP_CorreoEnviado = 0
 
+
+
+-- Excepcion donde los Articulos estan Inhactivos y tienen existencia. Para mas detalles correr la consulta ART_DefinidoPorUsuario1 
+-- Inventarios Contables.
+
+SELECT	ART_CodigoArticulo as CODIGO
+		, ART_Nombre as NOMBRE
+		, SUM(TRLOT_CantidadTraspaso) AS CANTIDAD  
+FROM Articulos  
+INNER JOIN TraspasosMovtos on ART_ArticuloId = TRAM_ART_ArticuloId
+INNER JOIN TraspasosLotes on TRAM_TraspasoMovtoId = TRLOT_TRAM_TraspasoMovtoId
+WHERE ART_Activo = 0 
+GROUP By ART_CodigoArticulo, ART_Nombre
+HAVING SUM(TRLOT_CantidadTraspaso) <> 0 
+ORDER BY ART_Nombre
+
+
+/*
+SELECT *  
+FROM Articulos  
+WHERE ART_CodigoArticulo = '54321' 
+ORDER BY ART_Nombre
+
+
+
+UPDATE Articulos SET ART_CodigoArticulo = '54321' WHERE ART_ArticuloId = '3E5941B9-2C2F-4CB9-B563-D47E2340D2F6'
+
+UPDATE Articulos SET ART_Eliminado = 0 WHERE ART_ArticuloId = '3E5941B9-2C2F-4CB9-B563-D47E2340D2F6'
+UPDATE Articulos SET ART_Activo  = 0 WHERE ART_ArticuloId = '3E5941B9-2C2F-4CB9-B563-D47E2340D2F6'
+
+*/
 
 

@@ -14,7 +14,7 @@ Order by RGC_tabla_linea
 select RGC_tabla_linea, RGC_tabla_titulo, RGC_BC_Cuenta_Id, BC_Cuenta_Nombre, BC_Movimiento_04, (BC_Movimiento_04*RGC_multiplica) as DAT_OK
 from RPT_RG_ConfiguracionTabla 
 inner join RPT_BalanzaComprobacionAzaret on RGC_BC_Cuenta_Id = BC_Cuenta_Id
-where RGC_hoja = 3 and BC_Ejercicio = '2023'
+where RGC_hoja = 3 and BC_Ejercicio = '2025'
 Order by RGC_tabla_linea
 
 
@@ -31,7 +31,7 @@ BC_Cuenta_Id =  '601-100-000'
 
 -- Balanza de Comprobación Iteknia
 
-Select * from RPT_BalanzaComprobacion Where BC_Ejercicio = 2023 
+Select * from RPT_BalanzaComprobacion Where BC_Ejercicio = 2025 
 --and BC_Cuenta_Id like '%-000-000' -- and BC_Movimiento_01+BC_Movimiento_02+BC_Movimiento_03 <> 0
 Order by BC_Cuenta_Id
 
@@ -65,15 +65,15 @@ BC_Cuenta_Id = '601-327-000'
 --update RPT_BalanzaComprobacion set BC_Saldo_Inicial=0, BC_Saldo_Final=0, BC_Movimiento_01=0, BC_Movimiento_04=0 where BC_Cuenta_Id = '108-003-716'
 
 -- Balanza de Comprobacion Comercializadora
-	Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2024 Order by BC_Cuenta_Id 
+	Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2025 Order by BC_Cuenta_Id 
 	
 -- Update RPT_BalanzaComprobacionComercializadora Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
 
 -- Balanza de Comprobación Azaret
 
-Select * from RPT_BalanzaComprobacionAzaret Where BC_Ejercicio = 2024 and BC_Cuenta_Id like '101-%' --and BC_Cuenta_Id =  '604-000-017'-- and BC_Movimiento_01 <> 0
+Select * from RPT_BalanzaComprobacionAzaret Where BC_Ejercicio = 2025 -- and BC_Cuenta_Id like '300-%' --and BC_Cuenta_Id =  '604-000-017'-- and BC_Movimiento_01 <> 0
 
--- Update RPT_BalanzaComprobacionAzaret Set BC_Movimiento_07 = 0 Where BC_Ejercicio = 2023
+-- Update RPT_BalanzaComprobacionAzaret Set BC_Movimiento_12 = 0 Where BC_Ejercicio = 2025
 
 
 Select * from RPT_BalanzaComprobacionComercializadora Where BC_Ejercicio = 2023 and BC_Cuenta_Id like '211-%'
@@ -102,7 +102,7 @@ Para tener los datos que corresponden al reporte.
 15.- BASURA
 
 select RGC_BC_Cuenta_Id, RGC_hoja, RGC_sociedad 
-from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 -- and RGC_sociedad = 3 
+from RPT_RG_ConfiguracionTabla where RGC_hoja = 15 --and RGC_sociedad = 3 
 Order by RGC_tabla_linea, RGC_BC_Cuenta_Id, RGC_sociedad
 
 
@@ -134,18 +134,18 @@ where RGC_BC_Cuenta_Id = '452-000-000' and RGC_hoja = 2  and RGC_sociedad = 2
 -- Cambiar algun campo a la configuracion, del reporte y de la cuenta.
 
 update RPT_RG_ConfiguracionTabla set 
-        --RGC_BC_Cuenta_Id = '300-910-000'
-        --, RGC_tipo_renglon = 'CUENTA'
-        --, RGC_hoja = 1
-        --, RGC_tabla_titulo = 'RESULTADOS'
-        --, RGC_tabla_linea = 32
-        --, RGC_descripcion_cuenta = 'RESULTADO DEL EJERCICIO 2023' 
-        --, RGC_fecha_alta = '2023-10-04'
-         RGC_multiplica = -1
-        --, RGC_sociedad = 3
-        --, RGC_BC_Cuenta_Id2 = '-1'
-        --, RGC_hojaDescripcion  = '01 BALANCE GENERAL'
- where RGC_BC_Cuenta_Id = '300-910-000' and RGC_hoja = 1  and RGC_sociedad = 3 
+        RGC_BC_Cuenta_Id = '300-920-000'
+        , RGC_tipo_renglon = 'CUENTA'
+        , RGC_hoja = 1
+        , RGC_tabla_titulo = 'RESULTADOS'
+        , RGC_tabla_linea = 33
+        , RGC_descripcion_cuenta = 'RESULTADO DEL EJERCICIO 2024' 
+        , RGC_fecha_alta = '2025-04-29'
+        , RGC_multiplica = -1
+        , RGC_sociedad = 3
+        , RGC_BC_Cuenta_Id2 = '-1'
+        , RGC_hojaDescripcion  = '01 BALANCE GENERAL'
+ where RGC_BC_Cuenta_Id = '601-115-000' and RGC_hoja = 15 and RGC_sociedad = 1 
         
 -- Para dar alta a una nueva cuenta
 

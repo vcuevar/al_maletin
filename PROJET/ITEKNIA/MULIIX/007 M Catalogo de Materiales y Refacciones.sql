@@ -28,9 +28,9 @@ left join ArticulosTipos on ART_ATP_TipoId = ATP_TipoId
 left join ControlesMaestrosUM on ART_CMUM_UMInventarioId = CMUM_UnidadMedidaId 
 left join ControlesMaestrosMultiples SBC on ART_CMM_SubcategoriaId = SBC.CMM_ControlId 
 left join ControlesMaestrosMultiples CFI on ART_CMM_ClaveProductoId = CFI.CMM_ControlId 
-where ART_Activo = 1 and ART_Eliminado = 0
-AND ATP_Descripcion = 'P.T Fabricado' 
--- and ART_CodigoArticulo = '0075.5-15'
+where ART_Activo = 0 and ART_Eliminado = 0
+--AND ATP_Descripcion = 'P.T Fabricado' 
+and ART_CodigoArticulo = '05190'
 order by ART_Nombre 
 
 

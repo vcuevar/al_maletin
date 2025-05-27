@@ -35,4 +35,13 @@ LOT_LoteId
 Select * from Lotes
 where LOT_CodigoLote = '70003621709A'
 
-Select * from Articulos
+Select top(10) * from Articulos
+
+
+
+E6FD8AA4-62FA-4B67-BCCE-D549C9E3BABF
+
+
+
+
+
