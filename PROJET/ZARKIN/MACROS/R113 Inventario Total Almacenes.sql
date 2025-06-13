@@ -113,9 +113,6 @@ Order By ARTICULO
 
 
 
-
-
-
 -- Calcula materiales cargados a las OP para CA la fecha de Corte.
 Select KDX.CODIGO AS CODIGO
 	, OITM.ItemName AS ARTICULO

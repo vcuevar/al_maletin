@@ -4,13 +4,16 @@
 
 -- Consulta los Reportes ya Asignados.
 
-Select * from SIZ_RBEV 
---Where CodeRepo = 'GZ-VMA-2307-135' 
-Order By NombRepo
+Select RIGHT(CodeRepo, 3) AS ID 
+	, CodeRepo
+	, NombRepo
+	, NumeVers
+from SIZ_RBEV 
+Order By ID 
 
 -- Modificar un Reporte a su Nueva Version
 
-Update SIZ_RBEV set NumeVers = 'VMA241203A' Where CodeRepo = 'SA-RBV-2104-114'
+Update SIZ_RBEV set NumeVers = 'VMA250609A' Where CodeRepo = 'SA-RBV-2104-113'
 
 -- Asignar un Nuevo Registro
 
@@ -18,9 +21,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'GZ-VMA-2411-141'
-Set @Nomb = 'Historial del Costo Estandar.'
-Set @Vers = 'VMA241115A'
+Set @Code = 'GZ-VMA-2506-016'
+Set @Nomb = 'Inventario de Materiales en OP (WIP).'
+Set @Vers = 'VMA250606A'
 
 Insert Into [dbo].[SIZ_RBEV]
 			( [CodeRepo], [NombRepo], [NumeVers])

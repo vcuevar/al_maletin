@@ -5,9 +5,7 @@
 -- Actualizado: Lunes 13 de Marzo del 2023; Agregar Telas a 140 por metros.
 -- Actualizado: Lunes 10 de Abril del 2023; Dejar solo Tela cuando no hay consumo de Piel, Elias.
 
-
--- NOTA: En la macro la hojas PARAMETROS tiene clave de edicion VMA2023
-
+-- NOTA: En la macro la hojas PARAMETROS tiene clave de edicion VMA2025
 
 -- Parametros Fecha Inicial y Final
 Declare @FechaIS date
@@ -15,16 +13,16 @@ Declare @FechaFS date
 Declare @EstaTra integer
 Declare @Modelo VarChar(5)
 
-Set @FechaIS = CONVERT(DATE, '2024-10-03', 102)
-Set @FechaFS = CONVERT(DATE, '2024-10-13', 102)
-Set @EstaTra = 112
+Set @FechaIS = CONVERT(DATE, '2025-05-05', 102)
+Set @FechaFS = CONVERT(DATE, '2025-05-11', 102)
+Set @EstaTra = 160
 Set @Modelo = '3841'
 
 -- Relacion de Estaciones de Trabajo:
 
 -- Select RT.Code, RT.Name, RT.U_Calidad from [@PL_RUTAS] RT 
 
-
+/*
 -- Produccion con Valores para cualquier area
 Select CAST(CP.U_FechaHora as DATE) as FECHA
 	, DATEPART(weekday, CP.U_FechaHora) AS DIA
@@ -54,7 +52,7 @@ inner join OITM A3 on OP.ItemCode=A3.ItemCode
 left join SIZ_DestGrupo SG on SUBSTRING(OP.ItemCode,1,7) = SG.CODE01 
 Where  CAST (CP.U_FechaHora as Date) Between @FechaIS and @FechaFS and CP.U_CT= @EstaTra 
 Order by RH.firstName, RH.lastName, CAST(CP.U_FechaHora as DATE), OP.DocEntry
-
+*/
 /*
 Se quito tela Elias dijo que siempre no. La tela cuando no es cero la piel.
 
@@ -73,8 +71,9 @@ sI PIEL ES CERO ENTONCES
 		ISNULL((Select  SUM(ITT1.Quantity) * 140 from ITT1
 		Inner Join OITM A1 on ITT1.Code = A1.ItemCode and A1.ItmsGrpCod = '114' and A1.U_GrupoPlanea = '11'
 		Where ITT1.Father = OP.ItemCode),0)) AS PIEL_TEORICO
-		*/
+*/
 
+/*
 -- Para reportes de Corte de Piel Unidad Decimetros y Tambien para los de Valor Sala.
 Select DEST.NUM_NOM AS NUM_NOM
 	, DEST.EMPLEADO AS EMPLEADO
@@ -110,11 +109,9 @@ Where  CAST (CP.U_FechaHora as Date) Between @FechaIS and @FechaFS and CP.U_CT= 
 ) DEST
 Group by DEST.NUM_NOM, DEST.EMPLEADO
 Order by DEST.EMPLEADO
-
-
-
+*/
 /*
--- Para realizar con grupos de muebles.
+-- Para realizar con grupos de muebles ABC, para 157 Tapiceria. 
 Select DEST.NUM_NOM AS NUM_NOM
 	, DEST.EMPLEADO AS EMPLEADO
 	, SUM(DEST.GPO_A) AS VS_A
@@ -140,6 +137,32 @@ Group By RH.U_EmpGiro, RH.firstName, RH.lastName, SG.GPO_157
 Group by DEST.NUM_NOM, DEST.EMPLEADO
 Order by DEST.EMPLEADO
 */
+
+-- Para realizar con grupos de muebles ABC, para 160 Armado de Tapiceria. 
+Select DEST.NUM_NOM AS NUM_NOM
+	, DEST.EMPLEADO AS EMPLEADO
+	, SUM(DEST.GPO_A) AS VS_A
+	, SUM(DEST.GPO_B) AS VS_B
+	, SUM(DEST.GPO_C) AS VS_C
+	, SUM(DEST.GPO_NA) AS VS_NA
+From (
+
+Select RH.U_EmpGiro AS NUM_NOM
+	, RH.firstName + ' ' + RH.lastName AS EMPLEADO
+	, Case When SG.GPO_160 = 'A' then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_A
+	, Case When SG.GPO_160 = 'B' then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_B
+	, Case When SG.GPO_160 = 'C' then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_C
+	, Case When SG.GPO_160 IS NULL then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_NA
+from OWOR OP 
+inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
+inner join OHEM RH on CP.U_idEmpleado=RH.empID 
+inner join OITM A3 on OP.ItemCode=A3.ItemCode 
+left join SIZ_DestGrupo SG on SUBSTRING(OP.ItemCode,1,7) = SG.CODE01 
+Where  CAST (CP.U_FechaHora as Date) Between @FechaIS and @FechaFS and CP.U_CT= @EstaTra 
+Group By RH.U_EmpGiro, RH.firstName, RH.lastName, SG.GPO_160 
+) DEST
+Group by DEST.NUM_NOM, DEST.EMPLEADO
+Order by DEST.EMPLEADO
 
 /*
 Select DEST.NUM_NOM AS NUM_NOM, DEST.EMPLEADO AS EMPLEADO, SUM(DEST.GPO_A) AS VS_A, SUM(DEST.GPO_B) AS VS_B, SUM(DEST.GPO_C) AS VS_C, SUM(DEST.GPO_NA) AS VS_NA From (Select RH.U_EmpGiro AS NUM_NOM, RH.firstName + ' ' + RH.lastName AS EMPLEADO, Case When SG.GPO_157 = 'A' then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_A, Case When SG.GPO_157 = 'B' then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_B, Case When SG.GPO_157 = 'C' then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_C, Case When SG.GPO_157 IS NULL then SUM(A3.U_VS * CP.U_Cantidad) Else 0 End AS GPO_NA from OWOR OP inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry inner join OHEM RH on CP.U_idEmpleado=RH.empID inner join OITM A3 on OP.ItemCode=A3.ItemCode left join SIZ_DestGrupo SG on SUBSTRING(OP.ItemCode,1,7) = SG.CODE01 

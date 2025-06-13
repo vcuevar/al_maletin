@@ -49,12 +49,13 @@ ORDER BY CP.U_DocEntry
 
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
-		delete [@CP_OF] where Code = 747580
+		delete [@CP_OF] where Code = 767709
 
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 54053	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
+	Set @NumOrd = 66587 
+	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
 	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD , HIS.U_idEmpleado --, DATEPART(WK, HIS.U_FechaHora) as SEMANA
@@ -64,28 +65,21 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 65054 -- and U_CT = 409   -- and U_idEmpleado = 2 -- and U_CT = 415  
+	select * from [@CP_LOGOF] where U_DocEntry= 65099 --and U_CT = 175   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_FechaHora, U_CT
 	 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 776229
+	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 795761
+	update [@CP_LOGOF] set U_idEmpleado = 374 Where Code = 782525
 
-	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 769747
-	update [@CP_LOGOF] set U_idEmpleado = 67 Where Code = 769748
-
-	update [@CP_LOGOF] set U_idEmpleado = 238 Where Code = 693252
-	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 530339
-	update [@CP_LOGOF] set U_idEmpleado = 84 Where Code = 530340
-	update [@CP_LOGOF] set U_idEmpleado = 65 Where Code = 530341
-	update [@CP_LOGOF] set U_idEmpleado = 85 Where Code = 530342
-
+	   	
 
 	update [@CP_LOGOF] set U_FechaHora = '2024-11-30 14:27:00.000'  Where Code = 693252
 	2024-11-30 14:27:00.000
 
-DELETE [@CP_LOGOF] WHERE Code = 731456
+DELETE [@CP_LOGOF] WHERE Code = 781888
 
 
 DELETE [@CP_LOGOF] WHERE Code = 603594
