@@ -56,6 +56,10 @@ Order by T0.UpdateDate, T0.[DocNum]
 -- ================================================================================================
 
 -- Presenta los PT que no tienen Lista de Materiales, Sin Existencia y fueron creados mas de 30 dias.
+-- 250721 Esto lo solicito Osiel, hace mas de un año que se fue y he visto como que a Luis y a Daniel eso no les interesa.
+--Ademas me trae problemas con Andrea porque despues necesita codigos viejos y tengo que activarlos de nuevo.
+-- Por lo que suspendo esta validación.
+/*
 SELECT  'INACTIVAR PT SIN LDM' AS QRY_004
 	, OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS NOMBRE
@@ -76,6 +80,7 @@ AND OITB.ItmsGrpNam <> 'PT PROTOTIPOS.' AND OITT.Name is null
 and OITM.frozenFor = 'N' and OITM.OnHand = 0
 and CAST(OITM.CreateDate as DATE) < DATEADD(day,-30,CAST(GETDATE() as DATE))
 ORDER BY OITM.ItemName
+*/
 
 -- Consultas de la Relacion de Hules con Pesos y Precio de Diseño.
 -- Solicitada por Oziel Franco

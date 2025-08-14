@@ -42,44 +42,46 @@ ORDER BY CP.U_DocEntry
 -- La estacion ultima en el historial, se pone la que sigue en ruta, entregado y procesado 0 cuando 
 --solo es una pieza y recibido en 1
 
-	update [@CP_OF] set U_DocEntry = 54053  where Code=72952
-	update [@CP_OF] set U_CT = 136, U_Orden = 136 where Code = 72952
-	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 72952
-	update [@CP_OF] set U_Recibido= 233 where Code= 72952
+	update [@CP_OF] set U_DocEntry = 65258  where Code=72955
+	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 72955
+	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 72955
+	update [@CP_OF] set U_Recibido= 1 where Code= 72955
 
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
-		delete [@CP_OF] where Code = 767709
+		
+	delete [@CP_OF] where Code = 786702
 
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 66587 
+	Set @NumOrd = 64183  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
-	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD , HIS.U_idEmpleado --, DATEPART(WK, HIS.U_FechaHora) as SEMANA
+	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD , HIS.U_idEmpleado --, HIS.U_FechaHora --DATEPART(WK, HIS.U_FechaHora) as SEMANA
 	from [@CP_LOGOF] HIS where HIS.U_DocEntry = @NumOrd 
-	Group by  HIS.U_CT , HIS.U_idEmpleado 
+	Group by  HIS.U_CT , HIS.U_idEmpleado -- , HIS.U_FechaHora
 	order by HIS.U_CT
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 65099 --and U_CT = 175   -- and U_idEmpleado = 2 -- and U_CT = 415  
+	select * from [@CP_LOGOF] where U_DocEntry= 67677                                      --and U_CT = 175   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_FechaHora, U_CT
 	 
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 795761
-	update [@CP_LOGOF] set U_idEmpleado = 374 Where Code = 782525
+	update [@CP_LOGOF] set U_idEmpleado = 315 Where Code = 841020
+
+	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 843866
 
 	   	
 
 	update [@CP_LOGOF] set U_FechaHora = '2024-11-30 14:27:00.000'  Where Code = 693252
 	2024-11-30 14:27:00.000
 
-DELETE [@CP_LOGOF] WHERE Code = 781888
+DELETE [@CP_LOGOF] WHERE Code = 839736
 
 
 DELETE [@CP_LOGOF] WHERE Code = 603594

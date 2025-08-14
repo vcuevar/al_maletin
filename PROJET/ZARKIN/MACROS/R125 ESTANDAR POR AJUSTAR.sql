@@ -16,6 +16,7 @@ Set @TC_CAN = (Select top(1) TC_can from SIZ_TipoCambio Order by TC_date DESC)
 Set @TC_EUR = (Select top(1) TC_eur from SIZ_TipoCambio Order by TC_date DESC)
 Set @TC_MXP = 1
 
+/*
 -- Validar que el L7 no sea menor de Ultima COMPRA en caso de ser asi, realizar cambio
 -- para que se active validacion al ESTANDAR.
 -- ESTE SE MONTO EN MACRO R125 ESTANDAR POR AJUSTAR.
@@ -88,7 +89,7 @@ Set @TC_MXP = 1
 
 	Select top(10) PDN1.ShipDate, ActDelDate,  * from PDN1 
 	WHERE PDN1.ItemCode = '18287' ORDER BY PDN1.DocEntry DESC, PDN1.BaseLine
-
+*/
 
 /*
 -- Consulta
@@ -151,7 +152,7 @@ Where U_TipoMat = 'MP' and OITM.frozenFor = 'N' and OITM.U_Linea = '01' Order By
 
 */
 
-
+/*
 Select OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
@@ -251,28 +252,46 @@ and OITM.frozenFor = 'N'
 and U_TipoMat = 'PT' 
 Order By OITM.ItemName 
 
-
+*/
 -- ================================================================================================
 -- |       ARTICULOS GLOBALES IGUALAR A ESTANDAR LISTA PRUEBA PARA INICIAR CAMBIOS.               |
 -- ================================================================================================
 -- Hoja 6 de la Macro.
 -- Actualizado al 20 de Septiembre del 2024.
 -- Presenta los ARTICULO diferente a lista prueba a estandar, para igualar al estandar. 
+
 Select OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
-	, ITM1.Price AS Pre_7
-	, ITM1.Currency AS Mon_7
-	, 7 AS LISTA
 	, ISNULL(LS.Price, 0) AS Pre_STD
 	, LS.Currency AS Mon_STD
+	, LS.PriceList AS LISTA
+	, ITM1.Price AS Pre_7
+	, ITM1.Currency AS Mon_7
 	, 'POR ACTUALIZAR' AS ACCION 
 	, OITM.U_TipoMat AS TM 
 	, OITM.OnHand AS EXT 
+	, (((ITM1.Price-LS.Price)/Case When LS.Price=0 then 1 else LS.Price end)*100) AS VARIAN
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
 INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
-Where OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' and ITM1.Price <> ISNULL(LS.Price, 0)
+Where ITM1.Price <> 0
+and OITM.OnHand = 0
+and OITM.frozenFor = 'N'
+and OITM.EvalSystem = 'S'
+and (((ITM1.Price - LS.Price)/Case When LS.Price=0 then 1 else LS.Price end))*100  > 10 
 Order By OITM.ItemName 
 
+
+-- Para costo de Venta en la lista 2
+
+SELECT OITM.ItemCode AS CODIGO, OITM.ItemName AS DESCRIPCION, OITM.InvntryUom AS UDM, 
+	Cast(L10.Price as decimal(16,3)) AS Pre_STD
+, L10.Currency as Mon_STD, L02.PriceList AS LISTA, 
+	Cast(L10.Price * 2.5 as decimal(16,3)) AS Pre_VEN, L10.Currency as Mon_VEN
+, OITM.U_TipoMat AS TM 
+
+FROM OITM inner join ITM1 L10 on OITM.ItemCode = L10.ItemCode and L10.PriceList = 7 
+inner join ITM1 L02 on OITM.ItemCode = L02.ItemCode and L02.PriceList = 2 
+WHERE  Cast(L10.Price * 2.5 as decimal(16,3)) <> Cast(L02.Price as decimal(16,3)) ORDER BY OITM.ItemName 
 

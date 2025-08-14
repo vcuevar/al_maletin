@@ -137,6 +137,31 @@ Where SUPER.QUITA_SUP Not Like '%QUITAR DE SUPERVISOR%'
 	and DUDA.BaseRef <> 58658
 	order by RB.DocDate,A3.ItemName
 
+/* ------------------------------------------------------------------------------------------------
+|  Relación de OP que se deben cambiar a PLabificadas.                                                  |
+--------------------------------------------------------------------------------------------------*/
+
+Select '025 PASAR PLANIF' as REPORTE
+		, OWOR.OriginNum AS PEDIDO
+		, OWOR.DocEntry AS OP
+		, OWOR.ItemCode AS CODIGO
+		, OWOR.ProdName AS DESCRIPCION
+		, (OWOR.PlannedQty - OWOR.CmpltQty ) * A3.U_VS AS TVS 
+		, p.U_CT AS CP_ESTACION
+		, OWOR.U_Starus AS ESTATUS
+		, A3.U_TipoMat AS TIPO
+from OWOR 
+inner join OITM A3 on A3.ItemCode = OWOR.ItemCode 
+left join [@CP_OF] P on P.U_DocEntry = OWOR.DocEntry
+Where OWOR.Status ='R' and OWOR.CmpltQty < OWOR.PlannedQty 
+and A3.U_TipoMat = 'PT'
+and OWOR.U_Starus <> '06'
+and P.U_CT < 106
+Order By DESCRIPCION
+
+
+
+
 
 
 --< EOF > EXCEPCIONES DE CONTROL DE PISO.

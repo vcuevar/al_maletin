@@ -10,8 +10,8 @@
 Declare @FechaIS nvarchar(30)
 Declare @FechaFS nvarchar(30)
 
-Set @FechaIS = CONVERT (DATE, '2024/09/30', 102)
-Set @FechaFS = CONVERT (DATE, '2024/11/03', 102)
+Set @FechaIS = CONVERT (DATE, '2025/07/03', 102)
+Set @FechaFS = CONVERT (DATE, '2025/07/03', 102)
 
 -- ================================================================================================
 -- |               DESARROLLO DEL PROCESO.                                                        |

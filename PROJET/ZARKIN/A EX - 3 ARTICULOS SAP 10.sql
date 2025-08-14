@@ -682,7 +682,7 @@ SELECT '241 A OBS. PT ZAR' AS REPO_241
 	, OITM.U_Linea AS LINEA
 	FROM OITM 
 	WHERE OITM.U_TipoMat = 'PT' and OITM.U_Linea = '01' and OITM.ItemCode like 'ZAR%'
-	ORDER BY OITM.ItemName
+	ORDER BY OITM.ItemCode
 	/*
 	Update OITM set OITM.U_Linea = '10'
 	FROM OITM 
@@ -1024,8 +1024,8 @@ Order By DESCRIPCION
 -- Articulo VENTAS que la suma de valor sala sea la de sus componentes, Capture correcto diseño.
 -- Instalodo en Alarma en SAP.
 	Select '465 ! VS DIFERENTE' AS REPORTE, A2.ItemCode, A2.ItemName, A2.U_TipoMat
-		, Cast(A2.U_VS as decimal(16,3)) AS U_VS
-		, Cast(B0.ValSal as decimal(16,3)) AS ValSal, A2.SellItem, A2.InvntItem, A2.PrchseItem
+		, Cast(A2.U_VS as decimal(16,3)) AS VS_ACT
+		, Cast(B0.ValSal as decimal(16,3)) AS VS_CAL, A2.SellItem, A2.InvntItem, A2.PrchseItem
 	from OITM A2
 	inner join (Select ITT1.Father, sum(A3.U_VS*ITT1.Quantity) As ValSal 
 	from ITT1

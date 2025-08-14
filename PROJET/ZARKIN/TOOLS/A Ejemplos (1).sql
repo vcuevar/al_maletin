@@ -24,6 +24,10 @@ Select * from [@TC_ATB] where U_AtbName like '%ZO US%'
 /* Uso de Between y formato para fecha ('aaa/dd/mm') */
 Where OINM.DocDate between ('2013/01/07') and ('2013/07/07')
 
+
+CASE When Condicion = ? then verdadero else 0 end 
+
+
 CASE When CAST([@CP_LOGOF].U_FechaHora as  TIME) > CAST('10:00' as TIME) and CAST([@CP_LOGOF].U_FechaHora as  TIME) <= CAST('12:00' as TIME) then [@CP_LOGOF].U_Cantidad else 0 end as CT02,
 
 where  [@CP_LOGOF].U_FechaHora BETWEEN '2015/20/10 00:00' and '2015/20/10 23:59:59') BIHR  

@@ -2,6 +2,7 @@
 -- Uso: Llevar Historial de Cambios de Lista de Precios 7 y pendientes a Estandar.
 -- Desarrollado: Ing. Vicente Cueva Ramirez.
 -- Actualizado: Miercoles 30 de Octubre del 2024; Origen.
+-- Actualizado: Lunes 07 de Julio del 2025; Calcular Historial de Compras.
 
 -- Select * from SIZ_HistoryEstandar Where HE_ItemCode = '11224'
 
@@ -9,6 +10,7 @@
 |  Para llenar reporte del historial de los costos estandar.                                       |
 --------------------------------------------------------------------------------------------------*/
 
+/*
 Select	OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom AS UDM	
@@ -31,6 +33,7 @@ Left Join SIZ_HistoryEstandar HE on HE.HE_ItemCode = OITM.ItemCode
 Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 and OITM.U_GrupoPlanea = '7' and OITM.frozenFor = 'N'
 Order By OITM.ItemName, HE.HE_FechaCambio desc 
+*/
 
 /* ------------------------------------------------------------------------------------------------
 |  Realizar Auditoria y presenta los que esten en +- 10%.                                         |
@@ -76,13 +79,18 @@ From OITM
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
 Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 Order By DESCRIPCION
+*/
+
+-- PARA BORRAR o CAMBIAR ALGUN REGISTRO DEL HISTORIAL. 
+
+-- Cambio de Fecha de Aplicación.
+/*
+Select * from SIZ_HistoryEstandar Where HE_NotasCambio = 'AUT DAVID Z 2025 (CAMBIO)'
+
+Update SIZ_HistoryEstandar set HE_FechaCambio = '2025-06-25' Where HE_NotasCambio = 'AUT DAVID Z 2025 (CAMBIO)'
 
 
--- PARA BORRAR UN REGISTRO 
-
-
-
-Select * from SIZ_HistoryEstandar Where HE_ItemCode = '18411'
+Select * from SIZ_HistoryEstandar Where HE_ItemCode = '20189'
 and HE_FechaCambio = '2024-10-09'
 
 Delete SIZ_HistoryEstandar Where HE_ItemCode = '18151' and HE_FechaCambio = '2024-10-09'
@@ -95,8 +103,8 @@ Update SIZ_HistoryEstandar set HE_PrecioNew = 363 Where HE_ItemCode = '18411' an
 1.- 09/12/24	6.142200	USD	20.196300
 2.- 02/12/24	5.329300	USD	20.417300
 3.- 02/12/24	6.142200	USD	20.417300
-
-
+*/
+/*
 -- Para sacar las ultimas compras segun el registro.
 
 SELECT CONVERT(varchar,T1.ActDelDate,3) FECHA_COMPRA
@@ -153,8 +161,6 @@ ORDER BY PDN1.DocEntry DESC, PDN1.BaseLine
 ) as decimal(16,4)) AS U_COMP
 
 */
-
-
 
 
 /*
@@ -239,7 +245,7 @@ Delete SIZ_HistoryEstandar
 /* ------------------------------------------------------------------------------------------------
 | Para sacar grupos que deben tener el mismo costo.                                                |
 --------------------------------------------------------------------------------------------------*/
-
+/*
 Select  OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
@@ -262,6 +268,53 @@ From OITM
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
 Where ItemName like 'HILO A 1.2%'
 Order By DESCRIPCION
+*/
+
+/* ------------------------------------------------------------------------------------------------
+| Para presentar el historico de comporas y sacar promedio de Precios.                             |
+--------------------------------------------------------------------------------------------------*/
+
+Select  OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+	, Cast(ITM1.Price as decimal(18,4)) AS PRE_10
+	, ITM1.Currency AS MON_10
+	, ITM1.PriceList AS LISTA
+	, OITM.OnHand AS EXISTENCIA
+From OITM
+Inner Join ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList = 10 
+Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N' and OITM.frozenFor = 'N'
+and ITM1.Price > 0 and OITM.U_Linea = '01'
+Order By OITM.ItemName
+
+
+Select top (7)	P.DocEntry, P.ItemCode, P.Price AS PRECIO, P.ActDelDate, P.Currency, P.Rate
+From PDN1 P 
+Where ItemCode = '18822'
+Order By ActDelDate desc
+
+
+Select top (7) B.DocEntry AS N_COMPRA
+	, B.ItemCode AS CODIGO
+	, B.Dscription AS DESCRIPCION
+	, (B.Price*(Case When B.Rate = 0 then 1 else B.Rate End))/B.NumPerMsr AS PREC_MX
+	, B.Price AS PRECIO
+	, B.Currency AS MONEDA
+	, (Case When B.Rate = 0 then 1 else B.Rate End) AS TI_CA
+	, B.NumPerMsr AS FACTOR
+	, B.ActDelDate AS FEC_COM
+From PDN1 B 
+Where ItemCode = '20649'
+Order By ActDelDate desc
+
+
+Select top (7)	* From PDN1 Where ItemCode = '18822' Order By ActDelDate desc
+
+Select top(1) HE_FechaCambio, HE_NotasCambio
+From SIZ_HistoryEstandar
+Where HE_ItemCode = '17419'
+Order By HE_FechaCambio desc
+
 
 
 

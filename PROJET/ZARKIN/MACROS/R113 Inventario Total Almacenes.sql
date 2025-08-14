@@ -155,3 +155,14 @@ Group By KDX.CODIGO, OITM.ItemName, OITM.InvntryUom, ITM1.Price, KDX.VS
 Having SUM(KDX.ENTRADA + KDX.SALIDA) <> 0 
 Order By ARTICULO
 
+-- Consulta del catalogo de Materiales Comprados.
+
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS DESCRIPCION
+	, OITM.InvntryUom AS UDM
+From OITM 
+Where OITM.U_TipoMat = 'MP' and QryGroup32 = 'N' and OITM.frozenFor = 'N'
+Order By DESCRIPCION
+
+
+
