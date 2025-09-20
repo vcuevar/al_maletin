@@ -1,4 +1,4 @@
--- Concentrado de EXCEPCIONES DE CONTROL DE PISO.
+	-- Concentrado de EXCEPCIONES DE CONTROL DE PISO.
 -- Desarrollado: Ing. Vicente Cueva Ramirez.
 -- Actualizado: Jueves 01 de Agosto del 2019; Inicio.
 -- Actualizado: Jueves 01 de Agosto del 2019; Integrar Excepcion de Usuarios Supervisor.
@@ -140,7 +140,9 @@ Where SUPER.QUITA_SUP Not Like '%QUITAR DE SUPERVISOR%'
 /* ------------------------------------------------------------------------------------------------
 |  Relación de OP que se deben cambiar a PLabificadas.                                                  |
 --------------------------------------------------------------------------------------------------*/
-
+-- Por algun motivo raro todas las ordenes las genera planeación y las pasan a liberados.
+-- Dejo de hacer esta validación porque no se corrijen: Jueves 04 de septiembre del 2025.
+/*
 Select '025 PASAR PLANIF' as REPORTE
 		, OWOR.OriginNum AS PEDIDO
 		, OWOR.DocEntry AS OP
@@ -158,10 +160,29 @@ and A3.U_TipoMat = 'PT'
 and OWOR.U_Starus <> '06'
 and P.U_CT < 106
 Order By DESCRIPCION
+*/
 
 
+/* ------------------------------------------------------------------------------------------------
+|  Ordenes con reproceso usuario 2 o 7 Que son los que tienen autorizacion. Hay que cambiar por el |
+|  Usuario productivo.                                                                             |
+--------------------------------------------------------------------------------------------------*/
+-- El 08 de septiembre deje a Eduardo Belis como Gerente para que pueda retroceder OP.
 
-
-
+	Select '030 CAMBIAR USUARIO' AS REP_030
+		, T.U_DocEntry AS OP
+		, A3.ItemName AS ARTICULO
+		, T.U_CT AS ESTACION
+		, R.Name AS DESCRIPCION
+		, T.U_idEmpleado AS COD_EMPL
+		, T.U_Reproceso AS REPRO
+		, T.U_Cantidad AS CANT
+	From [@CP_LOGOF] T
+	Inner Join OWOR on T.U_DocEntry = OWOR.DocNum
+	Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode
+	Inner join [@PL_RUTAS] R on T.U_CT = R.Code
+	Where OWOR.Status='R' and (T.U_idEmpleado = 2 or T.U_idEmpleado = 7) 
+	and T.U_Reproceso <> 'N'
+	
 
 --< EOF > EXCEPCIONES DE CONTROL DE PISO.

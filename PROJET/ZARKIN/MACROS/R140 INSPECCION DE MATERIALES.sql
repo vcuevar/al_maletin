@@ -74,3 +74,25 @@ LEFT JOIN UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1
 WHERE Cast(fechaRevision as date) between  @FechaIS and @FechaFS 
 Order By fechaRevision, materialDescripcion
 */
+
+
+
+-- Para realizar ajustes en la Inspeccion.
+
+
+Select *
+From Siz_Incoming SIC
+Where SIC.INC_docNum = 19275
+
+Select *
+From Siz_PielClases
+Where PLC_incId = 304
+
+
+Update Siz_PielClases Set PLC_claseA = 12526, PLC_claseB = 21525, PLC_claseC = 9434, PLC_claseD = 9071 Where Siz_PielClases.PLC_incId = 304
+
+
+Update Siz_PielClases Set PLC_creadoEn = CONVERT (DATE, '2025-06-30', 102) Where Siz_PielClases.PLC_incId = 318
+Update Siz_PielClases Set PLC_actualizadoEn = CONVERT (DATE, '2025-06-30', 102) Where Siz_PielClases.PLC_incId = 318
+
+*/

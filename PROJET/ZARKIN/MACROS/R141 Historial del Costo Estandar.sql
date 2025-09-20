@@ -80,12 +80,12 @@ INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7
 Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 Order By DESCRIPCION
 */
-
+/*
 -- PARA BORRAR o CAMBIAR ALGUN REGISTRO DEL HISTORIAL. 
 
 -- Cambio de Fecha de Aplicación.
-/*
-Select * from SIZ_HistoryEstandar Where HE_NotasCambio = 'AUT DAVID Z 2025 (CAMBIO)'
+
+Select * from SIZ_HistoryEstandar Where HE_NotasCambio = 'AUT DAVID Z 2025 SEP'
 
 Update SIZ_HistoryEstandar set HE_FechaCambio = '2025-06-25' Where HE_NotasCambio = 'AUT DAVID Z 2025 (CAMBIO)'
 
@@ -176,20 +176,20 @@ Declare @TipoCa as decimal(16,4)
 Declare @PreStd as decimal(16,4)
 Declare @NotCam as nvarchar(120)
 
-Set @CodArt = '20387'
-Set @FecCam = CONVERT (DATE, '2023/01/20', 102)
-Set @NuePre =  2220.0000 
+Set @CodArt = '20263'
+Set @FecCam = CONVERT (DATE, '2025/09/07', 102)
+Set @NuePre =  481.0000 
 Set @Moneda = 'MXP'
 Set @TipoCa = 1.00
-Set @PreStd = 2610.0000 
-Set @NotCam	= 'PRIMER AJUSTE  AUTORIZADO DAVID ZARKIN'
+Set @PreStd = 147.0000 
+Set @NotCam	= 'AUT DAVID Z 2025 SEP'
 
 Insert Into [dbo].SIZ_HistoryEstandar
 			( [HE_ItemCode], [HE_FechaCambio], [HE_PrecioNew], [HE_Moneda], [HE_TipoCambio], [HE_PrecioEstandar], [HE_NotasCambio])
 		Values
 			(@CodArt, @FecCam, @NuePre, @Moneda, @TipoCa, @PreStd, @NotCam)
-*/
 
+*/
 /*
 /* ------------------------------------------------------------------------------------------------
 |  Para llenar reporte de las compras con variaciones de mas 10% o menos 10% sobre el estandar.    |
@@ -290,7 +290,7 @@ Order By OITM.ItemName
 
 Select top (7)	P.DocEntry, P.ItemCode, P.Price AS PRECIO, P.ActDelDate, P.Currency, P.Rate
 From PDN1 P 
-Where ItemCode = '18822'
+Where ItemCode = '20264'
 Order By ActDelDate desc
 
 

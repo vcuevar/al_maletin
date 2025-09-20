@@ -12,6 +12,21 @@ Declare @CodeArti as nvarchar(10)
 Set @FechaIS = CONVERT (DATE, '2019/01/01', 102)
 Set @CodeArti = '10002'
 
+-- Conversion de FechaHora a solo fecha y semana del año 
+
+Substring(OFPR.Code, 1,4) AS CICLO
+	, Substring(OFPR.Code, 6,2) AS MES
+	, Cast(OFPR.F_RefDate as date) AS FEC_INI
+	, Cast(OFPR.T_RefDate as date) AS FEC_FIN
+
+	, DatePart(iso_week, Cast(OFPR.F_RefDate as date)) AS SEM_INI
+	, DatePart(iso_week, Cast(OFPR.T_RefDate as date)) AS SEM_FIN
+
+	, DatePart(iso_week, GetDate()) AS SEM_HOY
+
+
+
+
 SELECT SUBSTRING("SQL Tutorial", 5, 3) AS ExtractString;
 
 -- Formato Moneda

@@ -43,7 +43,7 @@ ORDER BY CP.U_DocEntry
 --solo es una pieza y recibido en 1
 
 	update [@CP_OF] set U_DocEntry = 65258  where Code=72955
-	update [@CP_OF] set U_CT = 100, U_Orden = 100 where Code = 72955
+	update [@CP_OF] set U_CT = 109, U_Orden = 109 where Code = 842861
 	update [@CP_OF] set U_Entregado = 0, U_Procesado = 0 where Code = 72955
 	update [@CP_OF] set U_Recibido= 1 where Code= 72955
 
@@ -51,54 +51,42 @@ ORDER BY CP.U_DocEntry
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
 		
 	delete [@CP_OF] where Code = 786702
-
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 64183  
+	Set @NumOrd = 69175  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
-	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD , HIS.U_idEmpleado --, HIS.U_FechaHora --DATEPART(WK, HIS.U_FechaHora) as SEMANA
+	select HIS.U_CT, SUM(HIS.U_Cantidad) as PROD --, HIS.U_idEmpleado --, HIS.U_FechaHora --DATEPART(WK, HIS.U_FechaHora) as SEMANA
 	from [@CP_LOGOF] HIS where HIS.U_DocEntry = @NumOrd 
-	Group by  HIS.U_CT , HIS.U_idEmpleado -- , HIS.U_FechaHora
+	Group by  HIS.U_CT --, HIS.U_idEmpleado -- , HIS.U_FechaHora
 	order by HIS.U_CT
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 67677                                      --and U_CT = 175   -- and U_idEmpleado = 2 -- and U_CT = 415  
-	order by  U_FechaHora, U_CT
-	 
+	select * from [@CP_LOGOF] where U_DocEntry= 63094
+ --and U_CT = 160   -- and U_idEmpleado = 2 -- and U_CT = 415  
+	order by  U_CT, U_FechaHora
+	
+	-- Para Cambia de Fecha AAAMMDD
+	update [@CP_LOGOF] set U_FechaHora = '2025-08-12 10:30:00.000'  Where Code = 870272
+
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 315 Where Code = 841020
+	update [@CP_LOGOF] set U_idEmpleado = 35 Where Code = 870345
+	update [@CP_LOGOF] set U_idEmpleado = 384 Where Code = 870346
+	update [@CP_LOGOF] set U_idEmpleado = 83 Where Code = 870347
 
-	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 843866
+	update [@CP_LOGOF] set U_idEmpleado = 229 Where Code = 870320
+	update [@CP_LOGOF] set U_idEmpleado = 229 Where Code = 870321
 
-	   	
 
-	update [@CP_LOGOF] set U_FechaHora = '2024-11-30 14:27:00.000'  Where Code = 693252
-	2024-11-30 14:27:00.000
 
 DELETE [@CP_LOGOF] WHERE Code = 839736
-
-
 DELETE [@CP_LOGOF] WHERE Code = 603594
-
 DELETE [@CP_LOGOF] WHERE Code = 495333
-
-DELETE [@CP_LOGOF] WHERE Code = 662140
-DELETE [@CP_LOGOF] WHERE Code = 474695
-DELETE [@CP_LOGOF] WHERE Code = 474696
-DELETE [@CP_LOGOF] WHERE Code = 474697
-DELETE [@CP_LOGOF] WHERE Code = 474698
-DELETE [@CP_LOGOF] WHERE Code = 474699
-DELETE [@CP_LOGOF] WHERE Code = 474700
-DELETE [@CP_LOGOF] WHERE Code = 474701
-DELETE [@CP_LOGOF] WHERE Code = 474702
-DELETE [@CP_LOGOF] WHERE Code = 474703
-
 
 update [@CP_LOGOF] set U_Cantidad = 5 Where Code = 766653
 
@@ -118,10 +106,7 @@ De la OP 36995 se borraron estos renglones que no fueron reales 18 de Agosto 202
 454763	454763	85	172	T	2023-08-11 14:10:00.000	36995	1	N
 454766	454766	267	175	T	2023-08-11 14:12:43.000	36995	1	N
 
-DELETE [@CP_LOGOF] WHERE Code = 454762
-DELETE [@CP_LOGOF] WHERE Code = 454763
-DELETE [@CP_LOGOF] WHERE Code = 454766
-	
+
 ---------------------------------------------------------------------------------
 	-- Ordenes que se Cancelaron y no se Borro de Control de Piso.
 	-- Se pueden usar los codigos para asignar a otro que se haya borrado.

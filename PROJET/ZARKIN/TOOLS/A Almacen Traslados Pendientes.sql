@@ -34,20 +34,24 @@ E	Linea para Traslado Externo		S-T
  From SIZ_SolicitudesMP
  inner join SIZ_MaterialesTraslados on SIZ_MaterialesTraslados.Id_Solicitud = SIZ_SolicitudesMP.Id_Solicitud 
  inner join OITM on SIZ_MaterialesTraslados.ItemCode = OITM.ItemCode
- Where  SIZ_SolicitudesMP.Id_Solicitud = 81242
+ Where  SIZ_SolicitudesMP.Id_Solicitud = 96580
  --and SIZ_MaterialesTraslados.EstatusLinea <> 'S' 
  --and SIZ_SolicitudesMP.Status like 'Cancelada'
  --SIZ_MaterialesTraslados.ItemCode = '17653'
   Order By SIZ_SolicitudesMP.Id_Solicitud
 
 
-  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 81242
+  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 96580
 
-  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 11496 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
+  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 96580 --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
 
   Select * from SIZ_MaterialesTraslados Where ItemCode = '74616'
 
   Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = '81242'
+
+  -- Cambiar Estatus E por S Externo por Activo.
+  Update SIZ_MaterialesTraslados set EstatusLinea = 'S' Where SIZ_MaterialesTraslados.Id_Solicitud = 96580 
+
 
 
 -- Para cancelar una solicitud.

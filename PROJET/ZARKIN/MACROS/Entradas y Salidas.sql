@@ -16,8 +16,8 @@ Declare @Articulo as nvarchar(30)
 Declare @nLista as Int
 
 Set @nLista = 10
-Set @FechaIS = '2024/12/01'
-Set @FechaFS = '2025/01/18'
+Set @FechaIS = '2025/09/01'
+Set @FechaFS = '2025/09/12'
 Set @Articulo = '10077'
 
 /*

@@ -33,8 +33,25 @@ from OCRD
 inner join OCRG on OCRD.GroupCode=OCRG.GroupCode
 where OCRD.GroupCode= '100' and OCRD.CardType <> 'L'
 	
+
+/* ================================================================================================
+|    EXCEPCIONES PARA PROVEEDORES.                                                                |
+================================================================================================= */
 	
+-- Proveedors sin industria definido (Grupo para Inspeccion de Calidad).
+Select '004 PROVE SIN INDUSTRIA' AS REP_003
+	, OCRD.CardCode
+	, OCRD.CardName
+	, OCRD.CardType
+	, OCRD.IndustryC
+	, OOND.IndName
+from OCRD 
+left join OOND on OCRD.IndustryC = OOND.IndCode
+where  OCRD.CardType = 'S' and ISNULL(OCRD.IndustryC,0) = 0
+Order by OCRD.CardName
 	
+		
+-- Select * from OOND	
 
 	
 --< EOF > EXCEPCIONES DE SOCIOS DE NEGOCIOS.
