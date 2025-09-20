@@ -23,7 +23,14 @@ Order by EMPLEADO
 
 
 Select * from Usuarios
-Where USU_Nombre = '784'
+Where USU_Nombre = '972'
+
+Select * From Permisos
+Where PER_PermisoId  = 'AA46530F-DD30-4014-873B-E8A571B06472'	--DIRECCION
+
+836, 0836, 00836 = reymar200116 Jazzmin Reynso
+118 = reymar200116 Alfredo para que use Jazz para vallarta.
+
 
 
  USU_PER_PermisoId = 'EBEF7BB0-784C-45E6-9876-327B3360FF67' and USU_Activo = 1

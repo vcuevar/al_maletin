@@ -119,7 +119,7 @@ From OrdenesVenta where OV_MON_MonedaId ='1EA50C6D-AD92-4DE6-A562-F155D0D516D3'a
 and OV_CodigoOV >'OV00887'
 Order By OV_CodigoOV
 
---Update OrdenesVenta Set OV_MONP_Paridad = 17.238 Where OV_CodigoOV = 'OV01340'
+--Update OrdenesVenta Set OV_MONP_Paridad = 19.069 Where OV_CodigoOV = 'OV01504'
 
 --identificar estatus de bultos y sus tablas iteknia
 -- Para hacer la validacion de las existencias contra los bultos
@@ -374,9 +374,10 @@ Where RCP_CorreoEnviado = 0
 -- Excepcion donde los Articulos estan Inhactivos y tienen existencia. Para mas detalles correr la consulta ART_DefinidoPorUsuario1 
 -- Inventarios Contables.
 
-SELECT	ART_CodigoArticulo as CODIGO
-		, ART_Nombre as NOMBRE
-		, SUM(TRLOT_CantidadTraspaso) AS CANTIDAD  
+SELECT	'ARTI INAC CON EXIST' AS REPO_30
+	,ART_CodigoArticulo as CODIGO
+	, ART_Nombre as NOMBRE
+	, SUM(TRLOT_CantidadTraspaso) AS CANTIDAD  
 FROM Articulos  
 INNER JOIN TraspasosMovtos on ART_ArticuloId = TRAM_ART_ArticuloId
 INNER JOIN TraspasosLotes on TRAM_TraspasoMovtoId = TRLOT_TRAM_TraspasoMovtoId
@@ -400,5 +401,32 @@ UPDATE Articulos SET ART_Eliminado = 0 WHERE ART_ArticuloId = '3E5941B9-2C2F-4CB
 UPDATE Articulos SET ART_Activo  = 0 WHERE ART_ArticuloId = '3E5941B9-2C2F-4CB9-B563-D47E2340D2F6'
 
 */
+
+-- Ordenes Estatus Parciales, Validar si son viables a cancelar.
+Select 'OT Parciales por Cerrar' AS REPO_35 
+	, OT.OT_Codigo AS OT
+	, Cast(OT.OT_FechaOT as date) AS FECHOT
+	, CMM_Valor AS ESTATUS
+	--, OTD.OTDA_Cantidad  AS CANTPLAN
+	--, BD.*
+From OrdenesTrabajo OT
+Inner Join ControlesMaestrosMultiples on OT_CMM_Estatus = CMM_ControlId
+--Inner Join OrdenesTrabajoDetalleArticulos OTD on OTD.OTDA_OT_OrdenTrabajoId  = OT.OT_OrdenTrabajoId 
+--Inner Join BultosDetalle BD ON BD.BULD_OT_OrdenTrabajoId  = OT.OT_OrdenTrabajoId
+Where OT_CMM_Estatus = '213ED3B9-12B3-41C9-8C6E-230DC86BBF90' 
+Order By OT
+
+--Update OrdenesTrabajo Set OT_CMM_Estatus = 'F860806C-B1EC-4047-AA95-EDAD406DE10E' Where OT_Codigo = 'OT02854'
+
+
+
+
+
+
+
+
+
+
+
 
 
