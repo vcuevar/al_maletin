@@ -23,6 +23,9 @@ SELECT TOP (1000) [PAS_PasoId] AS ID
 -- Tabla de configuración de Selectores
 -- Tabla actualizada Jueves 10 de julio del 2025.
 
+-- Select * from RPT_OpcionesCotizador
+RUTA SELECCIONADA > Quit > Riel recto > Medidas Riel Recto > Frescura > 【Sistema Ripplefold 60%】
+
   Select PAS_Pantalla_Ubicacion AS PANTALLA
   	,PAS_Orden AS N_SEL
   	,PAS_Nombre AS SELECTOR
@@ -50,13 +53,13 @@ SELECT TOP (1000) [PAS_PasoId] AS ID
     ,[OPC_S20]
 From RPT_OpcionesCotizador opc
 Inner Join RPT_PasosCotizador selector on opc.OPC_PasoId = selector.PAS_PasoId
-Where PAS_Activo = 1  and 
+Where PAS_Activo = 1  --and 
  --PAS_Orden = 1 						-- Para Seleccionar Area de Instalacion  
  --PAS_Orden = 2 and OPC_S1 = '00025' 	-- Seleccion de Tipo de Producto
  --PAS_Orden = 3 and OPC_S2 = '00259' 	-- Seleccion de Sub Producto
  --PAS_Orden = 4 and OPC_S3 = '00260' 	-- Seleccion de Tipo de Confeccion
 -- PAS_Orden = 5 and OPC_S4 = '00261' 	-- Seleccion de Tipo de Confeccion
-PAS_Orden = 6 --and OPC_S5 = '00263' 	-- Seleccion del Tipo de Riel
+--PAS_Orden = 6 --and OPC_S5 = '00263' 	-- Seleccion del Tipo de Riel
  
 --PAS_Orden = 7 --and OPC_S6 = '00012'  	-- Captura de las Medidas
  --PAS_Orden = 8 and OPC_S7 = '00035'   -- Numero de Hojas  

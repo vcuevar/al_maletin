@@ -17,4 +17,10 @@
 		<column name="Name" visible="true" order="0" width="176"/>
 		<column name="DataSource" visible="true" order="1" width="125"/>
 	</item>
+	<item id="scriptSelectorViewer">
+		<column name="Script" visible="true" order="0" width="358"/>
+		<column name="Time" visible="true" order="1" width="60"/>
+		<column name="Info" visible="true" order="2" width="36"/>
+		<column name="Folder" visible="true" order="3" width="51"/>
+	</item>
 </items>
