@@ -504,9 +504,10 @@ Order By OITM.ItemName
 	and OITM.ItemName not like '%BASTON%' and OITM.ItemName not like '%CAJA%' and OITM.ItemName not like '%CUBIERTA%'
 	and OITM.ItemName not like '%BOTON%' and OITM.ItemName not like '%MESA%' and OITM.ItemName not like '%VISTA%'
 	and OITM.ItemName not like '%CASCO%' and OITM.ItemName not like '%BASE%' and OITM.ItemName not like '%ZOCLO%' 
-	and OITM.ItemName not like '%ENGROSADO%' 
+	and OITM.ItemName not like '%ENGROSADO%' and OITM.ItemName not like '%ESCANTILLON%' 
 	ORDER BY OITM.ItemName		
-		
+
+			
 -- VER-160414 VALIDAR ALMACEN DE COMPLEMENTOS SEA APT-PA 
 	Select '135 ? LDM COMPL. ENTREGA APT-PA' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
 	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion,

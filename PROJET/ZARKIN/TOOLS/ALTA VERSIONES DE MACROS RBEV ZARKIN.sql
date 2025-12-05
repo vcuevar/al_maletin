@@ -13,9 +13,9 @@ Order By ID
 
 -- Modificar un Reporte a su Nueva Version
 
-Update SIZ_RBEV set NumeVers = 'VMA250917A' Where CodeRepo = 'GZ-VMA-2302-134'
+Update SIZ_RBEV set NumeVers = 'VMA251124A' Where CodeRepo = 'GZ-VMA-2510-147'
 
-Update SIZ_RBEV set NombRepo = 'Confiabilidad de Proveedores (Incoming)' Where CodeRepo = 'GZ-VMA-2508-143'
+Update SIZ_RBEV set NombRepo = 'Devolucion de Piel y Tela' Where CodeRepo = 'GZ-VMA-2508-144'
 
 -- Asignar un Nuevo Registro
 
@@ -23,9 +23,9 @@ Declare @Code as nvarchar(15)
 Declare @Nomb as nvarchar(50)
 Declare @Vers as nvarchar(10)
 
-Set @Code = 'GZ-VMA-2508-021'
-Set @Nomb = 'Resumen de Pedidos Planeacion.'
-Set @Vers = 'VMA250828A'
+Set @Code = 'GZ-VMA-2510-147'
+Set @Nomb = 'Inspeccion de Calidad.'
+Set @Vers = 'VMA251031A'
 
 Insert Into [dbo].[SIZ_RBEV]
 			( [CodeRepo], [NombRepo], [NumeVers])

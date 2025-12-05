@@ -21,6 +21,7 @@ Select	CASC.ART_CODE
 	, ITM1.Price AS PRECIO
 From (
 
+-- Inventario de Casco en al almacen del WIP VIRTUAL.
 Select OITM.ItemCode AS ART_CODE
 	, OITM.ItemName AS ART_NOMBRE
 	, OITM.InvntryUom AS UDM
@@ -34,6 +35,7 @@ where OITW.OnHand > 0 and OITM.U_TipoMat = 'CA'
 
 Union All
 
+-- Necesidades de Ordenes de Produccion don de se encuentra el casco en primer nivel.
 Select	 WOR1.ItemCode AS ART_CODE
 		, OITM.ItemName AS ART_NOMBRE
 		, OITM.InvntryUom AS UDM
@@ -51,7 +53,8 @@ Group By WOR1.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_VS
 
 Union All
 
-Select	 WOR1.ItemCode AS ART_CODE
+-- Necesidades de Casco en OP dentro de Subensambles
+Select	OITM.ItemCode AS ART_CODE
 		, OITM.ItemName AS ART_NOMBRE
 		, OITM.InvntryUom AS UDM
 		, OITM.U_VS AS VS
@@ -65,7 +68,7 @@ Left Join [@CP_OF] CP  on CP.U_DocEntry = OWOR.DocEntry
 Left join [@PL_RUTAS] RT on RT.Code = CP.U_CT 
 WHERE OWOR.Status <> 'C' and OWOR.Status <> 'L' 
 and CP.U_CT BETWEEN @EstIni and @EstFin 
-Group By WOR1.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_VS 
+Group By OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_VS 
 
 ) CASC
 inner join ITM1 on ITM1.ItemCode = CASC.ART_CODE and ITM1.PriceList=10

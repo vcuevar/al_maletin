@@ -14,7 +14,7 @@ Set @FechaFS = CONVERT (DATE, '2025-08-20', 102)
 -- Resumen de Pedidos.
 
 Select ORDR.DocEntry AS PEDIDO
-	, ORDR.DocDate AS FEC_PEDIDO
+	, Cast(ORDR.DocDate as date) AS FEC_PEDIDO
 	, ORDR.NumAtCard AS OC
 	, ORDR.CardCode AS COD_CLIENTE
 	, ORDR.CardName AS NOMBRE_CLI

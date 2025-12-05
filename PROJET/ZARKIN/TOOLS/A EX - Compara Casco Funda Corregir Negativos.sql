@@ -50,11 +50,11 @@ ORDER BY CP.U_DocEntry
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
 		
-	delete [@CP_OF] where Code = 786702
+	delete [@CP_OF] where Code = 853596
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 69175  
+	Set @NumOrd = 67346  
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -65,9 +65,21 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 63094
+	select * from [@CP_LOGOF] where U_DocEntry= 72968
  --and U_CT = 160   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_CT, U_FechaHora
+	 
+
+
+
+
+  	 	   	  
+	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 917425
+
+	update [@CP_LOGOF] set U_idEmpleado = 280 Where Code = 911194
+	update [@CP_LOGOF] set U_idEmpleado = 72 Where Code = 911193
+	update [@CP_LOGOF] set U_idEmpleado = 71 Where Code = 911192
+	update [@CP_LOGOF] set U_idEmpleado = 368 Where Code = 911191
 	
 	-- Para Cambia de Fecha AAAMMDD
 	update [@CP_LOGOF] set U_FechaHora = '2025-08-12 10:30:00.000'  Where Code = 870272
@@ -75,18 +87,21 @@ ORDER BY CP.U_DocEntry
 	-- Para cambiar el numero de un empleado
 	-- Usuario 6.- Virtual Costura (83)
 
-	update [@CP_LOGOF] set U_idEmpleado = 35 Where Code = 870345
-	update [@CP_LOGOF] set U_idEmpleado = 384 Where Code = 870346
+	
+	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 877597
 	update [@CP_LOGOF] set U_idEmpleado = 83 Where Code = 870347
-
 	update [@CP_LOGOF] set U_idEmpleado = 229 Where Code = 870320
 	update [@CP_LOGOF] set U_idEmpleado = 229 Where Code = 870321
 
 
+DELETE [@CP_LOGOF] WHERE Code = 878155	--878155	415	175	T	2025-09-26 17:50:33.000	67344	255	N	NULL	NULL
+DELETE [@CP_LOGOF] WHERE Code = 878156	--878156	415	175	T	2025-09-26 17:55:08.000	67345	40	N	NULL	NULL
+DELETE [@CP_LOGOF] WHERE Code = 878157	--878157	415	175	T	2025-09-26 17:55:35.000	67347	255	N	NULL	NULL
 
-DELETE [@CP_LOGOF] WHERE Code = 839736
-DELETE [@CP_LOGOF] WHERE Code = 603594
-DELETE [@CP_LOGOF] WHERE Code = 495333
+
+DELETE [@CP_LOGOF] WHERE Code = 875588  -- 875588	158	209	T	2025-09-23 18:14:00.000	70427	10	N
+DELETE [@CP_LOGOF] WHERE Code = 876258	-- 876258	158	212	T	2025-09-24 16:39:00.000	70427	10	N
+DELETE [@CP_LOGOF] WHERE Code = 876337	-- 876337	158	218	T	2025-09-24 17:22:00.000	70427	10	N
 
 update [@CP_LOGOF] set U_Cantidad = 5 Where Code = 766653
 

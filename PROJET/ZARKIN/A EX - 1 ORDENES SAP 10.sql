@@ -148,6 +148,24 @@ Ya no procede porque esta usando SB para cosas de carpinteria.
 	inner join OITM on WOR1.ItemCode = OITM.ItemCode
 	where OWOR.Status <> 'C' and OWOR.Status <> 'L' and OITM.ItmsGrpCod <> '113' 
 	and WOR1.wareHouse = 'AMP-CC'
+		
+-- Ordenes de Produccion hule espuma consume diferente a AMP-ST (Excepto Pegamento)
+	Select '047 OP CONSUME <> AMP-ST' AS REPORTE_047
+		, OWOR.Status
+		, WOR1.DocEntry
+		, OWOR.ItemCode
+		, WOR1.ItemCode
+		, A1.ItemName
+		, WOR1.wareHouse
+	from WOR1
+	inner join OWOR on WOR1.DocEntry = OWOR.DocEntry
+	Inner Join OITM A1 on WOR1.ItemCode = A1.ItemCode
+	inner join OITM A3 on OWOR.ItemCode = A3.ItemCode
+	where OWOR.Status <> 'C' and OWOR.Status <> 'L' 
+	and WOR1.wareHouse <> 'AMP-ST'
+	and A3.U_GrupoPlanea = '6'
+	and A1.ItemCode <> '13230'
+
 
 -- Ordenes de Produccion Fundas con Material Diferentes a Piel que consumen material de AMP-CC
 -- Se cancela esta excepcion ya que se cargan mas materiales de otro almacen 231230

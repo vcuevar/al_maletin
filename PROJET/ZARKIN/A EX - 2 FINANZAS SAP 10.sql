@@ -29,10 +29,21 @@
 
 -- Si es nulo y no da resultados es Recomendable que se capture el tipo de cambio para pasado Mañana.
 
+Declare @FechaIS as Date
+--Set @FechaIS = CONVERT (DATE, '2025-11-01', 102)
+Set @FechaIS = DATEADD(day,0,CAST(GETDATE() as DATE))
+
+Select top(6) *
+From ORTT
+Where  ORTT.Currency = 'USD'
+and CAST(ORTT.RateDate as DATE) >= @FechaIS
+
+
+/*
 Select Case When ( 
 	COALESCE((Select ORTT.Currency
 	from ORTT
-	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,1,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,0,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
 	'DIA HOY SIN TC' else
 ''
 	end AS HOY_SIN_TC
@@ -40,7 +51,7 @@ Select Case When (
 Select Case When ( 
 	COALESCE((Select ORTT.Currency
 	from ORTT
-	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,2,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,1,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
 	'DIA DOS SIN TC' else
 ''
 	end AS MAÑANA_SIN_TC
@@ -50,7 +61,7 @@ Select Case When (
 Select Case When ( 
 	COALESCE((Select ORTT.Currency
 	from ORTT
-	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,3,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,2,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
 	'DIA TRES SIN TC' else
 ''
 	end AS DIA_3_TC
@@ -59,17 +70,27 @@ Select Case When (
 Select Case When ( 
 	COALESCE((Select ORTT.Currency
 	from ORTT
-	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,4,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
+	Where CAST(ORTT.RateDate as DATE)= DATEADD(day,3,CAST(GETDATE() as DATE)) and ORTT.Currency = 'USD' ),'NEL')) = 'NEL' Then
 	'DIA CUATRO SIN TC' else
 ''
 	end AS DIA_4_TC
 
+*/
 -- Tipo de Cambio autorizados
 
-Select * from SIZ_TipoCambio Order By TC_date desc
-
--- Para realizar nuevo registro de Tipos de Cambio.
+Select TC_date AS FECHA
+	, TC_usd AS DOLAR
+	, TC_eur AS EURO
+	, TC_can AS CANADA
+	, TC_notas AS NOTAS
+From SIZ_TipoCambio 
+Order By TC_date desc
 /*
+-- Para realizar nuevo registro de Tipos de Cambio.
+
+-- 22/oct/2025 Davido Zarkin establece tipo de cambio a $ 19.00 el tipo de cambio para el USD y segun historico y estimando 
+-- los cambios, dejo CAN en $ 14.60 y el EUR en $ 21.70
+
 -- 14/Feb/2024 David Zarkin me dijo que este seria el tipo de cambio en Dolares, los otros dos los deje 
 -- como venian del año pasado.
 
@@ -81,16 +102,19 @@ Declare @TC_USD as decimal(10,4)
 Declare @TC_CAN as decimal(10,4)
 Declare @TC_EUR as decimal(10,4)
 
+
 Set @FechaCrea = GETDATE()
-Set @TC_USD = 19.95
-Set @TC_CAN = 14.50
-Set @TC_EUR = 21.51
+Set @TC_USD = 19.00
+Set @TC_CAN = 14.60
+Set @TC_EUR = 21.70
 
 Insert Into [dbo].SIZ_TipoCambio
-			( [TC_date], [TC_can], [TC_usd], [TC_eur])
+			( [TC_date], [TC_can], [TC_usd], [TC_eur], [TC_notas]  )
 		Values
-			(@FechaCrea, @TC_CAN, @TC_USD, @TC_EUR)
+			(@FechaCrea, @TC_CAN, @TC_USD, @TC_EUR, 'David Zarkin fijo TC USD' )
 Go
+
+
 
 */
 

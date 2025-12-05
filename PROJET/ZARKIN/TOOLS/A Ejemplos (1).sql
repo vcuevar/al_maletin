@@ -14,18 +14,14 @@ Set @CodeArti = '10002'
 
 -- Conversion de FechaHora a solo fecha y semana del año 
 
-Substring(OFPR.Code, 1,4) AS CICLO
-	, Substring(OFPR.Code, 6,2) AS MES
-	, Cast(OFPR.F_RefDate as date) AS FEC_INI
-	, Cast(OFPR.T_RefDate as date) AS FEC_FIN
+, Substring(OFPR.Code, 1,4) AS CICLO
+, Substring(OFPR.Code, 6,2) AS MES
+, Cast(OFPR.F_RefDate as date) AS FEC_INI
+, Cast(OFPR.T_RefDate as date) AS FEC_FIN
 
-	, DatePart(iso_week, Cast(OFPR.F_RefDate as date)) AS SEM_INI
-	, DatePart(iso_week, Cast(OFPR.T_RefDate as date)) AS SEM_FIN
-
-	, DatePart(iso_week, GetDate()) AS SEM_HOY
-
-
-
+, DatePart(iso_week, Cast(OFPR.F_RefDate as date)) AS SEM_INI
+, DatePart(iso_week, Cast(OFPR.T_RefDate as date)) AS SEM_FIN
+, DatePart(iso_week, GetDate()) AS SEM_HOY
 
 SELECT SUBSTRING("SQL Tutorial", 5, 3) AS ExtractString;
 
@@ -77,6 +73,7 @@ case
 	when datediff(day,ODLN.DocDate, getdate()) > 60 and datediff(day,ODLN.DocDate, getdate()) < 91 then 'A-90 dias' 
 	when datediff(day,ODLN.DocDate, getdate()) > 90 then 'A-MAS dias'
 End as Grupo,
+
 ODLN.CardCode, ODLN.CardName, DLN1.ItemCode, DLN1.Dscription, DLN1.Quantity, 
 OITM.AvgPrice, OITM.U_VS, OITM.U_TipoMat, ODLN.Comments 
 from ODLN 

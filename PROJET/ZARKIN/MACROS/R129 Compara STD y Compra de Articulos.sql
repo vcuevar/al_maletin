@@ -60,3 +60,41 @@ Where OITM.ItemCode is not null AND  OITM.U_TipoMat <> 'GF' AND Cast(OPDN.DocDat
 Order by PDN1.DocEntry 
 
 
+
+
+-- PRIMERA PARTE DE PROPUESTA DE COSTO
+Select ItemCode AS CODIGO
+	, ItemName AS MATERIAL
+	, InvntryUom AS UDM
+	, Cast(OnHand as decimal(16,2)) AS EXITENCIA 
+From OITM 
+Where OnHand > 0 and U_TipoMat = 'MP' and U_Linea = '01' 
+Order By ItemName
+
+
+
+
+-- SEGUNDA PARTE DE PROPUESTA DE COSTO 
+
+Select top(2) HE_FechaCambio
+	, HE_NotasCambio 
+From SIZ_HistoryEstandar 
+Where HE_ItemCode = '19901' 
+Order By HE_FechaCambio desc
+
+
+-- TERCERA PARTE
+--Actualización: Martes 28 de octubre del 2025; Tipo Cambio fijado por Dirección.
+
+Select top (7) B.DocEntry AS N_COMPRA
+	, B.ItemCode AS CODIGO
+	, B.Dscription AS DESCRIPCION
+	, (B.Price*(Case When B.Rate = 0 then 1 else B.Rate End))/B.NumPerMsr AS PREC_MX
+	, B.Price AS PRECIO
+	, B.Currency AS MONEDA
+	, (Case When B.Rate = 0 then 1 else B.Rate End) AS TI_CA
+	, B.NumPerMsr AS FACTOR
+	, B.ActDelDate AS FEC_COM 
+From PDN1 B Where ItemCode = '19901' 
+Order By ActDelDate desc 
+ 

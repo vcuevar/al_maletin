@@ -180,6 +180,102 @@ Order By OITM.ItemName
 Select * from OITM Where ItemCode= '17979'
 
 
+-- =======================================================================================
+-- |  EXCEPCIONES MODULO 15 Establecer el tiempo de entrega de los productos Leed Time.  |
+-- ======================================================================================
+/*
+' =========================================================================
+' | Procedimiento:                                                        |
+' |                                                                       |
+' | Se procede con:                                                       |
+' |      1.- Actualizar los tiempos de entrega de los articulossegun su   |
+' | tipo de material:                                                     |
+' |			MP Si no tiene tiempo se asignan 15 dias.                     |
+' |			PT Debe estar a 21 dias.                                      |
+' |			CA Debe estar a 5 dias.                                       |
+' |			SP Debe tener 15 dias.                                        |
+' |			HB Debe estar igual que SB a 15 dias.						  |
+' =========================================================================
+*/
+
+-- Cambio para los articulos que no son MP
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, OITM.LeadTime AS LEADTIME
+	, OITM.U_TipoMat AS TM
+	, NLT.N_LT AS NEW_LT
+	, 'POR ACTUALIZAR' AS ACCION 
+From OITM 
+
+inner Join (Select A5.ItemCode AS CODE
+	, Case 
+		When A5.U_TipoMat = 'CA' then 7 
+		When A5.U_TipoMat = 'HB' then 15 
+		When A5.U_TipoMat = 'SP' then 15 
+		When A5.U_TipoMat = 'RF' then 15 
+		When A5.U_TipoMat = 'GF' then 15 
+		When A5.U_TipoMat = 'PT' then 21 
+		When A5.U_TipoMat = 'MP' then 15
+	End As N_LT 
+From OITM A5 
+) NLT on OITM.ItemCode = NLT.CODE 
+Where OITM.LeadTime <> NLT.N_LT
+and  OITM.U_TipoMat <> 'MP'
+Order By OITM.ItemName
+
+-- Cambio para los que son MP = 0 los demas estan establecidos por compras.
+Select OITM.ItemCode AS CODIGO
+	, OITM.ItemName AS ARTICULO
+	, OITM.InvntryUom AS UDM
+	, OITM.LeadTime AS LEADTIME
+	, OITM.U_TipoMat AS TM
+	, NLT.N_LT AS NEW_LT
+	, 'POR ACTUALIZAR' AS ACCION 
+From OITM 
+
+inner Join (Select A5.ItemCode AS CODE
+	, Case 
+		When A5.U_TipoMat = 'CA' then 7 
+		When A5.U_TipoMat = 'HB' then 15 
+		When A5.U_TipoMat = 'SP' then 15 
+		When A5.U_TipoMat = 'RF' then 15 
+		When A5.U_TipoMat = 'GF' then 15 
+		When A5.U_TipoMat = 'PT' then 21 
+		When A5.U_TipoMat = 'MP' then 15
+	End As N_LT 
+From OITM A5 
+) NLT on OITM.ItemCode = NLT.CODE 
+Where OITM.LeadTime = 0
+and  OITM.U_TipoMat = 'MP'
+Order By OITM.ItemName
+
+
+
+
+
+
+Where OITM.U_TipoMat <> 'MP' and OITM.LeadTime <> NLT.N_LT and OITM.frozenFor = 'N' Order By OITM.ItemCode Desc 
+
+
+
+
+Select A5.ItemCode AS CODE
+	, Case 
+		When A5.U_TipoMat = 'CA' then 7 
+		When A5.U_TipoMat = 'HB' then 15 
+		When A5.U_TipoMat = 'SP' then 15 
+		When A5.U_TipoMat = 'RF' then 15 
+		When A5.U_TipoMat = 'GF' then 15 
+		When A5.U_TipoMat = 'PT' then 21 
+		When A5.U_TipoMat = 'MP' then 15
+	End As N_LT 
+From OITM A5
+
+
+
+
+
 -- ================================================================================================
 -- | FIN DEL PROYECTO.                                                                            |
 -- ================================================================================================

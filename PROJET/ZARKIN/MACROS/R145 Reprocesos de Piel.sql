@@ -5,7 +5,8 @@
 -- Actualizado: Miercoles 17 de septiembre del 2025; Origen
 
 /* ========================================
-*   Tabla de Tipos de Movimientos         *
+|      Tabla de Tipos de Movimientos      |
+|            OINM.TransType               |
 ===========================================
 TransType			Nombre
 13			Facturas clientes

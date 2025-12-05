@@ -171,6 +171,23 @@
 	INNER JOIN OITM A1 on ITT1.Code=A1.ItemCode
 	WHERE ITT1.Warehouse <> 'AMP-ST' and A3.U_GrupoPlanea = '5'
 
+-- 251114: ALMACEN DE CONSUMO DE LOS COMPONENTES DEL ARTICULO HULE ESPUMA AMP-ST.
+-- EXEPTO EL 13230 PEGAMENTO 8099NI/ K-812 QUE SE CONSUME DEL APG-ST
+	SELECT '060 HULE ESPUMA, ALMACEN <> AMP-ST' AS REPORTE_060
+		, A3.ItemCode AS CODE
+		, A3.ItemName AS MODELO
+		, A1.ItemCode AS CODIGO
+		, A1.ItemName AS DESCRIPCION
+		, ITT1.Warehouse AS ALMACEN
+	FROM ITT1
+	INNER JOIN OITM A3 on ITT1.Father = A3.ItemCode and A3.QryGroup32 = 'Y'
+	INNER JOIN OITM A1 on ITT1.Code=A1.ItemCode
+	WHERE ITT1.Warehouse <> 'AMP-ST' 
+	and A3.U_GrupoPlanea = '6'
+	and A1.ItemCode <> '13230'
+
+
+
 			
 -- VER-160414 VALIDAR ALMACEN DE BASE OITT CABECERA DE LISTA DE MATERIALES CASCO. 
 	Select '120 ? ALM. DFL CABECERA LMD' AS REPORTE, OITT.Code, A3.ItemName, A3.U_TipoMat, OITT.ToWH
@@ -261,23 +278,14 @@
 	
 	
 -- Estructura de consumen el material del AMP-ST
-	select '455 CONS. AMP-ST->APP-ST' AS REPORTE, ITT1.Father, A3.ItemName, ITT1.Code, A1.ItemName, ITT1.Warehouse
-	from ITT1 
+	Select '455 CONS. AMP-ST->APP-ST' AS REPORTE, ITT1.Father, A3.ItemName, ITT1.Code, A1.ItemName, ITT1.Warehouse
+	From ITT1 
 	inner join OITM A3 on ITT1.Father=A3.ItemCode
 	inner join OITM A1 on ITT1.Code=A1.ItemCode
-	Where ITT1.Warehouse = 'AMP-ST' and A1.ItmsGrpCod <> '113' and A1.ItmsGrpCod <> '114' and A1.U_GrupoPlanea <> '6' 
-	and ITT1.Father <> '17621' and ITT1.Father <> '19646' and ITT1.Father <> '20348' and ITT1.Father <> '20363' and ITT1.Father <> '20289'
-	and ITT1.Father <> '17620' and ITT1.Father <> '17691' and ITT1.Father <> '17701' and ITT1.Father <> '19052' and ITT1.Father <> '20290' 
-	and ITT1.Father <> '17822' and ITT1.Father <> '17814'  and ITT1.Father <> '18292' and ITT1.Father <> '18939'  and ITT1.Father <> '19053'  
-	and ITT1.Father <> '18288' and ITT1.Father <> '18262' and ITT1.Father <> '18627' and ITT1.Father <> '19057' and ITT1.Father <> '19057'
-	and ITT1.Father <> '18626' and ITT1.Father <> '18696' and ITT1.Father <> '18559' and ITT1.Father <> '18943' and ITT1.Father <> '19053'  
-	and ITT1.Father <> '18761' and ITT1.Father <> '10436' and ITT1.Father <> '19416' and ITT1.Father <> '18939'  and ITT1.Father <> '19430'  
-	and ITT1.Father <> '19415' and ITT1.Father <> '20357' and ITT1.Father <> '20358' and ITT1.Father <> '20414' and ITT1.Father <> '20415'
-	and ITT1.Father <> '20156' and ITT1.Father <> '20846' and ITT1.Father <> '20925' and ITT1.Father <> '21012' and ITT1.Father <> '21201'
-	and ITT1.Father <> '20988' and ITT1.Father <> '20876' and ITT1.Father <> '21017' and ITT1.Father <> '21058'
-
+	Where ITT1.Warehouse = 'AMP-ST' 
+	and A1.U_TipoMat = 'SP'
+	and A1.U_GrupoPlanea = '5' 
 	Order by A3.ItemName	
-	
 	
 	
 	/*

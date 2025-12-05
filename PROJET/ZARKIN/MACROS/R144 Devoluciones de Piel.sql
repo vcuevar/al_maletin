@@ -11,7 +11,8 @@
 
 
 /* ========================================
-*   Tabla de Tipos de Movimientos         *
+|   Tabla de Tipos de Movimientos         |
+|           OINM.TransType                |
 ===========================================
 TransType			Nombre
 13			Facturas clientes
@@ -33,8 +34,8 @@ TransType			Nombre
 Declare @FechaIS as Date
 Declare @FechaFS as Date
 
-Set @FechaIS = CONVERT (DATE, '2025-09-01', 102)
-Set @FechaFS = CONVERT (DATE, '2025-09-12', 102)
+Set @FechaIS = CONVERT (DATE, '2025-09-15', 102)
+Set @FechaFS = CONVERT (DATE, '2025-09-22', 102)
 
 Select Cast(OINM.CreateDate as DATE) AS FEC_MOV
 	, OINM.BASE_REF AS DOC
@@ -50,34 +51,6 @@ Inner Join OITM on OINM.ItemCode = OITM.ItemCode
 Where Cast (OINM.CreateDate as DATE) between  @FechaIS and @FechaFS 
 and  OINM.Warehouse <> 'APT-ST' and  OINM.Warehouse <> 'APT-PA'
 and OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
-and OINM.JrnlMemo Like 'Recib%'
+and OINM.TransType = 59 and OINM.AppObjAbs > -1
 Order By FEC_MOV, NOM_MAT ,OP
   
-
-  /*
-    ,OINM.CardName, OINM.BASE_REF, OINM.AppObjAbs, OINM.DocDate, OINM.CreateDate
-	, OINM.JrnlMemo	, ITM1.Price as COST01
-	, OINM.Price as COSTO_H
-	, OINM.RevalTotal
-	, OINM.UserSign, OUSR.U_NAME
-	, OITM.U_VS, OINM.Comments
-	, OITM.U_TipoMat, OINM.DocTime 
-	*/
-
-/*
-Emisión para producción
-Issue for Production
-Recibo de producción
-
-	Select Distinct OINM.JrnlMemo AS dato 
-	from OINM 
-	Where OINM.JrnlMemo like 'Devolu%'
-	and OINM.JrnlMemo not like 'Entrada%'
-	and OINM.JrnlMemo not like 'Entrega%'
-	and OINM.JrnlMemo not like 'Fact%'
-	and OINM.JrnlMemo not like 'Notas%'
-	and OINM.JrnlMemo not like 'Pedido%'
-	and OINM.JrnlMemo not like 'Salida%'
-	Order By OINM.JrnlMemo
-
-*/

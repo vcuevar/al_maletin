@@ -117,14 +117,14 @@
 		, OITM.U_Ruta AS RUTA
 		, OITM.U_GrupoPlanea AS PLANEA
 	from OITM
-	Where OITM.U_TipoMat = 'RF' and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175'
+	Where OITM.U_TipoMat = 'RF' and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,169,172,175'
 	and Len(OITM.ItemCode) > 5
 	
 
 /*
 
-	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175'
-	Where OITM.U_TipoMat = 'RF' and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175'
+	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,148,169,172,175'
+	Where OITM.U_TipoMat = 'RF' and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,169,172,175'
 	and Len(OITM.ItemCode) > 5
 	
 	*/	
@@ -177,7 +177,7 @@
 |                      Articulos Producto Terminado.   Ruta:  VARIOS
 =======================================================================================================================
 */
---Ruta para CINTILLOS -> '100,106,109,112,115,118,121,124,127,130,133,136' 
+--Ruta para CINTILLOS -> '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175' 
 
 	Select '017 RUTA CINTILLOS' AS REPO_015
 		, OITM.ItemCode AS CODIGO
@@ -189,17 +189,18 @@
 		, OITM.ItmsGrpCod AS GRUPO
 	from OITM
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 133
-	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136' 
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175' 
 		
 	/*
 
-	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136' 
+	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175' 
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 133
-	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136' 
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,172,175' 
 
 	*/
 
---Ruta para PT Copjines-> RUTA: 100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,172,175
+--Ruta para PT Copjines-> RUTA: 100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,169,172,175
+
 	Select '019 RUTA COJINES' AS REPO_019
 		, OITM.ItemCode AS CODIGO
 		, OITM.ItemName AS DESCRIPCION
@@ -210,18 +211,18 @@
 		, OITM.ItmsGrpCod AS GRUPO
 	from OITM
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 118
-	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,172,175'
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,169,172,175'
 	
 	/*
 
-	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,172,175'
+	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,169,172,175'
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 118
-	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,148,151,172,175'
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,169,172,175'
 	
 	*/
 
 
---Ruta para PT MESAS (GRUPO 122) -> RUTA: 100,106,109,148,151,154,157,160,172,175
+--Ruta para PT MESAS (GRUPO 122) -> RUTA: 100,106,109,148,151,154,157,160,169,172,175
 	Select '020 RUTA MESAS' AS REPO_020
 		, OITM.ItemCode AS CODIGO
 		, OITM.ItemName AS DESCRIPCION
@@ -232,17 +233,18 @@
 		, OITM.ItmsGrpCod AS GRUPO
 	from OITM
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 122
-	and OITM.U_Ruta <> '100,106,109,148,151,154,157,160,172,175'
+	and OITM.U_Ruta <> '100,106,109,148,151,154,157,160,169,172,175'
 	
 	/*
 
-	Update OITM set U_Ruta = '100,106,109,148,151,154,157,160,172,175'
+	Update OITM set U_Ruta = '100,106,109,148,151,154,157,160,169,172,175'
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 122
-	and OITM.U_Ruta <> '100,106,109,148,151,154,157,160,172,175'
+	and OITM.U_Ruta <> '100,106,109,148,151,154,157,160,169,172,175'
 
 	*/
 
---Ruta para PT General-> 100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,172,175
+--Ruta para PT General-> 100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,169,172,175
+						 
 	Select '021 RUTA PT' AS REPO_021
 		, OITM.ItemCode AS CODIGO
 		, OITM.ItemName AS DESCRIPCION
@@ -253,15 +255,15 @@
 		, OITM.ItmsGrpCod AS GRUPO
 	from OITM
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod <> 133 and OITM.ItmsGrpCod <> 118 and OITM.ItmsGrpCod <> 122
-	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,172,175'
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,169,172,175'
 	
 		
 	/*
 
-	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,172,175' 
-	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod <> 133 and OITM.ItmsGrpCod <> 118
-	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,172,175'
-
+	Update OITM set U_Ruta = '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,169,172,175' 
+	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod <> 133 and OITM.ItmsGrpCod <> 118 and OITM.ItmsGrpCod <> 122
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,169,172,175'
+	
 
 	*/
 
@@ -317,8 +319,20 @@
 	from OITM
 	Where  OITM.U_Ruta LIKE '%103%'
 	
+-- Rutas con Estaciones No Autorizadas 110 Corte de Complementos.	
+	Select '046 CON 110' AS REPORTE_46, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where  OITM.U_Ruta LIKE '%110%'
+	Order By OITM.ItemCode
+
+-- Rutas con Estaciones No Autorizadas 111 Costura de Mantas.	
+	Select '047 CON 111' AS REPORTE_47, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where  OITM.U_Ruta LIKE '%111%'
+	Order By OITM.ItemCode
+	
 -- Rutas con Estaciones No Autorizadas 140 Pegado de Delcron.	
-	Select '047 CON 140' AS REPORTE_47, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	Select '048 CON 140' AS REPORTE_48, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%140%'
 	Order By OITM.ItemCode
@@ -342,11 +356,14 @@
 	Order By OITM.ItemCode
 
 	-- Rutas con Estaciones No Autorizadas 169 Inspeccion Tapiceria	
+	-- Solicito Eduardo Belis que se habra esta Inspeccion 251120
+	/*
 	Select '055 CON 169' AS REPO_55, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where  OITM.U_Ruta LIKE '%169%'
 	Order By OITM.ItemCode
-	
+	*/
+
 	-- Rutas con Estaciones No Autorizadas 312 Inspección y Conteo	
 	Select '057 CON 312' AS REPO_57, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM

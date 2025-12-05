@@ -180,13 +180,13 @@ INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList = 1
 Where L7.Price = 0  and OITM.EvalSystem = 'S' and OITM.frozenFor = 'N' --and OITM.U_TipoMat = 'MP' 
 Order By OITM.ItemName 
 
-
 -- ================================================================================================
 -- |              PARA ASIGNAR PRECIO ESTANDAR EN BASE A LISTA 7.                                 |
 -- ================================================================================================
 -- Hoja 6 de la Macro.
 -- Actualizado al 19 de Septiembre del 2024.
 -- Presenta los MATERIALES COMPRADOS estandar diferente, con existencia validacion manual. 
+
 Select OITM.ItemCode AS CODIGO
 	, OITM.ItemName AS DESCRIPCION
 	, OITM.InvntryUom AS UDM
@@ -268,21 +268,26 @@ Select OITM.ItemCode AS CODIGO
 	, LS.PriceList AS LISTA
 	, ITM1.Price AS Pre_7
 	, ITM1.Currency AS Mon_7
-	, 'POR ACTUALIZAR' AS ACCION 
-	, OITM.U_TipoMat AS TM 
-	, OITM.OnHand AS EXT 
-	, (((ITM1.Price-LS.Price)/Case When LS.Price=0 then 1 else LS.Price end)*100) AS VARIAN
+	, 'POR ACTUALIZAR' AS ACCION
+	, OITM.U_TipoMat AS TM
+	, OITM.OnHand AS EXT
+	, (((ITM1.Price-LS.Price)/Case When LS.Price=0 then 1 else LS.Price end)) AS VARIAN
 From OITM 
 INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=7 
 INNER JOIN ITM1 LS on OITM.ItemCode= LS.ItemCode and LS.PriceList=10 
-Where ITM1.Price <> 0
-and OITM.OnHand = 0
-and OITM.frozenFor = 'N'
-and OITM.EvalSystem = 'S'
-and (((ITM1.Price - LS.Price)/Case When LS.Price=0 then 1 else LS.Price end))*100  > 10 
+Where ITM1.Price <> 0 
+and OITM.OnHand = 0 
+and OITM.frozenFor = 'N' 
+and OITM.EvalSystem = 'S' 
+and OITM.U_TipoMat = 'MP'
+
+and (((ITM1.Price - LS.Price)/Case When LS.Price=0 then 1 else LS.Price end))*100  > 0.0001 
 Order By OITM.ItemName 
 
 
+
+
+/*
 -- Para costo de Venta en la lista 2
 
 SELECT OITM.ItemCode AS CODIGO, OITM.ItemName AS DESCRIPCION, OITM.InvntryUom AS UDM, 
@@ -295,3 +300,4 @@ FROM OITM inner join ITM1 L10 on OITM.ItemCode = L10.ItemCode and L10.PriceList 
 inner join ITM1 L02 on OITM.ItemCode = L02.ItemCode and L02.PriceList = 2 
 WHERE  Cast(L10.Price * 2.5 as decimal(16,3)) <> Cast(L02.Price as decimal(16,3)) ORDER BY OITM.ItemName 
 
+*/

@@ -31,9 +31,10 @@ select Label, Dept, Name,  SIZ_AlmacenesTransferencias.Code,
 SolicitudMateriales, TrasladoDeptos, Remarks
 from SIZ_AlmacenesTransferencias 
 inner join OUDP on OUDP.Code = Dept
-where SIZ_AlmacenesTransferencias.Dept = '1' 
---SIZ_AlmacenesTransferencias.Code = 'APT-SE' --and TrasladoDeptos like '%O%'
+--Where SIZ_AlmacenesTransferencias.Dept = '1' 
+Where SIZ_AlmacenesTransferencias.Code = 'AGN-RE' -- and TrasladoDeptos like '%O%'
 order by TrasladoDeptos, Label
+
 
 Select Dept, Name, Label, SolicitudMateriales, TrasladoDeptos
 from SIZ_AlmacenesTransferencias 
@@ -45,7 +46,7 @@ Order by Dept
 
 
 
--- Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'O' Where Code = 'APG-ST' and Dept = '3' 
+--Update SIZ_AlmacenesTransferencias set TrasladoDeptos = 'O' Where Code = 'APG-ST' and Dept = '18' 
 
 
 -- Update SIZ_AlmacenesTransferencias set SolicitudMateriales = 'D' Where Code = 'APG-ST' and Dept = '7' 
@@ -56,6 +57,13 @@ Order by Dept
 
 -- Delete SIZ_AlmacenesTransferencias Where Code = 'APG-PA' and Dept = '1'
 
+-- Borre lo relacionado a los transportes ya que tenemos mucho que no se utiliza. 
+-- Miercoles 01 de octubre del 2025.
+/*
+Delete SIZ_AlmacenesTransferencias Where Code = 'AMP-TR' and Dept = '1'
+Delete SIZ_AlmacenesTransferencias Where Code = 'AMP-TR' and Dept = '21'
+Delete SIZ_AlmacenesTransferencias Where Code = 'AMP-TR' and Dept = '16'
+*/
 -- ****************** INSERTAR NUEVO ALMACEN  ***************************
 
 BEGIN      
