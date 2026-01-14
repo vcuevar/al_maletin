@@ -1,6 +1,7 @@
 dialog.default.folder=/home/iteknia/Documents/ARCHIVOS/al_maletin/PROJET/ITEKNIA/MULIIX
 eclipse.preferences.version=1
+org.jkiss.dbeaver.core.confirm.close_result_tabs=always
 org.jkiss.dbeaver.core.confirm.exit=always
 tipOfTheDayInitializer.notFirstRun=true
-ui.auto.update.check.time=1764776090288
+ui.auto.update.check.time=1767965093238
 ui.show.tip.of.the.day.on.startup=false

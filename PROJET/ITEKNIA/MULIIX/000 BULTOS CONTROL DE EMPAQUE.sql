@@ -70,6 +70,7 @@ Where --BUL_CMM_EstatusBultoId = 'F742508D-9B5B-4B8E-9F43-AE5C31ADD7DF' and BUL_
 BUL_NumeroBulto = 'A-1484'
 
 Union All
+
 Select   Cast(Isnull(BUL_FechaUltimaModificacion, BUL_FechaCreacion) as Date) AS FEC_MOD
         , BUL_Complemento AS BUL_PRINC
         , BUL_NumeroBulto AS BUL_COMPL

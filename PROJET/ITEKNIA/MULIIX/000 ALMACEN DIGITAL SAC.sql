@@ -57,8 +57,22 @@ inner join OrdenesVenta on OV_OrdenVentaId = OTRE_OV_OrdenVentaId
 inner join Articulos on OrdenesTrabajoDetalleArticulos.OTDA_ART_ArticuloId = Articulos.ART_ArticuloId 
 Order By OrdenesTrabajo.OT_Codigo
 
+-- Busqueda por Embarques (Bultos)
 
-
+Select DISTINCT T0.EMBB_CodigoEmbarqueBulto  AS EMBARQUE
+	, T3.PREB_CodigoPreembarqueBulto AS PRE_EMBARQUE
+	, T5.BUL_NumeroBulto AS N_BULTO
+	, T6.OT_Codigo AS OT
+	, T8.OV_CodigoOV AS OV
+From EmbarquesBultos T0
+INNER JOIN EmbarquesBultosDetalle T1 ON T0.EMBB_EmbarqueBultoId = T1.EMBBD_EMBB_EmbarqueBultoId  
+INNER JOIN PreembarqueBultoDetalle T2 ON T1.EMBBD_PREBD_PreembarqueBultoDetalleId = T2.PREBD_PreembarqueBultoDetalleId  
+INNER JOIN PreembarqueBulto T3 ON T2.PREBD_PREB_PreembarqueBultoId = T3.PREB_PreembarqueBultoId 
+INNER JOIN BultosDetalle T4 ON T2.PREBD_BULD_BultoDetalleId = T4.BULD_BultoDetalleId 
+INNER JOIN Bultos T5 ON T4.BULD_BUL_BultoId = T5.BUL_BultoId 
+INNER JOIN OrdenesTrabajo T6 ON T4.BULD_OT_OrdenTrabajoId = T6.OT_OrdenTrabajoId 
+INNER JOIN OrdenesTrabajoReferencia T7 ON T6.OT_OrdenTrabajoId = T7.OTRE_OT_OrdenTrabajoId 
+INNER JOIN OrdenesVenta T8 ON T7.OTRE_OV_OrdenVentaId = T8.OV_OrdenVentaId 
 
 
 
