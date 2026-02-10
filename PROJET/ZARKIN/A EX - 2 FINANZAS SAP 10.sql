@@ -85,8 +85,11 @@ Select TC_date AS FECHA
 	, TC_notas AS NOTAS
 From SIZ_TipoCambio 
 Order By TC_date desc
+
 /*
 -- Para realizar nuevo registro de Tipos de Cambio.
+
+-- 4 de febrero 2026, veo que en archivo de Marcela maneja tipo de cambio EUR a 21.00 realizo ajuste.
 
 -- 22/oct/2025 Davido Zarkin establece tipo de cambio a $ 19.00 el tipo de cambio para el USD y segun historico y estimando 
 -- los cambios, dejo CAN en $ 14.60 y el EUR en $ 21.70
@@ -97,6 +100,7 @@ Order By TC_date desc
 -- 21/Octubre/24 Al no definir el cambio de Estandar y con tantos ajustes no autorizados, cambie el 
 -- tipo de cambio con los siguientes datos, registrados en SAP.
 
+
 Declare @FechaCrea as date
 Declare @TC_USD as decimal(10,4)
 Declare @TC_CAN as decimal(10,4)
@@ -106,12 +110,12 @@ Declare @TC_EUR as decimal(10,4)
 Set @FechaCrea = GETDATE()
 Set @TC_USD = 19.00
 Set @TC_CAN = 14.60
-Set @TC_EUR = 21.70
+Set @TC_EUR = 21.00
 
 Insert Into [dbo].SIZ_TipoCambio
 			( [TC_date], [TC_can], [TC_usd], [TC_eur], [TC_notas]  )
 		Values
-			(@FechaCrea, @TC_CAN, @TC_USD, @TC_EUR, 'David Zarkin fijo TC USD' )
+			(@FechaCrea, @TC_CAN, @TC_USD, @TC_EUR, 'David Zarkin fijo TC EUR' )
 Go
 
 

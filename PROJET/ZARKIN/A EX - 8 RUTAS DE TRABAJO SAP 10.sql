@@ -233,6 +233,7 @@
 		, OITM.ItmsGrpCod AS GRUPO
 	from OITM
 	Where OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 122
+	and OITM.ItemCode not like '3738%'
 	and OITM.U_Ruta <> '100,106,109,148,151,154,157,160,169,172,175'
 	
 	/*
@@ -243,6 +244,23 @@
 
 	*/
 
+-- Ruta para PT MESAS 3738-53-P0471 TAZZO, -MESA REDONDA-, DIAM 40 X 53 CMS PIEL 0471 VAPOR.
+-- -> RUTA: 100,106,109,148,151,154,157,160,169,172,175
+-- AQUI
+	Select '020-A MESA TAZZO' AS REPO_020A
+		, OITM.ItemCode AS CODIGO
+		, OITM.ItemName AS DESCRIPCION
+		, OITM.U_TipoMat AS TM
+		, OITM.U_Ruta AS RUTA
+		, OITM.U_GrupoPlanea AS PLANEA
+		, OITM.U_Linea AS LINEA
+		, OITM.ItmsGrpCod AS GRUPO
+	from OITM
+	Where OITM.ItemCode like '3738%'
+	and OITM.U_TipoMat = 'PT' and OITM.ItmsGrpCod = 122
+	and OITM.U_Ruta <> '100,106,109,112,115,118,121,124,127,130,133,136,148,151,154,157,160,169,172,175'
+	-- and OITM.U_Ruta <> '100,106,109,112,115,118,148,151,154,157,160,169,172,175'
+	-- obligatorias - <    100,106,109,148,172,175
 --Ruta para PT General-> 100,106,109,112,115,118,121,124,127,130,133,136,139,145,146,148,151,154,157,160,169,172,175
 						 
 	Select '021 RUTA PT' AS REPO_021
@@ -296,6 +314,12 @@
 	Select '037 RUTA SIN 148' AS REPORTE_037, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
 	from OITM
 	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%148%' and OITM.frozenFor = 'N'
+	Order By OITM.ItemCode
+
+-- Ruta sin 169	Inspeccion de Tapiceria.
+	Select '037-A RUTA SIN 169' AS REPORTE_039, OITM.ItemCode, OITM.ItemName, OITM.U_Ruta
+	from OITM
+	Where OITM.U_TipoMat='PT' and OITM.U_Ruta NOT LIKE '%169%' and OITM.frozenFor = 'N'
 	Order By OITM.ItemCode
 
 -- Ruta sin 172	Proceso de Empaque.

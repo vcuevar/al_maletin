@@ -13,7 +13,7 @@ Declare @nCiclo nVarchar(4)
 --Set @FechaF = CONVERT (DATE, '2025-09-28', 102)
 
 Set @xCodProd =  'P2221' 
-Set @nCiclo = '2025'
+Set @nCiclo = '2026'
 
 Set @FechaI = (Select Cast(SCC.FEC_INI as date) From Siz_Calendario_Cierre SCC Where SCC.PERIODO = @nCiclo + '-01')
 Set @FechaF = (Select Cast(SCC.FEC_FIN as date) From Siz_Calendario_Cierre SCC Where SCC.PERIODO = @nCiclo + '-12')
@@ -39,7 +39,8 @@ Inner Join  Siz_Calendario_Cierre SCC on CAST(SIC.INC_fechaInspeccion as Date) b
 Left Join OOND on OCRD.IndustryC = OOND.IndCode
 Left Join Siz_PielClases SPC on SIC.INC_id = SPC.PLC_incId 
 Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaI and @FechaF 
-and SIC.INC_borrado = 'N' and SIC.INC_codProveedor = @xCodProd
+and SIC.INC_borrado = 'N' 
+-- and SIC.INC_codProveedor = @xCodProd
 Group By SIC.INC_codProveedor, OCRD.CardName, OOND.IndDesc,
 SIC.INC_docNum, SIC.INC_fechaInspeccion, SIC.INC_esPiel, OOND.IndName, SCC.MES
 ) RCP

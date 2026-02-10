@@ -10,8 +10,8 @@
 Declare @FechaIS nvarchar(30)
 Declare @FechaFS nvarchar(30)
 
-Set @FechaIS = CONVERT (DATE, '2025/07/03', 102)
-Set @FechaFS = CONVERT (DATE, '2025/07/03', 102)
+Set @FechaIS = CONVERT (DATE, '2025/11/03', 102)
+Set @FechaFS = CONVERT (DATE, '2025/11/30', 102)
 
 -- ================================================================================================
 -- |               DESARROLLO DEL PROCESO.                                                        |
@@ -39,7 +39,7 @@ Select OPDN.CardCode as PROVCOD
 	, OITM.InvntryUom as UDM
 	, PDN1.Quantity as CANTIDAD
 	, PDN1.NumPerMsr as X_PAQ
-	, (PDN1.Quantity*PDN1.NumPerMsr) as Q_INV, (PDN1.Price / PDN1.NumPerMsr) as PREC_UNIT
+	--, (PDN1.Quantity*PDN1.NumPerMsr) as Q_INV, (PDN1.Price / PDN1.NumPerMsr) as PREC_UNIT
 	, PDN1.LineTotal as IMPORTE
 	--, OITM.AvgPrice as COSTOESTANDAR
 	, L10.Price as COSTOESTADAR
@@ -60,7 +60,7 @@ Where OITM.ItemCode is not null AND  OITM.U_TipoMat <> 'GF' AND Cast(OPDN.DocDat
 Order by PDN1.DocEntry 
 
 
-
+/*
 
 -- PRIMERA PARTE DE PROPUESTA DE COSTO
 Select ItemCode AS CODIGO
@@ -97,4 +97,4 @@ Select top (7) B.DocEntry AS N_COMPRA
 	, B.ActDelDate AS FEC_COM 
 From PDN1 B Where ItemCode = '19901' 
 Order By ActDelDate desc 
- 
+ */

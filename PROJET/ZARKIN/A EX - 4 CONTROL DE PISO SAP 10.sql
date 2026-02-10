@@ -10,6 +10,17 @@
 -- Excepto la 100. y solo debe haber un supervisor.
 
 
+-- Que se cuente con el mismo dato en Empleado = EmplGiro
+Select U_EmpGiro AS NUM_NOM
+	, firstName AS NOMBRE
+	, lastName AS APELLIDOS
+	, ExtEmpNo AS NUM_EXT
+	, jobTitle AS OPERACION
+From OHEM 
+Where ExtEmpNo is null
+
+
+
 Select SUPER.REPORTE, SUPER.NOMBRE
 From (
 Select	'SUP. 100 OP PLANEACION.' as REPORTE, Isnull((Select top(1) Cast(OHEM.U_EmpGiro as VarChar(6)) + '  ' + OHEM.firstName + '  ' + OHEM.lastName from OHEM where OHEM.U_CP_CT like '%100%' and OHEM.position = 4 and OHEM.status = 1),'NO_ASIGNADO') as NOMBRE  Union all

@@ -244,7 +244,9 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Select '089 METODO->NO ES JIT !' AS REPORTE_089
 		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_Metodo
 	From OITM
-	Where OITM.U_TipoMat = 'MP' and OITM.U_Metodo <> 'MRP'  
+	Where OITM.U_TipoMat = 'MP' 
+	and QryGroup32 <> 'Y'
+	and OITM.U_Metodo <> 'MRP'  
 	Order By OITM.[ItemName]
 
 	--Update OITM Set OITM.U_Metodo = 'MRP'  Where OITM.U_TipoMat = 'MP' and OITM.U_Metodo <> 'MRP'

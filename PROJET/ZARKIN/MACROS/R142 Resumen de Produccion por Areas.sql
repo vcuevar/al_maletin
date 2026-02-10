@@ -10,9 +10,9 @@ Declare @FechaIS as Date
 Declare @FechaFS as Date
 Declare @Estacion nVarchar(3) 
 
-Set @FechaIS = CONVERT (DATE, '2025-09-22', 102)
-Set @FechaFS = CONVERT (DATE, '2025-09-24', 102)
-Set @Estacion = '209'
+Set @FechaIS = CONVERT (DATE, '2026-01-05', 102)
+Set @FechaFS = CONVERT (DATE, '2026-01-11', 102)
+Set @Estacion = '415'
 
 /* ============================================================================
 |  Produccion reportada por rango de fecha.                                    |
@@ -34,4 +34,16 @@ inner join OITM A3 on OP.ItemCode=A3.ItemCode
 left join OITM A4 on left(A3.ItemCode,4) = A4.ItemCode 
 Where Cast(CP.U_FechaHora as date) BETWEEN @FechaIS and @FechaFS and CP.U_CT = @Estacion 
 Order by CAST(CP.U_FechaHora as DATE), RH.firstName 
+
+
+
+
+Select SUM(CP.U_Cantidad) AS CANTIDAD
+	, SUM((A3.U_VS * CP.U_Cantidad)) as U_VS
+From OWOR OP 
+inner join [@CP_LOGOF] CP on OP.DocEntry= CP.U_DocEntry 
+inner join OHEM RH on CP.U_idEmpleado=RH.empID 
+inner join OITM A3 on OP.ItemCode=A3.ItemCode 
+left join OITM A4 on left(A3.ItemCode,4) = A4.ItemCode 
+Where Cast(CP.U_FechaHora as date) BETWEEN @FechaIS and @FechaFS and CP.U_CT = @Estacion 
 

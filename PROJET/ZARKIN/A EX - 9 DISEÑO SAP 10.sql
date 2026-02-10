@@ -562,17 +562,27 @@ OR INV.QryGroup30 = 'Y'
 OR INV.QryGroup31 = 'Y' 
 OR INV.QryGroup32 = 'Y') AND LD.Father IS NULL
 AND INV.frozenFor = 'N'
-Order by F_CREADO desc, DESCRIPCION 
+Order by F_CREADO, DESCRIPCION 
 
 
+-- ================================================================================================
+-- | Verificar que todos los Sub-ensambles fabricados y No fabricados en Planta tengan Metodo JIT.|
+-- ================================================================================================
+
+select '935 DEBE SER JIT' AS REPORTE_935
+	, OITM.ItemCode
+	, OITM.ItemName
+	, OITM.LeadTime
+	, OITM.U_Metodo 
+from OITM 
+where (OITM.QryGroup29='Y' or OITM.QryGroup30='Y' or OITM.QryGroup31='Y' or OITM.QryGroup32='Y') 
+and OITM.U_Metodo<> 'JIT'
 
 
+/*
+	update OITM set U_Metodo='JIT' where (OITM.QryGroup29='Y' or OITM.QryGroup30='Y' or OITM.QryGroup31='Y' or OITM.QryGroup32='Y') and OITM.U_Metodo<> 'JIT'
 
-
-
-
-
-
+*/
 
 
 --< EOF > EXCEPCIONES PARA DISEÑO LDM.

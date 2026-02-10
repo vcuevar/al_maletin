@@ -19,14 +19,13 @@ Declare @nCiclo nVarchar(4)
 -- Set @FechaFS = CONVERT (DATE, '2025-09-22', 102)
 Set @xCodArti = '18311'
 Set @xCodProd = 'P2221' 
-Set @nCiclo = '2025'
+Set @nCiclo = '2026'
 
 Set @FechaIS = (Select Cast(SCC.FEC_INI as date) From Siz_Calendario_Cierre SCC Where SCC.PERIODO = @nCiclo + '-01')
 Set @FechaFS = (Select Cast(SCC.FEC_FIN as date) From Siz_Calendario_Cierre SCC Where SCC.PERIODO = @nCiclo + '-12')
 
 --Select SCC.FEC_INI AS FI From Siz_Calendario_Cierre SCC Where SCC.PERIODO = '2025' + '-01'
 --Select SCC.FEC_FIN AS FF From Siz_Calendario_Cierre SCC Where SCC.PERIODO = '2025' + '-12'
-
 
 /* ==============================================================================================
 |  Reporte para Calificar a los Proveedores Agrupado por Mes Anualizado  R-143-A                |
@@ -55,7 +54,6 @@ Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaI and @FechaF and SIC
 Group By SIC.INC_esPiel, SIC.INC_codProveedor, SIC.INC_nomProveedor ) CPT
 
 */
-
 --  Llena la Calificacion por Mes General.
 /*
 Select SUM(RCP2.ENTRADAS) AS ENTRADAS
@@ -122,7 +120,6 @@ Group By RCP.IDG, RCP.GRUPO, RCP.COD_PROV, RCP.PROVEEDOR, RCP.NUM_MES
 |  Llena la Calificacion por Mes y por Grupo de Familia. R-143-A              | 
 |  Primera Seccion.                                                           |
 =============================================================================*/
-
 /*
 Select  RCP2.IDG 
 	, RCP2.GRUPO 
@@ -178,7 +175,7 @@ Inner Join OCRD on SIC.INC_codProveedor = OCRD.CardCode
 Inner Join  Siz_Calendario_Cierre SCC on CAST(SIC.INC_fechaInspeccion as Date) between Cast(SCC.FEC_INI as date) and Cast(SCC.FEC_FIN as date)
 Left Join OOND on OCRD.IndustryC = OOND.IndCode
 Left Join Siz_PielClases SPC on SIC.INC_id = SPC.PLC_incId 
-Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaI and @FechaF AND SCC.MES = '10' and SIC.INC_borrado = 'N'
+Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaIS and @FechaFS AND SCC.MES = '10' and SIC.INC_borrado = 'N'
 Group By SIC.INC_codProveedor, SIC.INC_nomProveedor, OOND.IndDesc,
 SIC.INC_docNum, SIC.INC_fechaInspeccion, SIC.INC_esPiel, OOND.IndName, SCC.MES, sic.INC_docNum
 ) RCP
@@ -188,12 +185,11 @@ Group By RCP2.IDG, RCP2.GRUPO
 Order By RCP2.IDG 
 */
 
-
 /* ============================================================================
 |  Llena la Calificacion por Mes por Proveedor. R-143-A                       |
 |  Segunda Seccion.                                                           |
 =============================================================================*/
-/*
+
 Select SUM(RCP2.ENTRADAS) AS ENTRADAS
 	, RCP2.IDG 
 	, RCP2.GRUPO 
@@ -236,7 +232,13 @@ Select SCC.MES AS NUM_MES
 	, SIC.INC_codProveedor AS COD_PROV
 	, OCRD.CardName AS PROVEEDOR
 	, Case When SIC.INC_esPiel = 'N' then
-	  (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) else
+
+	  --(SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida))
+	  
+	  (Case When (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) = 0 Then
+	0.00001 else (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) end)
+	  
+	  else
 	  (ISNULL((SUM(SPC.PLC_claseA)/SUM(SIC.INC_cantRecibida))/.3 +
 	(SUM(SPC.PLC_claseB)/SUM(SIC.INC_cantRecibida))/.5 +
 	(1-((SUM(SPC.PLC_claseC)/SUM(SIC.INC_cantRecibida))-.2)) +
@@ -249,7 +251,7 @@ Inner Join OCRD on SIC.INC_codProveedor = OCRD.CardCode
 Inner Join  Siz_Calendario_Cierre SCC on CAST(SIC.INC_fechaInspeccion as Date) between Cast(SCC.FEC_INI as date) and Cast(SCC.FEC_FIN as date)
 Left Join OOND on OCRD.IndustryC = OOND.IndCode
 Left Join Siz_PielClases SPC on SIC.INC_id = SPC.PLC_incId 
-Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaI and @FechaF and SIC.INC_borrado = 'N'
+Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaIS and @FechaFS and SIC.INC_borrado = 'N'
 Group By SIC.INC_codProveedor, OCRD.CardName, OOND.IndDesc,
 SIC.INC_docNum, SIC.INC_fechaInspeccion, SIC.INC_esPiel, OOND.IndName, SCC.MES
 ) RCP
@@ -257,55 +259,9 @@ Group By RCP.IDG, RCP.GRUPO, RCP.COD_PROV, RCP.PROVEEDOR, RCP.NUM_MES
 ) RCP2
 Group By RCP2.IDG, RCP2.GRUPO, RCP2.COD_PRO, RCP2.PROVEEDOR
 Order By RCP2.IDG, RCP2.PROVEEDOR
-*/
+
 
 -- EOF R-143-A
-
-/* ==============================================================================================
-|  Reporte para Calificar a los Proveedores Detalles   R-143-B                                         |
-============================================================================================== */
-
-/*
-Select SIC.INC_docNum AS NE
-	, DATEPART(ISO_WEEK, SIC.INC_fechaInspeccion) AS SEMANA
-	, MONTH(CAST(SIC.INC_fechaInspeccion as Date)) AS NUM_MES
-	, SIC.INC_codProveedor AS COD_PROV
-	, OCRD.CardName AS PROVEEDOR
-	, SIC.INC_codMaterial AS COD_MAT
-	, SIC.INC_nomMaterial AS MATERIAL
-	, SIC.INC_unidadMedida AS UDM
-	, SUM(SIC.INC_cantRecibida) AS RECIBIDO
-	, SUM((SIC.INC_cantAceptada + SIC.INC_cantRechazada)) AS REVISADA
-	, SUM(SIC.INC_cantAceptada) AS ACEPTADA
-	, SUM(SIC.INC_cantRechazada) AS RECHAZADA
-	, ISNULL(SUM(SPC.PLC_claseA), 0) AS CLAS_A
-	, ISNULL(SUM(SPC.PLC_claseB), 0) AS CLAS_B
-	, ISNULL(SUM(SPC.PLC_claseC), 0) AS CLAS_C
-	, ISNULL(SUM(SPC.PLC_claseD), 0) AS CLAS_D
-	, SIC.INC_esPiel AS ES_PIEL
-	, ISNULL(OOND.IndName, 'SIN GRUPO') AS GRUPO
-	, (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) AS CALF_1
-	, ISNULL((
-	(SUM(SPC.PLC_claseA)/SUM(SIC.INC_cantRecibida))/.3 +
-	(SUM(SPC.PLC_claseB)/SUM(SIC.INC_cantRecibida))/.5 +
-	(1-((SUM(SPC.PLC_claseC)/SUM(SIC.INC_cantRecibida))-.2)) +
-	(Case When SUM(SPC.PLC_claseD) = 0 Then 1 else
-	((SUM(SPC.PLC_claseD)/SUM(SIC.INC_cantRecibida))*-1) end))/4
-	, 0) AS CALF_2
-From Siz_Incoming SIC
-Inner Join OCRD on SIC.INC_codProveedor = OCRD.CardCode
-Left Join OOND on OCRD.IndustryC = OOND.IndCode
-Inner Join OITM on OITM.ItemCode = SIC.INC_codMaterial
-Left Join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=9 
-Left Join Siz_PielClases SPC on SIC.INC_id = SPC.PLC_incId 
-Where Cast(SIC.INC_fechaInspeccion as date) between  @FechaIS and @FechaFS
-and SIC.INC_codProveedor = @xCodProd and SIC.INC_borrado = 'N'
-Group By SIC.INC_docNum, SIC.INC_fechaInspeccion, SIC.INC_codProveedor, OCRD.CardName, 
-SIC.INC_codMaterial, SIC.INC_nomMaterial, SIC.INC_unidadMedida, SIC.INC_esPiel, OOND.IndName 
-Order By GRUPO, SIC.INC_fechaInspeccion, OCRD.CardName, SIC.INC_nomMaterial
-*/
-
--- EOF R-143-B
 
 /* ============================================================================
 |  Reporte para Calificar a los Proveedores Agrupado por semanal  R-143-C     |
@@ -337,7 +293,8 @@ Select SIC.INC_docNum AS NE
 	, ISNULL(SUM(SPC.PLC_claseD), 0) AS CLAS_D
 	, SIC.INC_esPiel AS ES_PIEL
 	, ISNULL(OOND.IndName, 'SIN GRUPO') AS GRUPO
-	, (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) AS CALF_1
+	, (Case When (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) = 0 Then
+	  0.00001 else (SUM(SIC.INC_cantAceptada) / SUM(SIC.INC_cantRecibida)) end) 	AS CALF_1
 	, ISNULL((
 	(SUM(SPC.PLC_claseA)/SUM(SIC.INC_cantRecibida))/.3 +
 	(SUM(SPC.PLC_claseB)/SUM(SIC.INC_cantRecibida))/.5 +
@@ -359,7 +316,6 @@ Group By  RCP.GRUPO, RCP.ES_PIEL, RCP.SEMANA, RCP.PROVEEDOR
 Order By NUM_SEM, GRUPO, PROVEEDOR
 */
 -- EOF R-143-C
-
 
 /* ==============================================================================================
 |  Reporte Anual por proveedor   R-143-D                                                        |
@@ -421,8 +377,7 @@ Order By MES
 /* =============================================================================
 |  Reporte Anual por material y proveedor   R-143-E                            |
 ============================================================================= */
-
-
+/*
 Select  RCP.COD_MAT AS COD_MATE
 	, RCP.MATERIAL AS MATERIAL
 	, RCP.UDM AS UDM
@@ -461,7 +416,7 @@ SIC.INC_nomMaterial, OITM.InvntryUom
 ) RCP
 Group By RCP.COD_PROV,  RCP.PROVEEDOR, RCP.COD_MAT,  RCP.MATERIAL, RCP.UDM
 Order By RCP.PROVEEDOR
-
+*/
 
 -- EOF R-143-E
 

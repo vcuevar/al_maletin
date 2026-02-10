@@ -6,8 +6,10 @@
 -- Parametros Numero del Programa.
 
 Declare @NumProg as nvarchar(20)
-Set @NumProg = '25334'
+Declare @nAjusSema as int
 
+Set @NumProg = '25334'
+Set @nAjusSema = 1
 
 -- Consulta del Programa al 28 de julio del 2025.
 
@@ -15,6 +17,7 @@ Select	OWOR.Status AS ESTADO
 		, OWOR.DocNum AS NUM_ORDEN
 		, OWOR.U_NoSerie AS SERIE
 		, owor.OriginNum AS PEDIDO
+		, DATEPART(ISO_WEEK, OWOR.U_FProduccion) - @nAjusSema AS SEMANA
 		, OWOR.U_Grupo AS PROG_MANTA
 		, OWOR.U_OT AS FOLIO
 		, OWOR.ItemCode AS CODIGO

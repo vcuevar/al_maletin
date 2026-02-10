@@ -25,8 +25,8 @@ Set @Estacion = '221'
 Set @nCiclo = '2025'
 Set @Articulo = '20649'
 
-Set @FechaIS = CONVERT (DATE, '2025-11-01', 102)
-Set @FechaFS = CONVERT (DATE, '2025-11-28', 102)
+Set @FechaIS = CONVERT (DATE, '2025-12-01', 102)
+Set @FechaFS = CONVERT (DATE, '2025-12-30', 102)
 
 -- Calcula el Principio y final del Año.
 --Set @FechaIS = (Select Cast(SCC.FEC_INI as date) From Siz_Calendario_Cierre SCC Where SCC.PERIODO = @nCiclo + '-01')
@@ -39,8 +39,14 @@ Set @FechaFS = CONVERT (DATE, '2025-11-28', 102)
 
 
 -- Tablas Claves de la Inspeccion
--- Select * from Siz_InspeccionProceso
--- Select * from Siz_InspeccionProcesoDetalle
+-- Select * from Siz_InspeccionProceso Where IPR_docEntry = 63512 Order By IPR_creadoEn
+
+Select * from Siz_InspeccionProceso SIP
+Inner Join Siz_InspeccionProcesoDetalle SID on SIP.IPR_id = SID.IPD_iprId
+Where SID.IPD_empID is null
+
+
+
 -- Select * from Siz_InspeccionProcesoImagen
 -- Select * from Siz_Checklist
 -- Select * from Siz_Calendario_Cierre
@@ -51,9 +57,9 @@ Set @FechaFS = CONVERT (DATE, '2025-11-28', 102)
 /*
 
 Select	Cast(SIP.IPR_fechaInspeccion as date) AS FECHA
+	, IPR_id AS N_INSP
 	, SCC.MES AS MES
 	, DATEPART(ISO_WEEK, SIP.IPR_fechaInspeccion) AS SEMANA
-	, SIP.IPR_centroInspeccion AS ESTACION	
 	, Case 
 		When SIP.IPR_centroInspeccion = 136 then 'CORTE/COSTURA'
 		When SIP.IPR_centroInspeccion = 146 then 'COJINERIA'
@@ -77,25 +83,27 @@ Select	Cast(SIP.IPR_fechaInspeccion as date) AS FECHA
 	, A3.U_VS AS VS
 	, IPD.IPD_empID AS NOMINA
 	, OHEM.firstName + ' ' + OHEM.lastName AS PERSONA
-
 	, Cast(SCL.CHK_id as varchar) + ' ' + SCL.CHK_descripcion AS DEFECTIVO
+	, SIP.IPR_nomInspector AS INSPECTOR 
+	, IPD_observacion AS COMENTARIO
 	, IPD.IPD_estado AS CUMPLE
 	, SIP.IPR_estado AS RESULTADO
-	, SIP.IPR_nomInspector AS INSPECTOR 
 From Siz_InspeccionProceso SIP
 Inner Join Siz_InspeccionProcesoDetalle IPD on SIP.IPR_id = IPD.IPD_iprId
 Inner Join Siz_Calendario_Cierre SCC on CAST(SIP.IPR_fechaInspeccion as Date) between Cast(SCC.FEC_INI as date) and Cast(SCC.FEC_FIN as date)
 Inner Join Siz_Checklist SCL on SCL.CHK_id = IPD.IPD_chkId
 Inner Join [@PL_RUTAS] EST on SCL.CHK_area_inspeccionada =  EST.Code
 Inner Join OITM A3 on A3.ItemCode = SIP.IPR_codArticulo 
-Inner Join OHEM on OHEM.empID = IPD.IPD_empID
+Left Join OHEM on OHEM.empID = IPD.IPD_empID
 Where Cast(SIP.IPR_fechaInspeccion as date) between  @FechaIS and @FechaFS 
+and IPD.IPD_estado = 'N'
 and IPD.IPD_borrado = 'N'
 Order By AREA, OP, PROCESO
 
+
 */
 
-
+/*
 /* ============================================================================
 |  Reporte de Top 3 Defectivos. HOJA 3 DE MACRO 147                           |
 =============================================================================*/
@@ -129,3 +137,55 @@ and PROCES.Code between @nProcesI and @nProcesF
 Group By SIP.IPR_docEntry, IPD.IPD_chkId, SCL.CHK_descripcion ) TP3
 Group By TP3.AREA, TP3.DEFECTIVO
 Order By CONTEO
+*/
+
+
+/* ============================================================================
+|  Reporte de Inspecion resumen por semana. HOJA 4 DE MACRO 147               |
+=============================================================================*/
+
+Select BAS.MES
+	, BAS.SEMAXMES 
+	, BAS.SEMANA
+	, BAS.AREA
+	, SUM(BAS.CANTIDAD) AS T_CANT
+	, SUM(BAS.VS) AS TVS
+From (
+Select	Distinct SCC.MES AS MES
+	, DATEPART(ISO_WEEK, SIP.IPR_fechaInspeccion) AS SEMANA
+	, SCC.SEMXMES AS SEMAXMES
+	, Case
+		WHEN EST.Code between 109 and 118 then 'CORTE'
+		WHEN EST.Code between 121 and 139 then 'COSTURA'
+		WHEN EST.Code between 140 and 146 then 'COJINERIA'
+		WHEN EST.Code between 140 and 146 then 'COJINERIA'
+		WHEN EST.Code between 148 and 169 then 'TAPICERIA'
+		WHEN EST.Code between 172 and 175 then 'EMPAQUE'
+		WHEN EST.Code between 403 and 415 then 'CARPINTERIA' else 'AREA NO DEFINIDA'
+	End AS AREA 
+	, SIP.IPR_op AS OP
+	, 1 AS CANTIDAD
+	, A3.U_VS AS VS
+From Siz_InspeccionProceso SIP
+Inner Join Siz_InspeccionProcesoDetalle IPD on SIP.IPR_id = IPD.IPD_iprId
+Inner Join Siz_Calendario_Cierre SCC on CAST(SIP.IPR_fechaInspeccion as Date) between Cast(SCC.FEC_INI as date) and Cast(SCC.FEC_FIN as date)
+Inner Join Siz_Checklist SCL on SCL.CHK_id = IPD.IPD_chkId
+Inner Join [@PL_RUTAS] EST on SCL.CHK_area_inspeccionada =  EST.Code
+Inner Join OITM A3 on A3.ItemCode = SIP.IPR_codArticulo 
+Left Join OHEM on OHEM.empID = IPD.IPD_empID
+Where Cast(SIP.IPR_fechaInspeccion as date) between  @FechaIS and @FechaFS 
+and IPD.IPD_estado = 'N'
+and IPD.IPD_borrado = 'N'
+) BAS
+Group By BAS.MES, BAS.SEMANA, BAS.AREA, BAS.SEMAXMES 
+Order By BAS.AREA, BAS.MES, BAS.SEMANA
+
+
+--Select * from Siz_Calendario_Cierre
+
+--136
+--137
+--138
+
+
+

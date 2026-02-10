@@ -50,11 +50,11 @@ ORDER BY CP.U_DocEntry
 
 	update [@CP_OF] set U_DocEntry = 41826, U_CT = 109, U_Orden = 109, U_Entregado = 0, U_Procesado = 0, U_Recibido= 1 where Code= 75787
 		
-	delete [@CP_OF] where Code = 853596
+	delete [@CP_OF] where Code = 918021
 --  ------------------------------------------------------------------------------------
 -- Revision del Historial de la Orden.  
 	DECLARE @NumOrd as int
-	Set @NumOrd = 67346  
+	Set @NumOrd = 74961   
 	select OWOR.Status AS ESTAT_CP_OF, CP.* from [@CP_OF] CP inner join OWOR on CP.U_DocEntry=OWOR.DocNum 
 	where U_DocEntry = @NumOrd ORDER BY U_CT,Code
 	--Select * from [@CP_LOGOT] where U_OP=@NumOrd  order by U_CT
@@ -65,19 +65,18 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry= 72968
+	select * from [@CP_LOGOF] where U_DocEntry = 73929 
  --and U_CT = 160   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_CT, U_FechaHora
-	 
+
+	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 950297
+
+	DELETE [@CP_LOGOF] WHERE Code = 950298
 
 
+	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 944013
+	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 944014
 
-
-  	 	   	  
-	update [@CP_LOGOF] set U_idEmpleado = 298 Where Code = 917425
-
-	update [@CP_LOGOF] set U_idEmpleado = 280 Where Code = 911194
-	update [@CP_LOGOF] set U_idEmpleado = 72 Where Code = 911193
 	update [@CP_LOGOF] set U_idEmpleado = 71 Where Code = 911192
 	update [@CP_LOGOF] set U_idEmpleado = 368 Where Code = 911191
 	
@@ -94,7 +93,6 @@ ORDER BY CP.U_DocEntry
 	update [@CP_LOGOF] set U_idEmpleado = 229 Where Code = 870321
 
 
-DELETE [@CP_LOGOF] WHERE Code = 878155	--878155	415	175	T	2025-09-26 17:50:33.000	67344	255	N	NULL	NULL
 DELETE [@CP_LOGOF] WHERE Code = 878156	--878156	415	175	T	2025-09-26 17:55:08.000	67345	40	N	NULL	NULL
 DELETE [@CP_LOGOF] WHERE Code = 878157	--878157	415	175	T	2025-09-26 17:55:35.000	67347	255	N	NULL	NULL
 

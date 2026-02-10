@@ -34,28 +34,28 @@ E	Linea para Traslado Externo		S-T
  From SIZ_SolicitudesMP
  inner join SIZ_MaterialesTraslados on SIZ_MaterialesTraslados.Id_Solicitud = SIZ_SolicitudesMP.Id_Solicitud 
  inner join OITM on SIZ_MaterialesTraslados.ItemCode = OITM.ItemCode
- Where  SIZ_SolicitudesMP.Id_Solicitud = 99569 
+ Where  SIZ_SolicitudesMP.Id_Solicitud = 102984 
  --and SIZ_MaterialesTraslados.EstatusLinea <> 'S' 
  --and SIZ_SolicitudesMP.Status like 'Cancelada'
  --SIZ_MaterialesTraslados.ItemCode = '17653'
   Order By SIZ_SolicitudesMP.Id_Solicitud
 
 
-  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 99569 
+  Select * from SIZ_SolicitudesMP Where SIZ_SolicitudesMP.Id_Solicitud = 102984 
 
-  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 99569  --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
+  Select * from SIZ_MaterialesTraslados Where SIZ_MaterialesTraslados.Id_Solicitud = 102984  --and EstatusLinea = 'S' --SIZ_MaterialesTraslados.ItemCode = '18205' and 
 
   Select * from SIZ_MaterialesTraslados Where ItemCode = '74616'
 
-  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = '81242'
+  Select * from SIZ_MaterialesSolicitudes Where Id_Solicitud = '99569'
 
   -- Cambiar Estatus E por S Externo por Activo.
-  Update SIZ_MaterialesTraslados set EstatusLinea = 'S' Where SIZ_MaterialesTraslados.Id_Solicitud = 96580 
+  Update SIZ_MaterialesTraslados set EstatusLinea = 'S' Where SIZ_MaterialesTraslados.Id_Solicitud = 10984 
 
 
 
 -- Para cancelar una solicitud.
-  Update SIZ_MaterialesTraslados set Cant_Pendiente = 0, EstatusLinea = 'C' Where SIZ_MaterialesTraslados.Id_Solicitud = 81242 --and EstatusLinea = 'S'
+  Update SIZ_MaterialesTraslados set Cant_Pendiente = 0, EstatusLinea = 'C' Where SIZ_MaterialesTraslados.Id_Solicitud = 10284 --and EstatusLinea = 'S'
 
   Update SIZ_SolicitudesMP set Status = 'Cerrada' Where SIZ_SolicitudesMP.Id_Solicitud = 99569
   
@@ -66,7 +66,7 @@ E	Linea para Traslado Externo		S-T
 
    Select * from SIZ_MaterialesSolicitudes Where Id = '74616'
 
-   Update SIZ_MaterialesSolicitudes Set EstatusLinea = 'T', Cant_PendienteA = 0  Where Id = 77166
+   Update SIZ_MaterialesSolicitudes Set EstatusLinea = 'T', Cant_PendienteA = 0  Where Id = 100405
    Update SIZ_MaterialesSolicitudes Set EstatusLinea = 'T', Cant_PendienteA = 0  Where Id = 77167
 
 

@@ -24,6 +24,8 @@
 	*/
 
 
+
+
 -- ================================================================================================
 -- |               Informacion acumulada del Mes.                                                 |
 -- ================================================================================================
@@ -498,6 +500,54 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 	and CAST(OWOR.CreateDate as DATE) < DATEADD(day,-709,CAST(GETDATE() as DATE))
 	Order By PRODUCTO, OP
 	*/
+
+-- Nueva auditoria donde se busquen Ordenes de Produccion que tengan mas consumo de tel o piel y esten en 
+-- estaciones superiores a costura para enviar una alerta de que esas ordenes esta con sobre consumos.
+-- Tome un consumo superios al 50% de lo planeado.
+
+	SELECT '150 TELA + 50% ' AS REPORTE_150
+		, OWOR.DocNum AS OP 
+		, OWOR.ItemCode AS CODIGO
+		, A3.ItemName AS MODELO
+		, A1.ItemName AS MATERIAL
+		, A1.InvntryUom AS UDM
+		, CP.U_CT AS AREA
+		, WOR1.PlannedQty AS DISEÑO
+		, WOR1.IssuedQty AS CARGADO
+		, WOR1.IssuedQty - WOR1.PlannedQty AS SOBRANTE 
+	FROM  OWOR
+	inner Join WOR1 on OWOR.DocEntry = WOR1.DocEntry
+	Inner Join OITM A1 on WOR1.ItemCode = A1.ItemCode 
+	Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode 
+	Right Join [@CP_OF] CP on CP.U_DocEntry = OWOR.DocEntry 
+	WHERE OWOR.Status = 'R' 
+	AND (WOR1.IssuedQty - WOR1.PlannedQty) > (WOR1.PlannedQty * 1.5)
+	and OWOR.CmpltQty = 0
+	and A1.ItmsGrpCod = '114' 
+	and CP.U_CT > 140
+	ORDER BY OWOR.DocNum, A1.ItemName
+
+	SELECT '155 PIEL + 60% ' AS REPORTE_150
+		, OWOR.DocNum AS OP 
+		, OWOR.ItemCode AS CODIGO
+		, A3.ItemName AS MODELO
+		, A1.ItemName AS MATERIAL
+		, A1.InvntryUom AS UDM
+		, CP.U_CT AS AREA
+		, WOR1.PlannedQty AS DISEÑO
+		, WOR1.IssuedQty AS CARGADO
+		, WOR1.IssuedQty - WOR1.PlannedQty AS SOBRANTE 
+	FROM  OWOR
+	inner Join WOR1 on OWOR.DocEntry = WOR1.DocEntry
+	Inner Join OITM A1 on WOR1.ItemCode = A1.ItemCode 
+	Inner Join OITM A3 on OWOR.ItemCode = A3.ItemCode 
+	Right Join [@CP_OF] CP on CP.U_DocEntry = OWOR.DocEntry 
+	WHERE OWOR.Status = 'R' 
+	AND (WOR1.IssuedQty - WOR1.PlannedQty) > (WOR1.PlannedQty * 1.6)
+	and OWOR.CmpltQty = 0
+	and A1.ItmsGrpCod = '113' 
+	and CP.U_CT > 140
+	ORDER BY OWOR.DocNum, A1.ItemName
 
 
 

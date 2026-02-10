@@ -10,11 +10,12 @@
 |  Para llenar reporte del historial de los costos estandar.                                       |
 --------------------------------------------------------------------------------------------------*/
 
-
+/*
 Select  OITM.ItemCode AS CODE, OITM.ItemName AS NOMBRE, OITM.InvntryUom AS UDM, OITM.OnHand AS EXISTENCIA, Cast(ITM1.Price as Decimal(16,4)) AS STD_ACTUAL, ITM1.Currency AS MON, Cast(HE.HE_PrecioEstandar as Decimal(16,4)) AS STD_OLD, HE.HE_PrecioNew AS P_COMP, Isnull(HE.HE_Moneda, 'NEL') AS M_COMP, HE.HE_TipoCambio AS TDC, Cast((HE.HE_PrecioNew * HE.HE_TipoCambio) as decimal(16,4)) AS P_NSTD, HE.HE_FechaCambio AS F_MODIF, HE.HE_NotasCambio AS NOTAS, T1.Descr AS GRUPPLAN, OITM.UpdateDate AS ACTUAL From OITM INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10 left join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=9 Left Join SIZ_HistoryEstandar HE on HE.HE_ItemCode = OITM.ItemCode 
 Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N' and OITM.frozenFor = 'N' 
 --and OITM.ItemCode = '16698'
 Order By OITM.ItemName, HE.HE_FechaCambio desc 
+*/
 
 Select	OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
@@ -40,9 +41,12 @@ Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 --and OITM.U_GrupoPlanea = '7' and OITM.frozenFor = 'N'
 Order By OITM.ItemName, HE.HE_FechaCambio desc 
 
+
+/*
 Select DISTINCt HE.HE_NotasCambio from SIZ_HistoryEstandar HE   
 --Where Cast(HE.HE_FechaCambio as date) > Cast('2025-10-15' as date)
 --Order By HE.HE_FechaCambio 
+*/
 
 /* ------------------------------------------------------------------------------------------------
 |  Realizar Auditoria y presenta los que esten en +- 10%.                                         |
@@ -93,33 +97,25 @@ Order By DESCRIPCION
 -- PARA BORRAR o CAMBIAR ALGUN REGISTRO DEL HISTORIAL. 
 
 -- Cambio de Fecha de Aplicación.
-
-Select * from SIZ_HistoryEstandar Where HE_NotasCambio = 'CARGA INICIAL.'
-
-
-Update SIZ_HistoryEstandar set HE_NotasCambio = 'CARGA INICIAL.' Where HE_NotasCambio = 'ASIGNACION INICIAL.'
-
-
-
+/*
+Select * from SIZ_HistoryEstandar Where HE_NotasCambio like '%2026%'
+Update SIZ_HistoryEstandar set HE_NotasCambio = 'AUT DAVID Z 2026' Where HE_NotasCambio = 'AUT DAVID Z 2025'
 Update SIZ_HistoryEstandar set HE_FechaCambio = '2025-06-25' Where HE_NotasCambio = 'AUT DAVID Z 2025'
 
-
-
-
 Select * from SIZ_HistoryEstandar Where HE_ItemCode = '13147' and HE_FechaCambio = '2025-10-15'
-
 Delete SIZ_HistoryEstandar Where HE_ItemCode = '18151' and HE_FechaCambio = '2024-10-09'
-
 Update SIZ_HistoryEstandar set HE_PrecioNew = 0.0266 Where HE_ItemCode = '13147' and HE_FechaCambio = '2025-10-15'
 
+
+Select * from SIZ_HistoryEstandar Where HE_ItemCode = '16698'
 
 
 20558
 1.- 09/12/24	6.142200	USD	20.196300
 2.- 02/12/24	5.329300	USD	20.417300
 3.- 02/12/24	6.142200	USD	20.417300
-*/
-/*
+
+
 -- Para sacar las ultimas compras segun el registro.
 
 SELECT CONVERT(varchar,T1.ActDelDate,3) FECHA_COMPRA
