@@ -5,17 +5,17 @@
 		<column name="Database description" visible="true" order="1" width="152"/>
 	</item>
 	<item id="Suggestion/NodeList/SQLServerTableColumn">
-		<column name="Column Name" visible="true" order="0" width="194"/>
-		<column name="#" visible="true" order="1" width="25"/>
+		<column name="Column Name" visible="true" order="0" width="169"/>
+		<column name="#" visible="true" order="1" width="48"/>
 		<column name="Type" visible="false" order="2" width="100"/>
 		<column name="Length" visible="false" order="3" width="100"/>
 		<column name="Scale" visible="false" order="4" width="100"/>
 		<column name="Precision" visible="false" order="5" width="100"/>
 		<column name="Not Null" visible="false" order="6" width="100"/>
-		<column name="Identity" visible="true" order="2" width="49"/>
+		<column name="Identity" visible="true" order="2" width="78"/>
 		<column name="Default" visible="false" order="8" width="100"/>
 		<column name="Collation" visible="false" order="9" width="137"/>
-		<column name="Description" visible="true" order="3" width="344"/>
+		<column name="Description" visible="true" order="3" width="107"/>
 	</item>
 	<item id="projectExplorer">
 		<column name="Name" visible="true" order="0" width="176"/>

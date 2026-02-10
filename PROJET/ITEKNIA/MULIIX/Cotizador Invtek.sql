@@ -24,7 +24,7 @@ SELECT TOP (1000) [PAS_PasoId] AS ID
 -- Tabla actualizada Jueves 10 de julio del 2025.
 
 -- Select * from RPT_OpcionesCotizador
-RUTA SELECCIONADA > Quit > Riel recto > Medidas Riel Recto > Frescura > 【Sistema Ripplefold 60%】
+--RUTA SELECCIONADA > Quit > Riel recto > Medidas Riel Recto > Frescura > 【Sistema Ripplefold 60%】
 
   Select PAS_Pantalla_Ubicacion AS PANTALLA
   	,PAS_Orden AS N_SEL
@@ -53,7 +53,8 @@ RUTA SELECCIONADA > Quit > Riel recto > Medidas Riel Recto > Frescura > 【Siste
     ,[OPC_S20]
 From RPT_OpcionesCotizador opc
 Inner Join RPT_PasosCotizador selector on opc.OPC_PasoId = selector.PAS_PasoId
-Where PAS_Activo = 1  --and 
+Where OPC_S1  = '00104' 
+-- PAS_Activo = 1  --and 
  --PAS_Orden = 1 						-- Para Seleccionar Area de Instalacion  
  --PAS_Orden = 2 and OPC_S1 = '00025' 	-- Seleccion de Tipo de Producto
  --PAS_Orden = 3 and OPC_S2 = '00259' 	-- Seleccion de Sub Producto
@@ -93,6 +94,8 @@ opc.OPC_ValorOpcion 					-- la opcion debe estar ordenada alfabeticamente
 --Select * from RPT_OpcionesCotizador Where OPC_S1 = 'T'
 
 --Select * from RPT_OpcionesCotizador Where OPC_OpcionId = 2 --OR OPC_OpcionId = 264 
+
+Select * from RPT_CotizacionesCortinas  
 
 
 /*

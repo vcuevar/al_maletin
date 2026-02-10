@@ -9,14 +9,53 @@ DECLARE @alto AS decimal(16,3)
 DECLARE @numeroHojas AS decimal(16,3)
 DECLARE @anchoTela AS decimal(16,3)
 
-SET @ancho = 6.8
-SET @alto = 3.5
-SET @numeroHojas = 1
-SET @anchoTela = 2.80
+SET @ancho = 1.5
+SET @alto = 2
+SET @numeroHojas = 2
+SET @anchoTela = 2.5
+
+
+
+--Select CEILING((1/5.8)* @ancho) as resultado
+
+--Select (1/5.8)* @ancho as resultado
+
+
+-- Seleccion de Catalogo de Tela Black OUT
+/*
+
+{
+  "path_filter": "TELAS/CORTINAS/PLEGABLES/BLACKOUT"
+}
+
+
+{
+  "path_filter": "TELAS/CORTINAS/PLEGABLES/SHEER/FRESCURA"
+}
+
+
+{
+  "path_filter": "CORTINAS/ROLLER/TELAS/SHEER ELEGANCE"
+}
+
+{
+  "path_filter": "TELAS/CORTINAS/PLEGABLES/SHEER/FRESCURA"
+}
+
+*/
+
+
+
 
 -- Calculo de Tela
 
 --SELECT CEILING((@alto + 0.45) *  CEILING((@ancho * 2) / @anchoTela)) AS resultado
+
+
+
+SELECT @alto + 0.35 AS resultado
+
+SELECT (((@alto * @ancho) + 0.35) * (1/@anchoTela)) AS resultado
 
 --SELECT CEILING(CEILING((@ancho * 2) / @anchoTela) * (@alto + 0.45)) AS resultado
 
@@ -31,6 +70,14 @@ SELECT  CEILING(@ancho) * 12 AS resultado
 -- Numero Fijo de piezas (2 piezas por cortinero)
 
 SELECT 2 AS resultado
+
+
+-- Cantidad de Carros igual al numero de hojas.
+SELECT  CEILING(@numeroHojas) AS resultado
+
+
+
+
 
 
 -- Confeccion de Cortinas, Mano de obra
@@ -59,7 +106,7 @@ Cuando ponemos que por cada Hoja 1 pieza nos arroja dos. Checar
 			
 */
 
-
+/*
 		
 -- Calculo de Bridas o Soportes
 SELECT  CEILING(@ancho/1.5)*2 - 1 AS resultado
@@ -79,5 +126,19 @@ SELECT (CASE
 		WHEN @ancho BETWEEN 7.51 and 9.0 THEN 7.0
 		WHEN @ancho BETWEEN 9.01 and 10.5 THEN 8.0
 		WHEN @ancho > 10.51 THEN 9.0 ELSE 2 END) AS resultado
+*/
+
+-- Calcula Cantidad de Broches
+
+--SELECT  CEILING(CEILING(@ancho)/0.0655) AS resultado
+
+--SELECT  CEILING(CEILING(@ancho)/0.0655)*0.10779 AS resultado
+
+-- Descripcion para Resumen de Cortinas.
+/*
+
+Cortina y cortinero {{ Confección }} del proyecto {{ nombre_proyecto }} del área {{ nombre_articulo }} de un ancho {{ inputAncho }} metros, por altura {{ inputAlto }} metros en tela {{ material_descripcion }} en 2 hojas con 2 bastones.
+No incluye instalación.
 
 
+*/
