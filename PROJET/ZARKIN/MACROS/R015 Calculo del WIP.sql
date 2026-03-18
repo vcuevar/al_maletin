@@ -98,6 +98,7 @@ Select OITM.ItemCode AS CODIGO
 	, (OITW.OnHand - OITM.IsCommited) * ITM1.Price AS IMPORTE
 	, OITM.U_Linea AS LINEA
 	, OITM.U_TipoMat AS TM
+	, OITM.QryGroup32 AS HUES
 	, ISNULL((Select Top (1) A3.ItemName AS K1 from ITT1 Inner Join OITM A1 ON ITT1.Code = A1.ItemCode 
 		Left Join OITM A3 on  ITT1.father = A3.ItemCode where ITT1.Code = OITM.ItemCode and A3.QryGroup32 = 'N'
 		Order By A3.ItemName ), 'SIN_REGISTRO')AS POR_OP

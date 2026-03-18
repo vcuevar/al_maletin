@@ -225,7 +225,7 @@ Where T1.[U_TipoMat] = 'CA' and T0.[Status] <> 'C' and T0.[Status] <> 'L' and T0
 	Select '207 GRP. PLANEA->PATAS' AS REPORTE_207
 		, OITM.ItemCode, OITM.ItemName, OITM.InvntryUom, OITM.U_Comprador
 	From OITM
-	Where OITM.QryGroup31 = 'Y' and OITM.U_GrupoPlanea <> '14'  
+	Where OITM.QryGroup31 = 'Y' and OITM.U_GrupoPlanea <> '14'  and OITM.U_GrupoPlanea <> '28'  
 	Order By OITM.[ItemName]
 
 
@@ -490,24 +490,25 @@ Order By OITM.ItemName
 	ORDER BY OITM.ItemName	
 	
 -- ARTICULO COMPLEMENTOS PROP. 31 PATAS Y BASTIDORES FABRICADOS EN CARPINTERIA. 
--- Articulo Complementos de Madera con Grupo de Planeacion diferente a 14 PATAS DE MADERA.
+-- Articulo Complementos de Madera con Grupo de Planeacion diferente a 14 PATAS DE MADERA y 28 EMPAQUE DE MADERA.
 	select '125 ? GRUPO PLANEACION' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.ItmsGrpCod, OITM.U_TipoMat, OITM.U_GrupoPlanea 
 	from OITM
-	where OITM.QryGroup31='Y' and U_GrupoPlanea<> 14
+	where OITM.QryGroup31='Y' and U_GrupoPlanea<> 14  and U_GrupoPlanea<> 28
 	order by OITM.ItemName
  
 -- Validar que sean COMPLEMENTOS DE CASCOS los que estan en Propiedad 31
-	Select '130 ? VALIDA SEAN FAB. CARPINT.' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
-	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion,
-	OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr from OITM 
-	inner join UFD1 on OITM.U_GrupoPlanea=UFD1.FldValue and UFD1.TableID='UITM'
-	inner join OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod
-	where OITM.QryGroup31='Y' and OITM.ItemName not like '%BASTIDOR%' and OITM.ItemName not like '%PATA%'
-	and OITM.ItemName not like '%BASTON%' and OITM.ItemName not like '%CAJA%' and OITM.ItemName not like '%CUBIERTA%'
-	and OITM.ItemName not like '%BOTON%' and OITM.ItemName not like '%MESA%' and OITM.ItemName not like '%VISTA%'
-	and OITM.ItemName not like '%CASCO%' and OITM.ItemName not like '%BASE%' and OITM.ItemName not like '%ZOCLO%' 
-	and OITM.ItemName not like '%ENGROSADO%' and OITM.ItemName not like '%ESCANTILLON%' 
-	ORDER BY OITM.ItemName		
+-- 24 febrero 2026 cancele por tanta variedad que se inventa diseño.
+--	Select '130 ? VALIDA SEAN FAB. CARPINT.' AS REPORTE, OITM.ItemCode, OITM.ItemName, OITM.U_TipoMat, OITM.DfltWH, oitm.ItmsGrpCod, OITB.ItmsGrpNam,
+--	OITM.U_GrupoPlanea, UFD1.Descr, OITM.U_estacion,
+--	OITM.PurPackMsr, OITM.NumInBuy, OITM.BuyUnitMsr from OITM 
+--	inner join UFD1 on OITM.U_GrupoPlanea=UFD1.FldValue and UFD1.TableID='UITM'
+--	inner join OITB on OITM.ItmsGrpCod=OITB.ItmsGrpCod
+--	where OITM.QryGroup31='Y' and OITM.ItemName not like '%BASTIDOR%' and OITM.ItemName not like '%PATA%'
+--	and OITM.ItemName not like '%BASTON%' and OITM.ItemName not like '%CAJA%' and OITM.ItemName not like '%CUBIERTA%'
+--	and OITM.ItemName not like '%BOTON%' and OITM.ItemName not like '%MESA%' and OITM.ItemName not like '%VISTA%'
+--	and OITM.ItemName not like '%CASCO%' and OITM.ItemName not like '%BASE%' and OITM.ItemName not like '%ZOCLO%' 
+--	and OITM.ItemName not like '%ENGROSADO%' and OITM.ItemName not like '%ESCANTILLON%' 
+--	ORDER BY OITM.ItemName		
 
 			
 -- VER-160414 VALIDAR ALMACEN DE COMPLEMENTOS SEA APT-PA 

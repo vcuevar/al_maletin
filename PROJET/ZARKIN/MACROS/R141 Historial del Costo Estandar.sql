@@ -17,6 +17,7 @@ Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N' and OITM.frozenFor = 'N'
 Order By OITM.ItemName, HE.HE_FechaCambio desc 
 */
 
+/*
 Select	OITM.ItemCode AS CODE
 		, OITM.ItemName AS NOMBRE
 		, OITM.InvntryUom AS UDM	
@@ -40,7 +41,7 @@ Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
 --OITM.ItemCode = '16698'
 --and OITM.U_GrupoPlanea = '7' and OITM.frozenFor = 'N'
 Order By OITM.ItemName, HE.HE_FechaCambio desc 
-
+*/
 
 /*
 Select DISTINCt HE.HE_NotasCambio from SIZ_HistoryEstandar HE   
@@ -172,9 +173,6 @@ ORDER BY PDN1.DocEntry DESC, PDN1.BaseLine
 ) as decimal(16,4)) AS U_COMP
 
 */
-
-
-
 /* ------------------------------------------------------------------------------------------------
 |  Asignar un Nuevo Registro al Historial de Cambios                                               |
 --------------------------------------------------------------------------------------------------*/
@@ -242,6 +240,14 @@ and CP.ItemCode = @Articulo
 Alter Table SIZ_HistoryEstandar
 	ADD HE_PrecioNew decimal(19,6) NOT NULL,
 		HE_TipoCambio decimal(19,6) NOT NULL;
+
+
+
+Alter Table SIZ_HistoryEstandar
+	ADD HE_PrecioNew decimal(19,6) NOT NULL,
+		HE_TipoCambio decimal(19,6) NOT NULL;
+
+
 */
 
 /*
@@ -329,9 +335,67 @@ Order By HE_FechaCambio desc
 */
 
 
+/* ------------------------------------------------------------------------------------------------
+|  Para llenar reporte lista de precios estandar de las materias primas compradas.                 |
+|  Reporte 141 Modulo 4 Hoja 4
+--------------------------------------------------------------------------------------------------*/
+
+Select	OITM.ItemCode AS CODE
+		, OITM.ItemName AS NOMBRE
+		, OITM.InvntryUom AS UDM	
+		, OITM.OnHand AS EXISTENCIA
+		, Cast(ITM1.Price as Decimal(16,4)) AS STD_ACTUAL
+		, ITM1.Currency AS MON
+		, Cast(HE.HE_PrecioEstandar as Decimal(16,4)) AS STD_OLD
+		, HE.HE_PrecioNew AS P_COMP
+		, Isnull(HE.HE_Moneda, 'NEL') AS M_COMP
+		, HE.HE_TipoCambio AS TDC
+		, Cast((HE.HE_PrecioNew * HE.HE_TipoCambio) as decimal(16,4)) AS P_NSTD
+		, HE.HE_FechaCambio AS F_MODIF
+		, HE.HE_NotasCambio AS NOTAS
+		, T1.Descr AS GRUPPLAN
+		, OITM.UpdateDate AS ACTUAL
+From OITM
+INNER JOIN ITM1 on OITM.ItemCode=ITM1.ItemCode and ITM1.PriceList=10 
+left join UFD1 T1 on OITM.U_GrupoPlanea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=9 
+Left Join SIZ_HistoryEstandar HE on HE.HE_ItemCode = OITM.ItemCode and Cast(HE.HE_FechaCambio as date) > Cast('2020-01-01' as date)
+Where OITM.U_TipoMat = 'MP' and OITM.QryGroup32 = 'N'
+and OITM.ItemCode = '10001'
+--and OITM.U_GrupoPlanea = '7' and OITM.frozenFor = 'N'
+Order By OITM.ItemName, HE.HE_FechaCambio desc 
 
 
 
 
+SELECT OITM.ItemCode AS CODE
+	, OITM.ItemName AS NOMBRE
+	, OITM.InvntryUom AS UDM
+	, Cast(L10.Price as decimal(16,4)) AS STANDAR
+	, L10.Currency AS MONEDA
+	, T1.Descr AS LINEA 
+FROM OITM 
+INNER JOIN ITM1 L10 on OITM.ItemCode = L10.ItemCode and L10.PriceList=10
+LEFT JOIN UFD1 T1 on OITM.U_Linea=T1.FldValue and T1.TableID='OITM' and T1.FieldID=7
+WHERE U_TipoMat = 'MP' and OITM.QryGroup32 = 'N' AND OITM.frozenFor = 'N' 
+ORDER BY OITM.ItemName
+
+SELECT * FROM UFD1 T1 WHERE T1.TableID='OITM'
+
+SELECT MAX(HE_FechaCambio) AS FEC_ACTUAL FROM SIZ_HistoryEstandar
+
+
+-- Historico del costo por articulos.
+
+Select OITM.ItemName AS NOMBARTI
+	, OITM.InvntryUom AS UDM
+	, OITM.OnHand AS EXISTOTA
+	, HE_FechaCambio AS FECHCAMB
+	, HE_PrecioNew AS NUEVSTDR
+	, HE_Moneda AS MONEDA
+	, HE_NotasCambio AS NOTAS
+From SIZ_HistoryEstandar SHE
+Inner Join OITM on OITM.ItemCode = SHE.HE_ItemCode
+Where HE_ItemCode = '10001' 
+Order By HE_FechaCambio desc
 
 

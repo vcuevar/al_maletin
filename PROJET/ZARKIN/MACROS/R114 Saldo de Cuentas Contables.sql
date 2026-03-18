@@ -43,3 +43,20 @@ Order By Cast(JDT1.DueDate as Date), JDT1.TransId
 
 
 
+-- Se agreo almacen a la informacion para detectar los consumos de diseño servicios y presidencia.
+
+Select  Cast(JDT1.DueDate as Date) AS FECHA, JDT1.Account AS CUENTA
+	, JDT1.TransId AS NUM_TRANS
+	, JDT1.Ref1 AS DOCUMENTO
+	, JDT1.LineMemo AS INFORMACION
+	, JDT1.Debit AS DEBITO
+	, JDT1.Credit AS CREDITO
+	, Isnull((Select OIGE.DocTotal from OIGE Where JDT1.TransId = OIGE.TransId),0 ) AS CARGO
+	, Isnull((Select OIGN.DocTotal from OIGN Where JDT1.TransId = OIGN.TransId),0 ) AS ABONO
+	, OUSR.USER_CODE AS AUTOR 
+	, (Select Top(1) IGE1.WhsCode From OIGE Inner Join IGE1 on OIGE.DocEntry = IGE1.DocEntry
+		Where OIGE.DocEntry = JDT1.Ref1) AS ALMACEN
+from JDT1 
+inner join OUSR on OUSR.USERID = JDT1.UserSign 
+Where Cast (JDT1.DueDate as Date) Between  @FechaIS and @FechaFS  and JDT1.Account = '_SYS00000000351' 
+Order By Cast(JDT1.DueDate as Date) desc, JDT1.TransId desc

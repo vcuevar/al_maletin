@@ -13,7 +13,7 @@ Order By ID
 
 -- Modificar un Reporte a su Nueva Version
 
-Update SIZ_RBEV set NumeVers = 'VMA260206A' Where CodeRepo = 'SA-RBV-2104-116'
+Update SIZ_RBEV set NumeVers = 'VMA260212A' Where CodeRepo = 'GZ-VMA-2510-147'
 
 Update SIZ_RBEV set NombRepo = 'Devolucion de Piel y Tela' Where CodeRepo = 'GZ-VMA-2508-144'
 

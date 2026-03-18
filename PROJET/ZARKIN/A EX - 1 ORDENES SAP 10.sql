@@ -375,10 +375,18 @@ Order By ORDR.DocEntry
 
  -- Para corregir hacerlo por Pedidos 
  /*
+ 
+ 
+ 3793
+ 3794
+ 3795
+ 3797
+ 3798
+ 3799
 
 Declare @Complejo as nvarchar(100)
 Declare @Pedido as integer
-Set @Pedido = 2267
+Set @Pedido = 3799
 Set @Complejo = (Select ORDR.U_comp from ORDR Where ORDR.DocEntry = @Pedido)
 
 Update OWOR Set U_cc = @Complejo Where OWOR.OriginNum = @Pedido
@@ -504,7 +512,8 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 -- Nueva auditoria donde se busquen Ordenes de Produccion que tengan mas consumo de tel o piel y esten en 
 -- estaciones superiores a costura para enviar una alerta de que esas ordenes esta con sobre consumos.
 -- Tome un consumo superios al 50% de lo planeado.
-
+-- 260226 No dan seguimiento a es por mas que les digo, voy a tratar de ver al cerrar op que no tengan mucho por consumido.
+/*
 	SELECT '150 TELA + 50% ' AS REPORTE_150
 		, OWOR.DocNum AS OP 
 		, OWOR.ItemCode AS CODIGO
@@ -548,8 +557,7 @@ Where OWOR.ItemCode like '%EMPAQ%' and (OWOR.Status = 'R' or OWOR.Status = 'P')
 	and A1.ItmsGrpCod = '113' 
 	and CP.U_CT > 140
 	ORDER BY OWOR.DocNum, A1.ItemName
-
-
+*/
 
 
 --< EOF > EXCEPCIONES DE ORDENES DE FABRICACION.

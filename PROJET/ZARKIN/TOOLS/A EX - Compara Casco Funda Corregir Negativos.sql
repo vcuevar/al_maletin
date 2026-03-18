@@ -65,11 +65,12 @@ ORDER BY CP.U_DocEntry
 ---------------------------------------------------------------------------------
 -- CORREGIR REGISTROS EN TABLA DE TERMINADOS LOGOF.
 
-	select * from [@CP_LOGOF] where U_DocEntry = 73929 
+	select * from [@CP_LOGOF] where U_DocEntry = 73941 
  --and U_CT = 160   -- and U_idEmpleado = 2 -- and U_CT = 415  
 	order by  U_CT, U_FechaHora
 
-	update [@CP_LOGOF] set U_idEmpleado = 79 Where Code = 950297
+	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 958608
+	update [@CP_LOGOF] set U_idEmpleado = 276 Where Code = 958609
 
 	DELETE [@CP_LOGOF] WHERE Code = 950298
 
