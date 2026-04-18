@@ -34,9 +34,22 @@ and ART_CodigoArticulo = '05190'
 order by ART_Nombre 
 
 
-Select ART_CMM_SubcategoriaId, * from Articulos
+Declare @FechaIS as date 
+Declare @FechaFS as Date 
 
-Select * from ControlesMaestrosUM 
+Set @FechaIS = CONVERT (DATE, '2018-01-01', 102)
+Set @FechaFS = CONVERT (DATE, '2018-12-31', 102)
+
+Select COUNT(ART_Precio), ATP_Descripcion 
+from Articulos
+left join ArticulosTipos on ART_ATP_TipoId = ATP_TipoId
+--Where Cast(ART_FechaCreacion as date) Between  @FechaIS and @FechaFS
+GROUP BY ArticulosTipos.ATP_Descripcion
+
+
+Select Cast(ART.ART_FechaCreacion as date), * from Articulos ART 
+Where Cast(ART.ART_FechaCreacion as date) Between  = 
+Order By Cast(ART.ART_FechaCreacion as date) asc   
 
 Select CMM_ControlId, CMM_Control, CMM_Valor from ControlesMaestrosMultiples -- Where CMM_ControlId = 'E8A9CE6B-6E87-4CEE-B054-EAD3A170365D'
 Where  CMM_Control = 'CMM_INV_PoliticaOrden'
